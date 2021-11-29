@@ -6,14 +6,16 @@
 //
 
 import UIKit
+import BSWInterfaceKit
 
-class ViewController: UIViewController {
-
+class MainViewController: UIViewController {
+    
+    override func loadView() {
+        view = UIView()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
     }
-
-
 }
 
