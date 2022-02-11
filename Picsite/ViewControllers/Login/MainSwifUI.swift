@@ -13,8 +13,8 @@ struct MainSwifUI: View {
     }
 }
 
-struct MainSwifUI_Previews: PreviewProvider {
-    static var previews: some View {
-        MainSwifUI()
-    }
-}
+//struct MainSwifUI_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MainSwifUI()
+//    }
+//}
