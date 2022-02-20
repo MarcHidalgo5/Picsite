@@ -8,6 +8,6 @@ enum AppState: Equatable {
     /// In this state, there is no user, so the user should login
     case unlogged
     
-    /// In this state, there is a user and show them the regular app UI
+    /// In this state, there is a user
     case login
 }

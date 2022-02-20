@@ -35,41 +35,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        updateRootViewController(forAppState: App.appStateProvider.currentAppState)
     }
 
-//    private func createCurrentViewController() -> UIViewController {
-//        guard !UIApplication.shared.isRunningTests else {
-//            return UIViewController()
-//        }
-//        switch currentAppState {
-//        case .walkthrough:
-//            return WalkthroughViewController.Factory.viewController(observer: self)
-//        case .teamSelection:
-//            let selectTeamHandler: VoidHandler = { [weak self] in
-//                self?.updateContainedViewController()
-//            }
-//            if let deeplink = queuedDeeplink, case .teamInvitation(let token, _) = deeplink.kind {
-//                self.queuedDeeplink = nil
-//                return TeamAcceptInvitationsViewController(invitationID: token, teamID: deeplink.teamID, didSelectTeam: selectTeamHandler)
-//            } else {
-//                return TeamSelectionViewController.Factory.stateViewController(didSelectTeam: selectTeamHandler)
-//            }
-//        case .renewingToken:
-//            return RenewTokenViewController()
-//        case .normal:
-//            defer {
-//                let appDelegate = UIApplication.shared.delegate as? AppDelegate
-//                appDelegate?.sceneWillTransitionToNormalState()
-//            }
-//            if let deeplink = queuedDeeplink {
-//                self.queuedDeeplink = nil
-//                /// When handling `userActivities` after the app launches, let's add
-//                 /// 300 miliseconds delay so the UI hierarchy is rendered correctly
-//                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)) {
-//                     self.handleDeeplink(deeplink: deeplink)
-//                 }
-//             }
-//            return VideoAsk.SplitViewController()
-//        }
-//    }
+    private func createCurrentViewController() -> UIViewController {
+        guard !UIApplication.shared.isRunningTests else {
+            return UIViewController()
+        }
+        
+        switch currentAppState {
+            
+        case .unlogged:
+            return UIViewController()
+        case .login:
+            return UIViewController()
+        }
+    }
     
     func updateRootViewController(forAppState appState: AppState) {
         
@@ -97,10 +75,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private var rootViewController: ContainerViewController? {
         return self.window?.rootViewController as? ContainerViewController
     }
-    
-//    private var currentAppState: AppState {
-//
-//    }
+
+    private var currentAppState: AppState {
+        return .unlogged
+    }
     
     func sceneDidDisconnect(_ scene: UIScene) {}
 
