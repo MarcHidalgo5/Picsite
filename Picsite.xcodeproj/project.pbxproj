@@ -10,6 +10,7 @@
 		1A7AC43927B64ED3006B7DF6 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7AC43827B64ED3006B7DF6 /* AppState.swift */; };
 		1A7AC43B27B64FF6006B7DF6 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7AC43A27B64FF6006B7DF6 /* App.swift */; };
 		1A7AC43F27B65C2C006B7DF6 /* BSWFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1A7AC43E27B65C2C006B7DF6 /* BSWFoundation */; };
+		1A9296FC27C40EA600037BA4 /* PicsiteKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1A9296FB27C40EA600037BA4 /* PicsiteKit */; };
 		1A943A5627540A92008D7150 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A943A5527540A92008D7150 /* UIColor.swift */; };
 		1ABF421D275540320096B4E9 /* MainSwifUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ABF421C275540320096B4E9 /* MainSwifUI.swift */; };
 		1ADAF7C327517C8800D8D480 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAF7C227517C8800D8D480 /* AppDelegate.swift */; };
@@ -49,7 +50,7 @@
 /* Begin PBXFileReference section */
 		1A7AC43827B64ED3006B7DF6 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		1A7AC43A27B64FF6006B7DF6 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
-		1A7AC43C27B65A28006B7DF6 /* PicsiteKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteKit; sourceTree = "<group>"; };
+		1A9296F927C40AC200037BA4 /* PicsiteKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteKit; sourceTree = "<group>"; };
 		1A943A5527540A92008D7150 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		1ABF421C275540320096B4E9 /* MainSwifUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSwifUI.swift; sourceTree = "<group>"; };
 		1ADAF7BF27517C8800D8D480 /* Picsite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picsite.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +76,7 @@
 				1ADAF80127517FF100D8D480 /* BSWInterfaceKit in Frameworks */,
 				1A7AC43F27B65C2C006B7DF6 /* BSWFoundation in Frameworks */,
 				1ADAF7FE27517F7100D8D480 /* FirebaseStorageSwift-Beta in Frameworks */,
+				1A9296FC27C40EA600037BA4 /* PicsiteKit in Frameworks */,
 				1ADAF7FA27517F7100D8D480 /* FirebaseDatabaseSwift-Beta in Frameworks */,
 				1ADAF7FC27517F7100D8D480 /* FirebaseFirestoreSwift-Beta in Frameworks */,
 				1ADAF7F627517F7100D8D480 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
@@ -99,6 +101,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A9296FA27C40EA600037BA4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1AA679F7275402BB00799CE1 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,11 +119,12 @@
 		1ADAF7B627517C8800D8D480 = {
 			isa = PBXGroup;
 			children = (
-				1A7AC43C27B65A28006B7DF6 /* PicsiteKit */,
+				1A9296F927C40AC200037BA4 /* PicsiteKit */,
 				1ADAF7C127517C8800D8D480 /* Picsite */,
 				1ADAF7D827517C8800D8D480 /* PicsiteTests */,
 				1ADAF7E227517C8900D8D480 /* PicsiteUITests */,
 				1ADAF7C027517C8800D8D480 /* Products */,
+				1A9296FA27C40EA600037BA4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -227,6 +237,7 @@
 				1ADAF7FD27517F7100D8D480 /* FirebaseStorageSwift-Beta */,
 				1ADAF80027517FF100D8D480 /* BSWInterfaceKit */,
 				1A7AC43E27B65C2C006B7DF6 /* BSWFoundation */,
+				1A9296FB27C40EA600037BA4 /* PicsiteKit */,
 			);
 			productName = Picsite;
 			productReference = 1ADAF7BF27517C8800D8D480 /* Picsite.app */;
@@ -778,6 +789,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1A7AC43D27B65C2C006B7DF6 /* XCRemoteSwiftPackageReference "BSWFoundation" */;
 			productName = BSWFoundation;
+		};
+		1A9296FB27C40EA600037BA4 /* PicsiteKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PicsiteKit;
 		};
 		1ADAF7F527517F7100D8D480 /* FirebaseAnalyticsSwift-Beta */ = {
 			isa = XCSwiftPackageProductDependency;

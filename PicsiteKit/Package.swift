@@ -5,28 +5,24 @@ import PackageDescription
 
 let package = Package(
     name: "PicsiteKit",
-    platforms: [
-        .iOS(.v14),
-    ],
     products: [
+        // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "PicsiteKit",
             targets: ["PicsiteKit"]),
     ],
     dependencies: [
-        .package(name: "BSWFoundation", url: "https://github.com/theleftbit/BSWFoundation.git", from: "5.0.0"),
-        .package(name: "SnapshotTesting", url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.9.0"),
+        // Dependencies declare other packages that this package depends on.
+        // .package(url: /* package url */, from: "1.0.0"),
     ],
     targets: [
+        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
+        // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "PicsiteKit",
-            dependencies: ["BSWFoundation"],
-            path: "Sources"
-        ),
+            dependencies: []),
         .testTarget(
             name: "PicsiteKitTests",
-            dependencies: ["PicsiteKit", "SnapshotTesting"],
-            path: "Tests"
-        ),
+            dependencies: ["PicsiteKit"]),
     ]
 )

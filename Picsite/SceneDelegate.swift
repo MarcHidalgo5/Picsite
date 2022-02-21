@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 import BSWInterfaceKit
+import PicsiteKit
 
 protocol SceneDelegateAppStateProvider {
     var currentAppState: AppState { get }
@@ -25,6 +26,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
+        let a = PicsiteKit.init(user: "Hidi")
+        print(a.user)
 //        let rootWindowController = ContainerViewController(containedViewController: <#T##UIViewController#>)
         
         let window = UIWindow(windowScene: windowScene)
