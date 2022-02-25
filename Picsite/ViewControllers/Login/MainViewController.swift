@@ -30,20 +30,22 @@ class MainViewController: UIViewController {
     
     override func loadView() {
         view = UIView()
-        let contentStackView = UIStackView()
-        contentStackView.spacing = 10
-        contentStackView.alignment = .center
+        view.backgroundColor = .red
+        
+        let contentStackView = UIStackView(arrangedSubviews: [
+           photoImageView
+        ])
         contentStackView.axis = .vertical
-        contentStackView.distribution = .fill
-        
-        photoImageView.tintColor = .blue
-        
-        contentStackView.addArrangedSubview(photoImageView)
+        contentStackView.layoutMargins = .init(uniform: 32)
+        contentStackView.isLayoutMarginsRelativeArrangement = true
+        contentStackView.spacing = 20
+        contentStackView.alignment = .fill
         
         view.addAutolayoutSubview(contentStackView)
-        contentStackView.pinToSuperview()
-        
-        
+        contentStackView.pinToSuperviewSafeLayoutEdges()
+        NSLayoutConstraint.activate([
+         
+        ])
     }
     
     override func viewDidLoad() {
