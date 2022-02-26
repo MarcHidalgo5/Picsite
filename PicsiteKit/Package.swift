@@ -14,11 +14,15 @@ let package = Package(
             targets: ["PicsiteKit"]),
     ],
     dependencies: [
+        .package(name: "BSWFoundation", url: "https://github.com/theleftbit/BSWFoundation.git", from: "5.0.0"),
+        .package(name: "SnapshotTesting", url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.8.2"),
     ],
     targets: [
         .target(
             name: "PicsiteKit",
-            dependencies: []),
+            dependencies: ["BSWFoundation"],
+            path: "Sources"
+            ),
         .testTarget(
             name: "PicsiteKitTests",
             dependencies: ["PicsiteKit"]),
