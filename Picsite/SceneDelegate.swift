@@ -6,50 +6,87 @@
 //
 
 import UIKit
+import BSWInterfaceKit
+import PicsiteKit
+import PicsiteUI
+import Firebase
+
+protocol SceneDelegateAppStateProvider {
+    var currentAppState: AppState { get }
+}
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
+//        let a = PicsiteKit.init(user: "Hidi")
+//        print(a.user)
+    
     var window: UIWindow?
+    
+    static var main: SceneDelegate? {
+        return UIApplication.shared.connectedScenes.compactMap { $0.delegate as? SceneDelegate }.first
+    }
 
-
+    func updateContainedViewController() {
+        /// Make sure nothing is on top of the rootVC before updating it
+        rootViewController.presentedViewController?.dismiss(animated: false, completion: nil)
+        rootViewController.updateContainedViewController(createCurrentViewController())
+    }
+    
+    //MARK: UIWindowSceneDelegate
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        let rootViewController = ContainerViewController(containedViewController: createCurrentViewController())
+        let window = UIWindow(windowScene: windowScene)
+        window.rootViewController = rootViewController
+        window.makeKeyAndVisible()
+        self.window = window
         
-        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-        window?.windowScene = windowScene
-        window?.rootViewController = ViewController()
-        window?.makeKeyAndVisible()
+        self.rootViewController = rootViewController
+        self.window = window
     }
+    
+    func sceneDidDisconnect(_ scene: UIScene) {}
+    func sceneDidBecomeActive(_ scene: UIScene) {}
+    func sceneWillResignActive(_ scene: UIScene) {}
+    func sceneWillEnterForeground(_ scene: UIScene) {}
+    func sceneDidEnterBackground(_ scene: UIScene) {}
 
-    func sceneDidDisconnect(_ scene: UIScene) {
-        // Called as the scene is being released by the system.
-        // This occurs shortly after the scene enters the background, or when its session is discarded.
-        // Release any resources associated with this scene that can be re-created the next time the scene connects.
-        // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
+    private func createCurrentViewController() -> UIViewController {
+        guard !UIApplication.shared.isRunningTests else {
+            return UIViewController()
+        }
+        switch currentAppState {
+        case .unlogged:
+            return MainViewController()
+        case .login:
+            return HomeViewController()
+        }
     }
-
-    func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+    
+    //Private
+    
+    private var rootViewController: ContainerViewController!
+    private var currentAppState: AppState {
+        if Auth.auth().currentUser != nil {
+            return .login
+        } else {
+            return .unlogged
+        }
     }
-
-    func sceneWillResignActive(_ scene: UIScene) {
-        // Called when the scene will move from an active state to an inactive state.
-        // This may occur due to temporary interruptions (ex. an incoming phone call).
+    
+    static func themeApp() {
+        /// Hook up VideoAskUI with dependencies
+        PicsiteUI.ColorPalette.picsiteTintColor = UIColor.picsiteTintColor
+        PicsiteUI.ColorPalette.picsiteTitleColor = UIColor.picsiteTitleColor
+        PicsiteUI.ColorPalette.picsiteBackgroundColor = UIColor.picsiteBackgroundColor
+        PicsiteUI.ColorPalette.picsiteTitleColorReversed = UIColor.picsiteTitleColorReversed
+        PicsiteUI.ColorPalette.picsiteBackgroundColorReversed = UIColor.picsiteBackgroundColorReversed
+        
+        PicsiteUI.FontPalette.boldTextStyler = boldTextStyler
+        PicsiteUI.FontPalette.mediumTextStyler = mediumTextStyler
+        PicsiteUI.FontPalette.regularTextStyler = regularTextStyler
+        
     }
-
-    func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
-    }
-
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
-    }
-
-
 }
 
