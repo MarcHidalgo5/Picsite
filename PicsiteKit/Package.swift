@@ -25,6 +25,8 @@ let package = Package(
             ),
         .testTarget(
             name: "PicsiteKitTests",
-            dependencies: ["PicsiteKit"]),
+            dependencies: ["PicsiteKit", "SnapshotTesting"],
+            path: "Tests"
+        ),
     ]
 )
