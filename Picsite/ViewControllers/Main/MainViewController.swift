@@ -20,7 +20,7 @@ class MainViewController: UIViewController {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.roundCorners(radius: Constants.CornerRadius)
-        imageView.backgroundColor = .red
+        imageView.backgroundColor = .picsiteTitleColor
         return imageView
     }()
     
@@ -28,7 +28,7 @@ class MainViewController: UIViewController {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.roundCorners(radius: Constants.CornerRadius)
-        imageView.backgroundColor = .red
+        imageView.backgroundColor = .picsiteTintColor
         return imageView
     }()
     

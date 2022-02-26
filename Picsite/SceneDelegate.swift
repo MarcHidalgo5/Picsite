@@ -77,7 +77,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     static func themeApp() {
         /// Hook up VideoAskUI with dependencies
-        
+        PicsiteUI.ColorPalette.picsiteTintColor = UIColor.picsiteTintColor
+        PicsiteUI.ColorPalette.picsiteTitleColor = UIColor.picsiteTitleColor
     }
 }
 
