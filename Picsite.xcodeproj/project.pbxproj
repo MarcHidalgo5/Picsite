@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A0EFFA727CA433A004B544C /* PicsiteKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1A0EFFA627CA433A004B544C /* PicsiteKit */; };
+		1A0EFFAA27CA4479004B544C /* PicsiteUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1A0EFFA927CA4479004B544C /* PicsiteUI */; };
 		1A66E4A827C94C7700177DEF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66E4A727C94C7700177DEF /* HomeViewController.swift */; };
 		1A7AC43927B64ED3006B7DF6 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7AC43827B64ED3006B7DF6 /* AppState.swift */; };
 		1A7AC43B27B64FF6006B7DF6 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7AC43A27B64FF6006B7DF6 /* App.swift */; };
 		1A7AC43F27B65C2C006B7DF6 /* BSWFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1A7AC43E27B65C2C006B7DF6 /* BSWFoundation */; };
-		1A9296FC27C40EA600037BA4 /* PicsiteKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1A9296FB27C40EA600037BA4 /* PicsiteKit */; };
 		1A943A5627540A92008D7150 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A943A5527540A92008D7150 /* UIColor.swift */; };
 		1ADAF7C327517C8800D8D480 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAF7C227517C8800D8D480 /* AppDelegate.swift */; };
 		1ADAF7C527517C8800D8D480 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAF7C427517C8800D8D480 /* SceneDelegate.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A0EFFA827CA4472004B544C /* PicsiteUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteUI; sourceTree = "<group>"; };
 		1A66E4A727C94C7700177DEF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1A7AC43827B64ED3006B7DF6 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		1A7AC43A27B64FF6006B7DF6 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -76,7 +78,8 @@
 				1ADAF80127517FF100D8D480 /* BSWInterfaceKit in Frameworks */,
 				1A7AC43F27B65C2C006B7DF6 /* BSWFoundation in Frameworks */,
 				1ADAF7FE27517F7100D8D480 /* FirebaseStorageSwift-Beta in Frameworks */,
-				1A9296FC27C40EA600037BA4 /* PicsiteKit in Frameworks */,
+				1A0EFFAA27CA4479004B544C /* PicsiteUI in Frameworks */,
+				1A0EFFA727CA433A004B544C /* PicsiteKit in Frameworks */,
 				1ADAF7FA27517F7100D8D480 /* FirebaseDatabaseSwift-Beta in Frameworks */,
 				1ADAF7FC27517F7100D8D480 /* FirebaseFirestoreSwift-Beta in Frameworks */,
 				1ADAF7F627517F7100D8D480 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
@@ -127,6 +130,7 @@
 		1ADAF7B627517C8800D8D480 = {
 			isa = PBXGroup;
 			children = (
+				1A0EFFA827CA4472004B544C /* PicsiteUI */,
 				1A9296F927C40AC200037BA4 /* PicsiteKit */,
 				1ADAF7C127517C8800D8D480 /* Picsite */,
 				1ADAF7D827517C8800D8D480 /* PicsiteTests */,
@@ -245,7 +249,8 @@
 				1ADAF7FD27517F7100D8D480 /* FirebaseStorageSwift-Beta */,
 				1ADAF80027517FF100D8D480 /* BSWInterfaceKit */,
 				1A7AC43E27B65C2C006B7DF6 /* BSWFoundation */,
-				1A9296FB27C40EA600037BA4 /* PicsiteKit */,
+				1A0EFFA627CA433A004B544C /* PicsiteKit */,
+				1A0EFFA927CA4479004B544C /* PicsiteUI */,
 			);
 			productName = Picsite;
 			productReference = 1ADAF7BF27517C8800D8D480 /* Picsite.app */;
@@ -793,14 +798,18 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1A0EFFA627CA433A004B544C /* PicsiteKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PicsiteKit;
+		};
+		1A0EFFA927CA4479004B544C /* PicsiteUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PicsiteUI;
+		};
 		1A7AC43E27B65C2C006B7DF6 /* BSWFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1A7AC43D27B65C2C006B7DF6 /* XCRemoteSwiftPackageReference "BSWFoundation" */;
 			productName = BSWFoundation;
-		};
-		1A9296FB27C40EA600037BA4 /* PicsiteKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PicsiteKit;
 		};
 		1ADAF7F527517F7100D8D480 /* FirebaseAnalyticsSwift-Beta */ = {
 			isa = XCSwiftPackageProductDependency;
