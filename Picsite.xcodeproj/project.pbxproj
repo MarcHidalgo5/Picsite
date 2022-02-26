@@ -50,6 +50,7 @@
 
 /* Begin PBXFileReference section */
 		1A0EFFA827CA4472004B544C /* PicsiteUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteUI; sourceTree = "<group>"; };
+		1A0EFFAB27CA480C004B544C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1A66E4A727C94C7700177DEF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1A7AC43827B64ED3006B7DF6 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		1A7AC43A27B64FF6006B7DF6 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -115,6 +116,7 @@
 		1A9296FA27C40EA600037BA4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1A0EFFAB27CA480C004B544C /* Foundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
