@@ -8,6 +8,7 @@
 import UIKit
 import BSWInterfaceKit
 import PicsiteKit
+import PicsiteUI
 import Firebase
 
 protocol SceneDelegateAppStateProvider {
@@ -75,6 +76,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     static func themeApp() {
+        /// Hook up VideoAskUI with dependencies
         
     }
 }
