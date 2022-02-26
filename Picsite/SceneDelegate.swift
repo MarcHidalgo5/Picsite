@@ -59,7 +59,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         case .unlogged:
             return MainViewController()
         case .login:
-            return UIViewController()
+            return HomeViewController()
         }
     }
     

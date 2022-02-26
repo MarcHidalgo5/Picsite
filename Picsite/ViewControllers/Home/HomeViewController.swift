@@ -1,15 +1,14 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  Picsite
 //
-//  Created by Marc Hidalgo on 26/11/21.
+//  Created by Marc Hidalgo on 25/2/22.
 //
 
 import UIKit
 import BSWInterfaceKit
-import SwiftUI
 
-class MainViewController: UIViewController {
+class HomeViewController: UIViewController {
     
     enum Constants {
         static let Spacing: CGFloat = 16
@@ -19,32 +18,32 @@ class MainViewController: UIViewController {
     
     private let photoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.roundCorners(radius: Constants.CornerRadius)
-        NSLayoutConstraint.activate([
-            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: Constants.PhotoHeight),
-        ])
+        imageView.backgroundColor = .black
         return imageView
     }()
     
     override func loadView() {
         view = UIView()
-        view.backgroundColor = .red
+        view.backgroundColor = .white
         
         let contentStackView = UIStackView(arrangedSubviews: [
-           photoImageView
+           photoImageView,
         ])
         contentStackView.axis = .vertical
         contentStackView.layoutMargins = .init(uniform: 32)
         contentStackView.isLayoutMarginsRelativeArrangement = true
         contentStackView.spacing = 20
         contentStackView.alignment = .fill
+        contentStackView.distribution = .fillProportionally
         
         view.addAutolayoutSubview(contentStackView)
         contentStackView.pinToSuperviewSafeLayoutEdges()
         NSLayoutConstraint.activate([
-         
+            photoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.isTallScreen ? 50 : 30),
+            photoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            photoImageView.heightAnchor.constraint(equalToConstant: 84),
         ])
     }
     
@@ -52,5 +51,6 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
     }
 }
+
 
 
