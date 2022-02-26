@@ -79,6 +79,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         /// Hook up VideoAskUI with dependencies
         PicsiteUI.ColorPalette.picsiteTintColor = UIColor.picsiteTintColor
         PicsiteUI.ColorPalette.picsiteTitleColor = UIColor.picsiteTitleColor
+        PicsiteUI.ColorPalette.picsiteBackgroundColor = UIColor.picsiteBackgroundColor
+        PicsiteUI.ColorPalette.picsiteTitleColorReversed = UIColor.picsiteTitleColorReversed
+        PicsiteUI.ColorPalette.picsiteBackgroundColorReversed = UIColor.picsiteBackgroundColorReversed
+        
+        PicsiteUI.FontPalette.boldTextStyler = boldTextStyler
+        PicsiteUI.FontPalette.mediumTextStyler = mediumTextStyler
+        PicsiteUI.FontPalette.regularTextStyler = regularTextStyler
+        
     }
 }
 
