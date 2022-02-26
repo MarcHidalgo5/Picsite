@@ -23,9 +23,9 @@ let package = Package(
     targets: [
         .target(
             name: "PicsiteUI",
-            dependencies: [
-                
-            ]
+            dependencies: ["BSWFoundation",
+                          "BSWInterfaceKit", "PicsiteKit",
+                          "JGProgressHUD"]
         ),
     ]
 )
