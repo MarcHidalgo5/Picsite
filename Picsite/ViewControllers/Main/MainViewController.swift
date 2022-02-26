@@ -26,7 +26,7 @@ class MainViewController: UIViewController {
         
         let picsiteImage =  UIImage(named: "picsite-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysOriginal)
         
-        let photoImageView: UIImageView = {
+        let picsiteImageView: UIImageView = {
             let imageView = UIImageView()
             imageView.contentMode = .scaleAspectFit
             imageView.roundCorners(radius: Constants.CornerRadius)
@@ -34,7 +34,7 @@ class MainViewController: UIViewController {
             return imageView
         }()
         
-        photoImageView.image = picsiteImage
+        picsiteImageView.image = picsiteImage
         
         let appleImage = UIImage(named: "apple-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysTemplate)
         let loginAppleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("Login with Apple", color: .picsiteTitleColorReversed, forSize: smallFontSize), appleImage), tintColor: .picsiteTitleColorReversed, backgroundColor: .picsiteBackgroundColorReversed, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: MainViewController.CornerRadius) {
@@ -57,7 +57,7 @@ class MainViewController: UIViewController {
 
         
         let contentStackView = UIStackView(arrangedSubviews: [
-           photoImageView,
+            picsiteImageView,
            loginEmailButton,
            loginAppleButton,
            loginGoogleButton,
@@ -74,8 +74,8 @@ class MainViewController: UIViewController {
         view.addAutolayoutSubview(contentStackView)
         contentStackView.pinToSuperview()
         NSLayoutConstraint.activate([
-            photoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.isTallScreen ? 50 : 30),
-            photoImageView.heightAnchor.constraint(equalToConstant: 200),
+            picsiteImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.isTallScreen ? 50 : 30),
+            picsiteImageView.heightAnchor.constraint(equalToConstant: 100),
             loginAppleButton.heightAnchor.constraint(equalToConstant: 60),
             loginEmailButton.heightAnchor.constraint(equalToConstant: 60),
             loginGoogleButton.heightAnchor.constraint(equalToConstant: 60),
