@@ -4,9 +4,9 @@ import UIKit
 import PicsiteKit
 
 /// It is the AppDelegate's responsibility to initialise the world with the correct environment
-var Current: App!
+var Current = World.init(environement: .production)
 
-struct App {
+struct World {
   
     var apiClient: PicsiteAPIClient
     

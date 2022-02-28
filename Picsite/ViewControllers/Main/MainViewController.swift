@@ -23,7 +23,7 @@ class MainViewController: UIViewController {
     private let provider: AuthenticationProviderType
     
     init(authenticationProvider: AuthenticationProviderType) {
-        self.provider = authenticationProvider
+        self.provider = Current.authProvider
         super.init(nibName: nil, bundle: nil)
     }
     
