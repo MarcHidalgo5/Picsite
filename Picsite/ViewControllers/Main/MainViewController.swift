@@ -8,6 +8,7 @@
 import UIKit
 import BSWInterfaceKit
 import PicsiteUI
+import PicsiteKit
 
 class MainViewController: UIViewController {
     
@@ -19,6 +20,16 @@ class MainViewController: UIViewController {
     
     static let CornerRadius: CGFloat = 12
     private var smallFontSize: CGFloat { UIScreen.main.isSmallScreen ? 16 : 18 }
+    private let provider: AuthenticationProviderType
+    
+    init(authenticationProvider: AuthenticationProviderType) {
+        self.provider = authenticationProvider
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = UIView()
@@ -52,7 +63,9 @@ class MainViewController: UIViewController {
         })
         
         let signInView = SignInView(onLogin: {
-           print("Login")
+            let vc = LoginViewController(provider: self.provider)
+            let navVC = UINavigationController.init(rootViewController: vc)
+            self.show(navVC, sender: nil)
         })
 
         

@@ -1,4 +1,4 @@
-public struct PicsiteKit {
+public struct PicsiteKit2 {
     public private(set) var text = "Hello, World!"
     public var user: String
     
