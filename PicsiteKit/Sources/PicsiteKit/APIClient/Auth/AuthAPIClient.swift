@@ -7,6 +7,7 @@
 
 import Foundation
 import BSWFoundation
+import FirebaseAuth
 
 public class AuthAPIClient {
     
@@ -16,8 +17,8 @@ public class AuthAPIClient {
         self.authEnvironment = authEnvironment
     }
     
-    func login(user: String, password: String) {
-        
+    public func login(email: String, password: String) async throws -> User {
+        try await Auth.auth().signIn(withEmail: email, password: password).user
     }
     
     public enum Environment: BSWFoundation.Environment {

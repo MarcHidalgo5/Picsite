@@ -7,6 +7,8 @@
 
 import UIKit
 import BSWInterfaceKit
+import PicsiteUI
+import FirebaseAuth
 
 class HomeViewController: UIViewController {
     
@@ -28,8 +30,18 @@ class HomeViewController: UIViewController {
         view = UIView()
         view.backgroundColor = .white
         
+        let appleImage = UIImage(named: "apple-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysTemplate)
+        let loginAppleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("Login with Apple", color: .picsiteTitleColorReversed, forSize: 15), appleImage), tintColor: .picsiteTitleColorReversed, backgroundColor: .picsiteBackgroundColorReversed, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: MainViewController.CornerRadius) {
+            let firebaseAuth = Auth.auth()
+           do {
+             try firebaseAuth.signOut()
+           } catch let signOutError as NSError {
+             print("Error signing out: %@", signOutError)
+           }
+        })
+        
         let contentStackView = UIStackView(arrangedSubviews: [
-           photoImageView,
+           loginAppleButton,
         ])
         contentStackView.axis = .vertical
         contentStackView.layoutMargins = .init(uniform: 32)
@@ -41,9 +53,9 @@ class HomeViewController: UIViewController {
         view.addAutolayoutSubview(contentStackView)
         contentStackView.pinToSuperviewSafeLayoutEdges()
         NSLayoutConstraint.activate([
-            photoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.isTallScreen ? 50 : 30),
-            photoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            photoImageView.heightAnchor.constraint(equalToConstant: 84),
+            loginAppleButton.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.isTallScreen ? 50 : 30),
+            loginAppleButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loginAppleButton.heightAnchor.constraint(equalToConstant: 84),
         ])
     }
     

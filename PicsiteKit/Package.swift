@@ -21,7 +21,7 @@ let package = Package(
     targets: [
         .target(
             name: "PicsiteKit",
-            dependencies: ["BSWFoundation"],
+            dependencies: [.product(name: "FirebaseAuth", package: "Firebase"),"BSWFoundation"],
             path: "Sources"
             ),
         .testTarget(
