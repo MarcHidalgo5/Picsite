@@ -25,7 +25,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         Task { @MainActor in
             do {
                 let user = try await provider.loginUser(email: "marchidalgo@icloud.com", password: "123456789")

@@ -18,7 +18,7 @@ public class AuthAPIClient {
     }
     
     public func login(email: String, password: String) async throws -> User {
-        try await Auth.auth().signIn(withEmail: email, password: password).user
+        return try await Auth.auth().signIn(withEmail: email, password: password).user
     }
     
     public enum Environment: BSWFoundation.Environment {
