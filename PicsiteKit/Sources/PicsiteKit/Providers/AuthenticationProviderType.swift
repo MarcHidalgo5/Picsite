@@ -7,9 +7,10 @@
 
 import Foundation
 import BSWFoundation
+import FirebaseAuth
 
 public protocol AuthenticationProviderType: AnyObject {
     
-    func loginUser(email: String, password: String) async throws
+    func loginUser(email: String, password: String) async throws -> User
     
 }

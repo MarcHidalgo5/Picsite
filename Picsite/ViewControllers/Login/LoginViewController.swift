@@ -28,14 +28,14 @@ class LoginViewController: UIViewController {
         
         Task { @MainActor in
             do {
-                try await provider.loginUser(email: "marchidalgo@icloud.com", password: "123456")
+                let user = try await provider.loginUser(email: "marchidalgo@icloud.com", password: "123456789")
+                print(user.email)
+                print(user.displayName)
                 let vc = HomeViewController()
                 show(vc, sender: nil)
             } catch {
-                print(error)
+                print("There was an issue when trying to sign in: \(error)")
             }
-           
         }
     }
-    
 }

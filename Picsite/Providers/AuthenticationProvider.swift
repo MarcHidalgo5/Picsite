@@ -8,6 +8,7 @@
 import PicsiteKit
 import BSWFoundation
 import Foundation
+import FirebaseAuth
 
 class AuthenticationProvider: AuthenticationProviderType {
     
@@ -17,7 +18,7 @@ class AuthenticationProvider: AuthenticationProviderType {
         self.authAPIClient = AuthAPIClient.init()
     }
     
-    func loginUser(email: String, password: String) async throws {
-        
+    func loginUser(email: String, password: String) async throws -> User {
+        try await self.authAPIClient.login(email: email, password: password)
     }
 }
