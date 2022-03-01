@@ -32,7 +32,7 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .white
         
         let appleImage = UIImage(named: "apple-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysTemplate)
-        let loginAppleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("Login with Apple", color: .picsiteTitleColorReversed, forSize: 15), appleImage), tintColor: .picsiteTitleColorReversed, backgroundColor: .picsiteBackgroundColorReversed, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: MainViewController.CornerRadius) {
+        let loginAppleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("Login with Apple", color: .picsiteTitleColorReversed, forSize: 15), appleImage), tintColor: .picsiteTitleColorReversed, backgroundColor: .picsiteBackgroundColorReversed, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: AuthenticationViewController.CornerRadius) {
             let firebaseAuth = Auth.auth()
            do {
              try firebaseAuth.signOut()

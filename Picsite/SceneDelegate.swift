@@ -58,7 +58,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         switch currentAppState {
         case .unlogged:
-            return MainViewController(authenticationProvider: Current.authProvider)
+            return AuthenticationViewController(authenticationProvider: Current.authProvider)
         case .login:
             return HomeViewController()
         }

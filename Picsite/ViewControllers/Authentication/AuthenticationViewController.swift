@@ -10,7 +10,7 @@ import BSWInterfaceKit
 import PicsiteUI
 import PicsiteKit
 
-class MainViewController: UIViewController {
+class AuthenticationViewController: UIViewController {
     
     enum Constants {
         static let Spacing: CGFloat = 16
@@ -48,17 +48,17 @@ class MainViewController: UIViewController {
         picsiteImageView.image = picsiteImage
         
         let appleImage = UIImage(named: "apple-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysTemplate)
-        let loginAppleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("Login with Apple", color: .picsiteTitleColorReversed, forSize: smallFontSize), appleImage), tintColor: .picsiteTitleColorReversed, backgroundColor: .picsiteBackgroundColorReversed, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: MainViewController.CornerRadius) {
+        let loginAppleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("Login with Apple", color: .picsiteTitleColorReversed, forSize: smallFontSize), appleImage), tintColor: .picsiteTitleColorReversed, backgroundColor: .picsiteBackgroundColorReversed, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: AuthenticationViewController.CornerRadius) {
            print("apple login")
         })
        
         
         let googleImage =  UIImage(named: "google-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysOriginal)
-        let loginGoogleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("Login with Google", color: .picsiteTitleColorReversed, forSize: smallFontSize), googleImage), tintColor: .picsiteTitleColorReversed, backgroundColor: .picsiteBackgroundColorReversed, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: MainViewController.CornerRadius) {
+        let loginGoogleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("Login with Google", color: .picsiteTitleColorReversed, forSize: smallFontSize), googleImage), tintColor: .picsiteTitleColorReversed, backgroundColor: .picsiteBackgroundColorReversed, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: AuthenticationViewController.CornerRadius) {
            print("google login")
         })
         
-        let loginEmailButton = UIButton(buttonConfiguration: .init(buttonTitle: .text(FontPalette.mediumTextStyler.attributedString("Login with email", color: .picsiteTitleColorReversed, forSize: smallFontSize)), tintColor: .picsiteTitleColorReversed, backgroundColor: .picsiteBackgroundColorReversed, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: MainViewController.CornerRadius) {
+        let loginEmailButton = UIButton(buttonConfiguration: .init(buttonTitle: .text(FontPalette.mediumTextStyler.attributedString("Login with email", color: .picsiteTitleColorReversed, forSize: smallFontSize)), tintColor: .picsiteTitleColorReversed, backgroundColor: .picsiteBackgroundColorReversed, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: AuthenticationViewController.CornerRadius) {
            print("email login")
         })
         

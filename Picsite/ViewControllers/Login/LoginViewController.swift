@@ -28,8 +28,8 @@ class LoginViewController: UIViewController {
         Task { @MainActor in
             do {
                 let user = try await provider.loginUser(email: "marchidalgo@icloud.com", password: "123456789")
-                print(user.email)
-                print(user.displayName)
+//                print(user.email)
+//                print(user.displayName)
                 let vc = HomeViewController()
                 show(vc, sender: nil)
             } catch {
