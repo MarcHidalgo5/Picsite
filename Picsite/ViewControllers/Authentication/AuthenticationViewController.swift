@@ -8,8 +8,9 @@
 import UIKit
 import BSWInterfaceKit
 import PicsiteUI
+import PicsiteKit
 
-class MainViewController: UIViewController {
+class AuthenticationViewController: UIViewController {
     
     enum Constants {
         static let Spacing: CGFloat = 16
@@ -19,6 +20,16 @@ class MainViewController: UIViewController {
     
     static let CornerRadius: CGFloat = 12
     private var smallFontSize: CGFloat { UIScreen.main.isSmallScreen ? 16 : 18 }
+    private let provider: AuthenticationProviderType
+    
+    init(authenticationProvider: AuthenticationProviderType) {
+        self.provider = Current.authProvider
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = UIView()
@@ -26,7 +37,7 @@ class MainViewController: UIViewController {
         
         let picsiteImage =  UIImage(named: "picsite-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysOriginal)
         
-        let photoImageView: UIImageView = {
+        let picsiteImageView: UIImageView = {
             let imageView = UIImageView()
             imageView.contentMode = .scaleAspectFit
             imageView.roundCorners(radius: Constants.CornerRadius)
@@ -34,30 +45,32 @@ class MainViewController: UIViewController {
             return imageView
         }()
         
-        photoImageView.image = picsiteImage
+        picsiteImageView.image = picsiteImage
         
         let appleImage = UIImage(named: "apple-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysTemplate)
-        let loginAppleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("Login with Apple", color: .picsiteTitleColorReversed, forSize: smallFontSize), appleImage), tintColor: .picsiteTitleColorReversed, backgroundColor: .picsiteBackgroundColorReversed, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: MainViewController.CornerRadius) {
+        let loginAppleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("Login with Apple", color: .picsiteTitleColorReversed, forSize: smallFontSize), appleImage), tintColor: .picsiteTitleColorReversed, backgroundColor: .picsiteBackgroundColorReversed, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: AuthenticationViewController.CornerRadius) {
            print("apple login")
         })
        
         
         let googleImage =  UIImage(named: "google-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysOriginal)
-        let loginGoogleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("Login with Google", color: .picsiteTitleColorReversed, forSize: smallFontSize), googleImage), tintColor: .picsiteTitleColorReversed, backgroundColor: .picsiteBackgroundColorReversed, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: MainViewController.CornerRadius) {
+        let loginGoogleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("Login with Google", color: .picsiteTitleColorReversed, forSize: smallFontSize), googleImage), tintColor: .picsiteTitleColorReversed, backgroundColor: .picsiteBackgroundColorReversed, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: AuthenticationViewController.CornerRadius) {
            print("google login")
         })
         
-        let loginEmailButton = UIButton(buttonConfiguration: .init(buttonTitle: .text(FontPalette.mediumTextStyler.attributedString("Login with email", color: .picsiteTitleColorReversed, forSize: smallFontSize)), tintColor: .picsiteTitleColorReversed, backgroundColor: .picsiteBackgroundColorReversed, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: MainViewController.CornerRadius) {
+        let loginEmailButton = UIButton(buttonConfiguration: .init(buttonTitle: .text(FontPalette.mediumTextStyler.attributedString("Login with email", color: .picsiteTitleColorReversed, forSize: smallFontSize)), tintColor: .picsiteTitleColorReversed, backgroundColor: .picsiteBackgroundColorReversed, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: AuthenticationViewController.CornerRadius) {
            print("email login")
         })
         
         let signInView = SignInView(onLogin: {
-           print("Login")
+            let vc = LoginViewController(provider: self.provider)
+            let navVC = UINavigationController.init(rootViewController: vc)
+            self.show(navVC, sender: nil)
         })
 
         
         let contentStackView = UIStackView(arrangedSubviews: [
-           photoImageView,
+            picsiteImageView,
            loginEmailButton,
            loginAppleButton,
            loginGoogleButton,
@@ -74,8 +87,8 @@ class MainViewController: UIViewController {
         view.addAutolayoutSubview(contentStackView)
         contentStackView.pinToSuperview()
         NSLayoutConstraint.activate([
-            photoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.isTallScreen ? 50 : 30),
-            photoImageView.heightAnchor.constraint(equalToConstant: 200),
+            picsiteImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.isTallScreen ? 50 : 30),
+            picsiteImageView.heightAnchor.constraint(equalToConstant: 100),
             loginAppleButton.heightAnchor.constraint(equalToConstant: 60),
             loginEmailButton.heightAnchor.constraint(equalToConstant: 60),
             loginGoogleButton.heightAnchor.constraint(equalToConstant: 60),

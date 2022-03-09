@@ -21,20 +21,11 @@
       },
       {
         "package": "BSWFoundation",
-        "repositoryURL": "https://github.com/theleftbit/BSWFoundation",
+        "repositoryURL": "https://github.com/theleftbit/BSWFoundation.git",
         "state": {
-          "branch": "develop",
-          "revision": "c6541cb92cb9bc5eb5ca18c88f40b713212a4cd1",
-          "version": null
-        }
-      },
-      {
-        "package": "BSWInterfaceKit",
-        "repositoryURL": "https://github.com/theleftbit/BSWInterfaceKit",
-        "state": {
-          "branch": "develop",
-          "revision": "ad04b1713e19fed458b5d6569d6f7f4e8b67706e",
-          "version": null
+          "branch": null,
+          "revision": "bc6c5881adb1cacac7d69ff62d5b337fc4bd2b51",
+          "version": "5.0.3"
         }
       },
       {
@@ -101,15 +92,6 @@
         }
       },
       {
-        "package": "JGProgressHUD",
-        "repositoryURL": "https://github.com/JonasGessner/JGProgressHUD.git",
-        "state": {
-          "branch": null,
-          "revision": "78d7cd35f1d90ff74fd82e486f2cbe4b24be8cf9",
-          "version": "2.2.0"
-        }
-      },
-      {
         "package": "KeychainAccess",
         "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess.git",
         "state": {
@@ -134,15 +116,6 @@
           "branch": null,
           "revision": "7ee9ef9f627d85cbe1b8c4f49a3ed26eed216c77",
           "version": "2.30908.0"
-        }
-      },
-      {
-        "package": "Nuke",
-        "repositoryURL": "https://github.com/kean/Nuke.git",
-        "state": {
-          "branch": null,
-          "revision": "78fa963b8491fc520791d8c2a509f1b8593d8aae",
-          "version": "10.7.1"
         }
       },
       {

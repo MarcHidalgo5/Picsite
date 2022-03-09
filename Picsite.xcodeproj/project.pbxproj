@@ -11,14 +11,19 @@
 		1A0EFFAA27CA4479004B544C /* PicsiteUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1A0EFFA927CA4479004B544C /* PicsiteUI */; };
 		1A0EFFB427CA7B37004B544C /* TextStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0EFFB327CA7B37004B544C /* TextStyler.swift */; };
 		1A0EFFB627CA7B8C004B544C /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0EFFB527CA7B8C004B544C /* UIFont+Extensions.swift */; };
+		1A0EFFBD27CA9B7A004B544C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0EFFBC27CA9B7A004B544C /* LoginViewController.swift */; };
+		1A0EFFBE27CA9D15004B544C /* BSWFoundation in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1A7AC43E27B65C2C006B7DF6 /* BSWFoundation */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		1A0EFFC027CA9D16004B544C /* BSWInterfaceKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1ADAF80027517FF100D8D480 /* BSWInterfaceKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		1A141CF027CD5A5A00AA8190 /* AuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A141CEF27CD5A5A00AA8190 /* AuthenticationProvider.swift */; };
+		1A47FC9327CE707800EC8FD7 /* PicsiteAuthKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1A47FC9227CE707800EC8FD7 /* PicsiteAuthKit */; };
 		1A66E4A827C94C7700177DEF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66E4A727C94C7700177DEF /* HomeViewController.swift */; };
 		1A7AC43927B64ED3006B7DF6 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7AC43827B64ED3006B7DF6 /* AppState.swift */; };
-		1A7AC43B27B64FF6006B7DF6 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7AC43A27B64FF6006B7DF6 /* App.swift */; };
+		1A7AC43B27B64FF6006B7DF6 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7AC43A27B64FF6006B7DF6 /* World.swift */; };
 		1A7AC43F27B65C2C006B7DF6 /* BSWFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1A7AC43E27B65C2C006B7DF6 /* BSWFoundation */; };
 		1A943A5627540A92008D7150 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A943A5527540A92008D7150 /* UIColor.swift */; };
 		1ADAF7C327517C8800D8D480 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAF7C227517C8800D8D480 /* AppDelegate.swift */; };
 		1ADAF7C527517C8800D8D480 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAF7C427517C8800D8D480 /* SceneDelegate.swift */; };
-		1ADAF7C727517C8800D8D480 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAF7C627517C8800D8D480 /* MainViewController.swift */; };
+		1ADAF7C727517C8800D8D480 /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAF7C627517C8800D8D480 /* AuthenticationViewController.swift */; };
 		1ADAF7CC27517C8800D8D480 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ADAF7CB27517C8800D8D480 /* Assets.xcassets */; };
 		1ADAF7CF27517C8800D8D480 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1ADAF7CD27517C8800D8D480 /* LaunchScreen.storyboard */; };
 		1ADAF7DA27517C8800D8D480 /* PicsiteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAF7D927517C8800D8D480 /* PicsiteTests.swift */; };
@@ -50,6 +55,21 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1A0EFFBF27CA9D15004B544C /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1A0EFFC027CA9D16004B544C /* BSWInterfaceKit in Embed Frameworks */,
+				1A0EFFBE27CA9D15004B544C /* BSWFoundation in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		1A0EFFA827CA4472004B544C /* PicsiteUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteUI; sourceTree = "<group>"; };
 		1A0EFFAB27CA480C004B544C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -58,15 +78,18 @@
 		1A0EFFB827CA984A004B544C /* SF-Compact-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Bold.otf"; sourceTree = "<group>"; };
 		1A0EFFB927CA984A004B544C /* SF-Compact-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Regular.otf"; sourceTree = "<group>"; };
 		1A0EFFBA27CA984A004B544C /* SF-Compact-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Medium.otf"; sourceTree = "<group>"; };
+		1A0EFFBC27CA9B7A004B544C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		1A141CEF27CD5A5A00AA8190 /* AuthenticationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationProvider.swift; sourceTree = "<group>"; };
+		1A47FC9127CE706D00EC8FD7 /* PicsiteAuthKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteAuthKit; sourceTree = "<group>"; };
 		1A66E4A727C94C7700177DEF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1A7AC43827B64ED3006B7DF6 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
-		1A7AC43A27B64FF6006B7DF6 /* App.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		1A7AC43A27B64FF6006B7DF6 /* World.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		1A9296F927C40AC200037BA4 /* PicsiteKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteKit; sourceTree = "<group>"; };
 		1A943A5527540A92008D7150 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		1ADAF7BF27517C8800D8D480 /* Picsite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picsite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ADAF7C227517C8800D8D480 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1ADAF7C427517C8800D8D480 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1ADAF7C627517C8800D8D480 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		1ADAF7C627517C8800D8D480 /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		1ADAF7CB27517C8800D8D480 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1ADAF7CE27517C8800D8D480 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1ADAF7D027517C8800D8D480 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -84,6 +107,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ADAF80127517FF100D8D480 /* BSWInterfaceKit in Frameworks */,
+				1A47FC9327CE707800EC8FD7 /* PicsiteAuthKit in Frameworks */,
 				1A7AC43F27B65C2C006B7DF6 /* BSWFoundation in Frameworks */,
 				1ADAF7FE27517F7100D8D480 /* FirebaseStorageSwift-Beta in Frameworks */,
 				1A0EFFAA27CA4479004B544C /* PicsiteUI in Frameworks */,
@@ -122,6 +146,22 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		1A0EFFBB27CA9B63004B544C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1A0EFFBC27CA9B7A004B544C /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		1A141CEE27CD5A3800AA8190 /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				1A141CEF27CD5A5A00AA8190 /* AuthenticationProvider.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
 		1A66E4A927C94C8500177DEF /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +193,7 @@
 			children = (
 				1A0EFFA827CA4472004B544C /* PicsiteUI */,
 				1A9296F927C40AC200037BA4 /* PicsiteKit */,
+				1A47FC9127CE706D00EC8FD7 /* PicsiteAuthKit */,
 				1ADAF7C127517C8800D8D480 /* Picsite */,
 				1ADAF7D827517C8800D8D480 /* PicsiteTests */,
 				1ADAF7E227517C8900D8D480 /* PicsiteUITests */,
@@ -177,8 +218,9 @@
 				1ADAF7C227517C8800D8D480 /* AppDelegate.swift */,
 				1A7AC43827B64ED3006B7DF6 /* AppState.swift */,
 				1ADAF7C427517C8800D8D480 /* SceneDelegate.swift */,
-				1A7AC43A27B64FF6006B7DF6 /* App.swift */,
+				1A7AC43A27B64FF6006B7DF6 /* World.swift */,
 				1ADAF7D027517C8800D8D480 /* Info.plist */,
+				1A141CEE27CD5A3800AA8190 /* Providers */,
 				1ADAF80627518E1000D8D480 /* Assets */,
 				1AA679F7275402BB00799CE1 /* Extensions */,
 				1ADAF80527518DEA00D8D480 /* Configuration */,
@@ -208,8 +250,9 @@
 		1ADAF80327518DBF00D8D480 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1A0EFFBB27CA9B63004B544C /* Login */,
 				1A66E4A927C94C8500177DEF /* Home */,
-				1ADAF80727518E2500D8D480 /* Main */,
+				1ADAF80727518E2500D8D480 /* Authentication */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -239,12 +282,12 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
-		1ADAF80727518E2500D8D480 /* Main */ = {
+		1ADAF80727518E2500D8D480 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				1ADAF7C627517C8800D8D480 /* MainViewController.swift */,
+				1ADAF7C627517C8800D8D480 /* AuthenticationViewController.swift */,
 			);
-			path = Main;
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +300,7 @@
 				1ADAF7BB27517C8800D8D480 /* Sources */,
 				1ADAF7BC27517C8800D8D480 /* Frameworks */,
 				1ADAF7BD27517C8800D8D480 /* Resources */,
+				1A0EFFBF27CA9D15004B544C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -273,6 +317,7 @@
 				1A7AC43E27B65C2C006B7DF6 /* BSWFoundation */,
 				1A0EFFA627CA433A004B544C /* PicsiteKit */,
 				1A0EFFA927CA4479004B544C /* PicsiteUI */,
+				1A47FC9227CE707800EC8FD7 /* PicsiteAuthKit */,
 			);
 			productName = Picsite;
 			productReference = 1ADAF7BF27517C8800D8D480 /* Picsite.app */;
@@ -427,14 +472,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1ADAF7C727517C8800D8D480 /* MainViewController.swift in Sources */,
+				1ADAF7C727517C8800D8D480 /* AuthenticationViewController.swift in Sources */,
 				1A943A5627540A92008D7150 /* UIColor.swift in Sources */,
+				1A141CF027CD5A5A00AA8190 /* AuthenticationProvider.swift in Sources */,
 				1A7AC43927B64ED3006B7DF6 /* AppState.swift in Sources */,
 				1A0EFFB427CA7B37004B544C /* TextStyler.swift in Sources */,
 				1ADAF7C327517C8800D8D480 /* AppDelegate.swift in Sources */,
-				1A7AC43B27B64FF6006B7DF6 /* App.swift in Sources */,
+				1A7AC43B27B64FF6006B7DF6 /* World.swift in Sources */,
 				1A66E4A827C94C7700177DEF /* HomeViewController.swift in Sources */,
 				1A0EFFB627CA7B8C004B544C /* UIFont+Extensions.swift in Sources */,
+				1A0EFFBD27CA9B7A004B544C /* LoginViewController.swift in Sources */,
 				1ADAF7C527517C8800D8D480 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -829,6 +876,10 @@
 		1A0EFFA927CA4479004B544C /* PicsiteUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PicsiteUI;
+		};
+		1A47FC9227CE707800EC8FD7 /* PicsiteAuthKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PicsiteAuthKit;
 		};
 		1A7AC43E27B65C2C006B7DF6 /* BSWFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
