@@ -1,0 +1,13 @@
+//
+//  AppStore.xcconfig
+//  Picsite
+//
+//  Created by Marc Hidalgo on 10/3/22.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+// App Settings
+APP_NAME = Picsite
+APP_BUNDLE_ID = MH21.Picsite
