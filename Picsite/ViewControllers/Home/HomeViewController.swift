@@ -82,7 +82,7 @@ class HomeViewController: UIViewController {
 //        Firestore.firestore().settings = settings
         
         let db = Firestore.firestore()
-        db.collection("data").document("one").setData(docData) { err in
+        db.collection("data").document("two").setData(docData) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {

@@ -83,6 +83,7 @@
 		1A141CEF27CD5A5A00AA8190 /* AuthenticationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationProvider.swift; sourceTree = "<group>"; };
 		1A47FC9127CE706D00EC8FD7 /* PicsiteAuthKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteAuthKit; sourceTree = "<group>"; };
 		1A66E4A727C94C7700177DEF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		1A677D8027DBE42800BF3385 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A7AC43827B64ED3006B7DF6 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		1A7AC43A27B64FF6006B7DF6 /* World.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		1A9296F927C40AC200037BA4 /* PicsiteKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteKit; sourceTree = "<group>"; };
@@ -172,6 +173,24 @@
 				1A66E4A727C94C7700177DEF /* HomeViewController.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		1A677D7E27DBE40F00BF3385 /* AppStore */ = {
+			isa = PBXGroup;
+			children = (
+				1ADAF7F227517E9600D8D480 /* GoogleService-Info.plist */,
+				1AE7434D27DA73B3007944C6 /* AppStore.xcconfig */,
+			);
+			path = AppStore;
+			sourceTree = "<group>";
+		};
+		1A677D7F27DBE41500BF3385 /* Develop */ = {
+			isa = PBXGroup;
+			children = (
+				1A677D8027DBE42800BF3385 /* GoogleService-Info.plist */,
+				1AE7434C27DA7383007944C6 /* Develop.xcconfig */,
+			);
+			path = Develop;
 			sourceTree = "<group>";
 		};
 		1A9296FA27C40EA600037BA4 /* Frameworks */ = {
@@ -271,9 +290,8 @@
 		1ADAF80527518DEA00D8D480 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				1ADAF7F227517E9600D8D480 /* GoogleService-Info.plist */,
-				1AE7434C27DA7383007944C6 /* Develop.xcconfig */,
-				1AE7434D27DA73B3007944C6 /* AppStore.xcconfig */,
+				1A677D7F27DBE41500BF3385 /* Develop */,
+				1A677D7E27DBE40F00BF3385 /* AppStore */,
 				1AE7434E27DB3083007944C6 /* Environment.swift */,
 			);
 			path = Configuration;
@@ -308,6 +326,7 @@
 				1ADAF7BC27517C8800D8D480 /* Frameworks */,
 				1ADAF7BD27517C8800D8D480 /* Resources */,
 				1A0EFFBF27CA9D15004B544C /* Embed Frameworks */,
+				1A677D7D27DBE3DB00BF3385 /* Setup Firebase Environment GoogleService-Info.plist */,
 			);
 			buildRules = (
 			);
@@ -473,6 +492,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1A677D7D27DBE3DB00BF3385 /* Setup Firebase Environment GoogleService-Info.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Setup Firebase Environment GoogleService-Info.plist";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Name of the resource to copy\nINFO_PLIST_FILE=GoogleService-Info.plist\n\n# Get references to debug and release versions of the plist file\nDEBUG_INFO_PLIST_FILE=${PROJECT_DIR}/${TARGET_NAME}/Configuration/Develop/${INFO_PLIST_FILE}\nRELEASE_INFO_PLIST_FILE=${PROJECT_DIR}/${TARGET_NAME}/Configuration/AppStore/${INFO_PLIST_FILE}\n\n# Make sure the debug version exists\necho \"Looking for ${INFO_PLIST_FILE} in ${DEBUG_INFO_PLIST_FILE}\"\nif [ ! -f $DEBUG_INFO_PLIST_FILE ] ; then\n    echo \"File GoogleService-Info.plist (debug) not found.\"\n    exit 1\nfi\n\n# Make sure the release version exists\necho \"Looking for ${INFO_PLIST_FILE} in ${RELEASE_INFO_PLIST_FILE}\"\nif [ ! -f $RELEASE_INFO_PLIST_FILE ] ; then\n    echo \"File GoogleService-Info.plist (release) not found.\"\n    exit 1\nfi\n\n# Get a reference to the destination location for the plist file\nPLIST_DESTINATION=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\necho \"Copying ${INFO_PLIST_FILE} to final destination: ${PLIST_DESTINATION}\"\n\n# Copy the appropiate file to app bundle\necho \"${CONFIGURATION}\"\nif [ \"${CONFIGURATION}\" == \"Debug (Production)\" ] ; then\n    echo \"File ${RELEASE_INFO_PLIST_FILE} copied\"\n    cp \"${RELEASE_INFO_PLIST_FILE}\" \"${PLIST_DESTINATION}\"\n\nelse\n    echo \"File ${DEBUG_INFO_PLIST_FILE} copied\"\n    cp \"${DEBUG_INFO_PLIST_FILE}\" \"${PLIST_DESTINATION}\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1ADAF7BB27517C8800D8D480 /* Sources */ = {
