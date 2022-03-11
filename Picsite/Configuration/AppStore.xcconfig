@@ -8,6 +8,12 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
+// Server URL
+ROOT_URL = AppStore
+
+// Keys
+API_KEY = 9ud0930djd_md9zdjdko3830lb0d
+
 // App Settings
 APP_NAME = Picsite
 APP_BUNDLE_ID = MH21.Picsite
