@@ -11,28 +11,13 @@ import FirebaseAuth
 
 public class AuthAPIClient {
     
-    public let authEnvironment: Environment
+    public let authEnvironment: PicsiteAPI.Environment
     
-    public init(authEnvironment: Environment) {
+    public init(authEnvironment: PicsiteAPI.Environment) {
         self.authEnvironment = authEnvironment
     }
     
     public func login(email: String, password: String) async throws -> User {
         return try await Auth.auth().signIn(withEmail: email, password: password).user
     }
-    
-    public enum Environment: BSWFoundation.Environment {
-        case development
-        case production
-
-        public var baseURL: URL {
-            switch self {
-            case .development:
-                fatalError()
-            case .production:
-                fatalError()
-            }
-        }
-    }
-    
 }

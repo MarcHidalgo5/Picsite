@@ -35,8 +35,8 @@ class AuthenticationViewController: UIViewController {
         view = UIView()
         view.backgroundColor = .picsiteBackgroundColor
         
-        print(Environment.apiKey)
-        print(Environment.rootURL.absoluteString)
+        print(Configuration.apiKey)
+        print(Configuration.rootURL.absoluteString)
         
         let picsiteImage =  UIImage(named: "picsite-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysOriginal)
         

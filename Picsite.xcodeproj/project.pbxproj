@@ -35,7 +35,7 @@
 		1ADAF7FC27517F7100D8D480 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADAF7FB27517F7100D8D480 /* FirebaseFirestoreSwift-Beta */; };
 		1ADAF7FE27517F7100D8D480 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADAF7FD27517F7100D8D480 /* FirebaseStorageSwift-Beta */; };
 		1ADAF80127517FF100D8D480 /* BSWInterfaceKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADAF80027517FF100D8D480 /* BSWInterfaceKit */; };
-		1AE7434F27DB3083007944C6 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7434E27DB3083007944C6 /* Environment.swift */; };
+		1AE7434F27DB3083007944C6 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7434E27DB3083007944C6 /* Configuration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,7 +101,7 @@
 		1ADAF7F227517E9600D8D480 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1AE7434C27DA7383007944C6 /* Develop.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Develop.xcconfig; sourceTree = "<group>"; };
 		1AE7434D27DA73B3007944C6 /* AppStore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppStore.xcconfig; sourceTree = "<group>"; };
-		1AE7434E27DB3083007944C6 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		1AE7434E27DB3083007944C6 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,7 +288,7 @@
 			children = (
 				1A677D7F27DBE41500BF3385 /* Develop */,
 				1A677D7E27DBE40F00BF3385 /* AppStore */,
-				1AE7434E27DB3083007944C6 /* Environment.swift */,
+				1AE7434E27DB3083007944C6 /* Configuration.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -515,7 +515,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ADAF7C727517C8800D8D480 /* AuthenticationViewController.swift in Sources */,
-				1AE7434F27DB3083007944C6 /* Environment.swift in Sources */,
+				1AE7434F27DB3083007944C6 /* Configuration.swift in Sources */,
 				1A943A5627540A92008D7150 /* UIColor.swift in Sources */,
 				1A141CF027CD5A5A00AA8190 /* AuthenticationProvider.swift in Sources */,
 				1A7AC43927B64ED3006B7DF6 /* AppState.swift in Sources */,

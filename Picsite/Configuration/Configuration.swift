@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum Environment {
+public enum Configuration {
   // MARK: - Keys
   enum Keys {
     enum Plist {
@@ -26,7 +26,7 @@ public enum Environment {
 
   // MARK: - Plist values
   static let rootURL: URL = {
-    guard let rootURLstring = Environment.infoDictionary[Keys.Plist.rootURL] as? String else {
+    guard let rootURLstring = Configuration.infoDictionary[Keys.Plist.rootURL] as? String else {
       fatalError("Root URL not set in plist for this environment")
     }
     guard let url = URL(string: rootURLstring) else {
@@ -36,7 +36,7 @@ public enum Environment {
   }()
 
   static let apiKey: String = {
-    guard let apiKey = Environment.infoDictionary[Keys.Plist.apiKey] as? String else {
+    guard let apiKey = Configuration.infoDictionary[Keys.Plist.apiKey] as? String else {
       fatalError("API Key not set in plist for this environment")
     }
     return apiKey
