@@ -36,24 +36,20 @@ enum Fonts {
             let fontName: String = {
                 switch variant {
                 case .regular:
-                    return "SF-Compact-Text-Regular"
+                    return "SF Compact Text Regular"
                 case .medium:
-                    return "SF-Compact-Text-Medium"
+                    return "SF Compact Text Medium"
                 case .bold:
-                    return "SF-Compact-Text-Bold"
+                    return "SF Compact Text Bold"
                 }
             }()
-            
-            /// https://stackoverflow.com/a/59471639/1152289
-            return UIFontDescriptor(fontAttributes: [
-                .name : fontName,
-                .featureSettings: [
-                    [
-                        UIFontDescriptor.FeatureKey.featureIdentifier: kStylisticAlternativesType,
-                        UIFontDescriptor.FeatureKey.typeIdentifier: 8
-                    ],
-                ]
-            ])
+
+            guard let customFont = UIFont(name: fontName, size: 12) else {
+                fatalError("""
+                           Failed to load the \(fontName) font.
+                           """ )
+            }
+            return customFont.fontDescriptor
         }
     }
 }
