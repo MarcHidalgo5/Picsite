@@ -15,7 +15,6 @@
 		1A0EFFBE27CA9D15004B544C /* BSWFoundation in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1A7AC43E27B65C2C006B7DF6 /* BSWFoundation */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		1A0EFFC027CA9D16004B544C /* BSWInterfaceKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1ADAF80027517FF100D8D480 /* BSWInterfaceKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		1A141CF027CD5A5A00AA8190 /* AuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A141CEF27CD5A5A00AA8190 /* AuthenticationProvider.swift */; };
-		1A47FC9327CE707800EC8FD7 /* PicsiteAuthKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1A47FC9227CE707800EC8FD7 /* PicsiteAuthKit */; };
 		1A66E4A827C94C7700177DEF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66E4A727C94C7700177DEF /* HomeViewController.swift */; };
 		1A7AC43927B64ED3006B7DF6 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7AC43827B64ED3006B7DF6 /* AppState.swift */; };
 		1A7AC43B27B64FF6006B7DF6 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7AC43A27B64FF6006B7DF6 /* World.swift */; };
@@ -36,6 +35,7 @@
 		1ADAF7FC27517F7100D8D480 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADAF7FB27517F7100D8D480 /* FirebaseFirestoreSwift-Beta */; };
 		1ADAF7FE27517F7100D8D480 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADAF7FD27517F7100D8D480 /* FirebaseStorageSwift-Beta */; };
 		1ADAF80127517FF100D8D480 /* BSWInterfaceKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADAF80027517FF100D8D480 /* BSWInterfaceKit */; };
+		1AE7434F27DB3083007944C6 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7434E27DB3083007944C6 /* Configuration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,8 +80,8 @@
 		1A0EFFBA27CA984A004B544C /* SF-Compact-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Medium.otf"; sourceTree = "<group>"; };
 		1A0EFFBC27CA9B7A004B544C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1A141CEF27CD5A5A00AA8190 /* AuthenticationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationProvider.swift; sourceTree = "<group>"; };
-		1A47FC9127CE706D00EC8FD7 /* PicsiteAuthKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteAuthKit; sourceTree = "<group>"; };
 		1A66E4A727C94C7700177DEF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		1A677D8027DBE42800BF3385 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A7AC43827B64ED3006B7DF6 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		1A7AC43A27B64FF6006B7DF6 /* World.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		1A9296F927C40AC200037BA4 /* PicsiteKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteKit; sourceTree = "<group>"; };
@@ -99,6 +99,9 @@
 		1ADAF7E327517C8900D8D480 /* PicsiteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicsiteUITests.swift; sourceTree = "<group>"; };
 		1ADAF7E527517C8900D8D480 /* PicsiteUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicsiteUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1ADAF7F227517E9600D8D480 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1AE7434C27DA7383007944C6 /* Develop.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Develop.xcconfig; sourceTree = "<group>"; };
+		1AE7434D27DA73B3007944C6 /* AppStore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppStore.xcconfig; sourceTree = "<group>"; };
+		1AE7434E27DB3083007944C6 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,7 +110,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ADAF80127517FF100D8D480 /* BSWInterfaceKit in Frameworks */,
-				1A47FC9327CE707800EC8FD7 /* PicsiteAuthKit in Frameworks */,
 				1A7AC43F27B65C2C006B7DF6 /* BSWFoundation in Frameworks */,
 				1ADAF7FE27517F7100D8D480 /* FirebaseStorageSwift-Beta in Frameworks */,
 				1A0EFFAA27CA4479004B544C /* PicsiteUI in Frameworks */,
@@ -170,6 +172,24 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		1A677D7E27DBE40F00BF3385 /* AppStore */ = {
+			isa = PBXGroup;
+			children = (
+				1ADAF7F227517E9600D8D480 /* GoogleService-Info.plist */,
+				1AE7434D27DA73B3007944C6 /* AppStore.xcconfig */,
+			);
+			path = AppStore;
+			sourceTree = "<group>";
+		};
+		1A677D7F27DBE41500BF3385 /* Develop */ = {
+			isa = PBXGroup;
+			children = (
+				1A677D8027DBE42800BF3385 /* GoogleService-Info.plist */,
+				1AE7434C27DA7383007944C6 /* Develop.xcconfig */,
+			);
+			path = Develop;
+			sourceTree = "<group>";
+		};
 		1A9296FA27C40EA600037BA4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,7 +213,6 @@
 			children = (
 				1A0EFFA827CA4472004B544C /* PicsiteUI */,
 				1A9296F927C40AC200037BA4 /* PicsiteKit */,
-				1A47FC9127CE706D00EC8FD7 /* PicsiteAuthKit */,
 				1ADAF7C127517C8800D8D480 /* Picsite */,
 				1ADAF7D827517C8800D8D480 /* PicsiteTests */,
 				1ADAF7E227517C8900D8D480 /* PicsiteUITests */,
@@ -267,7 +286,9 @@
 		1ADAF80527518DEA00D8D480 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				1ADAF7F227517E9600D8D480 /* GoogleService-Info.plist */,
+				1A677D7F27DBE41500BF3385 /* Develop */,
+				1A677D7E27DBE40F00BF3385 /* AppStore */,
+				1AE7434E27DB3083007944C6 /* Configuration.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -301,6 +322,7 @@
 				1ADAF7BC27517C8800D8D480 /* Frameworks */,
 				1ADAF7BD27517C8800D8D480 /* Resources */,
 				1A0EFFBF27CA9D15004B544C /* Embed Frameworks */,
+				1A677D7D27DBE3DB00BF3385 /* Setup Firebase Environment GoogleService-Info.plist */,
 			);
 			buildRules = (
 			);
@@ -317,7 +339,6 @@
 				1A7AC43E27B65C2C006B7DF6 /* BSWFoundation */,
 				1A0EFFA627CA433A004B544C /* PicsiteKit */,
 				1A0EFFA927CA4479004B544C /* PicsiteUI */,
-				1A47FC9227CE707800EC8FD7 /* PicsiteAuthKit */,
 			);
 			productName = Picsite;
 			productReference = 1ADAF7BF27517C8800D8D480 /* Picsite.app */;
@@ -367,7 +388,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1310;
-				LastUpgradeCheck = 1310;
+				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					1ADAF7BE27517C8800D8D480 = {
 						CreatedOnToolsVersion = 13.1;
@@ -467,12 +488,34 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1A677D7D27DBE3DB00BF3385 /* Setup Firebase Environment GoogleService-Info.plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Setup Firebase Environment GoogleService-Info.plist";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Name of the resource to copy\nINFO_PLIST_FILE=GoogleService-Info.plist\n\n# Get references to debug and release versions of the plist file\nDEBUG_INFO_PLIST_FILE=${PROJECT_DIR}/${TARGET_NAME}/Configuration/Develop/${INFO_PLIST_FILE}\nRELEASE_INFO_PLIST_FILE=${PROJECT_DIR}/${TARGET_NAME}/Configuration/AppStore/${INFO_PLIST_FILE}\n\n# Make sure the debug version exists\necho \"Looking for ${INFO_PLIST_FILE} in ${DEBUG_INFO_PLIST_FILE}\"\nif [ ! -f $DEBUG_INFO_PLIST_FILE ] ; then\n    echo \"File GoogleService-Info.plist (debug) not found.\"\n    exit 1\nfi\n\n# Make sure the release version exists\necho \"Looking for ${INFO_PLIST_FILE} in ${RELEASE_INFO_PLIST_FILE}\"\nif [ ! -f $RELEASE_INFO_PLIST_FILE ] ; then\n    echo \"File GoogleService-Info.plist (release) not found.\"\n    exit 1\nfi\n\n# Get a reference to the destination location for the plist file\nPLIST_DESTINATION=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\necho \"Copying ${INFO_PLIST_FILE} to final destination: ${PLIST_DESTINATION}\"\n\n# Copy the appropiate file to app bundle\necho \"${CONFIGURATION}\"\nif [ \"${CONFIGURATION}\" == \"Debug (Production)\" ] ; then\n    echo \"File ${RELEASE_INFO_PLIST_FILE} copied\"\n    cp \"${RELEASE_INFO_PLIST_FILE}\" \"${PLIST_DESTINATION}\"\n\nelse\n    echo \"File ${DEBUG_INFO_PLIST_FILE} copied\"\n    cp \"${DEBUG_INFO_PLIST_FILE}\" \"${PLIST_DESTINATION}\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		1ADAF7BB27517C8800D8D480 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				1ADAF7C727517C8800D8D480 /* AuthenticationViewController.swift in Sources */,
+				1AE7434F27DB3083007944C6 /* Configuration.swift in Sources */,
 				1A943A5627540A92008D7150 /* UIColor.swift in Sources */,
 				1A141CF027CD5A5A00AA8190 /* AuthenticationProvider.swift in Sources */,
 				1A7AC43927B64ED3006B7DF6 /* AppState.swift in Sources */,
@@ -530,8 +573,9 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		1ADAF7E727517C8900D8D480 /* Debug */ = {
+		1ADAF7E727517C8900D8D480 /* Debug (Development) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AE7434C27DA7383007944C6 /* Develop.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -590,10 +634,370 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Debug;
+			name = "Debug (Development)";
 		};
-		1ADAF7E827517C8900D8D480 /* Release */ = {
+		1ADAF7E827517C8900D8D480 /* Release (Development) */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AE7434C27DA7383007944C6 /* Develop.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Release (Development)";
+		};
+		1ADAF7EA27517C8900D8D480 /* Debug (Development) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AE7434C27DA7383007944C6 /* Develop.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y98RBRXD5B;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Picsite/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(APP_NAME)";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEVELOP;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug (Development)";
+		};
+		1ADAF7EB27517C8900D8D480 /* Release (Development) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AE7434C27DA7383007944C6 /* Develop.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y98RBRXD5B;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Picsite/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(APP_NAME)";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEVELOP;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Release (Development)";
+		};
+		1ADAF7ED27517C8900D8D480 /* Debug (Development) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y98RBRXD5B;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = MH.PicsiteTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Picsite.app/Picsite";
+			};
+			name = "Debug (Development)";
+		};
+		1ADAF7EE27517C8900D8D480 /* Release (Development) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y98RBRXD5B;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = MH.PicsiteTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Picsite.app/Picsite";
+			};
+			name = "Release (Development)";
+		};
+		1ADAF7F027517C8900D8D480 /* Debug (Development) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y98RBRXD5B;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = MH.PicsiteUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Picsite;
+			};
+			name = "Debug (Development)";
+		};
+		1ADAF7F127517C8900D8D480 /* Release (Development) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y98RBRXD5B;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = MH.PicsiteUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Picsite;
+			};
+			name = "Release (Development)";
+		};
+		1AE7434427DA70AE007944C6 /* Debug (Production) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AE7434D27DA73B3007944C6 /* AppStore.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = "Debug (Production)";
+		};
+		1AE7434527DA70AE007944C6 /* Debug (Production) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AE7434D27DA73B3007944C6 /* AppStore.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y98RBRXD5B;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Picsite/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(APP_NAME)";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug (Production)";
+		};
+		1AE7434627DA70AE007944C6 /* Debug (Production) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y98RBRXD5B;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = MH.PicsiteTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Picsite.app/Picsite";
+			};
+			name = "Debug (Production)";
+		};
+		1AE7434727DA70AE007944C6 /* Debug (Production) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y98RBRXD5B;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = MH.PicsiteUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Picsite;
+			};
+			name = "Debug (Production)";
+		};
+		1AE7434827DA70DF007944C6 /* Release (Production)  */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AE7434D27DA73B3007944C6 /* AppStore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -646,10 +1050,11 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = "Release (Production) ";
 		};
-		1ADAF7EA27517C8900D8D480 /* Debug */ = {
+		1AE7434927DA70DF007944C6 /* Release (Production)  */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AE7434D27DA73B3007944C6 /* AppStore.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -659,6 +1064,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Picsite/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "$(APP_NAME)";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -668,43 +1074,16 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MH21.Picsite;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = "Release (Production) ";
 		};
-		1ADAF7EB27517C8900D8D480 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y98RBRXD5B;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Picsite/Info.plist;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MH21.Picsite;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		1ADAF7ED27517C8900D8D480 /* Debug */ = {
+		1AE7434A27DA70DF007944C6 /* Release (Production)  */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -727,34 +1106,9 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Picsite.app/Picsite";
 			};
-			name = Debug;
+			name = "Release (Production) ";
 		};
-		1ADAF7EE27517C8900D8D480 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y98RBRXD5B;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MH.PicsiteTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Picsite.app/Picsite";
-			};
-			name = Release;
-		};
-		1ADAF7F027517C8900D8D480 /* Debug */ = {
+		1AE7434B27DA70DF007944C6 /* Release (Production)  */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -775,30 +1129,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Picsite;
 			};
-			name = Debug;
-		};
-		1ADAF7F127517C8900D8D480 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Y98RBRXD5B;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = MH.PicsiteUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Picsite;
-			};
-			name = Release;
+			name = "Release (Production) ";
 		};
 /* End XCBuildConfiguration section */
 
@@ -806,38 +1137,46 @@
 		1ADAF7BA27517C8800D8D480 /* Build configuration list for PBXProject "Picsite" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1ADAF7E727517C8900D8D480 /* Debug */,
-				1ADAF7E827517C8900D8D480 /* Release */,
+				1ADAF7E727517C8900D8D480 /* Debug (Development) */,
+				1AE7434427DA70AE007944C6 /* Debug (Production) */,
+				1ADAF7E827517C8900D8D480 /* Release (Development) */,
+				1AE7434827DA70DF007944C6 /* Release (Production)  */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release (Development)";
 		};
 		1ADAF7E927517C8900D8D480 /* Build configuration list for PBXNativeTarget "Picsite" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1ADAF7EA27517C8900D8D480 /* Debug */,
-				1ADAF7EB27517C8900D8D480 /* Release */,
+				1ADAF7EA27517C8900D8D480 /* Debug (Development) */,
+				1AE7434527DA70AE007944C6 /* Debug (Production) */,
+				1ADAF7EB27517C8900D8D480 /* Release (Development) */,
+				1AE7434927DA70DF007944C6 /* Release (Production)  */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release (Development)";
 		};
 		1ADAF7EC27517C8900D8D480 /* Build configuration list for PBXNativeTarget "PicsiteTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1ADAF7ED27517C8900D8D480 /* Debug */,
-				1ADAF7EE27517C8900D8D480 /* Release */,
+				1ADAF7ED27517C8900D8D480 /* Debug (Development) */,
+				1AE7434627DA70AE007944C6 /* Debug (Production) */,
+				1ADAF7EE27517C8900D8D480 /* Release (Development) */,
+				1AE7434A27DA70DF007944C6 /* Release (Production)  */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release (Development)";
 		};
 		1ADAF7EF27517C8900D8D480 /* Build configuration list for PBXNativeTarget "PicsiteUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1ADAF7F027517C8900D8D480 /* Debug */,
-				1ADAF7F127517C8900D8D480 /* Release */,
+				1ADAF7F027517C8900D8D480 /* Debug (Development) */,
+				1AE7434727DA70AE007944C6 /* Debug (Production) */,
+				1ADAF7F127517C8900D8D480 /* Release (Development) */,
+				1AE7434B27DA70DF007944C6 /* Release (Production)  */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = "Release (Development)";
 		};
 /* End XCConfigurationList section */
 
@@ -876,10 +1215,6 @@
 		1A0EFFA927CA4479004B544C /* PicsiteUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PicsiteUI;
-		};
-		1A47FC9227CE707800EC8FD7 /* PicsiteAuthKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PicsiteAuthKit;
 		};
 		1A7AC43E27B65C2C006B7DF6 /* BSWFoundation */ = {
 			isa = XCSwiftPackageProductDependency;

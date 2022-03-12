@@ -14,6 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: UIApplicationDelegate
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        Current = World(environment: {
+            #if APPSTORE
+                return .production
+            #else
+                return .development
+            #endif
+        }())
         FirebaseApp.configure()
         SceneDelegate.themeApp()
         return true

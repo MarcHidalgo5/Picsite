@@ -27,7 +27,7 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         Task { @MainActor in
             do {
-                let user = try await provider.loginUser(email: "marchidalgo@icloud.com", password: "123456789")
+                let _ = try await provider.loginUser(email: "marchidalgo@icloud.com", password: "123456789")
 //                print(user.email)
 //                print(user.displayName)
                 let vc = HomeViewController()
