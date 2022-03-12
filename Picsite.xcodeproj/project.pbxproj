@@ -15,7 +15,6 @@
 		1A0EFFBE27CA9D15004B544C /* BSWFoundation in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1A7AC43E27B65C2C006B7DF6 /* BSWFoundation */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		1A0EFFC027CA9D16004B544C /* BSWInterfaceKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1ADAF80027517FF100D8D480 /* BSWInterfaceKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		1A141CF027CD5A5A00AA8190 /* AuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A141CEF27CD5A5A00AA8190 /* AuthenticationProvider.swift */; };
-		1A47FC9327CE707800EC8FD7 /* PicsiteAuthKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1A47FC9227CE707800EC8FD7 /* PicsiteAuthKit */; };
 		1A66E4A827C94C7700177DEF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66E4A727C94C7700177DEF /* HomeViewController.swift */; };
 		1A7AC43927B64ED3006B7DF6 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7AC43827B64ED3006B7DF6 /* AppState.swift */; };
 		1A7AC43B27B64FF6006B7DF6 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7AC43A27B64FF6006B7DF6 /* World.swift */; };
@@ -36,7 +35,7 @@
 		1ADAF7FC27517F7100D8D480 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADAF7FB27517F7100D8D480 /* FirebaseFirestoreSwift-Beta */; };
 		1ADAF7FE27517F7100D8D480 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADAF7FD27517F7100D8D480 /* FirebaseStorageSwift-Beta */; };
 		1ADAF80127517FF100D8D480 /* BSWInterfaceKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1ADAF80027517FF100D8D480 /* BSWInterfaceKit */; };
-		1AE7434F27DB3083007944C6 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7434E27DB3083007944C6 /* Environment.swift */; };
+		1AE7434F27DB3083007944C6 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7434E27DB3083007944C6 /* Configuration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,7 +80,6 @@
 		1A0EFFBA27CA984A004B544C /* SF-Compact-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Medium.otf"; sourceTree = "<group>"; };
 		1A0EFFBC27CA9B7A004B544C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1A141CEF27CD5A5A00AA8190 /* AuthenticationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationProvider.swift; sourceTree = "<group>"; };
-		1A47FC9127CE706D00EC8FD7 /* PicsiteAuthKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteAuthKit; sourceTree = "<group>"; };
 		1A66E4A727C94C7700177DEF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1A677D8027DBE42800BF3385 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A7AC43827B64ED3006B7DF6 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -103,7 +101,7 @@
 		1ADAF7F227517E9600D8D480 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1AE7434C27DA7383007944C6 /* Develop.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Develop.xcconfig; sourceTree = "<group>"; };
 		1AE7434D27DA73B3007944C6 /* AppStore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppStore.xcconfig; sourceTree = "<group>"; };
-		1AE7434E27DB3083007944C6 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		1AE7434E27DB3083007944C6 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +110,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ADAF80127517FF100D8D480 /* BSWInterfaceKit in Frameworks */,
-				1A47FC9327CE707800EC8FD7 /* PicsiteAuthKit in Frameworks */,
 				1A7AC43F27B65C2C006B7DF6 /* BSWFoundation in Frameworks */,
 				1ADAF7FE27517F7100D8D480 /* FirebaseStorageSwift-Beta in Frameworks */,
 				1A0EFFAA27CA4479004B544C /* PicsiteUI in Frameworks */,
@@ -216,7 +213,6 @@
 			children = (
 				1A0EFFA827CA4472004B544C /* PicsiteUI */,
 				1A9296F927C40AC200037BA4 /* PicsiteKit */,
-				1A47FC9127CE706D00EC8FD7 /* PicsiteAuthKit */,
 				1ADAF7C127517C8800D8D480 /* Picsite */,
 				1ADAF7D827517C8800D8D480 /* PicsiteTests */,
 				1ADAF7E227517C8900D8D480 /* PicsiteUITests */,
@@ -292,7 +288,7 @@
 			children = (
 				1A677D7F27DBE41500BF3385 /* Develop */,
 				1A677D7E27DBE40F00BF3385 /* AppStore */,
-				1AE7434E27DB3083007944C6 /* Environment.swift */,
+				1AE7434E27DB3083007944C6 /* Configuration.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -343,7 +339,6 @@
 				1A7AC43E27B65C2C006B7DF6 /* BSWFoundation */,
 				1A0EFFA627CA433A004B544C /* PicsiteKit */,
 				1A0EFFA927CA4479004B544C /* PicsiteUI */,
-				1A47FC9227CE707800EC8FD7 /* PicsiteAuthKit */,
 			);
 			productName = Picsite;
 			productReference = 1ADAF7BF27517C8800D8D480 /* Picsite.app */;
@@ -393,7 +388,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1310;
-				LastUpgradeCheck = 1310;
+				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					1ADAF7BE27517C8800D8D480 = {
 						CreatedOnToolsVersion = 13.1;
@@ -520,7 +515,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1ADAF7C727517C8800D8D480 /* AuthenticationViewController.swift in Sources */,
-				1AE7434F27DB3083007944C6 /* Environment.swift in Sources */,
+				1AE7434F27DB3083007944C6 /* Configuration.swift in Sources */,
 				1A943A5627540A92008D7150 /* UIColor.swift in Sources */,
 				1A141CF027CD5A5A00AA8190 /* AuthenticationProvider.swift in Sources */,
 				1A7AC43927B64ED3006B7DF6 /* AppState.swift in Sources */,
@@ -680,6 +675,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -691,6 +687,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -722,6 +719,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEVELOP;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -752,6 +750,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEVELOP;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -941,6 +940,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1076,6 +1076,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(APP_BUNDLE_ID)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = APPSTORE;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1214,10 +1215,6 @@
 		1A0EFFA927CA4479004B544C /* PicsiteUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PicsiteUI;
-		};
-		1A47FC9227CE707800EC8FD7 /* PicsiteAuthKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PicsiteAuthKit;
 		};
 		1A7AC43E27B65C2C006B7DF6 /* BSWFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
