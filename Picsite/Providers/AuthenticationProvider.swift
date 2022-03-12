@@ -14,8 +14,8 @@ class AuthenticationProvider: AuthenticationProviderType {
     
     private let authAPIClient: AuthAPIClient
     
-    init() {
-        self.authAPIClient = AuthAPIClient.init()
+    init(environment: PicsiteAPI.Environment) {
+        self.authAPIClient = AuthAPIClient.init(authEnvironment: environment)
     }
     
     func loginUser(email: String, password: String) async throws -> User {

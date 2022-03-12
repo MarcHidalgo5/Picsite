@@ -13,7 +13,7 @@ public class AuthAPIClient {
     
     public let authEnvironment: Environment
     
-    public init(authEnvironment: Environment = .production) {
+    public init(authEnvironment: Environment) {
         self.authEnvironment = authEnvironment
     }
     
