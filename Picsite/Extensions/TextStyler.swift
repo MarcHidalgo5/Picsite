@@ -7,6 +7,6 @@
 
 import BSWInterfaceKit
 
-let mediumTextStyler = TextStyler(fontDescriptor: Fonts.system.descriptor(variant: .medium))
-let regularTextStyler = TextStyler(fontDescriptor: Fonts.system.descriptor(variant: .regular))
-let boldTextStyler = TextStyler(fontDescriptor: Fonts.system.descriptor(variant: .bold))
+let mediumTextStyler = TextStyler(fontDescriptor: Fonts.compact.descriptor(variant: .medium))
+let regularTextStyler = TextStyler(fontDescriptor: Fonts.compact.descriptor(variant: .regular))
+let boldTextStyler = TextStyler(fontDescriptor: Fonts.compact.descriptor(variant: .bold))
