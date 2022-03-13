@@ -14,6 +14,8 @@ class AuthenticationViewController: UIViewController {
     
     enum Constants {
         static let Spacing: CGFloat = 16
+        static let LogoSpacing: CGFloat = 150
+        static let LoginButtonHeight: CGFloat = 60
         static let PhotoHeight: CGFloat = 85
         static let CornerRadius: CGFloat = 12
     }
@@ -93,12 +95,12 @@ class AuthenticationViewController: UIViewController {
         ])
         
         contentStackView.axis = .vertical
-        contentStackView.layoutMargins = .init(top: 10, left: 40, bottom: 10, right: 40)
+        contentStackView.layoutMargins = .init(top: 10, left: 20, bottom: 10, right: 20)
         contentStackView.isLayoutMarginsRelativeArrangement = true
         contentStackView.spacing = 10
         contentStackView.alignment = .fill
         contentStackView.distribution = .fillProportionally
-        contentStackView.setCustomSpacing(150, after: picsiteImageView)
+        contentStackView.setCustomSpacing(Constants.LogoSpacing, after: picsiteImageView)
         
         view.addAutolayoutSubview(backgroundImageView)
         view.addAutolayoutSubview(contentStackView)
@@ -106,9 +108,8 @@ class AuthenticationViewController: UIViewController {
         contentStackView.pinToSuperviewLayoutMargins()
         NSLayoutConstraint.activate([
             picsiteImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.isTallScreen ? 50 : 30),
-            picsiteImageView.heightAnchor.constraint(equalToConstant: Constants.PhotoHeight),
-            socialContentStackView.heightAnchor.constraint(equalToConstant: 60),
-            loginEmailButton.heightAnchor.constraint(equalToConstant: 60),
+            socialContentStackView.heightAnchor.constraint(equalToConstant: Constants.LoginButtonHeight),
+            loginEmailButton.heightAnchor.constraint(equalToConstant: Constants.LoginButtonHeight),
             signInView.heightAnchor.constraint(equalToConstant: 64)
         ])
     }
