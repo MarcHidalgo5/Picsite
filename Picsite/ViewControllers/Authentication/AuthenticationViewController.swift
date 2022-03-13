@@ -44,6 +44,7 @@ class AuthenticationViewController: UIViewController {
             imageView.backgroundColor = .clear
             return imageView
         }()
+        picsiteImageView.image = picsiteImage
         
         let backgroundImageView: UIImageView = {
             let imageView = UIImageView()
@@ -51,22 +52,20 @@ class AuthenticationViewController: UIViewController {
             imageView.backgroundColor = .clear
             return imageView
         }()
-        
-        picsiteImageView.image = picsiteImage
         backgroundImageView.image = backgroundImage
         
         let appleImage = UIImage(named: "apple-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysTemplate)
-        let loginAppleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("Login with Apple", color: .white, forSize: smallFontSize), appleImage), tintColor: .white, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) {
+        let loginAppleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("authentication-login-apple-button".localize, color: .white, forSize: smallFontSize), appleImage), tintColor: .white, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) {
            print("apple login")
         })
-       
+        
         
         let googleImage =  UIImage(named: "google-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysOriginal)
-        let loginGoogleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("Login with Google", color: .white, forSize: smallFontSize), googleImage), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) {
+        let loginGoogleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("authentication-login-google-button".localize, color: .white, forSize: smallFontSize), googleImage), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) {
            print("google login")
         })
         
-        let loginEmailButton = UIButton(buttonConfiguration: .init(buttonTitle: .text(FontPalette.mediumTextStyler.attributedString("Login with email", color: .white, forSize: smallFontSize)), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) {
+        let loginEmailButton = UIButton(buttonConfiguration: .init(buttonTitle: .text(FontPalette.mediumTextStyler.attributedString("authentication-login-email-button".localize, color: .white, forSize: smallFontSize)), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) {
            print("email login")
         })
         
@@ -76,12 +75,21 @@ class AuthenticationViewController: UIViewController {
             self.show(navVC, sender: nil)
         })
         
+        let socialContentStackView = UIStackView(arrangedSubviews: [
+            loginAppleButton,
+            loginGoogleButton
+        ])
+        
+        socialContentStackView.axis = .horizontal
+        socialContentStackView.spacing = 10
+        socialContentStackView.alignment = .fill
+        socialContentStackView.distribution = .fillEqually
+        
         let contentStackView = UIStackView(arrangedSubviews: [
             picsiteImageView,
-           loginEmailButton,
-           loginAppleButton,
-           loginGoogleButton,
-           signInView,
+            loginEmailButton,
+            socialContentStackView,
+            signInView,
         ])
         
         contentStackView.axis = .vertical
@@ -90,7 +98,7 @@ class AuthenticationViewController: UIViewController {
         contentStackView.spacing = 10
         contentStackView.alignment = .fill
         contentStackView.distribution = .fillProportionally
-        contentStackView.setCustomSpacing(35, after: loginGoogleButton)
+        contentStackView.setCustomSpacing(150, after: picsiteImageView)
         
         view.addAutolayoutSubview(backgroundImageView)
         view.addAutolayoutSubview(contentStackView)
@@ -99,9 +107,8 @@ class AuthenticationViewController: UIViewController {
         NSLayoutConstraint.activate([
             picsiteImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.isTallScreen ? 50 : 30),
             picsiteImageView.heightAnchor.constraint(equalToConstant: Constants.PhotoHeight),
-            loginAppleButton.heightAnchor.constraint(equalToConstant: 60),
+            socialContentStackView.heightAnchor.constraint(equalToConstant: 60),
             loginEmailButton.heightAnchor.constraint(equalToConstant: 60),
-            loginGoogleButton.heightAnchor.constraint(equalToConstant: 60),
             signInView.heightAnchor.constraint(equalToConstant: 64)
         ])
     }
