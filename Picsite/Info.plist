@@ -2,16 +2,27 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>API_KEY</key>
+	<string>$(API_KEY)</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>$(REVERSED_CLIENT_ID)</string>
+			</array>
+		</dict>
+	</array>
+	<key>ROOT_URL</key>
+	<string>$(ROOT_URL)</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SF-Compact-Text-Regular.otf</string>
 		<string>SF-Compact-Text-Medium.otf</string>
 		<string>SF-Compact-Text-Bold.otf</string>
 	</array>
-	<key>API_KEY</key>
-	<string>$(API_KEY)</string>
-	<key>ROOT_URL</key>
-	<string>$(ROOT_URL)</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
