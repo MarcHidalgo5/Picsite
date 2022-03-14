@@ -9,6 +9,7 @@ import PicsiteKit
 import BSWFoundation
 import Foundation
 import FirebaseAuth
+import GoogleSignIn
 
 class AuthenticationProvider: AuthenticationProviderType {
     
@@ -20,5 +21,10 @@ class AuthenticationProvider: AuthenticationProviderType {
     
     func loginUser(email: String, password: String) async throws -> User {
         try await self.authAPIClient.login(email: email, password: password)
+    }
+    
+    func loginUsingGoogle(with credential: AuthCredential) async throws {
+        _ = try await authAPIClient.loginUsingGoogle(credential: credential)
+        
     }
 }

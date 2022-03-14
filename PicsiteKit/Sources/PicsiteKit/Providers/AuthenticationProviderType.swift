@@ -12,5 +12,6 @@ import FirebaseAuth
 public protocol AuthenticationProviderType: AnyObject {
     
     func loginUser(email: String, password: String) async throws -> User
+    func loginUsingGoogle(with credential: AuthCredential) async throws
     
 }
