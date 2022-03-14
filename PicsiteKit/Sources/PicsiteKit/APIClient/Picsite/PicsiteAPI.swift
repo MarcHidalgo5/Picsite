@@ -30,7 +30,7 @@ public enum PicsiteAPI {
     }
 }
 
-let VideoAskDateDecodingStrategy: DateFormatter = {
+let PicsiteDateDecodingStrategy: DateFormatter = {
     let formatter = DateFormatter()
     formatter.timeZone = TimeZone(identifier: "UTC")
     formatter.locale = Locale(identifier: "en_US_POSIX")

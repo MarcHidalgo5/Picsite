@@ -134,8 +134,8 @@ class AuthenticationViewController: UIViewController {
             ])
             loginButton.addTarget(self, action: #selector(_onLogin), for: .touchUpInside)
             let firstPartOfMessage =
-            FontPalette.mediumTextStyler.attributedString("You don't have an account yet?", color: .black, forSize: 17)
-            let secondPartOfMessage = FontPalette.boldTextStyler.attributedString("Sign in", color: .black, forSize: 17)
+            FontPalette.mediumTextStyler.attributedString("authentication-signup-label".localize, color: .black, forSize: 17)
+            let secondPartOfMessage = FontPalette.boldTextStyler.attributedString("authentication-signup-secondary-label".localize, color: .black, forSize: 17)
             let finalMessage = [firstPartOfMessage, secondPartOfMessage]
                 .joinedStrings()
                 .settingParagraphStyle {

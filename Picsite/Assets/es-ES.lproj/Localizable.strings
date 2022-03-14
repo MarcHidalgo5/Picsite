@@ -9,3 +9,5 @@
 "authentication-login-apple-button" = "Apple";
 "authentication-login-google-button" = "Google";
 "authentication-login-email-button" = "Iniciar sesion";
+"authentication-signup-label" = "Aún no tienes cuenta?";
+"authentication-signup-secondary-label" = "Registrate";
