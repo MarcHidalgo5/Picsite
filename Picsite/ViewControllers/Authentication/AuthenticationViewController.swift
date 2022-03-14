@@ -12,7 +12,25 @@ import PicsiteKit
 import Firebase
 import GoogleSignIn
 
+protocol AuthenticationObserver: AnyObject {
+    @MainActor func didFinishAuthentication()
+}
+
 class AuthenticationViewController: UIViewController {
+    
+    enum Factory {
+        static func viewController(observer: AuthenticationObserver, authenticationProvider: AuthenticationProviderType) -> UIViewController {
+            let vc = AuthenticationViewController(authenticationProvider: authenticationProvider, observer: observer)
+            return UINavigationController.init(rootViewController: vc)
+        }
+
+        #if DEVELOP
+//        static func _forTest_viewController(observer: WalkthroughObserver) -> UIViewController {
+//            let vc = viewController(observer: observer)
+//            return (vc as! RegularSizeClassPresenterViewController).viewControllerToPresent
+//        }
+        #endif
+    }
     
     enum Constants {
         static let Spacing: CGFloat = 16
@@ -25,8 +43,11 @@ class AuthenticationViewController: UIViewController {
     private var smallFontSize: CGFloat { UIScreen.main.isSmallScreen ? 16 : 18 }
     private let provider: AuthenticationProviderType
     
-    init(authenticationProvider: AuthenticationProviderType) {
+    weak var observer: AuthenticationObserver!
+    
+    init(authenticationProvider: AuthenticationProviderType, observer: AuthenticationObserver) {
         self.provider = authenticationProvider
+        self.observer = observer
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -126,7 +147,7 @@ class AuthenticationViewController: UIViewController {
             let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
             Task { @MainActor in
                 try await provider.loginUsingGoogle(with: credential)
-                print("Login")
+                self.observer.didFinishAuthentication()
             }
             
         }

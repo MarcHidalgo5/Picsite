@@ -58,7 +58,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         switch currentAppState {
         case .unlogged:
-            return AuthenticationViewController(authenticationProvider: Current.authProvider)
+            return AuthenticationViewController.Factory.viewController(observer: self, authenticationProvider: Current.authProvider)
         case .login:
             return HomeViewController()
         }
@@ -90,3 +90,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 }
 
+extension SceneDelegate: AuthenticationObserver {
+    func didFinishAuthentication() {
+        updateContainedViewController()
+    }
+}

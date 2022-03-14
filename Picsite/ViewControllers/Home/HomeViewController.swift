@@ -8,6 +8,7 @@
 import UIKit
 import BSWInterfaceKit
 import PicsiteUI
+import Firebase
 
 class HomeViewController: UIViewController {
     
@@ -15,6 +16,13 @@ class HomeViewController: UIViewController {
     override func loadView() {
         view = UIView()
         view.backgroundColor = .red
+        
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+        }
         
     }
     

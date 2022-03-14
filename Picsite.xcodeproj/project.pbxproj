@@ -157,14 +157,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		1A0EFFBB27CA9B63004B544C /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				1A0EFFBC27CA9B7A004B544C /* LoginViewController.swift */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
 		1A141CEE27CD5A3800AA8190 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +197,14 @@
 				1A0EFFAB27CA480C004B544C /* Foundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1A9B075D27DFFDD300341528 /* ChildVC */ = {
+			isa = PBXGroup;
+			children = (
+				1A0EFFBC27CA9B7A004B544C /* LoginViewController.swift */,
+			);
+			path = ChildVC;
 			sourceTree = "<group>";
 		};
 		1AA679F7275402BB00799CE1 /* Extensions */ = {
@@ -278,7 +278,6 @@
 		1ADAF80327518DBF00D8D480 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1A0EFFBB27CA9B63004B544C /* Login */,
 				1A66E4A927C94C8500177DEF /* Home */,
 				1ADAF80727518E2500D8D480 /* Authentication */,
 			);
@@ -316,6 +315,7 @@
 		1ADAF80727518E2500D8D480 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				1A9B075D27DFFDD300341528 /* ChildVC */,
 				1ADAF7C627517C8800D8D480 /* AuthenticationViewController.swift */,
 			);
 			path = Authentication;
