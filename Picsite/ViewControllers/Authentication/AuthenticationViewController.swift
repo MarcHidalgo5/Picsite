@@ -57,28 +57,24 @@ class AuthenticationViewController: UIViewController {
         backgroundImageView.image = backgroundImage
         
         let appleImage = UIImage(named: "apple-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysTemplate)
-        let loginAppleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("authentication-login-apple-button".localize, color: .white, forSize: smallFontSize), appleImage), tintColor: .white, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) {
-           print("apple login")
+        let _ = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("authentication-login-apple-button".localize, color: .white, forSize: smallFontSize), appleImage), tintColor: .white, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) { [weak self] in
+            self?.onLoginWithApple()
         })
-        
         
         let googleImage =  UIImage(named: "google-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysOriginal)
-        let loginGoogleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("authentication-login-google-button".localize, color: .white, forSize: smallFontSize), googleImage), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) {
-           print("google login")
+        let loginGoogleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("authentication-login-google-button".localize, color: .white, forSize: smallFontSize), googleImage), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) { [weak self] in
+            self?.onLoginWithGoogle()
         })
         
-        let loginEmailButton = UIButton(buttonConfiguration: .init(buttonTitle: .text(FontPalette.mediumTextStyler.attributedString("authentication-login-email-button".localize, color: .white, forSize: smallFontSize)), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) {
-           print("email login")
+        let loginEmailButton = UIButton(buttonConfiguration: .init(buttonTitle: .text(FontPalette.mediumTextStyler.attributedString("authentication-login-email-button".localize, color: .white, forSize: smallFontSize)), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) { [weak self] in
+            self?.onLogin()
         })
         
-        let signInView = SignInView(onLogin: {
-            let vc = LoginViewController(provider: self.provider)
-            let navVC = UINavigationController.init(rootViewController: vc)
-            self.show(navVC, sender: nil)
+        let signUpView = SignUpView(onLogin: {
+            self.onSignUp()
         })
         
         let socialContentStackView = UIStackView(arrangedSubviews: [
-            loginAppleButton,
             loginGoogleButton
         ])
         
@@ -91,7 +87,7 @@ class AuthenticationViewController: UIViewController {
             picsiteImageView,
             loginEmailButton,
             socialContentStackView,
-            signInView,
+            signUpView,
         ])
         
         contentStackView.axis = .vertical
@@ -110,13 +106,31 @@ class AuthenticationViewController: UIViewController {
             picsiteImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.isTallScreen ? 50 : 30),
             socialContentStackView.heightAnchor.constraint(equalToConstant: Constants.LoginButtonHeight),
             loginEmailButton.heightAnchor.constraint(equalToConstant: Constants.LoginButtonHeight),
-            signInView.heightAnchor.constraint(equalToConstant: 64)
+            signUpView.heightAnchor.constraint(equalToConstant: 64)
         ])
     }
     
     //Private
     
-    private class SignInView: UIView {
+    private func onLoginWithGoogle() {
+        
+    }
+    
+    private func onLoginWithApple() {
+        performLoginWithApple()
+    }
+    
+    private func onSignUp() {
+        
+    }
+    
+    private func onLogin() {
+        let vc = LoginViewController(provider: self.provider)
+        let navVC = UINavigationController.init(rootViewController: vc)
+        self.show(navVC, sender: nil)
+    }
+    
+    private class SignUpView: UIView {
         
         private let onLogin: () -> Void
         
@@ -155,4 +169,24 @@ class AuthenticationViewController: UIViewController {
     }
 }
 
+import AuthenticationServices
 
+extension AuthenticationViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+    
+    func performLoginWithApple() {
+        let request = ASAuthorizationAppleIDProvider().createRequest()
+        request.requestedScopes = [.fullName, .email]
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.delegate = self
+        controller.presentationContextProvider = self
+        controller.performRequests()
+    }
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return view.window!
+    }
+    
+    public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+       
+    }
+}
