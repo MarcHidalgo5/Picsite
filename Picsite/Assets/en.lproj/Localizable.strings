@@ -1,4 +1,8 @@
 
+// Common
+"loading-message" = "Loading";
+"error-message" = "Something went wrong";
+
 //AuthenticationViewController
 "authentication-login-apple-button" = "Apple";
 "authentication-login-google-button" = "Google";
@@ -6,3 +10,5 @@
 "authentication-signup-label" = "You don't have an account yet?";
 "authentication-signup-secondary-label" = "Sign up";
 
+//LoadingViewController
+"login-error-message" = "Fail to complete login";
