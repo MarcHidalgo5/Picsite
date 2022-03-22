@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }())
         FirebaseApp.configure()
         SceneDelegate.themeApp()
+        UIViewController.enhancedErrorAlertMessage = Current.enhancedErrorLogs
         return true
     }
     

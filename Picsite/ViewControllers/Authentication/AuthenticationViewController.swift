@@ -79,17 +79,21 @@ class AuthenticationViewController: UIViewController {
         }()
         backgroundImageView.image = backgroundImage
         
+        let textColor = {
+            return ColorPalette.picsiteTitleColor.resolvedColor(with: .init(userInterfaceStyle: self.traitCollection.userInterfaceStyle == .light ? .dark : .dark))
+        }()
+        
         let appleImage = UIImage(named: "apple-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysTemplate)
-        let _ = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("authentication-login-apple-button".localize, color: .white, forSize: smallFontSize), appleImage), tintColor: .white, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) { [weak self] in
+        let _ = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("authentication-login-apple-button".localize, color: textColor, forSize: smallFontSize), appleImage), tintColor: .white, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) { [weak self] in
             self?.onLoginWithApple()
         })
         
         let googleImage =  UIImage(named: "google-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysOriginal)
-        let loginGoogleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("authentication-login-google-button".localize, color: .white, forSize: smallFontSize), googleImage), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) { [weak self] in
+        let loginGoogleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("authentication-login-google-button".localize, color: textColor, forSize: smallFontSize), googleImage), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) { [weak self] in
             self?.onLoginWithGoogle()
         })
         
-        let loginEmailButton = UIButton(buttonConfiguration: .init(buttonTitle: .text(FontPalette.mediumTextStyler.attributedString("authentication-login-email-button".localize, color: .white, forSize: smallFontSize)), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) { [weak self] in
+        let loginEmailButton = UIButton(buttonConfiguration: .init(buttonTitle: .text(FontPalette.mediumTextStyler.attributedString("authentication-login-email-button".localize, color: textColor, forSize: smallFontSize)), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) { [weak self] in
             self?.onLogin()
         })
         
@@ -140,16 +144,15 @@ class AuthenticationViewController: UIViewController {
         let config = GIDConfiguration(clientID: clientID)
         GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { [unowned self] user, error in
             if let error = error {
-                
+                showErrorAlert("authentication-google-error".localize, error: error)
                 return
             }
             guard let authentication = user?.authentication, let idToken = authentication.idToken else { return }
             let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
-            Task { @MainActor in
-                try await provider.loginUsingGoogle(with: credential)
+            performBlockingTask(errorMessage: "authentication-google-error".localize, {
+                try await self.provider.loginUsingGoogle(with: credential)
                 self.observer.didFinishAuthentication()
-            }
-            
+            })
         }
     }
     
@@ -158,7 +161,7 @@ class AuthenticationViewController: UIViewController {
     }
     
     private func onSignUp() {
-        
+        showIndeterminateLoadingView(message: "loading".localize)
     }
     
     private func onLogin() {

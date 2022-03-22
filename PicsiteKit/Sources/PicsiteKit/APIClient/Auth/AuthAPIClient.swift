@@ -21,7 +21,7 @@ public class AuthAPIClient {
         return try await Auth.auth().signIn(withEmail: email, password: password).user
     }
     
-    public func loginUsingGoogle(credential: AuthCredential) async throws -> User {
+    public func login(with credential: AuthCredential) async throws -> User {
        return try await Auth.auth().signIn(with: credential).user
     }
    

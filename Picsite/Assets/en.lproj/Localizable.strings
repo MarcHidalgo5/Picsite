@@ -1,7 +1,9 @@
 
 // Common
-"loading-message" = "Loading";
-"error-message" = "Something went wrong";
+"loading" = "Loading";
+"error" = "Something has gone wrong";
+"dismiss" = "Dismiss";
+"error-perform-blocking-task" = "An error has occurred";
 
 //AuthenticationViewController
 "authentication-login-apple-button" = "Apple";
@@ -9,6 +11,7 @@
 "authentication-login-email-button" = "Sign in";
 "authentication-signup-label" = "You don't have an account yet?";
 "authentication-signup-secondary-label" = "Sign up";
+"authentication-google-error" = "Error signing in with google";
 
 //LoadingViewController
 "login-error-message" = "Fail to complete login";

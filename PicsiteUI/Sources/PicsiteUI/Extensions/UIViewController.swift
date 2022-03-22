@@ -6,9 +6,9 @@ public extension UIViewController {
     
     @discardableResult
     func performBlockingTask<T>(
-        loadingMessage: String = "loading-message".localize,
+        loadingMessage: String = "loading".localize,
         successMessage: String? = nil,
-        errorMessage: String = "error-message".localize,
+        errorMessage: String = "error-perform-blocking-task".localize,
         _ task: @escaping UIViewController.SwiftConcurrencyGenerator<T>)  -> Task<T, Error> {
         let blockingTask = Task {
             try await task()
@@ -49,7 +49,9 @@ public extension UIViewController {
         hud.indicatorView = HUDLoadingView(color: {
             return ColorPalette.picsiteTintColor.resolvedColor(with: .init(userInterfaceStyle: self.traitCollection.userInterfaceStyle == .light ? .dark : .light))
         }())
-        hud.textLabel.attributedText = FontPalette.mediumTextStyler.attributedString(message)
+        hud.textLabel.attributedText = FontPalette.mediumTextStyler.attributedString(message, color: {
+            return ColorPalette.picsiteTintColor.resolvedColor(with: .init(userInterfaceStyle: self.traitCollection.userInterfaceStyle == .light ? .dark : .light))
+        }())
         hud.show(in: self.view)
         hud.tag = UIViewController.ProgressTag
     }
