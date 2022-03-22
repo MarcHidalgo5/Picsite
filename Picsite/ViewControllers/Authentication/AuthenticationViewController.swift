@@ -23,13 +23,6 @@ class AuthenticationViewController: UIViewController {
             let vc = AuthenticationViewController(authenticationProvider: authenticationProvider, observer: observer)
             return UINavigationController.init(rootViewController: vc)
         }
-
-        #if DEVELOP
-//        static func _forTest_viewController(observer: WalkthroughObserver) -> UIViewController {
-//            let vc = viewController(observer: observer)
-//            return (vc as! RegularSizeClassPresenterViewController).viewControllerToPresent
-//        }
-        #endif
     }
     
     enum Constants {

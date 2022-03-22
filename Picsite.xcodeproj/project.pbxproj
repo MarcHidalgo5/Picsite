@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A0AA3BD27EA781E00A45AD1 /* StartingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0AA3BC27EA781E00A45AD1 /* StartingViewController.swift */; };
 		1A0EFFA727CA433A004B544C /* PicsiteKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1A0EFFA627CA433A004B544C /* PicsiteKit */; };
 		1A0EFFAA27CA4479004B544C /* PicsiteUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1A0EFFA927CA4479004B544C /* PicsiteUI */; };
 		1A0EFFB427CA7B37004B544C /* TextStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0EFFB327CA7B37004B544C /* TextStyler.swift */; };
@@ -77,6 +78,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1A0AA3BC27EA781E00A45AD1 /* StartingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingViewController.swift; sourceTree = "<group>"; };
 		1A0EFFA827CA4472004B544C /* PicsiteUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteUI; sourceTree = "<group>"; };
 		1A0EFFAB27CA480C004B544C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1A0EFFB327CA7B37004B544C /* TextStyler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyler.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				1A0EFFBC27CA9B7A004B544C /* LoginViewController.swift */,
+				1A0AA3BC27EA781E00A45AD1 /* StartingViewController.swift */,
 			);
 			path = ChildVC;
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 				1AE7434F27DB3083007944C6 /* Configuration.swift in Sources */,
 				1A943A5627540A92008D7150 /* UIColor.swift in Sources */,
 				1A141CF027CD5A5A00AA8190 /* AuthenticationProvider.swift in Sources */,
+				1A0AA3BD27EA781E00A45AD1 /* StartingViewController.swift in Sources */,
 				1A7AC43927B64ED3006B7DF6 /* AppState.swift in Sources */,
 				1A0EFFB427CA7B37004B544C /* TextStyler.swift in Sources */,
 				1ADAF7C327517C8800D8D480 /* AppDelegate.swift in Sources */,
