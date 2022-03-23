@@ -15,18 +15,18 @@ public enum PicsiteAPI {
         public static var PageSize: Int = 20
     }
     
-    public enum Environment: BSWFoundation.Environment {
+    public enum Environment {
         case production
         case development
         
-        public var baseURL: URL {
-            switch self {
-            case .production:
-                fatalError()
-            case .development:
-                fatalError()
-            }
-        }
+//        public var baseURL: URL {
+//            switch self {
+//            case .production:
+//                fatalError()
+//            case .development:
+//                fatalError()
+//            }
+//        }
     }
 }
 

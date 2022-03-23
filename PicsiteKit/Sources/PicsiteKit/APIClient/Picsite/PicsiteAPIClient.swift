@@ -10,9 +10,9 @@ import BSWFoundation
 
 open class PicsiteAPIClient {
     
-    let environment: Environment
+    let environment: PicsiteAPI.Environment
     
-    public init(environment: Environment) {
+    public init(environment: PicsiteAPI.Environment) {
         self.environment = environment
     }
     
