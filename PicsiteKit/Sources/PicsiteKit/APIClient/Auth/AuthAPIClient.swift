@@ -20,4 +20,9 @@ public class AuthAPIClient {
     public func login(email: String, password: String) async throws -> User {
         return try await Auth.auth().signIn(withEmail: email, password: password).user
     }
+    
+    public func login(with credential: AuthCredential) async throws -> User {
+       return try await Auth.auth().signIn(with: credential).user
+    }
+   
 }

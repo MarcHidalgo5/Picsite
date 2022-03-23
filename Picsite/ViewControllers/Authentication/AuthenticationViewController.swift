@@ -9,8 +9,21 @@ import UIKit
 import BSWInterfaceKit
 import PicsiteUI
 import PicsiteKit
+import Firebase
+import GoogleSignIn
+
+protocol AuthenticationObserver: AnyObject {
+    @MainActor func didFinishAuthentication()
+}
 
 class AuthenticationViewController: UIViewController {
+    
+    enum Factory {
+        static func viewController(observer: AuthenticationObserver, authenticationProvider: AuthenticationProviderType) -> UIViewController {
+            let vc = AuthenticationViewController(authenticationProvider: authenticationProvider, observer: observer)
+            return UINavigationController.init(rootViewController: vc)
+        }
+    }
     
     enum Constants {
         static let Spacing: CGFloat = 16
@@ -23,8 +36,11 @@ class AuthenticationViewController: UIViewController {
     private var smallFontSize: CGFloat { UIScreen.main.isSmallScreen ? 16 : 18 }
     private let provider: AuthenticationProviderType
     
-    init(authenticationProvider: AuthenticationProviderType) {
+    weak var observer: AuthenticationObserver!
+    
+    init(authenticationProvider: AuthenticationProviderType, observer: AuthenticationObserver) {
         self.provider = authenticationProvider
+        self.observer = observer
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -56,29 +72,29 @@ class AuthenticationViewController: UIViewController {
         }()
         backgroundImageView.image = backgroundImage
         
-        let appleImage = UIImage(named: "apple-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysTemplate)
-        let loginAppleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("authentication-login-apple-button".localize, color: .white, forSize: smallFontSize), appleImage), tintColor: .white, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) {
-           print("apple login")
-        })
+        let textColor = {
+            return ColorPalette.picsiteTitleColor.resolvedColor(with: .init(userInterfaceStyle: self.traitCollection.userInterfaceStyle == .light ? .dark : .dark))
+        }()
         
+        let appleImage = UIImage(named: "apple-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysTemplate)
+        let _ = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("authentication-login-apple-button".localize, color: textColor, forSize: smallFontSize), appleImage), tintColor: .white, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) { [weak self] in
+            self?.onLoginWithApple()
+        })
         
         let googleImage =  UIImage(named: "google-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysOriginal)
-        let loginGoogleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("authentication-login-google-button".localize, color: .white, forSize: smallFontSize), googleImage), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) {
-           print("google login")
+        let loginGoogleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("authentication-login-google-button".localize, color: textColor, forSize: smallFontSize), googleImage), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) { [weak self] in
+            self?.onLoginWithGoogle()
         })
         
-        let loginEmailButton = UIButton(buttonConfiguration: .init(buttonTitle: .text(FontPalette.mediumTextStyler.attributedString("authentication-login-email-button".localize, color: .white, forSize: smallFontSize)), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) {
-           print("email login")
+        let loginEmailButton = UIButton(buttonConfiguration: .init(buttonTitle: .text(FontPalette.mediumTextStyler.attributedString("authentication-login-email-button".localize, color: textColor, forSize: smallFontSize)), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) { [weak self] in
+            self?.onLogin()
         })
         
-        let signInView = SignInView(onLogin: {
-            let vc = LoginViewController(provider: self.provider)
-            let navVC = UINavigationController.init(rootViewController: vc)
-            self.show(navVC, sender: nil)
+        let signUpView = SignUpView(onLogin: {
+            self.onSignUp()
         })
         
         let socialContentStackView = UIStackView(arrangedSubviews: [
-            loginAppleButton,
             loginGoogleButton
         ])
         
@@ -91,7 +107,7 @@ class AuthenticationViewController: UIViewController {
             picsiteImageView,
             loginEmailButton,
             socialContentStackView,
-            signInView,
+            signUpView,
         ])
         
         contentStackView.axis = .vertical
@@ -110,13 +126,44 @@ class AuthenticationViewController: UIViewController {
             picsiteImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.isTallScreen ? 50 : 30),
             socialContentStackView.heightAnchor.constraint(equalToConstant: Constants.LoginButtonHeight),
             loginEmailButton.heightAnchor.constraint(equalToConstant: Constants.LoginButtonHeight),
-            signInView.heightAnchor.constraint(equalToConstant: 64)
+            signUpView.heightAnchor.constraint(equalToConstant: 64)
         ])
     }
     
     //Private
     
-    private class SignInView: UIView {
+    private func onLoginWithGoogle() {
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { [unowned self] user, error in
+            if let error = error {
+                showErrorAlert("authentication-google-error".localize, error: error)
+                return
+            }
+            guard let authentication = user?.authentication, let idToken = authentication.idToken else { return }
+            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
+            performBlockingTask(errorMessage: "authentication-google-error".localize, {
+                try await self.provider.loginUsingGoogle(with: credential)
+                self.observer.didFinishAuthentication()
+            })
+        }
+    }
+    
+    private func onLoginWithApple() {
+        performLoginWithApple()
+    }
+    
+    private func onSignUp() {
+        showIndeterminateLoadingView(message: "loading".localize)
+    }
+    
+    private func onLogin() {
+        let vc = LoginViewController(provider: self.provider)
+        let navVC = UINavigationController.init(rootViewController: vc)
+        self.show(navVC, sender: nil)
+    }
+    
+    private class SignUpView: UIView {
         
         private let onLogin: () -> Void
         
@@ -134,8 +181,8 @@ class AuthenticationViewController: UIViewController {
             ])
             loginButton.addTarget(self, action: #selector(_onLogin), for: .touchUpInside)
             let firstPartOfMessage =
-            FontPalette.mediumTextStyler.attributedString("You don't have an account yet?", color: .black, forSize: 17)
-            let secondPartOfMessage = FontPalette.boldTextStyler.attributedString("Sign in", color: .black, forSize: 17)
+            FontPalette.mediumTextStyler.attributedString("authentication-signup-label".localize, color: .black, forSize: 17)
+            let secondPartOfMessage = FontPalette.boldTextStyler.attributedString("authentication-signup-secondary-label".localize, color: .black, forSize: 17)
             let finalMessage = [firstPartOfMessage, secondPartOfMessage]
                 .joinedStrings()
                 .settingParagraphStyle {
@@ -155,4 +202,24 @@ class AuthenticationViewController: UIViewController {
     }
 }
 
+import AuthenticationServices
 
+extension AuthenticationViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+    
+    func performLoginWithApple() {
+        let request = ASAuthorizationAppleIDProvider().createRequest()
+        request.requestedScopes = [.fullName, .email]
+        let controller = ASAuthorizationController(authorizationRequests: [request])
+        controller.delegate = self
+        controller.presentationContextProvider = self
+        controller.performRequests()
+    }
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return view.window!
+    }
+    
+    public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+       
+    }
+}

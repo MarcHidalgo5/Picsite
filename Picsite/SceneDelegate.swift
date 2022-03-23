@@ -58,7 +58,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         switch currentAppState {
         case .unlogged:
-            return AuthenticationViewController(authenticationProvider: Current.authProvider)
+            return AuthenticationViewController.Factory.viewController(observer: self, authenticationProvider: Current.authProvider)
         case .login:
             return HomeViewController()
         }
@@ -80,8 +80,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         PicsiteUI.ColorPalette.picsiteTintColor = UIColor.picsiteTintColor
         PicsiteUI.ColorPalette.picsiteTitleColor = UIColor.picsiteTitleColor
         PicsiteUI.ColorPalette.picsiteBackgroundColor = UIColor.picsiteBackgroundColor
-        PicsiteUI.ColorPalette.picsiteTitleColorReversed = UIColor.picsiteTitleColorReversed
-        PicsiteUI.ColorPalette.picsiteBackgroundColorReversed = UIColor.picsiteBackgroundColorReversed
         
         PicsiteUI.FontPalette.boldTextStyler = boldTextStyler
         PicsiteUI.FontPalette.mediumTextStyler = mediumTextStyler
@@ -90,3 +88,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 }
 
+extension SceneDelegate: AuthenticationObserver {
+    func didFinishAuthentication() {
+        updateContainedViewController()
+    }
+}

@@ -14,6 +14,9 @@ ROOT_URL = AppStore
 // Keys
 API_KEY = 9ud0930djd_md9zdjdko3830lb0d
 
+//GoogleSignIn
+REVERSED_CLIENT_ID = com.googleusercontent.apps.950976371120-ua21bchj82hva34scui4n4dkiqf9bncj
+
 // App Settings
 APP_NAME = Picsite
 APP_BUNDLE_ID = MH21.Picsite

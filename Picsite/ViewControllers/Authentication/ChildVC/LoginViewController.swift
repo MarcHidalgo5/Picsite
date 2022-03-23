@@ -25,16 +25,12 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Task { @MainActor in
-            do {
-                let _ = try await provider.loginUser(email: "marchidalgo@icloud.com", password: "123456789")
-//                print(user.email)
-//                print(user.displayName)
-                let vc = HomeViewController()
-                show(vc, sender: nil)
-            } catch {
-                print("There was an issue when trying to sign in: \(error)")
-            }
-        }
+//        performBlockingTask {
+//            let _ = try await self.provider.loginUser(email: "marchidalgo@icloud.com", password: "123456789")
+////                print(user.email)
+////                print(user.displayName)
+//            let vc = HomeViewController()
+//            self.show(vc, sender: nil)
+//        }
     }
 }

@@ -9,8 +9,9 @@ import Foundation
 import BSWFoundation
 import FirebaseAuth
 
-public protocol AuthenticationProviderType: AnyObject {
+public protocol AuthenticationProviderType {
     
     func loginUser(email: String, password: String) async throws -> User
+    func loginUsingGoogle(with credential: AuthCredential) async throws
     
 }
