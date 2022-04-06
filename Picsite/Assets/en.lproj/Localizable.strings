@@ -5,6 +5,10 @@
 "dismiss" = "Dismiss";
 "error-perform-blocking-task" = "An error has occurred";
 
+//StartingViewController
+"start-button" = "Start";
+"start-subtitle" = "Discover places";
+
 //AuthenticationViewController
 "authentication-login-apple-button" = "Apple";
 "authentication-login-google-button" = "Google";

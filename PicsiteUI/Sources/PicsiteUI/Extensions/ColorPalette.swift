@@ -12,6 +12,5 @@ public enum ColorPalette {
     public static var picsiteTitleColor: UIColor!
     public static var picsiteTintColor: UIColor!
     public static var picsiteBackgroundColor: UIColor!
-    public static var picsiteTitleColorReversed: UIColor!
-    public static var picsiteBackgroundColorReversed: UIColor!
+    public static var picsiteDeepBlueColor: UIColor!
 }

@@ -12,4 +12,5 @@ extension UIColor {
     static let picsiteTintColor = UIColor(named: "picsite-tint-color")!
     static let picsiteTitleColor = UIColor(named: "picsite-title-color")!
     static let picsiteBackgroundColor = UIColor(named: "picsite-background-color")!
+    static let picsiteDeepBlueColor = UIColor(named: "picsite-deep-blue")!
 }

@@ -17,6 +17,7 @@
 		1A0EFFC027CA9D16004B544C /* BSWInterfaceKit in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1ADAF80027517FF100D8D480 /* BSWInterfaceKit */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		1A141CF027CD5A5A00AA8190 /* AuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A141CEF27CD5A5A00AA8190 /* AuthenticationProvider.swift */; };
 		1A225D4227DFF2A800BED065 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 1A225D4127DFF2A800BED065 /* GoogleSignIn */; };
+		1A32012627FE04D40094FF84 /* StartingBottomButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A32012527FE04D40094FF84 /* StartingBottomButtonViewController.swift */; };
 		1A4B17DD27DCF4D200390B1D /* SF-Compact-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A0EFFB827CA984A004B544C /* SF-Compact-Text-Bold.otf */; };
 		1A4B17DE27DCF4D500390B1D /* SF-Compact-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A0EFFBA27CA984A004B544C /* SF-Compact-Text-Medium.otf */; };
 		1A4B17DF27DCF4D700390B1D /* SF-Compact-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A0EFFB927CA984A004B544C /* SF-Compact-Text-Regular.otf */; };
@@ -88,6 +89,7 @@
 		1A0EFFBA27CA984A004B544C /* SF-Compact-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Medium.otf"; sourceTree = "<group>"; };
 		1A0EFFBC27CA9B7A004B544C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		1A141CEF27CD5A5A00AA8190 /* AuthenticationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationProvider.swift; sourceTree = "<group>"; };
+		1A32012527FE04D40094FF84 /* StartingBottomButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingBottomButtonViewController.swift; sourceTree = "<group>"; };
 		1A66E4A727C94C7700177DEF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1A677D8027DBE42800BF3385 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A76D09027DDEB80005EEA29 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -169,6 +171,23 @@
 			path = Providers;
 			sourceTree = "<group>";
 		};
+		1A32012327FE049D0094FF84 /* Start */ = {
+			isa = PBXGroup;
+			children = (
+				1A32012427FE04A40094FF84 /* ChildVC */,
+				1A0AA3BC27EA781E00A45AD1 /* StartingViewController.swift */,
+			);
+			path = Start;
+			sourceTree = "<group>";
+		};
+		1A32012427FE04A40094FF84 /* ChildVC */ = {
+			isa = PBXGroup;
+			children = (
+				1A32012527FE04D40094FF84 /* StartingBottomButtonViewController.swift */,
+			);
+			path = ChildVC;
+			sourceTree = "<group>";
+		};
 		1A66E4A927C94C8500177DEF /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,7 +226,6 @@
 			isa = PBXGroup;
 			children = (
 				1A0EFFBC27CA9B7A004B544C /* LoginViewController.swift */,
-				1A0AA3BC27EA781E00A45AD1 /* StartingViewController.swift */,
 			);
 			path = ChildVC;
 			sourceTree = "<group>";
@@ -284,6 +302,7 @@
 		1ADAF80327518DBF00D8D480 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1A32012327FE049D0094FF84 /* Start */,
 				1A66E4A927C94C8500177DEF /* Home */,
 				1ADAF80727518E2500D8D480 /* Authentication */,
 			);
@@ -518,6 +537,7 @@
 				1A0EFFB627CA7B8C004B544C /* UIFont+Extensions.swift in Sources */,
 				1A0EFFBD27CA9B7A004B544C /* LoginViewController.swift in Sources */,
 				1AADE10C27E5F5BB0014A884 /* ErrorView.swift in Sources */,
+				1A32012627FE04D40094FF84 /* StartingBottomButtonViewController.swift in Sources */,
 				1ADAF7C527517C8800D8D480 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

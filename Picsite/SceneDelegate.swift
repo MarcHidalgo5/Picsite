@@ -17,9 +17,6 @@ protocol SceneDelegateAppStateProvider {
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
-//        let a = PicsiteKit.init(user: "Hidi")
-//        print(a.user)
-    
     var window: UIWindow?
     
     static var main: SceneDelegate? {
@@ -58,7 +55,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         switch currentAppState {
         case .unlogged:
-            return AuthenticationViewController.Factory.viewController(observer: self, authenticationProvider: Current.authProvider)
+            return StartingViewController.Factory.viewController(observer: self)
         case .login:
             return HomeViewController()
         }
@@ -76,10 +73,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     static func themeApp() {
+        ///Customize UIKit
+        UIWindow.appearance().tintColor = .picsiteTintColor
+        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .picsiteTintColor
+        
         /// Hook up VideoAskUI with dependencies
         PicsiteUI.ColorPalette.picsiteTintColor = UIColor.picsiteTintColor
         PicsiteUI.ColorPalette.picsiteTitleColor = UIColor.picsiteTitleColor
         PicsiteUI.ColorPalette.picsiteBackgroundColor = UIColor.picsiteBackgroundColor
+        PicsiteUI.ColorPalette.picsiteDeepBlueColor =
+            UIColor.picsiteDeepBlueColor
         
         PicsiteUI.FontPalette.boldTextStyler = boldTextStyler
         PicsiteUI.FontPalette.mediumTextStyler = mediumTextStyler
@@ -92,4 +95,13 @@ extension SceneDelegate: AuthenticationObserver {
     func didFinishAuthentication() {
         updateContainedViewController()
     }
+}
+
+extension SceneDelegate: StartingObserver {
+    func didFinishStart() {
+        let a = 1
+//        updateContainedViewController()
+    }
+    
+    
 }
