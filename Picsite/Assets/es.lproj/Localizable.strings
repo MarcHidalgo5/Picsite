@@ -6,16 +6,17 @@
 "error-perform-blocking-task" = "An error has occurred";
 
 //StartingViewController
-"start-button" = "Start";
-"start-subtitle" = "Discover places";
+"start-button" = "Comenzar";
+"start-subtitle" = "Descubre lugares";
 
 //AuthenticationViewController
 "authentication-login-apple-button" = "Apple";
 "authentication-login-google-button" = "Google";
-"authentication-login-email-button" = "Sign in";
-"authentication-signup-label" = "You don't have an account yet?";
-"authentication-signup-secondary-label" = "Sign up";
+"authentication-login-email-button" = "Iniciar sesion";
+"authentication-signup-label" = "Aún no tienes cuenta?";
+"authentication-signup-secondary-label" = "Registrate";
 "authentication-google-error" = "Error signing in with google";
 
 //LoadingViewController
 "login-error-message" = "Fail to complete login";
+

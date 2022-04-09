@@ -4,11 +4,19 @@ import JGProgressHUD
 
 public extension UIViewController {
     
+    func addPlainBackButton() {
+        navigationItem.backButtonDisplayMode = .minimal
+    }
+    
+}
+
+public extension UIViewController {
+    
     @discardableResult
     func performBlockingTask<T>(
-        loadingMessage: String = "loading".localize,
+        loadingMessage: String = "loading".localized,
         successMessage: String? = nil,
-        errorMessage: String = "error-perform-blocking-task".localize,
+        errorMessage: String = "error-perform-blocking-task".localized,
         _ task: @escaping UIViewController.SwiftConcurrencyGenerator<T>)  -> Task<T, Error> {
         let blockingTask = Task {
             try await task()

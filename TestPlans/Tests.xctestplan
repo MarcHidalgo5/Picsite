@@ -1,0 +1,41 @@
+{
+  "configurations" : [
+    {
+      "id" : "F7142294-6F5B-4034-BE72-B191F602D07D",
+      "name" : "Default Settings",
+      "options" : {
+
+      }
+    },
+    {
+      "id" : "D7C53B3F-01DC-4F64-8ECB-1B97D0EFA8BB",
+      "name" : "GenerateSnapshots Settings",
+      "options" : {
+        "environmentVariableEntries" : [
+          {
+            "key" : "GENERATE_SNAPSHOTS",
+            "value" : "1"
+          }
+        ]
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Picsite.xcodeproj",
+      "identifier" : "1ADAF7BE27517C8800D8D480",
+      "name" : "Picsite"
+    },
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Picsite.xcodeproj",
+        "identifier" : "1AE1590128009A1B00F086B3",
+        "name" : "Tests"
+      }
+    }
+  ],
+  "version" : 1
+}

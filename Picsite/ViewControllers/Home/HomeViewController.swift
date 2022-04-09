@@ -12,7 +12,6 @@ import Firebase
 
 class HomeViewController: UIViewController {
     
-    
     override func loadView() {
         view = UIView()
         view.backgroundColor = .red
@@ -23,7 +22,6 @@ class HomeViewController: UIViewController {
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
         }
-        
     }
     
     override func viewDidLoad() {
