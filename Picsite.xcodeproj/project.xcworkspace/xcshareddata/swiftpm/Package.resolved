@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/openid/AppAuth-iOS.git",
         "state": {
           "branch": null,
-          "revision": "01131d68346c8ae552961c768d583c715fbe1410",
-          "version": "1.4.0"
+          "revision": "33660c271c961f8ce1084cc13f2ea8195e864f7d",
+          "version": "1.5.0"
         }
       },
       {
@@ -32,27 +32,18 @@
         "package": "BSWFoundation",
         "repositoryURL": "https://github.com/theleftbit/BSWFoundation",
         "state": {
-          "branch": "develop",
-          "revision": "c6541cb92cb9bc5eb5ca18c88f40b713212a4cd1",
-          "version": null
+          "branch": null,
+          "revision": "0b890c24a3a15c10911b8b34688f6f1de15f3442",
+          "version": "5.1.1"
         }
       },
       {
         "package": "BSWInterfaceKit",
         "repositoryURL": "https://github.com/theleftbit/BSWInterfaceKit",
         "state": {
-          "branch": "develop",
-          "revision": "ad04b1713e19fed458b5d6569d6f7f4e8b67706e",
-          "version": null
-        }
-      },
-      {
-        "package": "Deferred",
-        "repositoryURL": "https://github.com/theleftbit/Deferred.git",
-        "state": {
           "branch": null,
-          "revision": "8d601f0597135179a4b2f72b99fd196e6067dabe",
-          "version": "4.2.1"
+          "revision": "af3077ab135fb52b4f08e8a1cef99b6ed34d2e7d",
+          "version": "5.3.2"
         }
       },
       {
@@ -123,8 +114,8 @@
         "repositoryURL": "https://github.com/google/GTMAppAuth.git",
         "state": {
           "branch": null,
-          "revision": "40f4103fb52109032c05599a0c39ad43edbdf80a",
-          "version": "1.2.2"
+          "revision": "e803d09da0147fbf1bbb30e126c47ff43254e057",
+          "version": "1.2.3"
         }
       },
       {
