@@ -11,7 +11,6 @@ protocol StartingObserver: AnyObject {
     func didFinishStart()
 }
 
-
 class StartingViewController: UIViewController {
     
     enum Factory {

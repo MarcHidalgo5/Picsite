@@ -99,8 +99,7 @@ extension SceneDelegate: AuthenticationObserver {
 
 extension SceneDelegate: StartingObserver {
     func didFinishStart() {
-        let a = 1
-//        updateContainedViewController()
+        updateContainedViewController()
     }
     
     
