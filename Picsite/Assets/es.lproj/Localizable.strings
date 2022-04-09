@@ -1,0 +1,22 @@
+
+// Common
+"loading" = "Loading";
+"error" = "Something has gone wrong";
+"dismiss" = "Dismiss";
+"error-perform-blocking-task" = "An error has occurred";
+
+//StartingViewController
+"start-button" = "Comenzar";
+"start-subtitle" = "Descubre lugares";
+
+//AuthenticationViewController
+"authentication-login-apple-button" = "Apple";
+"authentication-login-google-button" = "Google";
+"authentication-login-email-button" = "Iniciar sesion";
+"authentication-signup-label" = "Aún no tienes cuenta?";
+"authentication-signup-secondary-label" = "Registrate";
+"authentication-google-error" = "Error signing in with google";
+
+//LoadingViewController
+"login-error-message" = "Fail to complete login";
+
