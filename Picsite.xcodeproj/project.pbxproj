@@ -44,9 +44,10 @@
 		1AE1591228009B8B00F086B3 /* BSWFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1AE1591128009B8B00F086B3 /* BSWFoundation */; };
 		1AE1591328009B8B00F086B3 /* BSWFoundation in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1AE1591128009B8B00F086B3 /* BSWFoundation */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		1AE1591928009C8600F086B3 /* BSWSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE1591728009C8200F086B3 /* BSWSnapshotTests.swift */; };
-		1AE1591B28009CEC00F086B3 /* StartingCollectionViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE1591A28009CEC00F086B3 /* StartingCollectionViewTests.swift */; };
+		1AE1591B28009CEC00F086B3 /* StartingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE1591A28009CEC00F086B3 /* StartingViewControllerTests.swift */; };
 		1AE1592028009DF600F086B3 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 1AE1591F28009DF600F086B3 /* SnapshotTesting */; };
 		1AE7434F27DB3083007944C6 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7434E27DB3083007944C6 /* Configuration.swift */; };
+		1AF71E91280161FA00469EA9 /* AuthenticationViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF71E90280161FA00469EA9 /* AuthenticationViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,10 +119,11 @@
 		1AE1590228009A1B00F086B3 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AE1591428009BF700F086B3 /* Tests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Tests.xctestplan; sourceTree = "<group>"; };
 		1AE1591728009C8200F086B3 /* BSWSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSWSnapshotTests.swift; sourceTree = "<group>"; };
-		1AE1591A28009CEC00F086B3 /* StartingCollectionViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingCollectionViewTests.swift; sourceTree = "<group>"; };
+		1AE1591A28009CEC00F086B3 /* StartingViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingViewControllerTests.swift; sourceTree = "<group>"; };
 		1AE7434C27DA7383007944C6 /* Develop.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Develop.xcconfig; sourceTree = "<group>"; };
 		1AE7434D27DA73B3007944C6 /* AppStore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppStore.xcconfig; sourceTree = "<group>"; };
 		1AE7434E27DB3083007944C6 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		1AF71E90280161FA00469EA9 /* AuthenticationViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -341,7 +343,8 @@
 		1AE1591528009C0200F086B3 /* Suite */ = {
 			isa = PBXGroup;
 			children = (
-				1AE1591A28009CEC00F086B3 /* StartingCollectionViewTests.swift */,
+				1AE1591A28009CEC00F086B3 /* StartingViewControllerTests.swift */,
+				1AF71E90280161FA00469EA9 /* AuthenticationViewControllerTests.swift */,
 			);
 			path = Suite;
 			sourceTree = "<group>";
@@ -532,8 +535,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1AE1591B28009CEC00F086B3 /* StartingCollectionViewTests.swift in Sources */,
+				1AE1591B28009CEC00F086B3 /* StartingViewControllerTests.swift in Sources */,
 				1AE1591928009C8600F086B3 /* BSWSnapshotTests.swift in Sources */,
+				1AF71E91280161FA00469EA9 /* AuthenticationViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
