@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "1422DB0A-A718-410E-AD24-6910E62C2E3C",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Picsite.xcodeproj",
+      "identifier" : "1ADAF7BE27517C8800D8D480",
+      "name" : "Picsite"
+    },
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Picsite.xcodeproj",
+        "identifier" : "1AE1590128009A1B00F086B3",
+        "name" : "Tests"
+      }
+    }
+  ],
+  "version" : 1
+}

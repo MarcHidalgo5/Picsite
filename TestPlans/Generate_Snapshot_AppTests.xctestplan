@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "3E960CD2-FB9D-4033-A28C-A7F96741684A",
+      "name" : "GenerateSnapshots Settings",
+      "options" : {
+        "environmentVariableEntries" : [
+          {
+            "key" : "GENERATE_SNAPSHOTS",
+            "value" : "1"
+          }
+        ]
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Picsite.xcodeproj",
+        "identifier" : "1AE1590128009A1B00F086B3",
+        "name" : "Tests"
+      }
+    }
+  ],
+  "version" : 1
+}
