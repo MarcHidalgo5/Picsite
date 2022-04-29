@@ -111,6 +111,7 @@
 		1ADAF7D027517C8800D8D480 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1ADAF7F227517E9600D8D480 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1AE0A1C2281AF74500100A82 /* AppTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = AppTests.xctestplan; sourceTree = "<group>"; };
+		1AE0A1C3281BCF9400100A82 /* Generate_Snapshot_AppTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Generate_Snapshot_AppTests.xctestplan; sourceTree = "<group>"; };
 		1AE1590228009A1B00F086B3 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AE1591728009C8200F086B3 /* BSWSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BSWSnapshotTests.swift; sourceTree = "<group>"; };
 		1AE1591A28009CEC00F086B3 /* StartingViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingViewControllerTests.swift; sourceTree = "<group>"; };
@@ -330,6 +331,7 @@
 			children = (
 				1AE1591628009C5600F086B3 /* Tests */,
 				1AE0A1C2281AF74500100A82 /* AppTests.xctestplan */,
+				1AE0A1C3281BCF9400100A82 /* Generate_Snapshot_AppTests.xctestplan */,
 			);
 			path = TestPlans;
 			sourceTree = "<group>";
@@ -694,7 +696,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
@@ -767,7 +769,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;

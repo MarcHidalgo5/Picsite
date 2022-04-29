@@ -8,15 +8,15 @@
 // Configuration settings file format documentation can be found at:
 // https://help.apple.com/xcode/#/dev745c5c974
 
-// Server URL
+// Server URL (don't do anything)
 ROOT_URL = AppStore
 
-// Keys
+// Keys (don't do anything)
 API_KEY = 9ud0930djd_md9zdjdko3830lb0d
 
 //GoogleSignIn
 REVERSED_CLIENT_ID = com.googleusercontent.apps.950976371120-ua21bchj82hva34scui4n4dkiqf9bncj
 
-// App Settings
+// App Settings (don't do anything)
 APP_NAME = Picsite
 APP_BUNDLE_ID = MH21.Picsite
