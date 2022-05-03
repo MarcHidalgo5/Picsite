@@ -11,30 +11,17 @@ import UIKit
 
 public enum PicsiteAPI {
     
-    public enum PagingConfiguration {
-        public static var PageSize: Int = 20
-    }
-    
     public enum Environment {
         case production
         case development
-        
-//        public var baseURL: URL {
-//            switch self {
-//            case .production:
-//                fatalError()
-//            case .development:
-//                fatalError()
-//            }
-//        }
     }
 }
-
-let PicsiteDateDecodingStrategy: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.timeZone = TimeZone(identifier: "UTC")
-    formatter.locale = Locale(identifier: "en_US_POSIX")
-    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZZZZZ"
-    return formatter
-}()
+//
+//let PicsiteDateDecodingStrategy: DateFormatter = {
+//    let formatter = DateFormatter()
+//    formatter.timeZone = TimeZone(identifier: "UTC")
+//    formatter.locale = Locale(identifier: "en_US_POSIX")
+//    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZZZZZ"
+//    return formatter
+//}()
 

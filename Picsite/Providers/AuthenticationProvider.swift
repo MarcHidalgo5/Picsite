@@ -10,6 +10,7 @@ import BSWFoundation
 import Foundation
 import FirebaseAuth
 import GoogleSignIn
+import PicsiteAuthKit
 
 class AuthenticationProvider: AuthenticationProviderType {
     

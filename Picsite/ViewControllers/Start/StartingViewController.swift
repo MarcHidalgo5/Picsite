@@ -5,6 +5,7 @@
 import UIKit
 import BSWInterfaceKit
 import PicsiteUI
+import PicsiteAuthKit
 
 @MainActor
 protocol StartingObserver: AnyObject {
@@ -75,7 +76,8 @@ class StartingViewController: UIViewController {
         addPlainBackButton()
         buttonContainer?.onGetStarted = { [weak self] in
             guard let self = self else { return }
-            let authVC = AuthenticationViewController(authenticationProvider: Current.authProvider, observer: self)
+            let authVC =
+            AuthenticationViewController(dependencies: .forPicsite(), observer: self)
             self.show(authVC, sender: nil)
         }
     }
@@ -114,7 +116,11 @@ class StartingViewController: UIViewController {
 }
 
 extension StartingViewController: AuthenticationObserver {
-    func didFinishAuthentication() {
+    func didRegister() {
+        
+    }
+    
+    func didLogin() {
         
     }
 }

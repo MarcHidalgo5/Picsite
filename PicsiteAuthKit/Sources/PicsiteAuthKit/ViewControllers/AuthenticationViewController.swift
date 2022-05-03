@@ -10,13 +10,14 @@ import BSWInterfaceKit
 import PicsiteUI
 import PicsiteKit
 import Firebase
-import GoogleSignIn
+//import GoogleSignIn
 
-protocol AuthenticationObserver: AnyObject {
-     func didFinishAuthentication()
+public protocol AuthenticationObserver: AnyObject {
+    func didRegister()
+    func didLogin()
 }
 
-class AuthenticationViewController: UIViewController {
+public class AuthenticationViewController: UIViewController {
     
     enum Constants {
         static let Spacing: CGFloat = 16
@@ -27,12 +28,14 @@ class AuthenticationViewController: UIViewController {
     }
     
     private var smallFontSize: CGFloat { UIScreen.main.isSmallScreen ? 16 : 18 }
-    private let provider: AuthenticationProviderType
+//    private let provider: AuthenticationProviderType
+    
+    public let dependencies: ModuleDependencies
     
     weak var observer: AuthenticationObserver!
     
-    init(authenticationProvider: AuthenticationProviderType, observer: AuthenticationObserver) {
-        self.provider = authenticationProvider
+    public init(dependencies: ModuleDependencies, observer: AuthenticationObserver) {
+        self.dependencies = dependencies
         self.observer = observer
         super.init(nibName: nil, bundle: nil)
     }
@@ -41,9 +44,9 @@ class AuthenticationViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func loadView() {
+    public override func loadView() {
         view = UIView()
-        view.backgroundColor = .picsiteBackgroundColor
+        view.backgroundColor = ColorPalette.picsiteBackgroundColor
     }
     
 //    override func loadView() {
@@ -109,24 +112,24 @@ class AuthenticationViewController: UIViewController {
     //Private
     
     private func onLoginWithGoogle() {
-        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-        let config = GIDConfiguration(clientID: clientID)
-        GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { [unowned self] user, error in
-            if let error = error {
-                showErrorAlert("authentication-google-error".localized, error: error)
-                return
-            }
-            guard let authentication = user?.authentication, let idToken = authentication.idToken else { return }
-            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
-            performBlockingTask(errorMessage: "authentication-google-error".localized, {
-                try await self.provider.loginUsingGoogle(with: credential)
-                self.observer.didFinishAuthentication()
-            })
-        }
+//        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+//        let config = GIDConfiguration(clientID: clientID)
+//        GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { [unowned self] user, error in
+//            if let error = error {
+//                showErrorAlert("authentication-google-error".localized, error: error)
+//                return
+//            }
+//            guard let authentication = user?.authentication, let idToken = authentication.idToken else { return }
+//            let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
+//            performBlockingTask(errorMessage: "authentication-google-error".localized, {
+//                try await self.provider.loginUsingGoogle(with: credential)
+//                self.observer.didFinishAuthentication()
+//            })
+//        }
     }
     
     private func onLoginWithApple() {
-        performLoginWithApple()
+//        performLoginWithApple()
     }
     
     private func onSignUp() {
@@ -134,9 +137,9 @@ class AuthenticationViewController: UIViewController {
     }
     
     private func onLogin() {
-        let vc = LoginViewController(provider: self.provider)
-        let navVC = UINavigationController.init(rootViewController: vc)
-        self.show(navVC, sender: nil)
+//        let vc = LoginViewController(provider: self.provider)
+//        let navVC = UINavigationController.init(rootViewController: vc)
+//        self.show(navVC, sender: nil)
     }
     
     private class SignUpView: UIView {
@@ -148,7 +151,7 @@ class AuthenticationViewController: UIViewController {
             super.init(frame: .zero)
             let loginButton = UIButton(type: .system)
             loginButton.prepareForMultiline(maxWidth: 300, horizontalAlignment: .center)
-            loginButton.tintColor = .picsiteTintColor
+            loginButton.tintColor = ColorPalette.picsiteTintColor
             addAutolayoutSubview(loginButton)
             NSLayoutConstraint.activate([
                 loginButton.topAnchor.constraint(equalTo: topAnchor),
@@ -178,27 +181,27 @@ class AuthenticationViewController: UIViewController {
     }
 }
 
-import AuthenticationServices
-
-extension AuthenticationViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
-    
-    func performLoginWithApple() {
-        let request = ASAuthorizationAppleIDProvider().createRequest()
-        request.requestedScopes = [.fullName, .email]
-        let controller = ASAuthorizationController(authorizationRequests: [request])
-        controller.delegate = self
-        controller.presentationContextProvider = self
-        controller.performRequests()
-    }
-    
-    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        return view.window!
-    }
-    
-    public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-       
-    }
-}
+//import AuthenticationServices
+//
+//extension AuthenticationViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+//
+//    func performLoginWithApple() {
+//        let request = ASAuthorizationAppleIDProvider().createRequest()
+//        request.requestedScopes = [.fullName, .email]
+//        let controller = ASAuthorizationController(authorizationRequests: [request])
+//        controller.delegate = self
+//        controller.presentationContextProvider = self
+//        controller.performRequests()
+//    }
+//
+//    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+//        return view.window!
+//    }
+//
+//    public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+//
+//    }
+//}
 
 extension AuthenticationViewController: TransparentNavigationBarPreferenceProvider {
     public var barStyle: TransparentNavigationBar.TintColorStyle { .transparent }

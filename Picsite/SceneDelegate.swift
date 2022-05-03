@@ -10,6 +10,7 @@ import BSWInterfaceKit
 import PicsiteKit
 import PicsiteUI
 import Firebase
+import PicsiteAuthKit
 
 protocol SceneDelegateAppStateProvider {
     var currentAppState: AppState { get }
@@ -88,12 +89,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         PicsiteUI.FontPalette.mediumTextStyler = mediumTextStyler
         PicsiteUI.FontPalette.regularTextStyler = regularTextStyler
         
-    }
-}
-
-extension SceneDelegate: AuthenticationObserver {
-    func didFinishAuthentication() {
-        updateContainedViewController()
     }
 }
 

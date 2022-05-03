@@ -9,6 +9,7 @@ import UIKit
 import BSWInterfaceKit
 import PicsiteUI
 import PicsiteKit
+import PicsiteAuthKit
 
 class LoginViewController: UIViewController {
     
