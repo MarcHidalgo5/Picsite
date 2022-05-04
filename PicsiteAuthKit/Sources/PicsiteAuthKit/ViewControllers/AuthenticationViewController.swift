@@ -9,7 +9,6 @@ import UIKit
 import BSWInterfaceKit
 import PicsiteUI
 import PicsiteKit
-import Firebase
 
 public protocol AuthenticationObserver: AnyObject {
     func didRegister()
@@ -108,9 +107,8 @@ public class AuthenticationViewController: UIViewController {
     private func onLoginWithGoogle() {
         Task { @MainActor in
             let socialInfo = try await dependencies.socialManager.fetchSocialNetworkInfo(forSocialType: .google, fromVC: self)
-            let credential = GoogleAuthProvider.credential(withIDToken: socialInfo.idToken, accessToken: socialInfo.accesToken)
             performBlockingTask(errorMessage: "authentication-google-error".localized, {
-                try await self.dependencies.authProvider.loginUsingGoogle(with: credential)
+                try await self.dependencies.authProvider.loginUsingGoogle(with: socialInfo)
                 self.observer.didFinishAuthentication()
             })
         }

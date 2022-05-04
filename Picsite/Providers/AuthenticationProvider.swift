@@ -24,8 +24,9 @@ class AuthenticationProvider: AuthenticationProviderType {
         try await self.authAPIClient.login(email: email, password: password)
     }
     
-    func loginUsingGoogle(with credential: AuthCredential) async throws {
-        _ = try await authAPIClient.login(with: credential)
+    func loginUsingGoogle(with socialInfo: AuthenticationManagerSocialInfo) async throws {
+        let credential = GoogleAuthProvider.credential(withIDToken: socialInfo.idToken, accessToken: socialInfo.accesToken)
+       _ = try await authAPIClient.login(with: credential)
         
     }
     
