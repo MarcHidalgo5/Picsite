@@ -18,7 +18,7 @@ public protocol AuthenticationProviderType {
 
 public enum AuthenticationManagerSocial {
     case apple
-    case google(googleClientID: String)
+    case google
 }
 
 public typealias AuthenticationManagerSocialInfo = (idToken: String, accesToken: String)

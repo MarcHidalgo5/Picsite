@@ -19,8 +19,9 @@ class SocialNetworkManager: NSObject, UIApplicationDelegate, AuthenticationManag
         switch socialType {
         case .apple:
             fatalError()
-        case .google(let googleClientID):
-            return try await fetchGoogleData(clientID: googleClientID, fromVC: fromVC)
+        case .google:
+            guard let clientID = FirebaseApp.app()?.options.clientID else { fatalError() }
+            return try await fetchGoogleData(clientID: clientID, fromVC: fromVC)
         }
     }
 }

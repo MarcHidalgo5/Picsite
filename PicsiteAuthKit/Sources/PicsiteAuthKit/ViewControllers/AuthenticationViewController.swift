@@ -10,7 +10,6 @@ import BSWInterfaceKit
 import PicsiteUI
 import PicsiteKit
 import Firebase
-//import GoogleSignIn
 
 public protocol AuthenticationObserver: AnyObject {
     func didRegister()
@@ -29,7 +28,6 @@ public class AuthenticationViewController: UIViewController {
     }
     
     private var smallFontSize: CGFloat { UIScreen.main.isSmallScreen ? 16 : 18 }
-//    private let provider: AuthenticationProviderType
     
     public let dependencies: ModuleDependencies
     
@@ -108,9 +106,8 @@ public class AuthenticationViewController: UIViewController {
     //Private
     
     private func onLoginWithGoogle() {
-        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         Task { @MainActor in
-            let socialInfo = try await dependencies.socialManager.fetchSocialNetworkInfo(forSocialType: .google(googleClientID: clientID), fromVC: self)
+            let socialInfo = try await dependencies.socialManager.fetchSocialNetworkInfo(forSocialType: .google, fromVC: self)
             let credential = GoogleAuthProvider.credential(withIDToken: socialInfo.idToken, accessToken: socialInfo.accesToken)
             performBlockingTask(errorMessage: "authentication-google-error".localized, {
                 try await self.dependencies.authProvider.loginUsingGoogle(with: credential)
