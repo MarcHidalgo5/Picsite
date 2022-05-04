@@ -17,7 +17,7 @@ API_KEY = 89dhdyd93380dkqmoe_hd830dhq
 //GoogleSignIn
 REVERSED_CLIENT_ID = com.googleusercontent.apps.825757393568-udh9b17besg87albo8i8tjtourif50fd
 
-// App Settings (don't do anything)
+// App Settings
 APP_NAME = Picsite_Dev
 APP_BUNDLE_ID = MH21.Picsite-Dev
 
