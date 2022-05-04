@@ -28,6 +28,7 @@
 		1A943A5627540A92008D7150 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A943A5527540A92008D7150 /* UIColor.swift */; };
 		1AADE10C27E5F5BB0014A884 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AADE10B27E5F5BB0014A884 /* ErrorView.swift */; };
 		1AC8543728218A9E00948232 /* PicsiteAuthenticationKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC8543628218A9E00948232 /* PicsiteAuthenticationKit.swift */; };
+		1AC8543A28218E1900948232 /* SocialNetworkManeger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC8543928218E1900948232 /* SocialNetworkManeger.swift */; };
 		1ADAF7C327517C8800D8D480 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAF7C227517C8800D8D480 /* AppDelegate.swift */; };
 		1ADAF7C527517C8800D8D480 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAF7C427517C8800D8D480 /* SceneDelegate.swift */; };
 		1ADAF7CC27517C8800D8D480 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1ADAF7CB27517C8800D8D480 /* Assets.xcassets */; };
@@ -105,6 +106,7 @@
 		1A943A5527540A92008D7150 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		1AADE10B27E5F5BB0014A884 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		1AC8543628218A9E00948232 /* PicsiteAuthenticationKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicsiteAuthenticationKit.swift; sourceTree = "<group>"; };
+		1AC8543928218E1900948232 /* SocialNetworkManeger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialNetworkManeger.swift; sourceTree = "<group>"; };
 		1ADAF7BF27517C8800D8D480 /* Picsite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picsite.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1ADAF7C227517C8800D8D480 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1ADAF7C427517C8800D8D480 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -244,6 +246,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		1AC8543828218E0200948232 /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				1AC8543928218E1900948232 /* SocialNetworkManeger.swift */,
+			);
+			path = ThirdParty;
+			sourceTree = "<group>";
+		};
 		1ADAF7B627517C8800D8D480 = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +285,7 @@
 				1A7AC43A27B64FF6006B7DF6 /* World.swift */,
 				1ADAF7D027517C8800D8D480 /* Info.plist */,
 				1A141CEE27CD5A3800AA8190 /* Providers */,
+				1AC8543828218E0200948232 /* ThirdParty */,
 				1ADAF80627518E1000D8D480 /* Assets */,
 				1AA679F7275402BB00799CE1 /* Extensions */,
 				1ADAF80527518DEA00D8D480 /* Configuration */,
@@ -522,6 +533,7 @@
 				1ADAF7C327517C8800D8D480 /* AppDelegate.swift in Sources */,
 				1A7AC43B27B64FF6006B7DF6 /* World.swift in Sources */,
 				1A66E4A827C94C7700177DEF /* HomeViewController.swift in Sources */,
+				1AC8543A28218E1900948232 /* SocialNetworkManeger.swift in Sources */,
 				1A0EFFB627CA7B8C004B544C /* UIFont+Extensions.swift in Sources */,
 				1A0EFFBD27CA9B7A004B544C /* LoginViewController.swift in Sources */,
 				1AC8543728218A9E00948232 /* PicsiteAuthenticationKit.swift in Sources */,

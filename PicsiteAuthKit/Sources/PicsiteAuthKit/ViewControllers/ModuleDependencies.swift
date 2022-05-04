@@ -7,11 +7,13 @@ import PicsiteKit
 public struct ModuleDependencies {
 
     let authProvider: AuthenticationProviderType
+    let socialManager: AuthenticationManagerSocialManagerType
     
     public init(
-        authProvider: AuthenticationProviderType
+        authProvider: AuthenticationProviderType,
+        socialManager: AuthenticationManagerSocialManagerType
         ) {
             self.authProvider = authProvider
-            
+            self.socialManager = socialManager
         }
 }

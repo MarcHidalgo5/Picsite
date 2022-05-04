@@ -15,6 +15,7 @@ import Firebase
 public protocol AuthenticationObserver: AnyObject {
     func didRegister()
     func didLogin()
+    func didFinishAuthentication()
 }
 
 public class AuthenticationViewController: UIViewController {
@@ -47,73 +48,77 @@ public class AuthenticationViewController: UIViewController {
     public override func loadView() {
         view = UIView()
         view.backgroundColor = ColorPalette.picsiteBackgroundColor
+
+        let textColor = {
+            return ColorPalette.picsiteTitleColor.resolvedColor(with: .init(userInterfaceStyle: self.traitCollection.userInterfaceStyle == .light ? .dark : .dark))
+        }()
+
+        let appleImage = UIImage(named: "apple-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysTemplate)
+        let _ = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("authentication-login-apple-button".localized, color: textColor, forSize: smallFontSize), appleImage), tintColor: .white, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) { [weak self] in
+            self?.onLoginWithApple()
+        })
+
+        let googleImage =  UIImage(named: "google-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysOriginal)
+        let loginGoogleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("authentication-login-google-button".localized, color: textColor, forSize: smallFontSize), googleImage), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) { [weak self] in
+            self?.onLoginWithGoogle()
+        })
+
+        let loginEmailButton = UIButton(buttonConfiguration: .init(buttonTitle: .text(FontPalette.mediumTextStyler.attributedString("authentication-login-email-button".localized, color: textColor, forSize: smallFontSize)), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) { [weak self] in
+            self?.onLogin()
+        })
+
+        let signUpView = SignUpView(onLogin: {
+            self.onSignUp()
+        })
+
+        let socialContentStackView = UIStackView(arrangedSubviews: [
+            loginGoogleButton
+        ])
+
+        socialContentStackView.axis = .horizontal
+        socialContentStackView.spacing = 10
+        socialContentStackView.alignment = .fill
+        socialContentStackView.distribution = .fillEqually
+
+        let contentStackView = UIStackView(arrangedSubviews: [
+            loginEmailButton,
+            socialContentStackView,
+            signUpView,
+        ])
+
+        contentStackView.axis = .vertical
+        contentStackView.layoutMargins = .init(top: 10, left: 20, bottom: 10, right: 20)
+        contentStackView.isLayoutMarginsRelativeArrangement = true
+        contentStackView.spacing = 10
+        contentStackView.alignment = .fill
+        contentStackView.distribution = .fillProportionally
+//        contentStackView.setCustomSpacing(Constants.LogoSpacing, after: Spacer())
+
+        view.addAutolayoutSubview(contentStackView)
+        contentStackView.pinToSuperviewLayoutMargins()
+
+        NSLayoutConstraint.activate([
+            loginEmailButton.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.isTallScreen ? 100 : 80),
+            socialContentStackView.heightAnchor.constraint(equalToConstant: Constants.LoginButtonHeight),
+            loginEmailButton.heightAnchor.constraint(equalToConstant: Constants.LoginButtonHeight),
+            signUpView.heightAnchor.constraint(equalToConstant: 64)
+        ])
     }
-    
-//    override func loadView() {
-//        view = UIView()
-//        view.backgroundColor = .picsiteBackgroundColor
-//
-//        let textColor = {
-//            return ColorPalette.picsiteTitleColor.resolvedColor(with: .init(userInterfaceStyle: self.traitCollection.userInterfaceStyle == .light ? .dark : .dark))
-//        }()
-//
-//        let appleImage = UIImage(named: "apple-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysTemplate)
-//        let _ = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("authentication-login-apple-button".localized, color: textColor, forSize: smallFontSize), appleImage), tintColor: .white, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) { [weak self] in
-//            self?.onLoginWithApple()
-//        })
-//
-//        let googleImage =  UIImage(named: "google-icon")!.scaleTo(CGSize(width: 28, height: 28)).withRenderingMode(.alwaysOriginal)
-//        let loginGoogleButton = UIButton(buttonConfiguration: .init(buttonTitle: .textAndImage(FontPalette.mediumTextStyler.attributedString("authentication-login-google-button".localized, color: textColor, forSize: smallFontSize), googleImage), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) { [weak self] in
-//            self?.onLoginWithGoogle()
-//        })
-//
-//        let loginEmailButton = UIButton(buttonConfiguration: .init(buttonTitle: .text(FontPalette.mediumTextStyler.attributedString("authentication-login-email-button".localized, color: textColor, forSize: smallFontSize)), tintColor: .clear, backgroundColor: .black, contentInset: UIEdgeInsets(uniform: 10), cornerRadius: Constants.CornerRadius) { [weak self] in
-//            self?.onLogin()
-//        })
-//
-//        let signUpView = SignUpView(onLogin: {
-//            self.onSignUp()
-//        })
-//
-//        let socialContentStackView = UIStackView(arrangedSubviews: [
-//            loginGoogleButton
-//        ])
-//
-//        socialContentStackView.axis = .horizontal
-//        socialContentStackView.spacing = 10
-//        socialContentStackView.alignment = .fill
-//        socialContentStackView.distribution = .fillEqually
-//
-//        let contentStackView = UIStackView(arrangedSubviews: [
-//            loginEmailButton,
-//            socialContentStackView,
-//            signUpView,
-//        ])
-//
-//        contentStackView.axis = .vertical
-//        contentStackView.layoutMargins = .init(top: 10, left: 20, bottom: 10, right: 20)
-//        contentStackView.isLayoutMarginsRelativeArrangement = true
-//        contentStackView.spacing = 10
-//        contentStackView.alignment = .fill
-//        contentStackView.distribution = .fillProportionally
-////        contentStackView.setCustomSpacing(Constants.LogoSpacing, after: Spacer())
-//
-//        view.addAutolayoutSubview(contentStackView)
-//        contentStackView.pinToSuperviewLayoutMargins()
-//
-//        NSLayoutConstraint.activate([
-//            loginEmailButton.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.isTallScreen ? 100 : 80),
-//            socialContentStackView.heightAnchor.constraint(equalToConstant: Constants.LoginButtonHeight),
-//            loginEmailButton.heightAnchor.constraint(equalToConstant: Constants.LoginButtonHeight),
-//            signUpView.heightAnchor.constraint(equalToConstant: 64)
-//        ])
-//    }
     
     //Private
     
     private func onLoginWithGoogle() {
-//        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-//        let config = GIDConfiguration(clientID: clientID)
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+        Task { @MainActor in
+            let socialInfo = try await dependencies.socialManager.fetchSocialNetworkInfo(forSocialType: .google(googleClientID: clientID), fromVC: self)
+            let credential = GoogleAuthProvider.credential(withIDToken: socialInfo.idToken, accessToken: socialInfo.accesToken)
+            performBlockingTask(errorMessage: "authentication-google-error".localized, {
+                try await self.dependencies.authProvider.loginUsingGoogle(with: credential)
+                self.observer.didFinishAuthentication()
+            })
+        }
+        
+        //        let config = GIDConfiguration(clientID: clientID)
 //        GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { [unowned self] user, error in
 //            if let error = error {
 //                showErrorAlert("authentication-google-error".localized, error: error)

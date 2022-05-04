@@ -15,3 +15,20 @@ public protocol AuthenticationProviderType {
     func loginUsingGoogle(with credential: AuthCredential) async throws
     
 }
+
+public enum AuthenticationManagerSocial {
+    case apple
+    case google(googleClientID: String)
+}
+
+public typealias AuthenticationManagerSocialInfo = (idToken: String, accesToken: String)
+
+#if canImport(UIKit)
+
+import UIKit
+
+public protocol AuthenticationManagerSocialManagerType {
+    func fetchSocialNetworkInfo(forSocialType social: AuthenticationManagerSocial, fromVC: UIViewController) async throws -> AuthenticationManagerSocialInfo
+}
+
+#endif

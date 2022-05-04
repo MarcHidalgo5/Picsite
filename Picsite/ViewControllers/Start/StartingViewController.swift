@@ -116,6 +116,10 @@ class StartingViewController: UIViewController {
 }
 
 extension StartingViewController: AuthenticationObserver {
+    func didFinishAuthentication() {
+        
+    }
+    
     func didRegister() {
         
     }

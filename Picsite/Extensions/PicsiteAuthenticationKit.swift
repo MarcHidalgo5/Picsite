@@ -10,6 +10,6 @@ import PicsiteAuthKit
 extension PicsiteAuthKit.ModuleDependencies {
     
     static func forPicsite() -> ModuleDependencies {
-        return ModuleDependencies(authProvider: Current.authProviderFactory())
+        return ModuleDependencies(authProvider: Current.authProviderFactory(), socialManager: SocialNetworkManager.shared)
     }
 }
