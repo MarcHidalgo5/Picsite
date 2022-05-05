@@ -20,6 +20,10 @@ class AuthenticationProvider: AuthenticationProviderType {
         self.authAPIClient = AuthAPIClient(authEnvironment: environment)
     }
     
+    var isUserLoggedIn: Bool {
+        return (Auth.auth().currentUser != nil) ? true : false
+    }
+    
     func loginUser(email: String, password: String) async throws -> User {
         try await self.authAPIClient.login(email: email, password: password)
     }

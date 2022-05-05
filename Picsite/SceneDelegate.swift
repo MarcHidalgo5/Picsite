@@ -9,8 +9,6 @@ import UIKit
 import BSWInterfaceKit
 import PicsiteKit
 import PicsiteUI
-import Firebase
-import PicsiteAuthKit
 
 protocol SceneDelegateAppStateProvider {
     var currentAppState: AppState { get }
@@ -66,7 +64,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private var rootViewController: ContainerViewController!
     private var currentAppState: AppState {
-        if Auth.auth().currentUser != nil {
+        if Current.authProvider.isUserLoggedIn {
             return .login
         } else {
             return .unlogged

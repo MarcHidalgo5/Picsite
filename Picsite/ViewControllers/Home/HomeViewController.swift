@@ -15,7 +15,7 @@ class HomeViewController: UIViewController {
     override func loadView() {
         view = UIView()
         view.backgroundColor = .red
-        
+
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()

@@ -17,15 +17,12 @@ struct World {
     
     var apiClient: PicsiteAPIClient
     
-    var authProviderFactory: () -> AuthenticationProviderType
+    var authProvider: AuthenticationProviderType
     
     init(environment: PicsiteAPI.Environment) {
         self.environment = environment
         self.apiClient = PicsiteAPIClient(environment: environment)
-        self.authProviderFactory = {
-            AuthenticationProvider(environment: environment)
-
-        }
+        self.authProvider = AuthenticationProvider(environment: environment)
     }
 }
 

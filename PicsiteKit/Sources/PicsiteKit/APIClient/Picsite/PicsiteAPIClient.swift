@@ -8,7 +8,7 @@
 import Foundation
 import BSWFoundation
 
-open class PicsiteAPIClient {
+public class PicsiteAPIClient {
     
     let environment: PicsiteAPI.Environment
     

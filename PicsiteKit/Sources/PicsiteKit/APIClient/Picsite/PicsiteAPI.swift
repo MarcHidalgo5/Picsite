@@ -16,12 +16,4 @@ public enum PicsiteAPI {
         case development
     }
 }
-//
-//let PicsiteDateDecodingStrategy: DateFormatter = {
-//    let formatter = DateFormatter()
-//    formatter.timeZone = TimeZone(identifier: "UTC")
-//    formatter.locale = Locale(identifier: "en_US_POSIX")
-//    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSZZZZZ"
-//    return formatter
-//}()
 
