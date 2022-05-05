@@ -11,7 +11,7 @@ import PicsiteUI
 import PicsiteKit
 
 @MainActor
-public protocol AuthenticationObserver: AnyObject {
+public protocol _AuthenticationObserver: AnyObject {
     func didFinishAuthentication()
 }
 
@@ -29,9 +29,9 @@ public class AuthenticationViewController: UIViewController {
     
     public let dependencies: ModuleDependencies
     
-    weak var observer: AuthenticationObserver!
+    weak var observer: _AuthenticationObserver!
     
-    public init(dependencies: ModuleDependencies, observer: AuthenticationObserver) {
+    public init(dependencies: ModuleDependencies, observer: _AuthenticationObserver) {
         self.dependencies = dependencies
         self.observer = observer
         super.init(nibName: nil, bundle: nil)

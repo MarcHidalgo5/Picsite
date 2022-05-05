@@ -1,7 +1,4 @@
-//
-//  AuthenticationProviderType.swift
-//  
-//
+ //
 //  Created by Marc Hidalgo on 28/2/22.
 //
 
@@ -12,14 +9,13 @@ import FirebaseAuth
 public enum AuthenticationKind: String, Codable {
     case register
     case login
-    case typeform
     case apple
-    case sso
-    case facebook
+    case google
+    case instagram
     
     public var isSocial: Bool {
         switch self {
-        case .apple, .sso, .typeform, .facebook:
+        case .apple, .google, .instagram:
             return true
         case .register, .login:
             return false
@@ -33,7 +29,6 @@ public protocol AuthenticationProviderType {
     
     func loginUser(email: String, password: String) async throws -> User
     func loginUsingGoogle(with socialInfo: AuthenticationManagerSocialInfo) async throws
-    
 }
 
 public enum AuthenticationManagerSocial {

@@ -127,7 +127,7 @@ class StartingViewController: UIViewController {
     }
 }
 
-extension StartingViewController: AuthenticationObserver {
+extension StartingViewController: _AuthenticationObserver {
     func didFinishAuthentication() {
         observer.didFinishStart()
     }
