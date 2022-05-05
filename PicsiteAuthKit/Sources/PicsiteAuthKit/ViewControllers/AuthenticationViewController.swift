@@ -10,9 +10,8 @@ import BSWInterfaceKit
 import PicsiteUI
 import PicsiteKit
 
+@MainActor
 public protocol AuthenticationObserver: AnyObject {
-    func didRegister()
-    func didLogin()
     func didFinishAuthentication()
 }
 

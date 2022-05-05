@@ -9,6 +9,24 @@ import Foundation
 import BSWFoundation
 import FirebaseAuth
 
+public enum AuthenticationKind: String, Codable {
+    case register
+    case login
+    case typeform
+    case apple
+    case sso
+    case facebook
+    
+    public var isSocial: Bool {
+        switch self {
+        case .apple, .sso, .typeform, .facebook:
+            return true
+        case .register, .login:
+            return false
+        }
+    }
+}
+
 public protocol AuthenticationProviderType {
     
     var isUserLoggedIn: Bool { get }

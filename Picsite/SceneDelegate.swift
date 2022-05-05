@@ -94,6 +94,4 @@ extension SceneDelegate: StartingObserver {
     func didFinishStart() {
         updateContainedViewController()
     }
-    
-    
 }
