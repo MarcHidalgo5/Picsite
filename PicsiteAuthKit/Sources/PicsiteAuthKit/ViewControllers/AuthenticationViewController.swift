@@ -104,13 +104,17 @@ public class AuthenticationViewController: UIViewController {
     //Private
     
     private func onLoginWithGoogle() {
-        Task { @MainActor in
-            let socialInfo = try await dependencies.socialManager.fetchSocialNetworkInfo(forSocialType: .google, fromVC: self)
-            performBlockingTask(errorMessage: "authentication-google-error".localized, {
-                try await self.dependencies.authProvider.loginUsingGoogle(with: socialInfo)
-                self.observer.didFinishAuthentication()
-            })
-        }
+        performBlockingTask(errorMessage: "authentication-google-error".localized, {
+            _ = try await self.dependencies.authProvider.loginUsingGoogle(from: self)
+            self.observer.didFinishAuthentication()
+        })
+//        Task { @MainActor in
+//            let socialInfo = try await dependencies.socialManager.fetchSocialNetworkInfo(forSocialType: .google, fromVC: self)
+//            performBlockingTask(errorMessage: "authentication-google-error".localized, {
+//                try await self.dependencies.authProvider.loginUsingGoogle(with: socialInfo)
+//                self.observer.didFinishAuthentication()
+//            })
+//        }
         
         //        let config = GIDConfiguration(clientID: clientID)
 //        GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { [unowned self] user, error in

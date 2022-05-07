@@ -27,8 +27,8 @@ public protocol AuthenticationProviderType {
     
     var isUserLoggedIn: Bool { get }
     
-    func loginUser(email: String, password: String) async throws -> User
-    func loginUsingGoogle(with socialInfo: AuthenticationManagerSocialInfo) async throws
+    func loginUserByEmail(email: String, password: String) async throws -> User
+    func loginUsingGoogle(from vc: UIViewController) async throws -> User
 }
 
 public enum AuthenticationManagerSocial {

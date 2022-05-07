@@ -15,22 +15,25 @@ import PicsiteAuthKit
 class AuthenticationProvider: AuthenticationProviderType {
     
     private let authAPIClient: AuthAPIClient
+    private let socialManager: AuthenticationManagerSocialManagerType
     
     init(environment: PicsiteAPI.Environment) {
         self.authAPIClient = AuthAPIClient(authEnvironment: environment)
+        self.socialManager = SocialNetworkManager.shared
     }
     
     var isUserLoggedIn: Bool {
         return (Auth.auth().currentUser != nil) ? true : false
     }
     
-    func loginUser(email: String, password: String) async throws -> User {
+    func loginUserByEmail(email: String, password: String) async throws -> User {
         try await self.authAPIClient.login(email: email, password: password)
     }
     
-    func loginUsingGoogle(with socialInfo: AuthenticationManagerSocialInfo) async throws {
+    func loginUsingGoogle(from vc: UIViewController) async throws -> User{
+        let socialInfo = try await socialManager.fetchSocialNetworkInfo(forSocialType: .google, fromVC: vc)
         let credential = GoogleAuthProvider.credential(withIDToken: socialInfo.idToken, accessToken: socialInfo.accesToken)
-       _ = try await authAPIClient.login(with: credential)
+       return try await authAPIClient.login(with: credential)
         
     }
     
