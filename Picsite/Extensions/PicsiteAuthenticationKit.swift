@@ -9,7 +9,7 @@ import PicsiteAuthKit
 
 extension PicsiteAuthKit.ModuleDependencies {
     
-    static func forPicsite() -> ModuleDependencies {
-        return ModuleDependencies(authProvider: Current.authProvider, socialManager: SocialNetworkManager.shared)
+    static func forPicsiteLogin(observer: AuthenticationObserver) -> ModuleDependencies {
+        return ModuleDependencies(authProvider: Current.authProvider, socialManager: SocialNetworkManager.shared, mode: .login, observer: observer)
     }
 }

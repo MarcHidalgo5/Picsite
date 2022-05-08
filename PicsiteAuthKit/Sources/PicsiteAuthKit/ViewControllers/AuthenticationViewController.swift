@@ -10,11 +10,6 @@ import BSWInterfaceKit
 import PicsiteUI
 import PicsiteKit
 
-@MainActor
-public protocol _AuthenticationObserver: AnyObject {
-    func didFinishAuthentication()
-}
-
 public class AuthenticationViewController: UIViewController {
     
     enum Constants {
@@ -29,9 +24,9 @@ public class AuthenticationViewController: UIViewController {
     
     public let dependencies: ModuleDependencies
     
-    weak var observer: _AuthenticationObserver!
+    weak var observer: AuthenticationObserver!
     
-    public init(dependencies: ModuleDependencies, observer: _AuthenticationObserver) {
+    public init(dependencies: ModuleDependencies, observer: AuthenticationObserver) {
         self.dependencies = dependencies
         self.observer = observer
         super.init(nibName: nil, bundle: nil)
@@ -105,8 +100,8 @@ public class AuthenticationViewController: UIViewController {
     
     private func onLoginWithGoogle() {
         performBlockingTask(errorMessage: "authentication-google-error".localized, {
-            _ = try await self.dependencies.authProvider.loginUsingGoogle(from: self)
-            self.observer.didFinishAuthentication()
+            let user = try await self.dependencies.authProvider.loginUsingGoogle(from: self)
+            self.observer.didAuthenticate(userID: user.uid, kind: .google)
         })
 //        Task { @MainActor in
 //            let socialInfo = try await dependencies.socialManager.fetchSocialNetworkInfo(forSocialType: .google, fromVC: self)

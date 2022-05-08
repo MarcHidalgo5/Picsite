@@ -14,7 +14,7 @@ protocol StartingObserver: AnyObject {
 
 class StartingViewController: UIViewController {
     
-    enum Factory {
+    public enum Factory {
         static func viewController(observer: StartingObserver) -> UIViewController {
             let vc = BottomContainerViewController(containedViewController: StartingViewController(observer: observer), bottomViewController: BottomButtonViewController())
             return MinimalNavigationController(rootViewController: vc)
@@ -82,14 +82,14 @@ class StartingViewController: UIViewController {
         addPlainBackButton()
         buttonContainer?.onGetStarted = { [weak self] in
             guard let self = self else { return }
-            let authVC =
-            AuthenticationViewController(dependencies: .forPicsite(), observer: self)
-            self.show(authVC, sender: nil)
+//            let authVC =
+//            AuthenticationViewController(dependencies: .forPicsite(), observer: self)
+//            self.show(authVC, sender: nil)
         }
         buttonContainer?.onLogIn = { [weak self] in
         guard let self = self else { return }
             let authVC =
-            AuthenticationViewController(dependencies: .forPicsite(), observer: self)
+            AuthenticationPerformerViewController(dependecies: .forPicsiteLogin(observer: self))
             self.show(authVC, sender: nil)
         }
     }
@@ -127,9 +127,21 @@ class StartingViewController: UIViewController {
     }
 }
 
-extension StartingViewController: _AuthenticationObserver {
-    func didFinishAuthentication() {
-        observer.didFinishStart()
+extension StartingViewController: AuthenticationObserver {
+    func didAuthenticate(userID: String, kind: AuthenticationKind) {
+        switch kind {
+        case .register:
+            break
+        case .login:
+            observer.didFinishStart()
+        case .apple:
+            break
+        case .google:
+            break
+        }
+    }
+    
+    func didCancelAuthentication() {
     }
 }
 

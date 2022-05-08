@@ -9,24 +9,28 @@ import UIKit
 import PicsiteUI
 import PicsiteKit
 
-class AuthenticationPerformerViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
+public class AuthenticationPerformerViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
     
-    enum Mode {
+    public enum Factory {
+        static func viewController(dependecies: ModuleDependencies) -> UIViewController {
+            let vc = AuthenticationPerformerViewController(dependecies: dependecies)
+            return vc
+        }
+    }
+    
+    public enum Mode {
         case login
         case register
     }
+
+    private let buttonContainer: ActionButtonContainerView
+    private let scrollView = UIScrollView()
+    private var contentVC: AuthenticationPerformerContentViewController!
+    public let dependencies: ModuleDependencies
     
-    private let provider: AuthenticationProviderType
-    private weak var observer: AuthenticationObserver!
-    private let mode: Mode
-    
-    var barStyle: TransparentNavigationBar.TintColorStyle {
-        .transparent
-    }
-    init(mode: Mode, provider: AuthenticationProviderType, observer: AuthenticationObserver) {
-        self.mode = mode
-        self.provider = provider
-        self.observer = observer
+    public init(dependecies: ModuleDependencies) {
+        self.dependencies = dependecies
+        self.buttonContainer = ActionButtonContainerView(actionTitle: dependencies.mode.actionTitle)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -34,11 +38,125 @@ class AuthenticationPerformerViewController: UIViewController, TransparentNaviga
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func loadView() {
+    public override func loadView() {
         view = UIView()
         view.backgroundColor = ColorPalette.picsiteBackgroundColor
         
+        scrollView.keyboardDismissMode = .onDrag
+        scrollView.alwaysBounceVertical = true
+        view.addAutolayoutSubview(scrollView)
+        scrollView.pinToSuperview()
         
+        contentVC = {
+            switch dependencies.mode {
+            case .login:
+                return LoginViewController()
+            case .register:
+                fatalError()
+            }
+        }()
+        
+        addChild(contentVC)
+        scrollView.addAutolayoutSubview(contentVC.view)
+        contentVC.didMove(toParent: self)
+        
+        view.addAutolayoutSubview(buttonContainer)
+    
+        NSLayoutConstraint.activate([
+            contentVC.view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentVC.view.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentVC.view.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentVC.view.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentVC.view.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            buttonContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            buttonContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            buttonContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
     }
     
+    public override func viewDidLoad() {
+        super.viewDidLoad()
+        assert(navigationController != nil)
+        addPlainBackButton()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        buttonContainer.actionButton.addTarget(self, action: #selector(onPerformAuthentication), for: .touchUpInside)
+    }
+    
+    static func attributeErrorString(_ string: String) -> NSAttributedString {
+        return FontPalette.mediumTextStyler.attributedString(
+            string,
+            color: ColorPalette.picsiteTintColor,
+            forSize: 14
+        )
+    }
+    
+    //MARK: IBActions
+    
+    @objc private func onPerformAuthentication() {
+        do {
+            self.view.endEditing(true)
+            try contentVC.validateFields()
+            contentVC.performValidationAnimations([])
+            self.showIndeterminateLoadingView(message: "indeterminate-message-loggin-in".localized)
+            Task { @MainActor in
+                do {
+//                    let userID = try await contentVC.performAuthentication()
+//                    let email: String = self.contentVC.authenticationEmail ?? ""
+//                    self.observer.didAuthenticate(userID: userID, email: email, kind: self.mode == .login ? .login : .register)
+                } catch {
+                    processError(error)
+                }
+                hideIndeterminateLoadingView()
+            }
+        } catch let errors as ValidationErrors {
+            contentVC.performValidationAnimations(contentVC.animationsFor(errors: errors))
+        } catch let error {
+            self.showErrorAlert("Unknown Error", error: error)
+        }
+    }
+    
+    private func processError(_ error: Error) {
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification){
+        guard let keyboardFrame = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        scrollView.contentInset.bottom = view.convert(keyboardFrame.cgRectValue, from: nil).size.height + buttonContainer.frame.height
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification){
+        scrollView.contentInset.bottom = 0
+    }
+    
+    public var barStyle: TransparentNavigationBar.TintColorStyle {
+        .transparent
+    }
+}
+
+extension AuthenticationPerformerViewController {
+    
+    struct ValidationErrorAnimation {
+        let field: AuthenticationField
+        let message: String?
+    }
+    
+    enum ValidationErrors: Swift.Error {
+        case invalidEmail
+        case invalidPassword
+        case invalidName
+        case didNotAcceptTC
+        case didNotAcceptPrivacy
+    }
+}
+
+private extension AuthenticationPerformerViewController.Mode {
+    var actionTitle: String {
+        switch self {
+        case .login:
+            return "authentication-performer-login-button".localized
+        case .register:
+            return "authentication-performer-signup-button".localized
+        }
+    }
 }

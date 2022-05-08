@@ -11,11 +11,10 @@ public enum AuthenticationKind: String, Codable {
     case login
     case apple
     case google
-    case instagram
     
     public var isSocial: Bool {
         switch self {
-        case .apple, .google, .instagram:
+        case .apple, .google:
             return true
         case .register, .login:
             return false
