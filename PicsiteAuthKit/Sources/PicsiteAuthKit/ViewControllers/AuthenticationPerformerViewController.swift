@@ -22,6 +22,17 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
         case login
         case register
     }
+    
+    enum Constants {
+        static let SmallPadding = Padding/2
+        static let Padding = CGFloat(14)
+        static let BigPadding: CGFloat = {
+            return UIScreen.main.isSmallScreen ? 18 : 20
+        }()
+        static let HugePadding: CGFloat = {
+            return UIScreen.main.isSmallScreen ? 25 : 30
+        }()
+    }
 
     private let buttonContainer: ActionButtonContainerView
     private let scrollView = UIScrollView()
@@ -40,7 +51,7 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
     
     public override func loadView() {
         view = UIView()
-        view.backgroundColor = ColorPalette.picsiteBackgroundColor
+        view.backgroundColor = .white
         
         scrollView.keyboardDismissMode = .onDrag
         scrollView.alwaysBounceVertical = true
@@ -50,7 +61,8 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
         contentVC = {
             switch dependencies.mode {
             case .login:
-                return LoginViewController()
+                self.title = FontPalette.mediumTextStyler.attributedString("Log in".localized, color: ColorPalette.picsiteTitleColor, forSize: 22).string
+                return LoginViewController(provider: self.dependencies.authProvider)
             case .register:
                 fatalError()
             }
@@ -130,7 +142,7 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
     }
     
     public var barStyle: TransparentNavigationBar.TintColorStyle {
-        .transparent
+        .solid(.alwaysTranslucent)
     }
 }
 
@@ -146,7 +158,6 @@ extension AuthenticationPerformerViewController {
         case invalidPassword
         case invalidName
         case didNotAcceptTC
-        case didNotAcceptPrivacy
     }
 }
 
