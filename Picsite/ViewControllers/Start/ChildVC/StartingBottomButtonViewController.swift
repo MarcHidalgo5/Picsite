@@ -40,6 +40,10 @@ extension StartingViewController {
             stackView.isLayoutMarginsRelativeArrangement = true
             stackView.axis = .vertical
             
+            NSLayoutConstraint.activate([
+                getStartedButton.heightAnchor.constraint(equalToConstant: 56)
+            ])
+            
             view = UIView()
             view.addAutolayoutSubview(stackView)
             

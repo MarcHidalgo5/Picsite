@@ -14,8 +14,15 @@ extension AuthenticationPerformerViewController {
         private let passwordTextField = TextField(kind: .password)
         private let titleView: UIView = {
             let titleLabel = UILabel()
+            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("Welcome back", color: ColorPalette.picsiteTitleColor, forSize: 24)
+            titleLabel.textAlignment = .center
+            return titleLabel
+        }()
+        
+        private let subTitleView: UIView = {
+            let titleLabel = UILabel()
             titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("Hello there, log in to continue!", color: ColorPalette.picsiteTitleColor, forSize: 20)
-            titleLabel.textAlignment = .left
+            titleLabel.textAlignment = .center
             return titleLabel
         }()
         
@@ -54,12 +61,12 @@ extension AuthenticationPerformerViewController {
                 return view
             }()
             
-            let stackView = UIStackView(arrangedSubviews: [titleView] + [emailTextField, passwordTextField, buttonWrapper])
+            let stackView = UIStackView(arrangedSubviews: [titleView, subTitleView] + [emailTextField, passwordTextField, buttonWrapper])
             stackView.axis = .vertical
-            stackView.layoutMargins = [.left: Constants.BigPadding, .bottom: Constants.BigPadding, .right: Constants.BigPadding, .top: Constants.BigPadding]
+            stackView.layoutMargins = [.left: Constants.BigPadding, .bottom: Constants.BigPadding, .right: Constants.BigPadding, .top: 0]
             stackView.isLayoutMarginsRelativeArrangement = true
             stackView.spacing = Constants.Padding
-            stackView.setCustomSpacing(Constants.HugePadding, after: titleView)
+            stackView.setCustomSpacing(Constants.HugePadding, after: subTitleView)
             view.addSubview(stackView)
             stackView.pinToSuperviewLayoutMargins()
             

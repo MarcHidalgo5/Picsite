@@ -8,6 +8,7 @@
 import UIKit
 import PicsiteUI
 import PicsiteKit
+import BSWInterfaceKit
 
 public class AuthenticationPerformerViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
     
@@ -61,7 +62,6 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
         contentVC = {
             switch dependencies.mode {
             case .login:
-                self.title = FontPalette.mediumTextStyler.attributedString("Log in".localized, color: ColorPalette.picsiteTitleColor, forSize: 22).string
                 return LoginViewController(provider: self.dependencies.authProvider)
             case .register:
                 fatalError()
@@ -73,16 +73,16 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
         contentVC.didMove(toParent: self)
         
         view.addAutolayoutSubview(buttonContainer)
-    
+        
         NSLayoutConstraint.activate([
             contentVC.view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentVC.view.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentVC.view.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentVC.view.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentVC.view.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            buttonContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            buttonContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            buttonContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            buttonContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            buttonContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            buttonContainer.bottomAnchor.constraint(equalTo: view.bswKeyboardLayoutGuide.topAnchor),
         ])
     }
     
@@ -142,7 +142,7 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
     }
     
     public var barStyle: TransparentNavigationBar.TintColorStyle {
-        .solid(.alwaysTranslucent)
+        .transparent
     }
 }
 
