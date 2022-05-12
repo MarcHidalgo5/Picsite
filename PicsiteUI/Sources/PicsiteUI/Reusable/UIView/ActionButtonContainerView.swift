@@ -23,6 +23,11 @@ public class ActionButtonContainerView: UIView {
         addAutolayoutSubview(stackView)
         stackView.pinToSuperviewLayoutMargins()
         
+        NSLayoutConstraint.activate([
+            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 33),
+            stackView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -33),
+        ])
+        
         actionButton.stringAttributes[.foregroundColor] = ColorPalette.picsiteButtonTitleColor
             
         actionButton.setTitle(actionTitle, for: .normal)

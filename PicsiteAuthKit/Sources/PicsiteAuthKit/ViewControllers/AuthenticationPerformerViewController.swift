@@ -52,7 +52,9 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
     
     public override func loadView() {
         view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = ColorPalette.picsiteBackgroundColor
+        
+        buttonContainer.backgroundColor = ColorPalette.picsiteBackgroundColor
         
         scrollView.keyboardDismissMode = .onDrag
         scrollView.alwaysBounceVertical = true
@@ -80,8 +82,8 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
             contentVC.view.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentVC.view.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentVC.view.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-            buttonContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            buttonContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            buttonContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            buttonContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             buttonContainer.bottomAnchor.constraint(equalTo: view.bswKeyboardLayoutGuide.topAnchor),
         ])
     }
@@ -168,6 +170,28 @@ private extension AuthenticationPerformerViewController.Mode {
             return "authentication-performer-login-button".localized
         case .register:
             return "authentication-performer-signup-button".localized
+        }
+    }
+}
+
+extension AuthenticationPerformerViewController {
+
+    public class SocialSeparatorView: UIView {
+        public init() {
+            super.init(frame: .zero)
+            let separatorView = UIView()
+            separatorView.backgroundColor = UIColor.opaqueSeparator
+            addAutolayoutSubview(separatorView)
+            NSLayoutConstraint.activate([
+                separatorView.centerYAnchor.constraint(equalTo: centerYAnchor),
+                separatorView.centerXAnchor.constraint(equalTo: centerXAnchor),
+                separatorView.heightAnchor.constraint(equalToConstant: 1),
+                separatorView.widthAnchor.constraint(equalTo: widthAnchor)
+            ])
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
         }
     }
 }

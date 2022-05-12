@@ -99,6 +99,7 @@ public extension UIView {
         public let offset = CGSize(width: 0, height: 1)
     }
 
+    #warning("edit this")
     @objc func addPicsiteShadow() {
         let shadow = PicsiteShadow()
         addShadow(opacity: shadow.opacity, radius: shadow.radius, offset: shadow.offset)

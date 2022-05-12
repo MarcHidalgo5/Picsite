@@ -4,24 +4,29 @@
 
 import UIKit
 import PicsiteKit; import PicsiteUI
+import BSWInterfaceKit
 
 extension AuthenticationPerformerViewController {
     
     class LoginViewController: UIViewController, UITextFieldDelegate,
                                AuthenticationPerformerContentViewController {
         
+        private let DefaultSpacing: CGFloat = 20
+        private let SocialButtonsSpacing: CGFloat = 60
+        
         private let emailTextField = TextField(kind: .email)
         private let passwordTextField = TextField(kind: .password)
+        
         private let titleView: UIView = {
             let titleLabel = UILabel()
-            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("Welcome back", color: ColorPalette.picsiteTitleColor, forSize: 24)
+            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("Welcome back".localized, color: ColorPalette.picsiteTitleColor, forSize: 24)
             titleLabel.textAlignment = .center
             return titleLabel
         }()
         
         private let subTitleView: UIView = {
             let titleLabel = UILabel()
-            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("Hello there, log in to continue!", color: ColorPalette.picsiteTitleColor, forSize: 20)
+            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("Hello there, log in to continue!".localized, color: ColorPalette.picsiteTitleColor, forSize: 20)
             titleLabel.textAlignment = .center
             return titleLabel
         }()
@@ -29,7 +34,7 @@ extension AuthenticationPerformerViewController {
         private let forgotPasswordButton: UIButton = {
             let button = UIButton(type: .system)
             button.tintColor = ColorPalette.picsiteDeepBlueColor
-            button.setTitle("Forgot password?", for: .normal)
+            button.setTitle("Don't remember the password?".localized, for: .normal)
             button.titleLabel?.font = FontPalette.mediumTextStyler.fontForSize(14)
             return button
         }()
@@ -61,14 +66,65 @@ extension AuthenticationPerformerViewController {
                 return view
             }()
             
-            let stackView = UIStackView(arrangedSubviews: [titleView, subTitleView] + [emailTextField, passwordTextField, buttonWrapper])
+            let orLabel = UILabel()
+            orLabel.attributedText = FontPalette.regularTextStyler.attributedString("or".localized, color: ColorPalette.picsiteTitleColor, forSize: 16)
+            let separator1 = SocialSeparatorView()
+            let separator2 = SocialSeparatorView()
+            let separatorStackView = UIStackView(arrangedSubviews: [
+                separator1,
+                orLabel,
+                separator2
+            ])
+            separatorStackView.spacing = DefaultSpacing
+            NSLayoutConstraint.activate([
+                separator1.widthAnchor.constraint(equalTo: separator2.widthAnchor),
+            ])
+            
+            let loginAppleButton = createSocialButton(kind: .apple)
+            let loginInstaButton = createSocialButton(kind: .instagram)
+            let loginGoogleButton = createSocialButton(kind: .google)
+            
+//            loginAppleButton.addTarget(self, action: #selector(onLoginWithApple), for: .touchUpInside)
+//            loginFBButton.addTarget(self, action: #selector(onLoginWithFacebook), for: .touchUpInside)
+//            loginGoogleButton.addTarget(self, action: #selector(onLoginWithGoogle), for: .touchUpInside)
+            
+            loginInstaButton.addPicsiteShadow()
+            loginAppleButton.addPicsiteShadow()
+            loginGoogleButton.addPicsiteShadow()
+            
+            let socialLoginStackView = UIStackView(arrangedSubviews: [
+                loginGoogleButton,
+                loginInstaButton,
+                loginAppleButton,
+            ])
+            socialLoginStackView.axis = .horizontal
+            socialLoginStackView.alignment = .fill
+            socialLoginStackView.distribution = .fillEqually
+            socialLoginStackView.spacing = SocialButtonsSpacing
+            
+            let socialButtonContainer = UIView()
+            socialButtonContainer.addAutolayoutSubview(socialLoginStackView)
+            NSLayoutConstraint.activate([
+                socialLoginStackView.centerXAnchor.constraint(equalTo: socialButtonContainer.centerXAnchor),
+                socialLoginStackView.centerYAnchor.constraint(equalTo: socialButtonContainer.centerYAnchor),
+                socialLoginStackView.heightAnchor.constraint(equalTo: socialButtonContainer.heightAnchor),
+            ])
+            
+            let stackView = UIStackView(arrangedSubviews: [titleView, subTitleView] + [emailTextField, passwordTextField, buttonWrapper, separatorStackView, socialButtonContainer])
             stackView.axis = .vertical
             stackView.layoutMargins = [.left: Constants.BigPadding, .bottom: Constants.BigPadding, .right: Constants.BigPadding, .top: 0]
             stackView.isLayoutMarginsRelativeArrangement = true
             stackView.spacing = Constants.Padding
+            stackView.alignment = .fill
             stackView.setCustomSpacing(Constants.HugePadding, after: subTitleView)
             view.addSubview(stackView)
             stackView.pinToSuperviewLayoutMargins()
+            
+            NSLayoutConstraint.activate([
+                loginGoogleButton.heightAnchor.constraint(equalTo: loginAppleButton.heightAnchor),
+                loginInstaButton.heightAnchor.constraint(equalTo: loginAppleButton.heightAnchor),
+                loginAppleButton.heightAnchor.constraint(equalTo: loginAppleButton.heightAnchor)
+            ])
             
         }
         
@@ -142,5 +198,60 @@ extension AuthenticationPerformerViewController {
                 emailTextField.text = newValue
             }
         }
+    }
+}
+
+extension AuthenticationPerformerViewController.LoginViewController {
+    
+    public enum SocialButtonKind {
+        case apple, instagram, google
+        
+        public var image: UIImage {
+            switch self {
+            case .apple:
+                return UIImage(systemName: "applelogo")!.withRenderingMode(.alwaysTemplate)
+            case .instagram:
+                return UIImage(named: "instagram-icon")!
+            case .google:
+                return UIImage(named: "google-icon")!
+            }
+        }
+        
+        public var tintColor: UIColor? {
+            switch self {
+            case .apple: return .black
+            default: return nil
+            }
+        }
+        
+        public var backgroundColor: UIColor {
+            return .white
+        }
+        
+        public var imageEdgeInsets: UIEdgeInsets {
+            switch self {
+            case .apple:
+                return UIEdgeInsets(top: 6, left: 6, bottom: 12, right: 12)
+            case .google:
+                return UIEdgeInsets(uniform: 8)
+            case .instagram:
+                return UIEdgeInsets(uniform: 11)
+            }
+        }
+    }
+    
+    public func createSocialButton(kind: SocialButtonKind) -> UIButton {
+        let button = RoundButton(color: .white)
+        button.setImage(kind.image, for: .normal)
+        button.imageEdgeInsets = kind.imageEdgeInsets
+        if let tintColor = kind.tintColor {
+            button.tintColor = tintColor
+        }
+        button.backgroundColor = kind.backgroundColor
+        button.imageView?.contentMode = .scaleAspectFit
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        
+        return button
     }
 }
