@@ -131,8 +131,7 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
         }
     }
     
-    private func processError(_ error: Error) {
-    }
+    private func processError(_ error: Error) { }
     
     @objc func keyboardWillShow(notification: NSNotification){
         guard let keyboardFrame = notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }

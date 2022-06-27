@@ -86,7 +86,7 @@ extension AuthenticationPerformerViewController {
             
 //            loginAppleButton.addTarget(self, action: #selector(onLoginWithApple), for: .touchUpInside)
 //            loginFBButton.addTarget(self, action: #selector(onLoginWithFacebook), for: .touchUpInside)
-//            loginGoogleButton.addTarget(self, action: #selector(onLoginWithGoogle), for: .touchUpInside)
+            loginGoogleButton.addTarget(self, action: #selector(onLoginWithGoogle), for: .touchUpInside)
             
             loginInstaButton.addPicsiteShadow()
             loginAppleButton.addPicsiteShadow()
@@ -152,7 +152,13 @@ extension AuthenticationPerformerViewController {
         
         // MARK: IBActions
         
-        @objc private func onForgetPasswordTapped() {
+        @objc private func onForgetPasswordTapped() { }
+        
+        @objc private func onLoginWithGoogle() {
+            performBlockingTask(errorMessage: "authentication-google-error".localized, {
+//                let user = try await self.dependencies.authProvider.loginUsingGoogle(from: self)
+//                self.observer.didAuthenticate(userID: user.uid, kind: .google)
+            })
         }
 
         // MARK: UITextFieldDelegate
