@@ -40,9 +40,11 @@ extension AuthenticationPerformerViewController {
         }()
         
         private let provider: AuthenticationProviderType
+        var observer: AuthenticationObserver
         
-        init(provider: AuthenticationProviderType) {
+        init(provider: AuthenticationProviderType, observer: AuthenticationObserver) {
             self.provider = provider
+            self.observer = observer
             super.init(nibName: nil, bundle: nil)
         }
         
@@ -92,6 +94,10 @@ extension AuthenticationPerformerViewController {
             loginAppleButton.addPicsiteShadow()
             loginGoogleButton.addPicsiteShadow()
             
+            //Hide unused authenticate options
+            loginAppleButton.isHidden = true
+            loginInstaButton.isHidden = true
+            
             let socialLoginStackView = UIStackView(arrangedSubviews: [
                 loginGoogleButton,
                 loginInstaButton,
@@ -125,7 +131,6 @@ extension AuthenticationPerformerViewController {
                 loginInstaButton.heightAnchor.constraint(equalTo: loginAppleButton.heightAnchor),
                 loginAppleButton.heightAnchor.constraint(equalTo: loginAppleButton.heightAnchor)
             ])
-            
         }
         
         override func viewDidLoad() {
@@ -156,8 +161,8 @@ extension AuthenticationPerformerViewController {
         
         @objc private func onLoginWithGoogle() {
             performBlockingTask(errorMessage: "authentication-google-error".localized, {
-//                let user = try await self.dependencies.authProvider.loginUsingGoogle(from: self)
-//                self.observer.didAuthenticate(userID: user.uid, kind: .google)
+                let user = try await self.provider.loginUsingGoogle(from: self)
+                self.observer.didAuthenticate(userID: user.uid, kind: .google)
             })
         }
 

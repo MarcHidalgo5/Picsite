@@ -134,10 +134,8 @@ extension StartingViewController: AuthenticationObserver {
             break
         case .login:
             observer.didFinishStart()
-        case .apple:
-            break
         case .google:
-            break
+            observer.didFinishStart()
         }
     }
     

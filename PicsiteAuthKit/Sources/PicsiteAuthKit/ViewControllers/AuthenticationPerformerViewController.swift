@@ -13,7 +13,7 @@ import BSWInterfaceKit
 public class AuthenticationPerformerViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
     
     public enum Factory {
-        static func viewController(dependecies: ModuleDependencies) -> UIViewController {
+        static func viewController(dependecies: ModuleDependencies, observer: AuthenticationObserver) -> UIViewController {
             let vc = AuthenticationPerformerViewController(dependecies: dependecies)
             return vc
         }
@@ -64,7 +64,7 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
         contentVC = {
             switch dependencies.mode {
             case .login:
-                return LoginViewController(provider: self.dependencies.authProvider)
+                return LoginViewController(provider: self.dependencies.authProvider, observer: dependencies.observer)
             case .register:
                 fatalError()
             }

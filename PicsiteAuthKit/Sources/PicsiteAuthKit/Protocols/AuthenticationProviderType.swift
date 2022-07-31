@@ -9,12 +9,11 @@ import FirebaseAuth
 public enum AuthenticationKind: String, Codable {
     case register
     case login
-    case apple
     case google
     
     public var isSocial: Bool {
         switch self {
-        case .apple, .google:
+        case .google:
             return true
         case .register, .login:
             return false
