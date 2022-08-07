@@ -12,6 +12,7 @@ protocol AuthenticationPerformerContentViewController: UIViewController {
     func performAuthentication() async throws -> (String)
     func validateFields() throws
     func animationsFor(errors: AuthenticationPerformerViewController.ValidationErrors) -> [AuthenticationPerformerViewController.ValidationErrorAnimation]
+    func disableAllErrorFields()
     
     var authenticationEmail: String? { get set }
     var authenticationName: String? { get set }

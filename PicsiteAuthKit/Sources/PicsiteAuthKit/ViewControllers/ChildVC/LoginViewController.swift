@@ -212,6 +212,20 @@ extension AuthenticationPerformerViewController {
             }
         }
         
+        func disableAllErrorFields() {
+            var animations = [AuthenticationPerformerViewController.ValidationErrorAnimation]()
+            animations.append(.init(field: emailTextField, message: nil))
+            animations.append(.init(field: passwordTextField, message: nil))
+            let animator = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut)
+            animator.addAnimations {
+                animations.forEach({ (animation) in
+                    animation.field.showErrorMessage(message: nil)
+                })
+                self.view.layoutIfNeeded()
+            }
+            animator.startAnimation()
+        }
+        
         func animationsFor(errors: ValidationErrors) -> [ValidationErrorAnimation] {
             var animations = [AuthenticationPerformerViewController.ValidationErrorAnimation]()
             animations.append(

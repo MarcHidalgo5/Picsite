@@ -112,7 +112,7 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
         do {
             self.view.endEditing(true)
             try contentVC.validateFields()
-            contentVC.performValidationAnimations([])
+            contentVC.disableAllErrorFields()
             self.showIndeterminateLoadingView(message: "indeterminate-message-log-in".localized)
             Task { @MainActor in
                 do {
