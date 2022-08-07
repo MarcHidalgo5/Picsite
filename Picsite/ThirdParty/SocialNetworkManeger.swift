@@ -33,12 +33,12 @@ private extension SocialNetworkManager {
             let googleSignInConfig = GIDConfiguration(clientID: clientID)
             googleProvider.signIn(with: googleSignInConfig, presenting: fromVC) { user, error in
                 guard error == nil else {
-//                    let nsError = error! as NSError
-//                    if nsError.domain == "com.google.GIDSignIn", nsError.code == -5 {
-//                        cont.resume(throwing: AuthenticationManagerError.userCanceled)
-//                    } else {
-//                        cont.resume(throwing: error!)
-//                    }
+                    let nsError = error! as NSError
+                    if nsError.domain == "com.google.GIDSignIn", nsError.code == -5 {
+                        cont.resume(throwing: AuthenticationManagerError.userCanceled)
+                    } else {
+                        cont.resume(throwing: error!)
+                    }
                     return
                 }
                 

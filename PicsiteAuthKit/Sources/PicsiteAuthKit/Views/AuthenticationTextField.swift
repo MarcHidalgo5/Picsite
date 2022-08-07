@@ -54,7 +54,6 @@ extension AuthenticationPerformerViewController {
             }
             
             textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-            
             let stackView = UIStackView(arrangedSubviews: [titleLable, textField, errorLabel])
             stackView.axis = .vertical
             stackView.spacing = AuthenticationPerformerViewController.Constants.SmallPadding

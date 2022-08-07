@@ -101,7 +101,7 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
     static func attributeErrorString(_ string: String) -> NSAttributedString {
         return FontPalette.mediumTextStyler.attributedString(
             string,
-            color: ColorPalette.picsiteTintColor,
+            color: ColorPalette.picsiteErrorColor,
             forSize: 14
         )
     }
@@ -113,14 +113,13 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
             self.view.endEditing(true)
             try contentVC.validateFields()
             contentVC.performValidationAnimations([])
-            self.showIndeterminateLoadingView(message: "indeterminate-message-loggin-in".localized)
+            self.showIndeterminateLoadingView(message: "indeterminate-message-log-in".localized)
             Task { @MainActor in
                 do {
-//                    let userID = try await contentVC.performAuthentication()
-//                    let email: String = self.contentVC.authenticationEmail ?? ""
-//                    self.observer.didAuthenticate(userID: userID, email: email, kind: self.mode == .login ? .login : .register)
+                    let userID = try await contentVC.performAuthentication()
+                    self.dependencies.observer.didAuthenticate(userID: userID, kind: self.dependencies.mode == .login ? .login : .register)
                 } catch {
-                    processError(error)
+                    self.showErrorAlert(error.localizedDescription, error: error)
                 }
                 hideIndeterminateLoadingView()
             }
@@ -154,11 +153,21 @@ extension AuthenticationPerformerViewController {
         let message: String?
     }
     
-    enum ValidationErrors: Swift.Error {
-        case invalidEmail
-        case invalidPassword
-        case invalidName
-        case didNotAcceptTC
+//    enum ValidationErrors: Swift.Error {
+//        case invalidEmail
+//        case invalidPassword
+//        case invalidName
+//        case didNotAcceptTC
+//    }
+    
+    struct ValidationErrors: OptionSet, Swift.Error {
+        let rawValue: Int
+        
+        static let invalidEmail         = ValidationErrors(rawValue: 1 << 0)
+        static let invalidPassword      = ValidationErrors(rawValue: 1 << 1)
+        static let invalidName          = ValidationErrors(rawValue: 1 << 2)
+        static let didNotAcceptTC       = ValidationErrors(rawValue: 1 << 3)
+        static let didNotAcceptPrivacy  = ValidationErrors(rawValue: 1 << 4)
     }
 }
 

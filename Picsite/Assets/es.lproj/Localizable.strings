@@ -5,6 +5,10 @@
 "dismiss" = "Cerrar";
 "error-perform-blocking-task" = "Ha ocurrido un problema";
 
+//AuthenticationManagerError
+"authentication-maneger-error-invalid-user-or-pasword" = "Usuario o contraseña incorrectos";
+"authentication-maneger-error-unknownError" = "Error desconocido";
+
 //StartingViewController
 "start-button" = "Comenzar";
 "start-subtitle" = "Descubre lugares";
@@ -23,3 +27,7 @@
 //LoadingViewController
 "login-error-message" = "Error al completar el logoin";
 
+//LogincViewController
+"authentication-validation-error-invalid-email" = "Introduce un email valido";
+"authentication-validation-error-invalid-password" = "La contraseña debe tener al menos 8 caracteres";
+"indeterminate-message-log-in" = "Iniciando sesion";

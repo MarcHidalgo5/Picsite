@@ -151,7 +151,7 @@ extension AuthenticationPerformerViewController {
                 return
             }
             emailTextField.text = "marchidalgo@icloud.com"
-            passwordTextField.text = "12345678"
+            passwordTextField.text = "123456789"
             #endif
         }
         
@@ -161,8 +161,20 @@ extension AuthenticationPerformerViewController {
         
         @objc private func onLoginWithGoogle() {
             performBlockingTask(errorMessage: "authentication-google-error".localized, {
-                let user = try await self.provider.loginUsingGoogle(from: self)
-                self.observer.didAuthenticate(userID: user.uid, kind: .google)
+                do {
+                    let user = try await self.provider.loginUsingGoogle(from: self)
+                    self.observer.didAuthenticate(userID: user.uid, kind: .google)
+                } catch let error {
+                    if let socialError = error as? AuthenticationManagerError {
+                        if socialError == .userCanceled {
+                            return
+                        } else {
+                            guard let socialError = socialError.errorDescription else { return }
+                            self.showErrorAlert(socialError, error: error)
+                        }
+                    }
+                    self.showErrorAlert(error.localizedDescription, error: error)
+                }
             })
         }
 
@@ -183,15 +195,39 @@ extension AuthenticationPerformerViewController {
         //MARK: AuthenticationPerformer
         
         func performAuthentication() async throws -> (String) {
-            fatalError()
+            let user = try await self.provider.loginUserByEmail(email: self.emailTextField.text!, password: self.passwordTextField.text!)
+            return user.uid
         }
         
         func validateFields() throws {
-            fatalError()
+            var errors = ValidationErrors()
+            if let email = emailTextField.text, !AuthenticationValidator.validateEmail(email) {
+                errors.insert(.invalidEmail)
+            }
+            if let password = passwordTextField.text, !AuthenticationValidator.validatePassword(password) {
+                errors.insert(.invalidPassword)
+            }
+            guard errors.isEmpty else {
+                throw errors
+            }
         }
         
-        func animationsFor(errors: AuthenticationPerformerViewController.ValidationErrors) -> [AuthenticationPerformerViewController.ValidationErrorAnimation] {
-            fatalError()
+        func animationsFor(errors: ValidationErrors) -> [ValidationErrorAnimation] {
+            var animations = [AuthenticationPerformerViewController.ValidationErrorAnimation]()
+            animations.append(
+                .init(
+                    field: emailTextField,
+                    message: errors.contains(.invalidEmail) ? "authentication-validation-error-invalid-email".localized : nil
+                )
+            )
+
+            animations.append(
+                .init(
+                    field: passwordTextField,
+                    message: errors.contains(.invalidPassword) ? "authentication-validation-error-invalid-password".localized : nil
+                )
+            )
+            return animations
         }
         
         var authenticationName: String? {

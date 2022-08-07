@@ -5,6 +5,10 @@
 "dismiss" = "Dismiss";
 "error-perform-blocking-task" = "An error has occurred";
 
+//AuthenticationManagerError
+"authentication-maneger-error-invalid-user-or-pasword" = "Invalid user or pasword";
+"authentication-maneger-error-unknownError" = "Unknown error";
+
 //StartingViewController
 "start-button" = "Start";
 "start-subtitle" = "Discover places";
@@ -22,3 +26,8 @@
 
 //LoadingViewController
 "login-error-message" = "Fail to complete login";
+
+//LogincViewController
+"authentication-validation-error-invalid-email" = "Introduce a valid email address";
+"authentication-validation-error-invalid-password" = "Your password needs to have at least 8 characters";
+"indeterminate-message-log-in" = "Logging in";

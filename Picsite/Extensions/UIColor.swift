@@ -14,6 +14,7 @@ extension UIColor {
     static let picsiteBackgroundColor = UIColor(named: "picsite-background-color")!
     static let picsiteDeepBlueColor = UIColor(named: "picsite-deep-blue")!
     static let picsitePlaceholderColor = UIColor(named: "picsite-placeholder-color")!
+    static let picsiteErrorColor = UIColor(named: "picsite-error-color")!
     
     static let picsiteButtonTitleColor = UIColor(light: .white, dark: .white)
 }
