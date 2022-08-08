@@ -153,13 +153,6 @@ extension AuthenticationPerformerViewController {
         let message: String?
     }
     
-//    enum ValidationErrors: Swift.Error {
-//        case invalidEmail
-//        case invalidPassword
-//        case invalidName
-//        case didNotAcceptTC
-//    }
-    
     struct ValidationErrors: OptionSet, Swift.Error {
         let rawValue: Int
         
