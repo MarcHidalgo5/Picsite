@@ -157,7 +157,12 @@ extension AuthenticationPerformerViewController {
         
         // MARK: IBActions
         
-        @objc private func onForgetPasswordTapped() { }
+        @objc private func onForgetPasswordTapped() {
+            self.view.endEditing(false)
+            let vc = ForgotPasswordViewController(provider: self.provider)
+            show(vc, sender: nil)
+            
+        }
         
         @objc private func onLoginWithGoogle() {
             performBlockingTask(errorMessage: "authentication-google-error".localized, {
