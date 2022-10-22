@@ -19,10 +19,6 @@
 "authentication-performer-login-button" = "Log in";
 "authentication-performer-signup-button" = "Sign up";
 
-//AuthenticationViewController
-"authentication-login-apple-button" = "Apple";
-"authentication-login-google-button" = "Google";
-"authentication-google-error" = "Error signing in with google";
 
 //LoadingViewController
 "login-error-message" = "Fail to complete login";
