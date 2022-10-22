@@ -82,9 +82,7 @@ class StartingViewController: UIViewController {
         addPlainBackButton()
         buttonContainer?.onGetStarted = { [weak self] in
             guard let self = self else { return }
-//            let authVC =
-//            AuthenticationViewController(dependencies: .forPicsite(), observer: self)
-//            self.show(authVC, sender: nil)
+
         }
         buttonContainer?.onLogIn = { [weak self] in
         guard let self = self else { return }
@@ -139,8 +137,7 @@ extension StartingViewController: AuthenticationObserver {
         }
     }
     
-    func didCancelAuthentication() {
-    }
+    func didCancelAuthentication() { }
 }
 
 extension StartingViewController: TransparentNavigationBarPreferenceProvider {

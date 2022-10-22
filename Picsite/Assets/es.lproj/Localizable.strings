@@ -19,10 +19,6 @@
 "authentication-performer-login-button" = "Iniciar sesión";
 "authentication-performer-signup-button" = "Registrarse";
 
-//AuthenticationViewController
-"authentication-login-apple-button" = "Apple";
-"authentication-login-google-button" = "Google";
-"authentication-google-error" = "Error al iniciar sesión con google";
 
 //LoadingViewController
 "login-error-message" = "Error al completar el logoin";
