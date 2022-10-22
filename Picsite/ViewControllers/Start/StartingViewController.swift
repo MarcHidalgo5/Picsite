@@ -5,6 +5,7 @@
 import UIKit
 import BSWInterfaceKit
 import PicsiteUI
+import PicsiteAuthKit
 
 @MainActor
 protocol StartingObserver: AnyObject {
@@ -13,7 +14,7 @@ protocol StartingObserver: AnyObject {
 
 class StartingViewController: UIViewController {
     
-    enum Factory {
+    public enum Factory {
         static func viewController(observer: StartingObserver) -> UIViewController {
             let vc = BottomContainerViewController(containedViewController: StartingViewController(observer: observer), bottomViewController: BottomButtonViewController())
             return MinimalNavigationController(rootViewController: vc)
@@ -23,8 +24,8 @@ class StartingViewController: UIViewController {
     enum Constants {
         static let SmallPadding = CGFloat(8)
         static let LogoSpacing: CGFloat = 150
-        static let CornerRadius: CGFloat = 122
-        static let LayoutMargins = UIEdgeInsets(top: 32, left: 80, bottom: 32, right: 80)
+        static let CornerRadius: CGFloat = 12
+        static let LayoutMargins = UIEdgeInsets(top: 5, left: 32, bottom: 5, right: 32)
     }
     
     init(observer: StartingObserver) {
@@ -59,10 +60,16 @@ class StartingViewController: UIViewController {
         }()
         backgroundImageView.image = backgroundImage
         
-        view.addAutolayoutSubview(backgroundImageView)
-        view.addAutolayoutSubview(logoView)
+        let blurEffect = UIBlurEffect(style: .systemMaterialDark)
+        let blurredEffectView = UIVisualEffectView(effect: blurEffect)
+        blurredEffectView.alpha = 0.3
         
+        view.addAutolayoutSubview(backgroundImageView)
+        view.addAutolayoutSubview(blurredEffectView)
+        view.addAutolayoutSubview(logoView)
+    
         backgroundImageView.pinToSuperview()
+        blurredEffectView.pinToSuperview()
         
         NSLayoutConstraint.activate([
             logoView.topAnchor.constraint(equalTo: view.topAnchor, constant: UIScreen.main.isTallScreen ? 80 : 60),
@@ -75,7 +82,12 @@ class StartingViewController: UIViewController {
         addPlainBackButton()
         buttonContainer?.onGetStarted = { [weak self] in
             guard let self = self else { return }
-            let authVC = AuthenticationViewController(authenticationProvider: Current.authProvider, observer: self)
+
+        }
+        buttonContainer?.onLogIn = { [weak self] in
+        guard let self = self else { return }
+            let authVC =
+            AuthenticationPerformerViewController(dependecies: .forPicsiteLogin(observer: self))
             self.show(authVC, sender: nil)
         }
     }
@@ -114,9 +126,18 @@ class StartingViewController: UIViewController {
 }
 
 extension StartingViewController: AuthenticationObserver {
-    func didFinishAuthentication() {
-        
+    func didAuthenticate(userID: String, kind: AuthenticationKind) {
+        switch kind {
+        case .register:
+            break
+        case .login:
+            observer.didFinishStart()
+        case .google:
+            observer.didFinishStart()
+        }
     }
+    
+    func didCancelAuthentication() { }
 }
 
 extension StartingViewController: TransparentNavigationBarPreferenceProvider {

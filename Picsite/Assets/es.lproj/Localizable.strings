@@ -1,22 +1,29 @@
 
 // Common
-"loading" = "Loading";
-"error" = "Something has gone wrong";
-"dismiss" = "Dismiss";
-"error-perform-blocking-task" = "An error has occurred";
+"loading" = "Cargando";
+"error" = "Algo ha ido mal";
+"dismiss" = "Cerrar";
+"error-perform-blocking-task" = "Ha ocurrido un problema";
+
+//AuthenticationManagerError
+"authentication-maneger-error-invalid-user-or-pasword" = "Usuario o contraseña incorrectos";
+"authentication-maneger-error-unknownError" = "Error desconocido";
 
 //StartingViewController
 "start-button" = "Comenzar";
 "start-subtitle" = "Descubre lugares";
+"start-login-title" = "Ya tienes una cuenta?";
+"start-login-subtitle" = "Inicia sesión";
 
-//AuthenticationViewController
-"authentication-login-apple-button" = "Apple";
-"authentication-login-google-button" = "Google";
-"authentication-login-email-button" = "Iniciar sesion";
-"authentication-signup-label" = "Aún no tienes cuenta?";
-"authentication-signup-secondary-label" = "Registrate";
-"authentication-google-error" = "Error signing in with google";
+//AuthenticationPerformerViewController
+"authentication-performer-login-button" = "Iniciar sesión";
+"authentication-performer-signup-button" = "Registrarse";
+
 
 //LoadingViewController
-"login-error-message" = "Fail to complete login";
+"login-error-message" = "Error al completar el logoin";
 
+//LogincViewController
+"authentication-validation-error-invalid-email" = "Introduce un email valido";
+"authentication-validation-error-invalid-password" = "La contraseña debe tener al menos 8 caracteres";
+"indeterminate-message-log-in" = "Iniciando sesion";

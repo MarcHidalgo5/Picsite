@@ -9,7 +9,6 @@ import UIKit
 import BSWInterfaceKit
 import PicsiteKit
 import PicsiteUI
-import Firebase
 
 protocol SceneDelegateAppStateProvider {
     var currentAppState: AppState { get }
@@ -65,7 +64,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private var rootViewController: ContainerViewController!
     private var currentAppState: AppState {
-        if Auth.auth().currentUser != nil {
+        if Current.authProvider.isUserLoggedIn {
             return .login
         } else {
             return .unlogged
@@ -83,6 +82,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         PicsiteUI.ColorPalette.picsiteBackgroundColor = UIColor.picsiteBackgroundColor
         PicsiteUI.ColorPalette.picsiteDeepBlueColor =
             UIColor.picsiteDeepBlueColor
+        PicsiteUI.ColorPalette.picsiteButtonTitleColor = UIColor.picsiteButtonTitleColor
+        PicsiteUI.ColorPalette.picsitePlaceholderColor = UIColor.picsitePlaceholderColor
+        PicsiteUI.ColorPalette.picsiteErrorColor = UIColor.picsiteErrorColor
         
         PicsiteUI.FontPalette.boldTextStyler = boldTextStyler
         PicsiteUI.FontPalette.mediumTextStyler = mediumTextStyler
@@ -91,16 +93,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 }
 
-extension SceneDelegate: AuthenticationObserver {
-    func didFinishAuthentication() {
-        updateContainedViewController()
-    }
-}
-
 extension SceneDelegate: StartingObserver {
     func didFinishStart() {
         updateContainedViewController()
     }
-    
-    
 }

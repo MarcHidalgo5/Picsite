@@ -3,6 +3,7 @@ import Foundation
 import UIKit
 import PicsiteKit
 import BSWFoundation
+import PicsiteAuthKit
 
 /// It is the AppDelegate's responsibility to initialise the world with the correct environment
 var Current: World!
@@ -16,11 +17,12 @@ struct World {
     
     var apiClient: PicsiteAPIClient
     
-    lazy var authProvider: AuthenticationProviderType = AuthenticationProvider(environment: environment)
+    let authProvider: AuthenticationProviderType
     
     init(environment: PicsiteAPI.Environment) {
         self.environment = environment
         self.apiClient = PicsiteAPIClient(environment: environment)
+        self.authProvider = AuthenticationProvider(apiClient: apiClient, environment: environment)
     }
 }
 
