@@ -5,10 +5,6 @@
 "dismiss" = "Cerrar";
 "error-perform-blocking-task" = "Ha ocurrido un problema";
 
-//AuthenticationManagerError
-"authentication-maneger-error-invalid-user-or-pasword" = "Usuario o contraseña incorrectos";
-"authentication-maneger-error-unknownError" = "Error desconocido";
-
 //StartingViewController
 "start-button" = "Comenzar";
 "start-subtitle" = "Descubre lugares";

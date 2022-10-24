@@ -87,6 +87,9 @@ extension AuthenticationPerformerViewController {
             }
             performBlockingTask(loadingMessage: "reset-password-loading".localized, successMessage: "reset-password-success".localized, errorMessage: "reset-password-error".localized) {
                 try await self.provier.recoverPasword(email: email)
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000)) {
+                    self.closeViewController(sender: nil)
+                }
             }
         }
     }
