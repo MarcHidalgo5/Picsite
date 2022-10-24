@@ -3,8 +3,7 @@
 //
 
 import UIKit
-import PicsiteUI
-import PicsiteKit
+import PicsiteUI; import PicsiteKit
 import BSWInterfaceKit
 
 public class AuthenticationPerformerViewController: UIViewController, TransparentNavigationBarPreferenceProvider {

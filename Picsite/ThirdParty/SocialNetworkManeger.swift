@@ -18,6 +18,7 @@ class SocialNetworkManager: NSObject, UIApplicationDelegate, AuthenticationManag
         
         switch socialType {
         case .apple:
+            //Implement this
             fatalError()
         case .google:
             guard let clientID = FirebaseApp.app()?.options.clientID else { fatalError() }

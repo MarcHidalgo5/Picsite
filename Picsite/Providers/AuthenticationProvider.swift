@@ -54,4 +54,8 @@ class AuthenticationProvider: AuthenticationProviderType {
         self.authenticationKind = .google
         return user
     }
+    
+    func recoverPasword(email: String) async throws {
+        try await authAPIClient.recoverPassword(email: email)
+    }
 }

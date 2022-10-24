@@ -19,11 +19,13 @@
 "authentication-performer-login-button" = "Iniciar sesión";
 "authentication-performer-signup-button" = "Registrarse";
 
-
-//LoadingViewController
-"login-error-message" = "Error al completar el logoin";
-
-//LogincViewController
+//LoginViewController
 "authentication-validation-error-invalid-email" = "Introduce un email valido";
 "authentication-validation-error-invalid-password" = "La contraseña debe tener al menos 8 caracteres";
 "indeterminate-message-log-in" = "Iniciando sesion";
+"login-error-message" = "Error al completar el login";
+
+//ResetPasswordViewController
+"reset-password-error"  = "Algo salió mal. Por favor, vuelva a intentarlo";
+"reset-password-loading" = "Enviando...";
+"reset-password-success" = "Email enviado correctamente";

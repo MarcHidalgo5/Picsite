@@ -25,6 +25,10 @@ public class AuthAPIClient {
        return try await Auth.auth().signIn(with: credential).user
     }
     
+    public func recoverPassword(email: String) async throws {
+        try await Auth.auth().sendPasswordReset(withEmail: email)
+    }
+    
     public enum AuthError: LocalizedError {
         case unknownError
         case invalidLoginPassword

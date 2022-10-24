@@ -25,8 +25,8 @@ extension AuthenticationPerformerViewController {
         }()
         
         private let subTitleView: UIView = {
-            let titleLabel = UILabel()
-            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("Hello there, log in to continue!".localized, color: ColorPalette.picsiteTitleColor, forSize: 20)
+            let titleLabel = UILabel.unlimitedLinesLabel()
+            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("Hello there, log in to continue!".localized, color: ColorPalette.picsiteTitleColor, forSize: 18)
             titleLabel.textAlignment = .center
             return titleLabel
         }()

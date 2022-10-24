@@ -20,8 +20,8 @@ extension AuthenticationPerformerViewController {
         }()
         
         private let subTitleView: UIView = {
-            let titleLabel = UILabel()
-            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("Enter the email with which you registered to receive instructions to reset".localized, color: ColorPalette.picsiteTitleColor, forSize: 20)
+            let titleLabel = UILabel.unlimitedLinesLabel()
+            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("Enter the email with which you registered to receive instructions to reset".localized, color: ColorPalette.picsiteTitleColor, forSize: 18)
             titleLabel.textAlignment = .center
             return titleLabel
         }()
@@ -85,7 +85,9 @@ extension AuthenticationPerformerViewController {
             guard let email = emailTextField.text else {
                 return
             }
-            print(email)
+            performBlockingTask(loadingMessage: "reset-password-loading".localized, successMessage: "reset-password-success".localized, errorMessage: "reset-password-error".localized) {
+                try await self.provier.recoverPasword(email: email)
+            }
         }
     }
 }
