@@ -5,6 +5,15 @@
 "dismiss" = "Dismiss";
 "error-perform-blocking-task" = "An error has occurred";
 
+//TextField
+"textField-name-title" = "Enter your name";
+"textField-username-title" = "Enter username";
+"textField-repeat-password-title" = "Repeat password";
+"textField-password-title" = "Enter your password";
+"textField-password-placeholder" = "Password";
+"textField-email-title" = "Enter your email";
+"textField-email-placeholder" = "Email";
+
 //StartingViewController
 "start-button" = "Start";
 "start-subtitle" = "Discover places";
@@ -20,8 +29,15 @@
 "authentication-validation-error-invalid-password" = "Your password needs to have at least 8 characters";
 "indeterminate-message-log-in" = "Logging in";
 "login-error-message" = "Fail to complete login";
+"login-title" = "Welcome back";
+"login-subtitle" = "Hello there, log in to continue!";
+"login-reset-password-button-action" = "Don't remember the password?";
+"login-separetor" = "or";
 
 //ResetPasswordViewController
 "reset-password-error" = "Something went wrong, please try again";
 "reset-password-loading" = "Sending...";
 "reset-password-success" = "Email sent successfully";
+"reset-password-title" = "Forgot your password?";
+"reset-password-subtitle" = "Enter the email with which you registered to receive instructions to reset";
+"reset-password-button-action" = "Recover password";

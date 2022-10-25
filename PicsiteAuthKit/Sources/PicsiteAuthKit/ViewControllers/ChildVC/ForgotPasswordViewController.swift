@@ -14,19 +14,19 @@ extension AuthenticationPerformerViewController {
         
         private let titleView: UIView = {
             let titleLabel = UILabel.unlimitedLinesLabel()
-            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("Forgot your password?".localized, color: ColorPalette.picsiteTitleColor, forSize: 24)
+            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("reset-password-title".localized, color: ColorPalette.picsiteTitleColor, forSize: 24)
             titleLabel.textAlignment = .center
             return titleLabel
         }()
         
         private let subTitleView: UIView = {
             let titleLabel = UILabel.unlimitedLinesLabel()
-            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("Enter the email with which you registered to receive instructions to reset".localized, color: ColorPalette.picsiteTitleColor, forSize: 18)
+            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("reset-password-subtitle".localized, color: ColorPalette.picsiteTitleColor, forSize: 18)
             titleLabel.textAlignment = .center
             return titleLabel
         }()
         
-        private var buttonContainer = ActionButtonContainerView(actionTitle: "Recover password")
+        private var buttonContainer = ActionButtonContainerView(actionTitle: "reset-password-button-action".localized)
         
         private let provier: AuthenticationProviderType
         

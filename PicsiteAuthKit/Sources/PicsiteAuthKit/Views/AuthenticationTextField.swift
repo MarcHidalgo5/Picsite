@@ -27,30 +27,37 @@ extension AuthenticationPerformerViewController {
             switch kind {
             case .name:
                 textField.returnKeyType = .next
-                textField.placeholder = "Your name".localized
+                textField.placeholder = "textField-name-title".localized
                 textField.textContentType = .name
                 textField.keyboardType = .asciiCapable
                 textField.autocapitalizationType = .words
             case .username:
                 textField.returnKeyType = .done
-                textField.placeholder = "Your username".localized
+                textField.placeholder = "textField-username-title".localized
                 textField.textContentType = .username
                 textField.keyboardType = .asciiCapableNumberPad
                 textField.autocapitalizationType = .none
             case .email:
                 textField.returnKeyType = .next
-                textField.attributedPlaceholder = FontPalette.mediumTextStyler.attributedString("Enter your email".localized, color: .gray, forSize: 14)
+                textField.attributedPlaceholder = FontPalette.mediumTextStyler.attributedString("textField-email-title".localized, color: .gray, forSize: 14)
                 textField.textContentType = .emailAddress
                 textField.keyboardType = .emailAddress
                 textField.autocapitalizationType = .none
-                titleLable.attributedText = FontPalette.boldTextStyler.attributedString("Email", color: .gray, forSize: 14)
-            case .password, .newPassword:
-                textField.attributedPlaceholder = FontPalette.mediumTextStyler.attributedString("Enter your password".localized, color: .gray, forSize: 14)
+                titleLable.attributedText = FontPalette.boldTextStyler.attributedString("textField-email-placeholder".localized, color: .gray, forSize: 14)
+            case .password:
+                textField.attributedPlaceholder = FontPalette.mediumTextStyler.attributedString("textField-password-title".localized, color: .gray, forSize: 14)
                 textField.returnKeyType = .done
                 textField.textContentType = kind == .newPassword ? .newPassword : .password
                 textField.isSecureTextEntry = true
                 textField.autocapitalizationType = .none
-                titleLable.attributedText = FontPalette.boldTextStyler.attributedString("Password", color: .gray, forSize: 14)
+                titleLable.attributedText = FontPalette.boldTextStyler.attributedString("textField-password-placeholder".localized, color: .gray, forSize: 14)
+            case .newPassword:
+                textField.attributedPlaceholder = FontPalette.mediumTextStyler.attributedString("textField-repeat-password-title".localized, color: .gray, forSize: 14)
+                textField.returnKeyType = .done
+                textField.textContentType = kind == .newPassword ? .newPassword : .password
+                textField.isSecureTextEntry = true
+                textField.autocapitalizationType = .none
+                titleLable.attributedText = FontPalette.boldTextStyler.attributedString("textField-password-placeholder".localized, color: .gray, forSize: 14)
             }
             
             textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
