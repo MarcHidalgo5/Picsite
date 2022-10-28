@@ -161,7 +161,6 @@ extension AuthenticationPerformerViewController {
             self.view.endEditing(false)
             let vc = ForgotPasswordViewController(provider: self.provider)
             show(vc, sender: nil)
-            
         }
         
         @objc private func onLoginWithGoogle() {
