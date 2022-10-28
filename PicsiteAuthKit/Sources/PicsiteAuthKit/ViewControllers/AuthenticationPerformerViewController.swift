@@ -1,13 +1,9 @@
-//
-//  File.swift
-//  
-//
+ //
 //  Created by Marc Hidalgo on 5/5/22.
 //
 
 import UIKit
-import PicsiteUI
-import PicsiteKit
+import PicsiteUI; import PicsiteKit
 import BSWInterfaceKit
 
 public class AuthenticationPerformerViewController: UIViewController, TransparentNavigationBarPreferenceProvider {

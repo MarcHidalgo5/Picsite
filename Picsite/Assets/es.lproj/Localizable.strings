@@ -5,9 +5,14 @@
 "dismiss" = "Cerrar";
 "error-perform-blocking-task" = "Ha ocurrido un problema";
 
-//AuthenticationManagerError
-"authentication-maneger-error-invalid-user-or-pasword" = "Usuario o contraseña incorrectos";
-"authentication-maneger-error-unknownError" = "Error desconocido";
+//TextField
+"textField-name-title" = "Introduce tu nombre";
+"textField-username-title" = "Introduce tu nombre de usuario";
+"textField-repeat-password-title" = "Reptie la contraseña";
+"textField-password-title" = "Introduce tu contraseña";
+"textField-password-placeholder" = "Contraseña";
+"textField-email-title" = "Introduce tu email";
+"textField-email-placeholder" = "Email";
 
 //StartingViewController
 "start-button" = "Comenzar";
@@ -19,11 +24,21 @@
 "authentication-performer-login-button" = "Iniciar sesión";
 "authentication-performer-signup-button" = "Registrarse";
 
-
-//LoadingViewController
-"login-error-message" = "Error al completar el logoin";
-
-//LogincViewController
+//LoginViewController
 "authentication-validation-error-invalid-email" = "Introduce un email valido";
 "authentication-validation-error-invalid-password" = "La contraseña debe tener al menos 8 caracteres";
 "indeterminate-message-log-in" = "Iniciando sesion";
+"login-error-message" = "Error al completar el login";
+"login-title" = "Bienvenido de nuevo";
+"login-subtitle" = "¡Hola, inicia sesión para continuar!";
+"login-reset-password-button-action" = "No recuerdas la contraseña?";
+"login-separetor" = "o";
+
+
+//ResetPasswordViewController
+"reset-password-error"  = "Algo salió mal. Por favor, vuelva a intentarlo";
+"reset-password-loading" = "Enviando...";
+"reset-password-success" = "Email enviado correctamente";
+"reset-password-title" = "Olvidaste tu contraseña?";
+"reset-password-subtitle" = "Introduce el email con el que se registró para recibir instrucciones para restablecer";
+"reset-password-button-action" = "Recuperar contraseña";

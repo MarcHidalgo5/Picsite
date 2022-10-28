@@ -82,7 +82,7 @@ class StartingViewController: UIViewController {
         addPlainBackButton()
         buttonContainer?.onGetStarted = { [weak self] in
             guard let self = self else { return }
-
+            //TODO
         }
         buttonContainer?.onLogIn = { [weak self] in
         guard let self = self else { return }

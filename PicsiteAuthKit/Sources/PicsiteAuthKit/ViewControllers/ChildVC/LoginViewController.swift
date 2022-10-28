@@ -19,14 +19,14 @@ extension AuthenticationPerformerViewController {
         
         private let titleView: UIView = {
             let titleLabel = UILabel()
-            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("Welcome back".localized, color: ColorPalette.picsiteTitleColor, forSize: 24)
+            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("login-title".localized, color: ColorPalette.picsiteTitleColor, forSize: 24)
             titleLabel.textAlignment = .center
             return titleLabel
         }()
         
         private let subTitleView: UIView = {
-            let titleLabel = UILabel()
-            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("Hello there, log in to continue!".localized, color: ColorPalette.picsiteTitleColor, forSize: 20)
+            let titleLabel = UILabel.unlimitedLinesLabel()
+            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("login-subtitle".localized, color: ColorPalette.picsiteTitleColor, forSize: 18)
             titleLabel.textAlignment = .center
             return titleLabel
         }()
@@ -34,7 +34,7 @@ extension AuthenticationPerformerViewController {
         private let forgotPasswordButton: UIButton = {
             let button = UIButton(type: .system)
             button.tintColor = ColorPalette.picsiteDeepBlueColor
-            button.setTitle("Don't remember the password?".localized, for: .normal)
+            button.setTitle("login-reset-password-button-action".localized, for: .normal)
             button.titleLabel?.font = FontPalette.mediumTextStyler.fontForSize(14)
             return button
         }()
@@ -69,7 +69,7 @@ extension AuthenticationPerformerViewController {
             }()
             
             let orLabel = UILabel()
-            orLabel.attributedText = FontPalette.regularTextStyler.attributedString("or".localized, color: ColorPalette.picsiteTitleColor, forSize: 16)
+            orLabel.attributedText = FontPalette.regularTextStyler.attributedString("login-separetor".localized, color: ColorPalette.picsiteTitleColor, forSize: 16)
             let separator1 = SocialSeparatorView()
             let separator2 = SocialSeparatorView()
             let separatorStackView = UIStackView(arrangedSubviews: [
@@ -157,7 +157,11 @@ extension AuthenticationPerformerViewController {
         
         // MARK: IBActions
         
-        @objc private func onForgetPasswordTapped() { }
+        @objc private func onForgetPasswordTapped() {
+            self.view.endEditing(false)
+            let vc = ForgotPasswordViewController(provider: self.provider)
+            show(vc, sender: nil)
+        }
         
         @objc private func onLoginWithGoogle() {
             performBlockingTask(errorMessage: "authentication-google-error".localized, {

@@ -29,21 +29,17 @@ public protocol AuthenticationProviderType {
     
     func loginUserByEmail(email: String, password: String) async throws -> User
     func loginUsingGoogle(from vc: UIViewController) async throws -> User
+    func recoverPasword(email: String) async throws
+    
 }
 
 public enum AuthenticationManagerError: Swift.Error, Equatable {
-    case invalidUsernameOrPassword
     case userCanceled
-    case unknownError
-    
+
     public var errorDescription: String? {
         switch self {
-        case .invalidUsernameOrPassword:
-            return "authentication-maneger-error-invalid-user-or-pasword".localized
         case .userCanceled:
             return ""
-        case .unknownError:
-            return "authentication-maneger-error-unknownError".localized
         }
     }
 }

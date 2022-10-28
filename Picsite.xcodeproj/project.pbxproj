@@ -229,7 +229,6 @@
 				1A0EFFB327CA7B37004B544C /* TextStyler.swift */,
 				1A0EFFB527CA7B8C004B544C /* UIFont+Extensions.swift */,
 				1AADE10B27E5F5BB0014A884 /* ErrorView.swift */,
-				1AC8543628218A9E00948232 /* PicsiteAuthenticationKit.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -276,6 +275,7 @@
 				1AC8543828218E0200948232 /* ThirdParty */,
 				1ADAF80627518E1000D8D480 /* Assets */,
 				1AA679F7275402BB00799CE1 /* Extensions */,
+				1AF1217D290C30D200792365 /* PicsiteFeatureKit */,
 				1ADAF80527518DEA00D8D480 /* Configuration */,
 				1ADAF80427518DCF00D8D480 /* Views */,
 				1ADAF80327518DBF00D8D480 /* ViewControllers */,
@@ -345,6 +345,14 @@
 				1AE1591528009C0200F086B3 /* Suite */,
 			);
 			path = Tests;
+			sourceTree = "<group>";
+		};
+		1AF1217D290C30D200792365 /* PicsiteFeatureKit */ = {
+			isa = PBXGroup;
+			children = (
+				1AC8543628218A9E00948232 /* PicsiteAuthenticationKit.swift */,
+			);
+			path = PicsiteFeatureKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
