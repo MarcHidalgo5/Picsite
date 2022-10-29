@@ -27,37 +27,39 @@ extension AuthenticationPerformerViewController {
             switch kind {
             case .name:
                 textField.returnKeyType = .next
-                textField.placeholder = "textField-name-title".localized
+                textField.attributedPlaceholder = FontPalette.mediumTextStyler.attributedString("textField-name-placeholder".localized, color: .gray, forSize: 14)
                 textField.textContentType = .name
                 textField.keyboardType = .asciiCapable
                 textField.autocapitalizationType = .words
+                titleLable.attributedText = FontPalette.boldTextStyler.attributedString("textField-name-title".localized, color: .gray, forSize: 14)
             case .username:
                 textField.returnKeyType = .done
-                textField.placeholder = "textField-username-title".localized
+                textField.attributedPlaceholder = FontPalette.mediumTextStyler.attributedString("textField-username-placeholder".localized, color: .gray, forSize: 14)
                 textField.textContentType = .username
                 textField.keyboardType = .asciiCapableNumberPad
                 textField.autocapitalizationType = .none
+                titleLable.attributedText = FontPalette.boldTextStyler.attributedString("textField-username-title".localized, color: .gray, forSize: 14)
             case .email:
                 textField.returnKeyType = .next
-                textField.attributedPlaceholder = FontPalette.mediumTextStyler.attributedString("textField-email-title".localized, color: .gray, forSize: 14)
+                textField.attributedPlaceholder = FontPalette.mediumTextStyler.attributedString("textField-email-placeholder".localized, color: .gray, forSize: 14)
                 textField.textContentType = .emailAddress
                 textField.keyboardType = .emailAddress
                 textField.autocapitalizationType = .none
-                titleLable.attributedText = FontPalette.boldTextStyler.attributedString("textField-email-placeholder".localized, color: .gray, forSize: 14)
+                titleLable.attributedText = FontPalette.boldTextStyler.attributedString("textField-email-title".localized, color: .gray, forSize: 14)
             case .password:
-                textField.attributedPlaceholder = FontPalette.mediumTextStyler.attributedString("textField-password-title".localized, color: .gray, forSize: 14)
+                textField.attributedPlaceholder = FontPalette.mediumTextStyler.attributedString("textField-password-placeholder".localized, color: .gray, forSize: 14)
                 textField.returnKeyType = .done
                 textField.textContentType = kind == .newPassword ? .newPassword : .password
                 textField.isSecureTextEntry = true
                 textField.autocapitalizationType = .none
-                titleLable.attributedText = FontPalette.boldTextStyler.attributedString("textField-password-placeholder".localized, color: .gray, forSize: 14)
+                titleLable.attributedText = FontPalette.boldTextStyler.attributedString("textField-password-title".localized, color: .gray, forSize: 14)
             case .newPassword:
-                textField.attributedPlaceholder = FontPalette.mediumTextStyler.attributedString("textField-repeat-password-title".localized, color: .gray, forSize: 14)
+                textField.attributedPlaceholder = FontPalette.mediumTextStyler.attributedString("textField-repeat-password-placeholder".localized, color: .gray, forSize: 14)
                 textField.returnKeyType = .done
                 textField.textContentType = kind == .newPassword ? .newPassword : .password
                 textField.isSecureTextEntry = true
                 textField.autocapitalizationType = .none
-                titleLable.attributedText = FontPalette.boldTextStyler.attributedString("textField-password-placeholder".localized, color: .gray, forSize: 14)
+                titleLable.attributedText = FontPalette.boldTextStyler.attributedString("textField-password-title".localized, color: .gray, forSize: 14)
             }
             
             textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)

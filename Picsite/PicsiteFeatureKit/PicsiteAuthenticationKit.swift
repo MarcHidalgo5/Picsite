@@ -12,4 +12,8 @@ extension PicsiteAuthKit.ModuleDependencies {
     static func forPicsiteLogin(observer: AuthenticationObserver) -> ModuleDependencies {
         return ModuleDependencies(authProvider: Current.authProvider, socialManager: SocialNetworkManager.shared, mode: .login, observer: observer)
     }
+    
+    static func forPicsiteRegister(observer: AuthenticationObserver) -> ModuleDependencies {
+        return ModuleDependencies(authProvider: Current.authProvider, socialManager: SocialNetworkManager.shared, mode: .register, observer: observer)
+    }
 }

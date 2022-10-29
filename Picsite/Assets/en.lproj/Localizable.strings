@@ -6,13 +6,15 @@
 "error-perform-blocking-task" = "An error has occurred";
 
 //TextField
-"textField-name-title" = "Enter your name";
-"textField-username-title" = "Enter username";
-"textField-repeat-password-title" = "Repeat password";
-"textField-password-title" = "Enter your password";
-"textField-password-placeholder" = "Password";
-"textField-email-title" = "Enter your email";
-"textField-email-placeholder" = "Email";
+"textField-name-placeholder" = "Enter your name";
+"textField-name-title" = "Name";
+"textField-username-placeholder" = "Enter username";
+"textField-username-title" = "Username";
+"textField-repeat-password-placeholder" = "Repeat password";
+"textField-password-placeholder" = "Enter your password";
+"textField-password-title" = "Password";
+"textField-email-placeholder" = "Enter your email";
+"textField-email-title" = "Email";
 
 //StartingViewController
 "start-button" = "Start";
@@ -41,3 +43,4 @@
 "reset-password-title" = "Forgot your password?";
 "reset-password-subtitle" = "Enter the email with which you registered to receive instructions to reset";
 "reset-password-button-action" = "Recover password";
+
