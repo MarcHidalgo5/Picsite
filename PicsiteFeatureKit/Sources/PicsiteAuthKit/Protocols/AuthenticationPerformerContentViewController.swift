@@ -9,7 +9,7 @@ protocol AuthenticationField: UIView {
 }
 
 protocol AuthenticationPerformerContentViewController: UIViewController {
-    func performAuthentication() async throws -> (String)
+    func performAuthentication() async throws
     func validateFields() async throws
     func animationsFor(errors: AuthenticationPerformerViewController.ValidationErrors) -> [AuthenticationPerformerViewController.ValidationErrorAnimation]
     func disableAllErrorFields()

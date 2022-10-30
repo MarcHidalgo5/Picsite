@@ -128,7 +128,7 @@ class StartingViewController: UIViewController {
 }
 
 extension StartingViewController: AuthenticationObserver {
-    func didAuthenticate(userID: String, kind: AuthenticationKind) {
+    func didAuthenticate(kind: AuthenticationPerformerKind) {
         switch kind {
         case .register:
             #warning("Tutorial vc?")

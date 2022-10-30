@@ -137,8 +137,8 @@ extension AuthenticationPerformerViewController {
        @objc private func onLoginWithGoogle() {
            performBlockingTask(errorMessage: "authentication-google-error".localized, {
                do {
-                   let user = try await self.provider.loginUsingGoogle(from: self)
-                   self.observer.didAuthenticate(userID: user.uid, kind: .google)
+                   try await self.provider.loginUsingGoogle(from: self)
+                   self.observer.didAuthenticate(kind: .google)
                } catch let error {
                    if let socialError = error as? AuthenticationManagerError {
                        if socialError == .userCanceled {
@@ -173,17 +173,14 @@ extension AuthenticationPerformerViewController {
        
        //MARK: AuthenticationPerformer
        
-       func performAuthentication() async throws -> (String) {
-           #warning("implement this")
-//           let user = try await self.provider.loginUserByEmail(email: self.emailTextField.text!, password: self.passwordTextField.text!)
-//           return user.uid
-           return ""
+       func performAuthentication() async throws {
+           try await self.provider.registerUser(displayName: self.usernameTextField.text!, email: self.emailTextField.text!, password: self.passwordTextField.text!)
        }
        
        func validateFields() async throws {
            var errors = ValidationErrors()
-           if let username = usernameTextField.text {
-               #warning("check if username exists")
+           if let username = usernameTextField.text, try await self.provider.isUsernameNotUsed(username: username) {
+               errors.insert(.invalidUsername)
            }
            if let email = emailTextField.text, !AuthenticationValidator.validateEmail(email) {
                errors.insert(.invalidEmail)

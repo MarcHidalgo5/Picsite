@@ -112,8 +112,8 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
                 try await contentVC.validateFields()
                 contentVC.disableAllErrorFields()
                 #warning("make sure user id is necesary here")
-                let userID = try await contentVC.performAuthentication()
-                self.dependencies.observer.didAuthenticate(userID: userID, kind: self.dependencies.mode == .login ? .login : .register)
+                try await contentVC.performAuthentication()
+                self.dependencies.observer.didAuthenticate(kind: self.dependencies.mode == .login ? .login : .register)
             } catch let errors as ValidationErrors  {
                 contentVC.performValidationAnimations(contentVC.animationsFor(errors: errors))
             } catch let error {
@@ -152,7 +152,7 @@ extension AuthenticationPerformerViewController {
         static let invalidEmail          = ValidationErrors(rawValue: 1 << 0)
         static let invalidPassword       = ValidationErrors(rawValue: 1 << 1)
         static let invalidRepeatPassword = ValidationErrors(rawValue: 1 >> 2)
-        static let invalidName           = ValidationErrors(rawValue: 1 << 3)
+        static let invalidUsername       = ValidationErrors(rawValue: 1 << 3)
         static let didNotAcceptTC        = ValidationErrors(rawValue: 1 << 4)
         static let didNotAcceptPrivacy   = ValidationErrors(rawValue: 1 << 5)
     }
