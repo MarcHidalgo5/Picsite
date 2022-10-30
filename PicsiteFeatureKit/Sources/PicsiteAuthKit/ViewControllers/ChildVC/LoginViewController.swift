@@ -15,7 +15,7 @@ extension AuthenticationPerformerViewController {
         private let SocialButtonsSpacing: CGFloat = 60
         
         private let emailTextField = TextField(kind: .email)
-        private let passwordTextField = TextField(kind: .password)
+        private let passwordTextField = TextField(kind: .password(newPassword: false))
         
         private let titleView: UIView = {
             let titleLabel = UILabel()
@@ -69,7 +69,7 @@ extension AuthenticationPerformerViewController {
             }()
             
             let orLabel = UILabel()
-            orLabel.attributedText = FontPalette.regularTextStyler.attributedString("login-separetor".localized, color: ColorPalette.picsiteTitleColor, forSize: 16)
+            orLabel.attributedText = FontPalette.mediumTextStyler.attributedString("login-title-social".localized, color: .gray, forSize: 14)
             let separator1 = SocialSeparatorView()
             let separator2 = SocialSeparatorView()
             let separatorStackView = UIStackView(arrangedSubviews: [

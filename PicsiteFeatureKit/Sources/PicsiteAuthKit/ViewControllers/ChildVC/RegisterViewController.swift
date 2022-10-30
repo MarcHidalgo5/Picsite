@@ -14,21 +14,22 @@ extension AuthenticationPerformerViewController {
        private let DefaultSpacing: CGFloat = 20
        private let SocialButtonsSpacing: CGFloat = 60
        
+       private let nameTextField = TextField(kind: .name)
        private let usernameTextField = TextField(kind: .username)
        private let emailTextField = TextField(kind: .email)
-       private let repeatPasswordTextField = TextField(kind: .password)
-       private let passwordTextField = TextField(kind: .password)
+       private let passwordTextField = TextField(kind:
+           .password(newPassword: true))
        
        private let titleView: UIView = {
            let titleLabel = UILabel()
-           titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("login-title".localized, color: ColorPalette.picsiteTitleColor, forSize: 24)
+           titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("register-title".localized, color: ColorPalette.picsiteTitleColor, forSize: 24)
            titleLabel.textAlignment = .center
            return titleLabel
        }()
        
        private let subTitleView: UIView = {
            let titleLabel = UILabel.unlimitedLinesLabel()
-           titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("login-subtitle".localized, color: ColorPalette.picsiteTitleColor, forSize: 18)
+           titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("register-subtitle".localized, color: ColorPalette.picsiteTitleColor, forSize: 18)
            titleLabel.textAlignment = .center
            return titleLabel
        }()
@@ -50,7 +51,7 @@ extension AuthenticationPerformerViewController {
            view = UIView()
            
            let orLabel = UILabel()
-           orLabel.attributedText = FontPalette.regularTextStyler.attributedString("login-separetor".localized, color: ColorPalette.picsiteTitleColor, forSize: 16)
+           orLabel.attributedText = FontPalette.mediumTextStyler.attributedString("register-title-social".localized, color: .gray, forSize: 14)
            let separator1 = SocialSeparatorView()
            let separator2 = SocialSeparatorView()
            let separatorStackView = UIStackView(arrangedSubviews: [
@@ -95,7 +96,7 @@ extension AuthenticationPerformerViewController {
                socialLoginStackView.heightAnchor.constraint(equalTo: socialButtonContainer.heightAnchor),
            ])
            
-           let stackView = UIStackView(arrangedSubviews: [titleView, subTitleView] + [usernameTextField, emailTextField, passwordTextField, repeatPasswordTextField, separatorStackView, socialButtonContainer])
+           let stackView = UIStackView(arrangedSubviews: [titleView, subTitleView] + [nameTextField ,usernameTextField, emailTextField, passwordTextField, separatorStackView, socialButtonContainer])
            stackView.axis = .vertical
            stackView.layoutMargins = [.left: Constants.BigPadding, .bottom: Constants.BigPadding, .right: Constants.BigPadding, .top: 0]
            stackView.isLayoutMarginsRelativeArrangement = true
@@ -115,15 +116,19 @@ extension AuthenticationPerformerViewController {
        override func viewDidLoad() {
            super.viewDidLoad()
            
+           nameTextField.delegate = self
            usernameTextField.delegate = self
            emailTextField.delegate = self
-           repeatPasswordTextField.delegate = self
            passwordTextField.delegate = self
+           // We need this to disable password autofill on simulator because it breaks the UITests on iOS 16
+           #if targetEnvironment(simulator)
+           passwordTextField.textField.textContentType = .oneTimeCode
+           #endif
        }
        
        override func viewDidAppear(_ animated: Bool) {
            super.viewDidAppear(animated)
-           usernameTextField.becomeFirstResponder()
+           nameTextField.becomeFirstResponder()
        }
        
        // MARK: IBActions
@@ -157,14 +162,14 @@ extension AuthenticationPerformerViewController {
        
        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
            switch textField {
+           case nameTextField.textField:
+               usernameTextField.becomeFirstResponder()
            case usernameTextField.textField:
                emailTextField.becomeFirstResponder()
            case emailTextField.textField:
                passwordTextField.becomeFirstResponder()
            case passwordTextField.textField:
-               repeatPasswordTextField.resignFirstResponder()
-           case repeatPasswordTextField.textField:
-               repeatPasswordTextField.resignFirstResponder()
+               passwordTextField.resignFirstResponder()
            default:
                break
            }
@@ -174,7 +179,7 @@ extension AuthenticationPerformerViewController {
        //MARK: AuthenticationPerformer
        
        func performAuthentication() async throws {
-           try await self.provider.registerUser(username: self.usernameTextField.text!, email: self.emailTextField.text!, password: self.passwordTextField.text!)
+           try await self.provider.registerUser(username: self.usernameTextField.text!, fullName: self.nameTextField.text!, email: self.emailTextField.text!, password: self.passwordTextField.text!)
        }
        
        func validateFields() async throws {
@@ -188,9 +193,6 @@ extension AuthenticationPerformerViewController {
            if let password = passwordTextField.text, !AuthenticationValidator.validatePassword(password) {
                errors.insert(.invalidPassword)
            }
-           if let repeatPassword = repeatPasswordTextField.text, let password = passwordTextField.text, repeatPassword != password {
-               errors.insert(.invalidRepeatPassword)
-           }
            guard errors.isEmpty else {
                throw errors
            }
@@ -201,7 +203,6 @@ extension AuthenticationPerformerViewController {
            animations.append(.init(field: usernameTextField, message: nil))
            animations.append(.init(field: emailTextField, message: nil))
            animations.append(.init(field: passwordTextField, message: nil))
-           animations.append(.init(field: repeatPasswordTextField, message: nil))
            let animator = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut)
            animator.addAnimations {
                animations.forEach({ (animation) in
@@ -225,6 +226,12 @@ extension AuthenticationPerformerViewController {
                .init(
                    field: passwordTextField,
                    message: errors.contains(.invalidPassword) ? "authentication-validation-error-invalid-password".localized : nil
+               )
+           )
+           animations.append(
+               .init(
+                   field: usernameTextField,
+                   message: errors.contains(.invalidUsername) ? "authentication-validation-error-invalid-username".localized : nil
                )
            )
            return animations

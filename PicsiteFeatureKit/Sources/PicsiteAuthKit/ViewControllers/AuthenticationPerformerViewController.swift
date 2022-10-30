@@ -108,7 +108,8 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
         self.view.endEditing(true)
         Task { @MainActor in
             do {
-                self.showIndeterminateLoadingView(message: "indeterminate-message-log-in".localized)
+                let message = self.dependencies.mode == .login ? "login-indeterminate-message".localized : "register-indeterminate-message".localized
+                self.showIndeterminateLoadingView(message: message)
                 try await contentVC.validateFields()
                 contentVC.disableAllErrorFields()
                 try await contentVC.performAuthentication()
@@ -150,10 +151,9 @@ extension AuthenticationPerformerViewController {
         
         static let invalidEmail          = ValidationErrors(rawValue: 1 << 0)
         static let invalidPassword       = ValidationErrors(rawValue: 1 << 1)
-        static let invalidRepeatPassword = ValidationErrors(rawValue: 1 >> 2)
-        static let invalidUsername       = ValidationErrors(rawValue: 1 << 3)
-        static let didNotAcceptTC        = ValidationErrors(rawValue: 1 << 4)
-        static let didNotAcceptPrivacy   = ValidationErrors(rawValue: 1 << 5)
+        static let invalidUsername       = ValidationErrors(rawValue: 1 << 2)
+        static let didNotAcceptTC        = ValidationErrors(rawValue: 1 << 3)
+        static let didNotAcceptPrivacy   = ValidationErrors(rawValue: 1 << 4)
     }
 }
 

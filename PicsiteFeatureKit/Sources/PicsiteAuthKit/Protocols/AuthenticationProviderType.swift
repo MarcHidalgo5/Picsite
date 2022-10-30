@@ -42,7 +42,7 @@ public protocol AuthenticationProviderType {
     
     func loginUserByEmail(email: String, password: String) async throws 
     func loginUsingGoogle(from vc: UIViewController) async throws
-    func registerUser(username: String, email: String, password: String) async throws
+    func registerUser(username: String, fullName: String, email: String, password: String) async throws
     func recoverPasword(email: String) async throws
     
     func isUsernameCurrentUsed(username: String) async throws -> Bool

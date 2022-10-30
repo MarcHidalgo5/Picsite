@@ -44,12 +44,12 @@ class AuthenticationProvider: AuthenticationProviderType {
         self.authenticationKind = .google
     }
     
-    func registerUser(username: String, email: String, password: String) async throws {
+    func registerUser(username: String, fullName: String, email: String, password: String) async throws {
         try await authAPIClient.registerUser(email: email, password: password)
         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
         changeRequest?.displayName = username
         try await changeRequest?.commitChanges()
-        try await apiClient.createUser(docData: docData(username: username))
+        try await apiClient.createUser(docData: docData(username: username, fullName: fullName))
         self.authenticationKind = .email
     }
     
@@ -62,10 +62,12 @@ class AuthenticationProvider: AuthenticationProviderType {
     }
 }
 
+#warning("Create endpoint correctly")
 extension AuthenticationProvider {
-    func docData(username: String) -> [String: Any] {
+    func docData(username: String, fullName: String) -> [String: Any] {
         return [
             "username": username,
+            "full_name": fullName
         ]
     }
 }
