@@ -5,14 +5,18 @@
 "dismiss" = "Cerrar";
 "error-perform-blocking-task" = "Ha ocurrido un problema";
 
+//Google
+"authentication-google-error" = "Error al iniciar session";
+
 //TextField
-"textField-name-title" = "Introduce tu nombre";
-"textField-username-title" = "Introduce tu nombre de usuario";
-"textField-repeat-password-title" = "Reptie la contraseña";
-"textField-password-title" = "Introduce tu contraseña";
-"textField-password-placeholder" = "Contraseña";
-"textField-email-title" = "Introduce tu email";
-"textField-email-placeholder" = "Email";
+"textField-name-placeholder" = "Introduce tu nombre completo";
+"textField-name-title" = "Nombre completo";
+"textField-username-placeholder" = "Introduce nombre de usuario";
+"textField-username-title" = "Nombre de usuario en picsite";
+"textField-password-placeholder" = "Introduce tu contraseña";
+"textField-password-title" = "Contraseña (minimo 8 caracteres)";
+"textField-email-placeholder" = "Introduce tu email";
+"textField-email-title" = "Email";
 
 //StartingViewController
 "start-button" = "Comenzar";
@@ -23,16 +27,16 @@
 //AuthenticationPerformerViewController
 "authentication-performer-login-button" = "Iniciar sesión";
 "authentication-performer-signup-button" = "Registrarse";
-
-//LoginViewController
 "authentication-validation-error-invalid-email" = "Introduce un email valido";
 "authentication-validation-error-invalid-password" = "La contraseña debe tener al menos 8 caracteres";
-"indeterminate-message-log-in" = "Iniciando sesion";
-"login-error-message" = "Error al completar el login";
-"login-title" = "Bienvenido de nuevo";
-"login-subtitle" = "¡Hola, inicia sesión para continuar!";
+"authentication-validation-error-invalid-username" = "El nombre de usuario ya está en uso";
+
+//LoginViewController
+"login-indeterminate-message" = "Iniciando sesion...";
+"login-title" = "Bienvenido de nuevo!";
+"login-subtitle" = "Inicia sesión para continuar";
 "login-reset-password-button-action" = "No recuerdas la contraseña?";
-"login-separetor" = "o";
+"login-title-social" = "O inicia sesión con estas opciones:";
 
 
 //ResetPasswordViewController
@@ -42,3 +46,9 @@
 "reset-password-title" = "Olvidaste tu contraseña?";
 "reset-password-subtitle" = "Introduce el email con el que se registró para recibir instrucciones para restablecer";
 "reset-password-button-action" = "Recuperar contraseña";
+
+//RegisterViewController
+"register-indeterminate-message" = "Creando usuario...";
+"register-title" = "Bienvenido!";
+"register-subtitle" = "Registrate para continuar";
+"register-title-social" = "O inicia sesión con estas opciones:";

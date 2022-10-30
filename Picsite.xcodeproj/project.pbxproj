@@ -17,7 +17,6 @@
 		1A4B17DD27DCF4D200390B1D /* SF-Compact-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A0EFFB827CA984A004B544C /* SF-Compact-Text-Bold.otf */; };
 		1A4B17DE27DCF4D500390B1D /* SF-Compact-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A0EFFBA27CA984A004B544C /* SF-Compact-Text-Medium.otf */; };
 		1A4B17DF27DCF4D700390B1D /* SF-Compact-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A0EFFB927CA984A004B544C /* SF-Compact-Text-Regular.otf */; };
-		1A666B99281C92BC00DD2FB4 /* PicsiteAuthKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1A666B98281C92BC00DD2FB4 /* PicsiteAuthKit */; };
 		1A66E4A827C94C7700177DEF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66E4A727C94C7700177DEF /* HomeViewController.swift */; };
 		1A76D08F27DDEB80005EEA29 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1A76D09127DDEB80005EEA29 /* Localizable.strings */; };
 		1A7AC43927B64ED3006B7DF6 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7AC43827B64ED3006B7DF6 /* AppState.swift */; };
@@ -45,6 +44,7 @@
 		1AE1591B28009CEC00F086B3 /* StartingViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE1591A28009CEC00F086B3 /* StartingViewControllerTests.swift */; };
 		1AE1592028009DF600F086B3 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 1AE1591F28009DF600F086B3 /* SnapshotTesting */; };
 		1AE7434F27DB3083007944C6 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7434E27DB3083007944C6 /* Configuration.swift */; };
+		1AE7B3FC290DC2A30021AFE1 /* PicsiteAuthKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1AE7B3FB290DC2A30021AFE1 /* PicsiteAuthKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,7 +97,6 @@
 		1A7AC43A27B64FF6006B7DF6 /* World.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		1A8C9A722801734800EF4B06 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		1A8C9A732801734800EF4B06 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		1A900354281C9217003FC51F /* PicsiteAuthKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteAuthKit; sourceTree = "<group>"; };
 		1A9296F927C40AC200037BA4 /* PicsiteKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteKit; sourceTree = "<group>"; };
 		1A943A5527540A92008D7150 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		1AADE10B27E5F5BB0014A884 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
@@ -119,6 +118,7 @@
 		1AE7434C27DA7383007944C6 /* Develop.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Develop.xcconfig; sourceTree = "<group>"; };
 		1AE7434D27DA73B3007944C6 /* AppStore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppStore.xcconfig; sourceTree = "<group>"; };
 		1AE7434E27DB3083007944C6 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		1AE7B3F6290DB3B40021AFE1 /* PicsiteFeatureKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteFeatureKit; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,7 +131,7 @@
 				1ADAF7FE27517F7100D8D480 /* FirebaseStorageSwift-Beta in Frameworks */,
 				1A0EFFAA27CA4479004B544C /* PicsiteUI in Frameworks */,
 				1A0EFFA727CA433A004B544C /* PicsiteKit in Frameworks */,
-				1A666B99281C92BC00DD2FB4 /* PicsiteAuthKit in Frameworks */,
+				1AE7B3FC290DC2A30021AFE1 /* PicsiteAuthKit in Frameworks */,
 				1A225D4227DFF2A800BED065 /* GoogleSignIn in Frameworks */,
 				1ADAF7FA27517F7100D8D480 /* FirebaseDatabaseSwift-Beta in Frameworks */,
 				1ADAF7FC27517F7100D8D480 /* FirebaseFirestoreSwift-Beta in Frameworks */,
@@ -244,7 +244,7 @@
 		1ADAF7B627517C8800D8D480 = {
 			isa = PBXGroup;
 			children = (
-				1A900354281C9217003FC51F /* PicsiteAuthKit */,
+				1AE7B3F6290DB3B40021AFE1 /* PicsiteFeatureKit */,
 				1A0EFFA827CA4472004B544C /* PicsiteUI */,
 				1A9296F927C40AC200037BA4 /* PicsiteKit */,
 				1ADAF7C127517C8800D8D480 /* Picsite */,
@@ -384,7 +384,7 @@
 				1A0EFFA627CA433A004B544C /* PicsiteKit */,
 				1A0EFFA927CA4479004B544C /* PicsiteUI */,
 				1A225D4127DFF2A800BED065 /* GoogleSignIn */,
-				1A666B98281C92BC00DD2FB4 /* PicsiteAuthKit */,
+				1AE7B3FB290DC2A30021AFE1 /* PicsiteAuthKit */,
 			);
 			productName = Picsite;
 			productReference = 1ADAF7BF27517C8800D8D480 /* Picsite.app */;
@@ -985,10 +985,6 @@
 			package = 1A225D4027DFF2A700BED065 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignIn;
 		};
-		1A666B98281C92BC00DD2FB4 /* PicsiteAuthKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PicsiteAuthKit;
-		};
 		1A7AC43E27B65C2C006B7DF6 /* BSWFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1A7AC43D27B65C2C006B7DF6 /* XCRemoteSwiftPackageReference "BSWFoundation" */;
@@ -1038,6 +1034,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1AE1591E28009DF600F086B3 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */;
 			productName = SnapshotTesting;
+		};
+		1AE7B3FB290DC2A30021AFE1 /* PicsiteAuthKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PicsiteAuthKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

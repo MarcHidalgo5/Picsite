@@ -5,14 +5,18 @@
 "dismiss" = "Dismiss";
 "error-perform-blocking-task" = "An error has occurred";
 
+//Google
+"authentication-google-error" = "Failed to login";
+
 //TextField
-"textField-name-title" = "Enter your name";
-"textField-username-title" = "Enter username";
-"textField-repeat-password-title" = "Repeat password";
-"textField-password-title" = "Enter your password";
-"textField-password-placeholder" = "Password";
-"textField-email-title" = "Enter your email";
-"textField-email-placeholder" = "Email";
+"textField-name-placeholder" = "Enter your full name";
+"textField-name-title" = "Full name";
+"textField-username-placeholder" = "Enter username";
+"textField-username-title" = "Username on picsite";
+"textField-password-placeholder" = "Enter your password";
+"textField-password-title" = "Password";
+"textField-email-placeholder" = "Enter your email";
+"textField-email-title" = "Email";
 
 //StartingViewController
 "start-button" = "Start";
@@ -23,16 +27,17 @@
 //AuthenticationPerformerViewController
 "authentication-performer-login-button" = "Log in";
 "authentication-performer-signup-button" = "Sign up";
-
-//LoginViewController
 "authentication-validation-error-invalid-email" = "Introduce a valid email address";
 "authentication-validation-error-invalid-password" = "Your password needs to have at least 8 characters";
-"indeterminate-message-log-in" = "Logging in";
+"authentication-validation-error-invalid-username" = "The username is already in use";
+
+//LoginViewController
+"login-indeterminate-message" = "Logging in";
 "login-error-message" = "Fail to complete login";
 "login-title" = "Welcome back";
 "login-subtitle" = "Hello there, log in to continue!";
 "login-reset-password-button-action" = "Don't remember the password?";
-"login-separetor" = "or";
+"login-title-social" = "Or sign in with these options:";
 
 //ResetPasswordViewController
 "reset-password-error" = "Something went wrong, please try again";
@@ -41,3 +46,10 @@
 "reset-password-title" = "Forgot your password?";
 "reset-password-subtitle" = "Enter the email with which you registered to receive instructions to reset";
 "reset-password-button-action" = "Recover password";
+
+//RegisterViewController
+"register-indeterminate-message" = "Creating user...";
+"register-title" = "Welcome!";
+"register-subtitle" = "Sign up to continue";
+"register-title-social" = "Or sign in with these options:";
+

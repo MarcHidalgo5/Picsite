@@ -7,6 +7,6 @@ import PicsiteKit
 
 @MainActor
 public protocol AuthenticationObserver: AnyObject {
-    func didAuthenticate(userID: String, kind: AuthenticationKind)
+    func didAuthenticate(kind: AuthenticationPerformerKind)
     func didCancelAuthentication()
 }

@@ -62,7 +62,7 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
             case .login:
                 return LoginViewController(provider: self.dependencies.authProvider, observer: dependencies.observer)
             case .register:
-                fatalError()
+                return RegisterViewController(provider: self.dependencies.authProvider, observer: dependencies.observer)
             }
         }()
         
@@ -105,24 +105,21 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
     //MARK: IBActions
     
     @objc private func onPerformAuthentication() {
-        do {
-            self.view.endEditing(true)
-            try contentVC.validateFields()
-            contentVC.disableAllErrorFields()
-            self.showIndeterminateLoadingView(message: "indeterminate-message-log-in".localized)
-            Task { @MainActor in
-                do {
-                    let userID = try await contentVC.performAuthentication()
-                    self.dependencies.observer.didAuthenticate(userID: userID, kind: self.dependencies.mode == .login ? .login : .register)
-                } catch {
-                    self.showErrorAlert(error.localizedDescription, error: error)
-                }
-                hideIndeterminateLoadingView()
+        self.view.endEditing(true)
+        Task { @MainActor in
+            do {
+                let message = self.dependencies.mode == .login ? "login-indeterminate-message".localized : "register-indeterminate-message".localized
+                self.showIndeterminateLoadingView(message: message)
+                try await contentVC.validateFields()
+                contentVC.disableAllErrorFields()
+                try await contentVC.performAuthentication()
+                self.dependencies.observer.didAuthenticate(kind: self.dependencies.mode == .login ? .login : .register)
+            } catch let errors as ValidationErrors  {
+                contentVC.performValidationAnimations(contentVC.animationsFor(errors: errors))
+            } catch let error {
+                self.showErrorAlert(error.localizedDescription, error: error)
             }
-        } catch let errors as ValidationErrors {
-            contentVC.performValidationAnimations(contentVC.animationsFor(errors: errors))
-        } catch let error {
-            self.showErrorAlert("Unknown Error", error: error)
+            hideIndeterminateLoadingView()
         }
     }
     
@@ -152,11 +149,11 @@ extension AuthenticationPerformerViewController {
     struct ValidationErrors: OptionSet, Swift.Error {
         let rawValue: Int
         
-        static let invalidEmail         = ValidationErrors(rawValue: 1 << 0)
-        static let invalidPassword      = ValidationErrors(rawValue: 1 << 1)
-        static let invalidName          = ValidationErrors(rawValue: 1 << 2)
-        static let didNotAcceptTC       = ValidationErrors(rawValue: 1 << 3)
-        static let didNotAcceptPrivacy  = ValidationErrors(rawValue: 1 << 4)
+        static let invalidEmail          = ValidationErrors(rawValue: 1 << 0)
+        static let invalidPassword       = ValidationErrors(rawValue: 1 << 1)
+        static let invalidUsername       = ValidationErrors(rawValue: 1 << 2)
+        static let didNotAcceptTC        = ValidationErrors(rawValue: 1 << 3)
+        static let didNotAcceptPrivacy   = ValidationErrors(rawValue: 1 << 4)
     }
 }
 
@@ -192,3 +189,4 @@ extension AuthenticationPerformerViewController {
         }
     }
 }
+

@@ -9,7 +9,7 @@ import PicsiteAuthKit
 
 @MainActor
 protocol StartingObserver: AnyObject {
-    func didFinishStart()
+    func didFinishAuthentication()
 }
 
 class StartingViewController: UIViewController {
@@ -82,7 +82,9 @@ class StartingViewController: UIViewController {
         addPlainBackButton()
         buttonContainer?.onGetStarted = { [weak self] in
             guard let self = self else { return }
-            //TODO
+            let authVC =
+            AuthenticationPerformerViewController(dependecies: .forPicsiteRegister(observer: self))
+            self.show(authVC, sender: nil)
         }
         buttonContainer?.onLogIn = { [weak self] in
         guard let self = self else { return }
@@ -126,14 +128,13 @@ class StartingViewController: UIViewController {
 }
 
 extension StartingViewController: AuthenticationObserver {
-    func didAuthenticate(userID: String, kind: AuthenticationKind) {
+    func didAuthenticate(kind: AuthenticationPerformerKind) {
         switch kind {
         case .register:
-            break
-        case .login:
-            observer.didFinishStart()
-        case .google:
-            observer.didFinishStart()
+            #warning("Tutorial vc?")
+            observer.didFinishAuthentication()
+        case .login, .google:
+            observer.didFinishAuthentication()
         }
     }
     

@@ -15,7 +15,7 @@ extension AuthenticationPerformerViewController {
         private let SocialButtonsSpacing: CGFloat = 60
         
         private let emailTextField = TextField(kind: .email)
-        private let passwordTextField = TextField(kind: .password)
+        private let passwordTextField = TextField(kind: .password(newPassword: false))
         
         private let titleView: UIView = {
             let titleLabel = UILabel()
@@ -69,7 +69,7 @@ extension AuthenticationPerformerViewController {
             }()
             
             let orLabel = UILabel()
-            orLabel.attributedText = FontPalette.regularTextStyler.attributedString("login-separetor".localized, color: ColorPalette.picsiteTitleColor, forSize: 16)
+            orLabel.attributedText = FontPalette.mediumTextStyler.attributedString("login-title-social".localized, color: .gray, forSize: 14)
             let separator1 = SocialSeparatorView()
             let separator2 = SocialSeparatorView()
             let separatorStackView = UIStackView(arrangedSubviews: [
@@ -82,12 +82,10 @@ extension AuthenticationPerformerViewController {
                 separator1.widthAnchor.constraint(equalTo: separator2.widthAnchor),
             ])
             
-            let loginAppleButton = createSocialButton(kind: .apple)
-            let loginInstaButton = createSocialButton(kind: .instagram)
-            let loginGoogleButton = createSocialButton(kind: .google)
+            let loginAppleButton = SocialButtonKind.createSocialButton(kind: .apple)
+            let loginInstaButton = SocialButtonKind.createSocialButton(kind: .instagram)
+            let loginGoogleButton = SocialButtonKind.createSocialButton(kind: .google)
             
-//            loginAppleButton.addTarget(self, action: #selector(onLoginWithApple), for: .touchUpInside)
-//            loginFBButton.addTarget(self, action: #selector(onLoginWithFacebook), for: .touchUpInside)
             loginGoogleButton.addTarget(self, action: #selector(onLoginWithGoogle), for: .touchUpInside)
             
             loginInstaButton.addPicsiteShadow()
@@ -166,8 +164,8 @@ extension AuthenticationPerformerViewController {
         @objc private func onLoginWithGoogle() {
             performBlockingTask(errorMessage: "authentication-google-error".localized, {
                 do {
-                    let user = try await self.provider.loginUsingGoogle(from: self)
-                    self.observer.didAuthenticate(userID: user.uid, kind: .google)
+                    try await self.provider.loginUsingGoogle(from: self)
+                    self.observer.didAuthenticate(kind: .google)
                 } catch let error {
                     if let socialError = error as? AuthenticationManagerError {
                         if socialError == .userCanceled {
@@ -198,13 +196,13 @@ extension AuthenticationPerformerViewController {
         
         //MARK: AuthenticationPerformer
         
-        func performAuthentication() async throws -> (String) {
-            let user = try await self.provider.loginUserByEmail(email: self.emailTextField.text!, password: self.passwordTextField.text!)
-            return user.uid
+        func performAuthentication() async throws {
+            try await self.provider.loginUserByEmail(email: self.emailTextField.text!, password: self.passwordTextField.text!)
         }
         
-        func validateFields() throws {
+        func validateFields() async throws {
             var errors = ValidationErrors()
+            #warning("we can provide if email exists")
             if let email = emailTextField.text, !AuthenticationValidator.validateEmail(email) {
                 errors.insert(.invalidEmail)
             }
@@ -247,76 +245,5 @@ extension AuthenticationPerformerViewController {
             )
             return animations
         }
-        
-        var authenticationName: String? {
-            get {
-                nil
-            } set {
-                //Nothing
-            }
-        }
-        
-        var authenticationEmail: String? {
-            get {
-                emailTextField.text
-            } set {
-                emailTextField.text = newValue
-            }
-        }
-    }
-}
-
-extension AuthenticationPerformerViewController.LoginViewController {
-    
-    public enum SocialButtonKind {
-        case apple, instagram, google
-        
-        public var image: UIImage {
-            switch self {
-            case .apple:
-                return UIImage(systemName: "applelogo")!.withRenderingMode(.alwaysTemplate)
-            case .instagram:
-                return UIImage(named: "instagram-icon")!
-            case .google:
-                return UIImage(named: "google-icon")!
-            }
-        }
-        
-        public var tintColor: UIColor? {
-            switch self {
-            case .apple: return .black
-            default: return nil
-            }
-        }
-        
-        public var backgroundColor: UIColor {
-            return .white
-        }
-        
-        public var imageEdgeInsets: UIEdgeInsets {
-            switch self {
-            case .apple:
-                return UIEdgeInsets(top: 6, left: 6, bottom: 12, right: 12)
-            case .google:
-                return UIEdgeInsets(uniform: 8)
-            case .instagram:
-                return UIEdgeInsets(uniform: 11)
-            }
-        }
-    }
-    
-    public func createSocialButton(kind: SocialButtonKind) -> UIButton {
-        let button = RoundButton(color: .white)
-        button.setImage(kind.image, for: .normal)
-        button.imageEdgeInsets = kind.imageEdgeInsets
-        if let tintColor = kind.tintColor {
-            button.tintColor = tintColor
-        }
-        button.backgroundColor = kind.backgroundColor
-        button.imageView?.contentMode = .scaleAspectFit
-        button.contentVerticalAlignment = .fill
-        button.contentHorizontalAlignment = .fill
-        
-        return button
     }
 }

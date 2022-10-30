@@ -6,7 +6,7 @@ import Foundation
 import BSWFoundation
 import FirebaseAuth
 
-public enum AuthenticationKind: String, Codable {
+public enum AuthenticationPerformerKind: String, Codable {
     case register
     case login
     case google
@@ -21,15 +21,31 @@ public enum AuthenticationKind: String, Codable {
     }
 }
 
+public enum AuthenticationType: String, Codable {
+    case email
+    case google
+    
+    public var isSocial: Bool {
+        switch self {
+        case .google:
+            return true
+        case .email:
+            return false
+        }
+    }
+}
+
 public protocol AuthenticationProviderType {
     
     var isUserLoggedIn: Bool { get }
-    var userID: String? { get }
-    var authenticationKind: AuthenticationKind? { get }
+    var authenticationKind: AuthenticationType? { get }
     
-    func loginUserByEmail(email: String, password: String) async throws -> User
-    func loginUsingGoogle(from vc: UIViewController) async throws -> User
+    func loginUserByEmail(email: String, password: String) async throws 
+    func loginUsingGoogle(from vc: UIViewController) async throws
+    func registerUser(username: String, fullName: String, email: String, password: String) async throws
     func recoverPasword(email: String) async throws
+    
+    func isUsernameCurrentUsed(username: String) async throws -> Bool
     
 }
 

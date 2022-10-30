@@ -94,7 +94,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 }
 
 extension SceneDelegate: StartingObserver {
-    func didFinishStart() {
+    func didFinishAuthentication() {
         updateContainedViewController()
     }
 }
