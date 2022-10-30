@@ -29,18 +29,6 @@ public class AuthAPIClient {
         try await Auth.auth().createUser(withEmail: email, password: password)
     }
     
-    public func createUser(docData: [String: Any]) async throws {
-//        Firebase
-//        let db = Firestore.firestore()
-//        db.collection("data").document("two").setData(docData) { err in
-//            if let err = err {
-//                print("Error writing document: \(err)")
-//            } else {
-//                print("Document successfully written!")
-//            }
-//        }
-    }
-    
     public func recoverPassword(email: String) async throws {
         try await Auth.auth().sendPasswordReset(withEmail: email)
     }

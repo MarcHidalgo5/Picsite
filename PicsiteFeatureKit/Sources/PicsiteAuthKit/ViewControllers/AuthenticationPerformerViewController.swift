@@ -111,7 +111,6 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
                 self.showIndeterminateLoadingView(message: "indeterminate-message-log-in".localized)
                 try await contentVC.validateFields()
                 contentVC.disableAllErrorFields()
-                #warning("make sure user id is necesary here")
                 try await contentVC.performAuthentication()
                 self.dependencies.observer.didAuthenticate(kind: self.dependencies.mode == .login ? .login : .register)
             } catch let errors as ValidationErrors  {

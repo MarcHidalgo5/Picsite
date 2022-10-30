@@ -44,19 +44,28 @@ class AuthenticationProvider: AuthenticationProviderType {
         self.authenticationKind = .google
     }
     
-    func registerUser(displayName: String, email: String, password: String) async throws {
+    func registerUser(username: String, email: String, password: String) async throws {
         try await authAPIClient.registerUser(email: email, password: password)
-        self.authenticationKind = .email
         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-        changeRequest?.displayName = displayName
+        changeRequest?.displayName = username
         try await changeRequest?.commitChanges()
+        try await apiClient.createUser(docData: docData(username: username))
+        self.authenticationKind = .email
     }
     
     func recoverPasword(email: String) async throws {
         try await authAPIClient.recoverPassword(email: email)
     }
     
-    func isUsernameNotUsed(username: String) async throws -> Bool {
-        return false
+    func isUsernameCurrentUsed(username: String) async throws -> Bool {
+        return try await self.apiClient.isUsernameCurrentlyUsed(username: username)
+    }
+}
+
+extension AuthenticationProvider {
+    func docData(username: String) -> [String: Any] {
+        return [
+            "username": username,
+        ]
     }
 }

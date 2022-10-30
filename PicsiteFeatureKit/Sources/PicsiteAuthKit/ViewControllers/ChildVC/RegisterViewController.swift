@@ -174,12 +174,12 @@ extension AuthenticationPerformerViewController {
        //MARK: AuthenticationPerformer
        
        func performAuthentication() async throws {
-           try await self.provider.registerUser(displayName: self.usernameTextField.text!, email: self.emailTextField.text!, password: self.passwordTextField.text!)
+           try await self.provider.registerUser(username: self.usernameTextField.text!, email: self.emailTextField.text!, password: self.passwordTextField.text!)
        }
        
        func validateFields() async throws {
            var errors = ValidationErrors()
-           if let username = usernameTextField.text, try await self.provider.isUsernameNotUsed(username: username) {
+           if let username = usernameTextField.text, try await self.provider.isUsernameCurrentUsed(username: username) {
                errors.insert(.invalidUsername)
            }
            if let email = emailTextField.text, !AuthenticationValidator.validateEmail(email) {
