@@ -22,6 +22,8 @@
 		1A7AC43927B64ED3006B7DF6 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7AC43827B64ED3006B7DF6 /* AppState.swift */; };
 		1A7AC43B27B64FF6006B7DF6 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7AC43A27B64FF6006B7DF6 /* World.swift */; };
 		1A7AC43F27B65C2C006B7DF6 /* BSWFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1A7AC43E27B65C2C006B7DF6 /* BSWFoundation */; };
+		1A8525542913D2C5006C7DAA /* LoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8525532913D2C5006C7DAA /* LoginViewControllerTests.swift */; };
+		1A8525572913D542006C7DAA /* MockProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8525562913D542006C7DAA /* MockProviders.swift */; };
 		1A943A5627540A92008D7150 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A943A5527540A92008D7150 /* UIColor.swift */; };
 		1AADE10C27E5F5BB0014A884 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AADE10B27E5F5BB0014A884 /* ErrorView.swift */; };
 		1AC8543728218A9E00948232 /* PicsiteAuthenticationKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC8543628218A9E00948232 /* PicsiteAuthenticationKit.swift */; };
@@ -95,6 +97,8 @@
 		1A76D09027DDEB80005EEA29 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1A7AC43827B64ED3006B7DF6 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		1A7AC43A27B64FF6006B7DF6 /* World.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
+		1A8525532913D2C5006C7DAA /* LoginViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerTests.swift; sourceTree = "<group>"; };
+		1A8525562913D542006C7DAA /* MockProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProviders.swift; sourceTree = "<group>"; };
 		1A8C9A722801734800EF4B06 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		1A8C9A732801734800EF4B06 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1A9296F927C40AC200037BA4 /* PicsiteKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteKit; sourceTree = "<group>"; };
@@ -212,6 +216,14 @@
 				1AE7434C27DA7383007944C6 /* Develop.xcconfig */,
 			);
 			path = Develop;
+			sourceTree = "<group>";
+		};
+		1A8525552913D534006C7DAA /* MockProviders */ = {
+			isa = PBXGroup;
+			children = (
+				1A8525562913D542006C7DAA /* MockProviders.swift */,
+			);
+			path = MockProviders;
 			sourceTree = "<group>";
 		};
 		1A9296FA27C40EA600037BA4 /* Frameworks */ = {
@@ -334,6 +346,7 @@
 			isa = PBXGroup;
 			children = (
 				1AE1591A28009CEC00F086B3 /* StartingViewControllerTests.swift */,
+				1A8525532913D2C5006C7DAA /* LoginViewControllerTests.swift */,
 			);
 			path = Suite;
 			sourceTree = "<group>";
@@ -343,6 +356,7 @@
 			children = (
 				1AE1591728009C8200F086B3 /* BSWSnapshotTests.swift */,
 				1AE1591528009C0200F086B3 /* Suite */,
+				1A8525552913D534006C7DAA /* MockProviders */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -533,7 +547,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A8525542913D2C5006C7DAA /* LoginViewControllerTests.swift in Sources */,
 				1AE1591B28009CEC00F086B3 /* StartingViewControllerTests.swift in Sources */,
+				1A8525572913D542006C7DAA /* MockProviders.swift in Sources */,
 				1AE1591928009C8600F086B3 /* BSWSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

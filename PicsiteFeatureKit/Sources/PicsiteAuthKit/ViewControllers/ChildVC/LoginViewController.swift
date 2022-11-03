@@ -116,7 +116,7 @@ extension AuthenticationPerformerViewController {
             
             let stackView = UIStackView(arrangedSubviews: [titleView, subTitleView] + [emailTextField, passwordTextField, buttonWrapper, separatorStackView, socialButtonContainer])
             stackView.axis = .vertical
-            stackView.layoutMargins = [.left: Constants.BigPadding, .bottom: Constants.BigPadding, .right: Constants.BigPadding, .top: 0]
+            stackView.layoutMargins = [.left: Constants.Padding, .bottom: Constants.BigPadding, .right: Constants.Padding, .top: 0]
             stackView.isLayoutMarginsRelativeArrangement = true
             stackView.spacing = Constants.Padding
             stackView.alignment = .fill
@@ -202,7 +202,6 @@ extension AuthenticationPerformerViewController {
         
         func validateFields() async throws {
             var errors = ValidationErrors()
-            #warning("we can provide if email exists")
             if let email = emailTextField.text, !AuthenticationValidator.validateEmail(email) {
                 errors.insert(.invalidEmail)
             }

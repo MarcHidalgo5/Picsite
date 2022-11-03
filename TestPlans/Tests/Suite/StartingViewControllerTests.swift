@@ -20,6 +20,5 @@ class StartingViewControllerTests: BSWSnapshotTest {
 }
 
 extension StartingViewControllerTests: StartingObserver {
-    func didFinishStart() { }
-    
+    func didFinishAuthentication() { }
 }

@@ -98,7 +98,7 @@ extension AuthenticationPerformerViewController {
            
            let stackView = UIStackView(arrangedSubviews: [titleView, subTitleView] + [nameTextField ,usernameTextField, emailTextField, passwordTextField, separatorStackView, socialButtonContainer])
            stackView.axis = .vertical
-           stackView.layoutMargins = [.left: Constants.BigPadding, .bottom: Constants.BigPadding, .right: Constants.BigPadding, .top: 0]
+           stackView.layoutMargins = [.left: Constants.Padding, .bottom: Constants.BigPadding, .right: Constants.Padding, .top: 0]
            stackView.isLayoutMarginsRelativeArrangement = true
            stackView.spacing = Constants.Padding
            stackView.alignment = .fill
