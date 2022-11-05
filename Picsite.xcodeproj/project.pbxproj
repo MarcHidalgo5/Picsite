@@ -13,6 +13,8 @@
 		1A0EFFB427CA7B37004B544C /* TextStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0EFFB327CA7B37004B544C /* TextStyler.swift */; };
 		1A0EFFB627CA7B8C004B544C /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0EFFB527CA7B8C004B544C /* UIFont+Extensions.swift */; };
 		1A141CF027CD5A5A00AA8190 /* AuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A141CEF27CD5A5A00AA8190 /* AuthenticationProvider.swift */; };
+		1A20451629167C960093663B /* RegisterViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A20451529167C960093663B /* RegisterViewControllerTests.swift */; };
+		1A204518291686870093663B /* ForgotPasswordViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A204517291686870093663B /* ForgotPasswordViewControllerTests.swift */; };
 		1A225D4227DFF2A800BED065 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 1A225D4127DFF2A800BED065 /* GoogleSignIn */; };
 		1A4B17DD27DCF4D200390B1D /* SF-Compact-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A0EFFB827CA984A004B544C /* SF-Compact-Text-Bold.otf */; };
 		1A4B17DE27DCF4D500390B1D /* SF-Compact-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A0EFFBA27CA984A004B544C /* SF-Compact-Text-Medium.otf */; };
@@ -22,6 +24,8 @@
 		1A7AC43927B64ED3006B7DF6 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7AC43827B64ED3006B7DF6 /* AppState.swift */; };
 		1A7AC43B27B64FF6006B7DF6 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7AC43A27B64FF6006B7DF6 /* World.swift */; };
 		1A7AC43F27B65C2C006B7DF6 /* BSWFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 1A7AC43E27B65C2C006B7DF6 /* BSWFoundation */; };
+		1A8525542913D2C5006C7DAA /* LoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8525532913D2C5006C7DAA /* LoginViewControllerTests.swift */; };
+		1A8525572913D542006C7DAA /* MockProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8525562913D542006C7DAA /* MockProviders.swift */; };
 		1A943A5627540A92008D7150 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A943A5527540A92008D7150 /* UIColor.swift */; };
 		1AADE10C27E5F5BB0014A884 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AADE10B27E5F5BB0014A884 /* ErrorView.swift */; };
 		1AC8543728218A9E00948232 /* PicsiteAuthenticationKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC8543628218A9E00948232 /* PicsiteAuthenticationKit.swift */; };
@@ -90,11 +94,15 @@
 		1A0EFFB927CA984A004B544C /* SF-Compact-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Regular.otf"; sourceTree = "<group>"; };
 		1A0EFFBA27CA984A004B544C /* SF-Compact-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Medium.otf"; sourceTree = "<group>"; };
 		1A141CEF27CD5A5A00AA8190 /* AuthenticationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationProvider.swift; sourceTree = "<group>"; };
+		1A20451529167C960093663B /* RegisterViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerTests.swift; sourceTree = "<group>"; };
+		1A204517291686870093663B /* ForgotPasswordViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewControllerTests.swift; sourceTree = "<group>"; };
 		1A66E4A727C94C7700177DEF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1A677D8027DBE42800BF3385 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A76D09027DDEB80005EEA29 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1A7AC43827B64ED3006B7DF6 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		1A7AC43A27B64FF6006B7DF6 /* World.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
+		1A8525532913D2C5006C7DAA /* LoginViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerTests.swift; sourceTree = "<group>"; };
+		1A8525562913D542006C7DAA /* MockProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProviders.swift; sourceTree = "<group>"; };
 		1A8C9A722801734800EF4B06 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		1A8C9A732801734800EF4B06 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1A9296F927C40AC200037BA4 /* PicsiteKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteKit; sourceTree = "<group>"; };
@@ -212,6 +220,14 @@
 				1AE7434C27DA7383007944C6 /* Develop.xcconfig */,
 			);
 			path = Develop;
+			sourceTree = "<group>";
+		};
+		1A8525552913D534006C7DAA /* MockProviders */ = {
+			isa = PBXGroup;
+			children = (
+				1A8525562913D542006C7DAA /* MockProviders.swift */,
+			);
+			path = MockProviders;
 			sourceTree = "<group>";
 		};
 		1A9296FA27C40EA600037BA4 /* Frameworks */ = {
@@ -334,6 +350,9 @@
 			isa = PBXGroup;
 			children = (
 				1AE1591A28009CEC00F086B3 /* StartingViewControllerTests.swift */,
+				1A8525532913D2C5006C7DAA /* LoginViewControllerTests.swift */,
+				1A20451529167C960093663B /* RegisterViewControllerTests.swift */,
+				1A204517291686870093663B /* ForgotPasswordViewControllerTests.swift */,
 			);
 			path = Suite;
 			sourceTree = "<group>";
@@ -343,6 +362,7 @@
 			children = (
 				1AE1591728009C8200F086B3 /* BSWSnapshotTests.swift */,
 				1AE1591528009C0200F086B3 /* Suite */,
+				1A8525552913D534006C7DAA /* MockProviders */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -533,7 +553,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A204518291686870093663B /* ForgotPasswordViewControllerTests.swift in Sources */,
+				1A20451629167C960093663B /* RegisterViewControllerTests.swift in Sources */,
+				1A8525542913D2C5006C7DAA /* LoginViewControllerTests.swift in Sources */,
 				1AE1591B28009CEC00F086B3 /* StartingViewControllerTests.swift in Sources */,
+				1A8525572913D542006C7DAA /* MockProviders.swift in Sources */,
 				1AE1591928009C8600F086B3 /* BSWSnapshotTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -25,7 +25,7 @@ class StartingViewController: UIViewController {
         static let SmallPadding = CGFloat(8)
         static let LogoSpacing: CGFloat = 150
         static let CornerRadius: CGFloat = 12
-        static let LayoutMargins = UIEdgeInsets(top: 5, left: 32, bottom: 5, right: 32)
+        static let LayoutMargins = UIEdgeInsets(top: 5, left: 20, bottom: 5, right: 20)
     }
     
     init(observer: StartingObserver) {

@@ -4,6 +4,7 @@
 
 import UIKit
 import PicsiteUI
+import PicsiteKit
 
 extension AuthenticationPerformerViewController {
     

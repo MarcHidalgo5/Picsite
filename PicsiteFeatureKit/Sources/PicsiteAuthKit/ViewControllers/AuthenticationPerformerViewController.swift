@@ -76,7 +76,7 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
             contentVC.view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentVC.view.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentVC.view.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            contentVC.view.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentVC.view.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -60),
             contentVC.view.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             buttonContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             buttonContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),

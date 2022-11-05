@@ -19,17 +19,18 @@ extension AuthenticationPerformerViewController {
        private let emailTextField = TextField(kind: .email)
        private let passwordTextField = TextField(kind:
            .password(newPassword: true))
+       private let legalTermsView = LegalTermsView()
        
        private let titleView: UIView = {
            let titleLabel = UILabel()
-           titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("register-title".localized, color: ColorPalette.picsiteTitleColor, forSize: 24)
+           titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("register-title".localized, color: ColorPalette.picsiteTitleColor, forSize: 22)
            titleLabel.textAlignment = .center
            return titleLabel
        }()
        
        private let subTitleView: UIView = {
            let titleLabel = UILabel.unlimitedLinesLabel()
-           titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("register-subtitle".localized, color: ColorPalette.picsiteTitleColor, forSize: 18)
+           titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("register-subtitle".localized, color: ColorPalette.picsiteTitleColor, forSize: 16)
            titleLabel.textAlignment = .center
            return titleLabel
        }()
@@ -96,9 +97,9 @@ extension AuthenticationPerformerViewController {
                socialLoginStackView.heightAnchor.constraint(equalTo: socialButtonContainer.heightAnchor),
            ])
            
-           let stackView = UIStackView(arrangedSubviews: [titleView, subTitleView] + [nameTextField ,usernameTextField, emailTextField, passwordTextField, separatorStackView, socialButtonContainer])
+           let stackView = UIStackView(arrangedSubviews: [titleView, subTitleView] + [nameTextField ,usernameTextField, emailTextField, passwordTextField, legalTermsView, separatorStackView, socialButtonContainer])
            stackView.axis = .vertical
-           stackView.layoutMargins = [.left: Constants.BigPadding, .bottom: Constants.BigPadding, .right: Constants.BigPadding, .top: 0]
+           stackView.layoutMargins = [.left: Constants.Padding, .bottom: Constants.BigPadding, .right: Constants.Padding, .top: 0]
            stackView.isLayoutMarginsRelativeArrangement = true
            stackView.spacing = Constants.Padding
            stackView.alignment = .fill
@@ -193,6 +194,9 @@ extension AuthenticationPerformerViewController {
            if let password = passwordTextField.text, !AuthenticationValidator.validatePassword(password) {
                errors.insert(.invalidPassword)
            }
+           if !legalTermsView.termsAndConditionsAccepted {
+               errors.insert(.didNotAcceptTC)
+           }
            guard errors.isEmpty else {
                throw errors
            }
@@ -203,6 +207,7 @@ extension AuthenticationPerformerViewController {
            animations.append(.init(field: usernameTextField, message: nil))
            animations.append(.init(field: emailTextField, message: nil))
            animations.append(.init(field: passwordTextField, message: nil))
+           animations.append(.init(field: legalTermsView.termsAndConditionsView, message: nil))
            let animator = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut)
            animator.addAnimations {
                animations.forEach({ (animation) in
@@ -232,6 +237,12 @@ extension AuthenticationPerformerViewController {
                .init(
                    field: usernameTextField,
                    message: errors.contains(.invalidUsername) ? "authentication-validation-error-invalid-username".localized : nil
+               )
+           )
+           animations.append(
+               .init(
+                   field: legalTermsView.termsAndConditionsView,
+                   message: errors.contains(.didNotAcceptTC) ? "authentication-validation-error-invalid-t&c".localized : nil
                )
            )
            return animations

@@ -14,14 +14,14 @@ extension AuthenticationPerformerViewController {
         
         private let titleView: UIView = {
             let titleLabel = UILabel.unlimitedLinesLabel()
-            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("reset-password-title".localized, color: ColorPalette.picsiteTitleColor, forSize: 24)
+            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("reset-password-title".localized, color: ColorPalette.picsiteTitleColor, forSize: 22)
             titleLabel.textAlignment = .center
             return titleLabel
         }()
         
         private let subTitleView: UIView = {
             let titleLabel = UILabel.unlimitedLinesLabel()
-            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("reset-password-subtitle".localized, color: ColorPalette.picsiteTitleColor, forSize: 18)
+            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("reset-password-subtitle".localized, color: ColorPalette.picsiteTitleColor, forSize: 16)
             titleLabel.textAlignment = .center
             return titleLabel
         }()
@@ -58,9 +58,9 @@ extension AuthenticationPerformerViewController {
             
             // Layout the view
             NSLayoutConstraint.activate([
-                stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
                 stackView.topAnchor.constraint(equalTo: view.topAnchor),
-                stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
                 buttonContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 buttonContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
                 buttonContainer.bottomAnchor.constraint(equalTo: view.bswKeyboardLayoutGuide.topAnchor),
