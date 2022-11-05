@@ -24,7 +24,7 @@ public class PicsiteButton: UIButton {
     public var stringAttributes: [NSAttributedString.Key: Any] = [
         .kern: 0.5,
         .foregroundColor: ColorPalette.picsiteButtonTitleColor!,
-        .font: UIFont(descriptor: FontPalette.mediumTextStyler.fontDescriptor!, size: 20)
+        .font: UIFont(descriptor: FontPalette.mediumTextStyler.fontDescriptor!, size: 22)
     ]
     
     private enum Constants {

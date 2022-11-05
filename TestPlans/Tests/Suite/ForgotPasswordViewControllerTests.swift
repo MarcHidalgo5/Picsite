@@ -12,7 +12,7 @@ class ForgotPasswordViewControllerTests: BSWSnapshotTest {
     func testLayout() {
         let sut = AuthenticationPerformerViewController.ForgotPasswordViewController(provider: MockAuthKit())
         let navVC = MinimalNavigationController(rootViewController: sut)
-        debug(viewController: navVC)
+//        debug(viewController: navVC)
         waitABitAndVerify(viewController: navVC, testDarkMode: true)
     }
 }
