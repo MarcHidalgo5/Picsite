@@ -30,6 +30,7 @@
 "authentication-validation-error-invalid-email" = "Introduce un email valido";
 "authentication-validation-error-invalid-password" = "La contraseña debe tener al menos 8 caracteres";
 "authentication-validation-error-invalid-username" = "El nombre de usuario ya está en uso";
+"authentication-validation-error-invalid-t&c" = "Debes aceptar los terminos y condiciones antes de continuar";
 
 //LoginViewController
 "login-indeterminate-message" = "Iniciando sesion...";
@@ -52,3 +53,5 @@
 "register-title" = "Bienvenido!";
 "register-subtitle" = "Registrate para continuar";
 "register-title-social" = "O inicia sesión con estas opciones:";
+"register-t&c-message" = "Acepto los Términos y condiciones";
+"register-t&c-message-link" = "Términos y condiciones";

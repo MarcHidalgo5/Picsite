@@ -4,10 +4,6 @@
 
 import UIKit
 
-protocol AuthenticationField: UIView {
-    func showErrorMessage(message: NSAttributedString?)
-}
-
 protocol AuthenticationPerformerContentViewController: UIViewController {
     func performAuthentication() async throws
     func validateFields() async throws
