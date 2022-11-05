@@ -23,14 +23,14 @@ extension AuthenticationPerformerViewController {
        
        private let titleView: UIView = {
            let titleLabel = UILabel()
-           titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("register-title".localized, color: ColorPalette.picsiteTitleColor, forSize: 24)
+           titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("register-title".localized, color: ColorPalette.picsiteTitleColor, forSize: 22)
            titleLabel.textAlignment = .center
            return titleLabel
        }()
        
        private let subTitleView: UIView = {
            let titleLabel = UILabel.unlimitedLinesLabel()
-           titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("register-subtitle".localized, color: ColorPalette.picsiteTitleColor, forSize: 18)
+           titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("register-subtitle".localized, color: ColorPalette.picsiteTitleColor, forSize: 16)
            titleLabel.textAlignment = .center
            return titleLabel
        }()

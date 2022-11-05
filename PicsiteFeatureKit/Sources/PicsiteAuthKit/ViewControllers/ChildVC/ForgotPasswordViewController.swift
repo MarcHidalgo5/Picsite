@@ -14,14 +14,14 @@ extension AuthenticationPerformerViewController {
         
         private let titleView: UIView = {
             let titleLabel = UILabel.unlimitedLinesLabel()
-            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("reset-password-title".localized, color: ColorPalette.picsiteTitleColor, forSize: 24)
+            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("reset-password-title".localized, color: ColorPalette.picsiteTitleColor, forSize: 22)
             titleLabel.textAlignment = .center
             return titleLabel
         }()
         
         private let subTitleView: UIView = {
             let titleLabel = UILabel.unlimitedLinesLabel()
-            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("reset-password-subtitle".localized, color: ColorPalette.picsiteTitleColor, forSize: 18)
+            titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("reset-password-subtitle".localized, color: ColorPalette.picsiteTitleColor, forSize: 16)
             titleLabel.textAlignment = .center
             return titleLabel
         }()
