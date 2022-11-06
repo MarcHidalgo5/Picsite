@@ -12,7 +12,7 @@
 "textField-name-placeholder" = "";
 "textField-name-title" = "Nombre completo";
 "textField-username-placeholder" = "";
-"textField-username-title" = "Nombre de usuario en picsite";
+"textField-username-title" = "Nombre de usuario";
 "textField-password-placeholder" = "";
 "textField-password-title" = "Contraseña (minimo 8 caracteres)";
 "textField-email-placeholder" = "";

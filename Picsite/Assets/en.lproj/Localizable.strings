@@ -12,7 +12,7 @@
 "textField-name-placeholder" = "";
 "textField-name-title" = "Full name";
 "textField-username-placeholder" = "";
-"textField-username-title" = "Username on picsite";
+"textField-username-title" = "Username";
 "textField-password-placeholder" = "";
 "textField-password-title" = "Password";
 "textField-email-placeholder" = "";
