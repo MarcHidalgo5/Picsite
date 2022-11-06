@@ -75,6 +75,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         ///Customize UIKit
         UIWindow.appearance().tintColor = .picsiteTintColor
         UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .picsiteTintColor
+        UITabBar.appearance().tintColor = .picsiteDeepBlueColor
+        UITabBarItem.appearance().setTitleTextAttributes(
+            [NSAttributedString.Key.font: mediumTextStyler.fontForSize(12)],
+          for: .normal)
+        UITextField.appearance().tintColor = .picsiteTintColor
+        UITextField.appearance().font = regularTextStyler.fontForSize(18)
+        
+        UISwitch.appearance().onTintColor = .picsiteDeepBlueColor
+        
+        UIViewController.loadingViewFactory = { UIView.picsiteLoadingView() }
         
         /// Hook up VideoAskUI with dependencies
         PicsiteUI.ColorPalette.picsiteTintColor = UIColor.picsiteTintColor

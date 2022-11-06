@@ -49,7 +49,6 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         tabBar.barTintColor = .picsiteDeepBlueColor
         tabBar.backgroundColor = .picsiteBackgroundColor
-        tabBar.isTranslucent = false
         
         //Lines:
         let topline = CALayer()

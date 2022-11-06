@@ -28,7 +28,6 @@ open class SwitchField: UIStackView, ViewModelConfigurable, AuthenticationField 
         messageLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
         messageLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         onSwitch.setContentHuggingPriority(.required, for: .horizontal)
-        onSwitch.onTintColor = ColorPalette.picsiteDeepBlueColor
         showErrorMessage(message: nil)        
     }
     

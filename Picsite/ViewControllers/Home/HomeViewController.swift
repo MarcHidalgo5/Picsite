@@ -15,13 +15,13 @@ class HomeViewController: UIViewController {
     override func loadView() {
         view = UIView()
 //
-//        let firebaseAuth = Auth.auth()
-//        do {
-//            try firebaseAuth.signOut()
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
 //            SceneDelegate.main?.updateContainedViewController()
-//        } catch let signOutError as NSError {
-//            print("Error signing out: %@", signOutError)
-//        }
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+        }
     }
     
     override func viewDidLoad() {

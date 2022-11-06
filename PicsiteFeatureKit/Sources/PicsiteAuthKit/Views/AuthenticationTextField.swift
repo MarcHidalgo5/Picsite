@@ -27,27 +27,23 @@ extension AuthenticationPerformerViewController {
             switch kind {
             case .name:
                 textField.returnKeyType = .next
-                textField.attributedPlaceholder = FontPalette.mediumTextStyler.attributedString("textField-name-placeholder".localized, color: .gray, forSize: 14)
                 textField.textContentType = .name
                 textField.keyboardType = .asciiCapable
                 textField.autocapitalizationType = .words
                 titleLable.attributedText = FontPalette.boldTextStyler.attributedString("textField-name-title".localized, color: .gray, forSize: 14)
             case .username:
                 textField.returnKeyType = .next
-                textField.attributedPlaceholder = FontPalette.mediumTextStyler.attributedString("textField-username-placeholder".localized, color: .gray, forSize: 14)
                 textField.textContentType = .username
                 textField.keyboardType = .asciiCapable
                 textField.autocapitalizationType = .none
                 titleLable.attributedText = FontPalette.boldTextStyler.attributedString("textField-username-title".localized, color: .gray, forSize: 14)
             case .email:
                 textField.returnKeyType = .next
-                textField.attributedPlaceholder = FontPalette.mediumTextStyler.attributedString("textField-email-placeholder".localized, color: .gray, forSize: 14)
                 textField.textContentType = .emailAddress
                 textField.keyboardType = .emailAddress
                 textField.autocapitalizationType = .none
                 titleLable.attributedText = FontPalette.boldTextStyler.attributedString("textField-email-title".localized, color: .gray, forSize: 14)
             case .password(let isNewPassword):
-                textField.attributedPlaceholder = FontPalette.mediumTextStyler.attributedString("textField-password-placeholder".localized, color: .gray, forSize: 14)
                 textField.returnKeyType = .done
                 textField.textContentType = isNewPassword ? .newPassword : .password
                 textField.isSecureTextEntry = true
@@ -108,128 +104,6 @@ extension AuthenticationPerformerViewController {
             set {
                 textField.delegate = newValue
             }
-        }
-        
-        //MARK: UIResponder overrides
-        
-        override var canBecomeFirstResponder: Bool {
-            return textField.canBecomeFirstResponder
-        }
-        
-        override var canResignFirstResponder: Bool  {
-            return textField.canResignFirstResponder
-        }
-        
-        override var isFirstResponder: Bool {
-            return textField.isFirstResponder
-        }
-        
-        @discardableResult
-        override func resignFirstResponder() -> Bool {
-            return textField.resignFirstResponder()
-        }
-        
-        @discardableResult
-        override func becomeFirstResponder() -> Bool {
-            return textField.becomeFirstResponder()
-        }
-        
-        //MARK: UIControl overrides
-        
-        override var isEnabled: Bool {
-            set {
-                textField.isEnabled = newValue
-            }
-            get {
-                return textField.isEnabled
-            }
-        }
-        
-        override var isSelected: Bool {
-            set {
-                textField.isSelected = newValue
-            }
-            get {
-                return textField.isSelected
-            }
-        }
-        
-        override var isHighlighted: Bool  {
-            set {
-                textField.isHighlighted = newValue
-            }
-            get {
-                return textField.isHighlighted
-            }
-        }
-        
-        override var contentVerticalAlignment: UIControl.ContentVerticalAlignment  {
-            set {
-                textField.contentVerticalAlignment = newValue
-            }
-            get {
-                return textField.contentVerticalAlignment
-            }
-        }
-        
-        override var contentHorizontalAlignment: UIControl.ContentHorizontalAlignment  {
-            set {
-                textField.contentHorizontalAlignment = newValue
-            }
-            get {
-                return textField.contentHorizontalAlignment
-            }
-        }
-        
-        override var effectiveContentHorizontalAlignment: UIControl.ContentHorizontalAlignment  {
-            return textField.effectiveContentHorizontalAlignment
-        }
-        
-        override var state: UIControl.State { return textField.state }
-        
-        override var isTracking: Bool { return textField.isTracking }
-        
-        override var isTouchInside: Bool { return textField.isTouchInside }
-        
-        
-        override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool  {
-            return textField.beginTracking(touch, with: event)
-        }
-        
-        override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
-            return textField.continueTracking(touch, with: event)
-        }
-        
-        override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
-            return textField.endTracking(touch, with: event)
-        }
-        
-        override func cancelTracking(with event: UIEvent?) {
-            return textField.cancelTracking(with: event)
-        }
-        
-        override func addTarget(_ target: Any?, action: Selector, for controlEvents: UIControl.Event) {
-            return textField.addTarget(target, action: action, for: controlEvents)
-        }
-        
-        override func removeTarget(_ target: Any?, action: Selector?, for controlEvents: UIControl.Event) {
-            return textField.removeTarget(target, action: action, for: controlEvents)
-        }
-        
-        override var allTargets: Set<AnyHashable> { return textField.allTargets }
-        
-        override var allControlEvents: UIControl.Event { return textField.allControlEvents }
-        
-        override func actions(forTarget target: Any?, forControlEvent controlEvent: UIControl.Event) -> [String]? {
-            return textField.actions(forTarget: target, forControlEvent: controlEvent)
-        }
-        
-        override func sendAction(_ action: Selector, to target: Any?, for event: UIEvent?) {
-            return textField.sendAction(action, to: target, for: event)
-        }
-        
-        override func sendActions(for controlEvents: UIControl.Event) {
-            return textField.sendActions(for: controlEvents)
         }
     }
 }
