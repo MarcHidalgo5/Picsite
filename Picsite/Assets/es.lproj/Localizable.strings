@@ -19,7 +19,7 @@
 "textField-email-title" = "Email";
 
 //StartingViewController
-"start-button" = "Comenzar";
+"start-button" = "Empezar";
 "start-subtitle" = "Descubre lugares";
 "start-login-title" = "Ya tienes una cuenta?";
 "start-login-subtitle" = "Inicia sesión";
@@ -27,9 +27,11 @@
 //AuthenticationPerformerViewController
 "authentication-performer-login-button" = "Iniciar sesión";
 "authentication-performer-signup-button" = "Registrarse";
+"authentication-validation-error-invalid-name" = "Introduce un nombre valido";
 "authentication-validation-error-invalid-email" = "Introduce un email valido";
 "authentication-validation-error-invalid-password" = "La contraseña debe tener al menos 8 caracteres";
 "authentication-validation-error-invalid-username" = "El nombre de usuario ya está en uso";
+"authentication-validation-error-invalid-username-lenght" = "El nombre de usuario debe tener al menos 8 caracteres";
 "authentication-validation-error-invalid-t&c" = "Debes aceptar los terminos y condiciones antes de continuar";
 
 //LoginViewController

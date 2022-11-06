@@ -186,8 +186,11 @@ extension AuthenticationPerformerViewController {
        
        func validateFields() async throws {
            var errors = ValidationErrors()
-           if let username = usernameTextField.text, try await self.provider.isUsernameCurrentUsed(username: username) {
+           if let username = usernameTextField.text, !AuthenticationValidator.validatUsername(username) {
                errors.insert(.invalidUsername)
+           }
+           if let name = nameTextField.text, !AuthenticationValidator.validateName(name) {
+               errors.insert(.invalidName)
            }
            if let email = emailTextField.text, !AuthenticationValidator.validateEmail(email) {
                errors.insert(.invalidEmail)
@@ -205,6 +208,7 @@ extension AuthenticationPerformerViewController {
        
        func disableAllErrorFields() {
            var animations = [AuthenticationPerformerViewController.ValidationErrorAnimation]()
+           animations.append(.init(field: nameTextField, message: nil))
            animations.append(.init(field: usernameTextField, message: nil))
            animations.append(.init(field: emailTextField, message: nil))
            animations.append(.init(field: passwordTextField, message: nil))
@@ -223,6 +227,12 @@ extension AuthenticationPerformerViewController {
            var animations = [AuthenticationPerformerViewController.ValidationErrorAnimation]()
            animations.append(
                .init(
+                   field: nameTextField,
+                   message: errors.contains(.invalidName) ? "authentication-validation-error-invalid-name".localized : nil
+               )
+           )
+           animations.append(
+               .init(
                    field: emailTextField,
                    message: errors.contains(.invalidEmail) ? "authentication-validation-error-invalid-email".localized : nil
                )
@@ -237,7 +247,7 @@ extension AuthenticationPerformerViewController {
            animations.append(
                .init(
                    field: usernameTextField,
-                   message: errors.contains(.invalidUsername) ? "authentication-validation-error-invalid-username".localized : nil
+                   message: errors.contains(.invalidUsername) ? "authentication-validation-error-invalid-username-lenght".localized : nil
                )
            )
            animations.append(
