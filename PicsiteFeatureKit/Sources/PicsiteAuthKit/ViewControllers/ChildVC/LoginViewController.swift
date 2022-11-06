@@ -201,7 +201,7 @@ extension AuthenticationPerformerViewController {
             try await self.provider.loginUserByEmail(email: self.emailTextField.text!, password: self.passwordTextField.text!)
         }
         
-        func validateFields() async throws {
+        func validateFields() throws {
             var errors = ValidationErrors()
             if let email = emailTextField.text, !AuthenticationValidator.validateEmail(email) {
                 errors.insert(.invalidEmail)

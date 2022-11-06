@@ -184,7 +184,7 @@ extension AuthenticationPerformerViewController {
            try await self.provider.registerUser(username: self.usernameTextField.text!, fullName: self.nameTextField.text!, email: self.emailTextField.text!, password: self.passwordTextField.text!)
        }
        
-       func validateFields() async throws {
+       func validateFields() throws {
            var errors = ValidationErrors()
            if let username = usernameTextField.text, !AuthenticationValidator.validatUsername(username) {
                errors.insert(.invalidUsername)
