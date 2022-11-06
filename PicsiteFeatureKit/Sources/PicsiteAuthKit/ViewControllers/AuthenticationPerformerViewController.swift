@@ -8,13 +8,6 @@ import BSWInterfaceKit
 
 public class AuthenticationPerformerViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
     
-    public enum Factory {
-        static func viewController(dependecies: ModuleDependencies, observer: AuthenticationObserver) -> UIViewController {
-            let vc = AuthenticationPerformerViewController(dependecies: dependecies)
-            return vc
-        }
-    }
-    
     public enum Mode {
         case login
         case register
@@ -27,7 +20,7 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
             return UIScreen.main.isSmallScreen ? 18 : 20
         }()
         static let HugePadding: CGFloat = {
-            return UIScreen.main.isSmallScreen ? 25 : 30
+            return UIScreen.main.isSmallScreen ? 15 : 20
         }()
     }
 
@@ -98,7 +91,7 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
         return FontPalette.mediumTextStyler.attributedString(
             string,
             color: ColorPalette.picsiteErrorColor,
-            forSize: 14
+            forSize: 12
         )
     }
     
@@ -116,6 +109,8 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
                 self.dependencies.observer.didAuthenticate(kind: self.dependencies.mode == .login ? .login : .register)
             } catch let errors as ValidationErrors  {
                 contentVC.performValidationAnimations(contentVC.animationsFor(errors: errors))
+            } catch let error as AuthenticationPerformerError {
+                   self.showAlert(error.errorDescription)
             } catch let error {
                 self.showErrorAlert(error.localizedDescription, error: error)
             }
@@ -152,8 +147,9 @@ extension AuthenticationPerformerViewController {
         static let invalidEmail          = ValidationErrors(rawValue: 1 << 0)
         static let invalidPassword       = ValidationErrors(rawValue: 1 << 1)
         static let invalidUsername       = ValidationErrors(rawValue: 1 << 2)
-        static let didNotAcceptTC        = ValidationErrors(rawValue: 1 << 3)
-        static let didNotAcceptPrivacy   = ValidationErrors(rawValue: 1 << 4)
+        static let invalidName           = ValidationErrors(rawValue: 1 << 3)
+        static let didNotAcceptTC        = ValidationErrors(rawValue: 1 << 4)
+        static let didNotAcceptPrivacy   = ValidationErrors(rawValue: 1 << 5)
     }
 }
 

@@ -6,7 +6,7 @@ import UIKit
 
 protocol AuthenticationPerformerContentViewController: UIViewController {
     func performAuthentication() async throws
-    func validateFields() async throws
+    func validateFields() throws
     func animationsFor(errors: AuthenticationPerformerViewController.ValidationErrors) -> [AuthenticationPerformerViewController.ValidationErrorAnimation]
     func disableAllErrorFields()
 }

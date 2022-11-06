@@ -45,6 +45,9 @@ class AuthenticationProvider: AuthenticationProviderType {
     }
     
     func registerUser(username: String, fullName: String, email: String, password: String) async throws {
+        if try await self.apiClient.isUsernameCurrentlyUsed(username: username) {
+            throw AuthenticationPerformerError.usenameUnavaliable
+        }
         try await authAPIClient.registerUser(email: email, password: password)
         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
         changeRequest?.displayName = username
@@ -55,10 +58,6 @@ class AuthenticationProvider: AuthenticationProviderType {
     
     func recoverPasword(email: String) async throws {
         try await authAPIClient.recoverPassword(email: email)
-    }
-    
-    func isUsernameCurrentUsed(username: String) async throws -> Bool {
-        return try await self.apiClient.isUsernameCurrentlyUsed(username: username)
     }
 }
 

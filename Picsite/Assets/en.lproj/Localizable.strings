@@ -12,14 +12,14 @@
 "textField-name-placeholder" = "";
 "textField-name-title" = "Full name";
 "textField-username-placeholder" = "";
-"textField-username-title" = "Username on picsite";
+"textField-username-title" = "Username";
 "textField-password-placeholder" = "";
 "textField-password-title" = "Password";
 "textField-email-placeholder" = "";
 "textField-email-title" = "Email";
 
 //StartingViewController
-"start-button" = "Start";
+"start-button" = "Get started";
 "start-subtitle" = "Discover places";
 "start-login-title" = "Do you already have an account?";
 "start-login-subtitle" = "Log in";
@@ -27,9 +27,11 @@
 //AuthenticationPerformerViewController
 "authentication-performer-login-button" = "Log in";
 "authentication-performer-signup-button" = "Sign up";
+"authentication-validation-error-invalid-name" = "Introduce a valid name";
 "authentication-validation-error-invalid-email" = "Introduce a valid email address";
 "authentication-validation-error-invalid-password" = "Your password needs to have at least 8 characters";
 "authentication-validation-error-invalid-username" = "The username is already in use";
+"authentication-validation-error-invalid-username-lenght" = "Your username needs to have at least 6 characters";
 "authentication-validation-error-invalid-t&c" = "You must accept the terms and conditions before continuing";
 
 //LoginViewController
@@ -45,7 +47,7 @@
 "reset-password-loading" = "Sending...";
 "reset-password-success" = "Email sent successfully";
 "reset-password-title" = "Forgot your password?";
-"reset-password-subtitle" = "Enter the email with which you registered to receive instructions to reset";
+"reset-password-subtitle" = "Enter email to receive instructions";
 "reset-password-button-action" = "Recover password";
 
 //RegisterViewController

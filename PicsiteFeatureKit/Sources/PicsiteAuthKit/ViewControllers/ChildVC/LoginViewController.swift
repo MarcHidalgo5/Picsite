@@ -120,6 +120,7 @@ extension AuthenticationPerformerViewController {
             stackView.isLayoutMarginsRelativeArrangement = true
             stackView.spacing = Constants.Padding
             stackView.alignment = .fill
+            stackView.setCustomSpacing(Constants.SmallPadding, after: titleView)
             stackView.setCustomSpacing(Constants.HugePadding, after: subTitleView)
             view.addSubview(stackView)
             stackView.pinToSuperviewLayoutMargins()
@@ -200,7 +201,7 @@ extension AuthenticationPerformerViewController {
             try await self.provider.loginUserByEmail(email: self.emailTextField.text!, password: self.passwordTextField.text!)
         }
         
-        func validateFields() async throws {
+        func validateFields() throws {
             var errors = ValidationErrors()
             if let email = emailTextField.text, !AuthenticationValidator.validateEmail(email) {
                 errors.insert(.invalidEmail)

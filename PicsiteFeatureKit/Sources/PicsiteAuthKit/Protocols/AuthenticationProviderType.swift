@@ -44,9 +44,18 @@ public protocol AuthenticationProviderType {
     func loginUsingGoogle(from vc: UIViewController) async throws
     func registerUser(username: String, fullName: String, email: String, password: String) async throws
     func recoverPasword(email: String) async throws
+}
+
+
+public enum AuthenticationPerformerError: Swift.Error {
+    case usenameUnavaliable
     
-    func isUsernameCurrentUsed(username: String) async throws -> Bool
-    
+    public var errorDescription: String {
+        switch self {
+        case .usenameUnavaliable:
+            return "Username already exists"
+        }
+    }
 }
 
 public enum AuthenticationManagerError: Swift.Error, Equatable {
@@ -73,7 +82,13 @@ public enum AuthenticationValidator {
     }
 
     public static func validateName(_ string: String) -> Bool {
-        return string.count > 3
+        let emailRegEx = "[A-Za-z ]{2,64}"
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: string) && string.count > 3
+    }
+    
+    public static func validatUsername(_ string: String) -> Bool {
+        return string.count >= 6
     }
 }
 
