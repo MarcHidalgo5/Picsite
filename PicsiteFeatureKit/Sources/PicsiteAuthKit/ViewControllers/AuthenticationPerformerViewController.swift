@@ -8,13 +8,6 @@ import BSWInterfaceKit
 
 public class AuthenticationPerformerViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
     
-    public enum Factory {
-        public static func viewController(dependecies: ModuleDependencies) -> UIViewController {
-            let vc = AuthenticationPerformerViewController(dependecies: dependecies)
-            return vc
-        }
-    }
-    
     public enum Mode {
         case login
         case register
