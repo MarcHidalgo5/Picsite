@@ -14,14 +14,14 @@ class HomeViewController: UIViewController {
     
     override func loadView() {
         view = UIView()
-        view.backgroundColor = .red
-
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
-        }
+//
+//        let firebaseAuth = Auth.auth()
+//        do {
+//            try firebaseAuth.signOut()
+//            SceneDelegate.main?.updateContainedViewController()
+//        } catch let signOutError as NSError {
+//            print("Error signing out: %@", signOutError)
+//        }
     }
     
     override func viewDidLoad() {

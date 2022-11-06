@@ -56,7 +56,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         case .unlogged:
             return StartingViewController.Factory.viewController(observer: self)
         case .login:
-            return HomeViewController()
+            return TabBarController()
         }
     }
     

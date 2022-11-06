@@ -9,7 +9,7 @@ import BSWInterfaceKit
 public class AuthenticationPerformerViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
     
     public enum Factory {
-        static func viewController(dependecies: ModuleDependencies, observer: AuthenticationObserver) -> UIViewController {
+        public static func viewController(dependecies: ModuleDependencies) -> UIViewController {
             let vc = AuthenticationPerformerViewController(dependecies: dependecies)
             return vc
         }
