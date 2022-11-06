@@ -53,6 +53,7 @@ extension AuthenticationPerformerViewController {
             stackView.isLayoutMarginsRelativeArrangement = true
             stackView.spacing = Constants.Padding
             stackView.alignment = .fill
+            stackView.setCustomSpacing(Constants.SmallPadding, after: titleView)
             stackView.setCustomSpacing(Constants.HugePadding, after: subTitleView)
             view.addAutolayoutSubview(stackView)
             

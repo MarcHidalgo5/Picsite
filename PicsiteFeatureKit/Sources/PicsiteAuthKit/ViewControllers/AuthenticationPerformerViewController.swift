@@ -27,7 +27,7 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
             return UIScreen.main.isSmallScreen ? 18 : 20
         }()
         static let HugePadding: CGFloat = {
-            return UIScreen.main.isSmallScreen ? 25 : 30
+            return UIScreen.main.isSmallScreen ? 15 : 20
         }()
     }
 

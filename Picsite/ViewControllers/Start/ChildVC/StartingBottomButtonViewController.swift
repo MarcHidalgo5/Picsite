@@ -68,8 +68,8 @@ extension StartingViewController {
             ])
             loginButton.addTarget(self, action: #selector(_onLogin), for: .touchUpInside)
             let firstPartOfMessage =
-            regularTextStyler.attributedString("start-login-title".localized, color: .white, forSize: 17)
-            let secondPartOfMessage = boldTextStyler.attributedString("start-login-subtitle".localized, color: .white, forSize: 17)
+            regularTextStyler.attributedString("start-login-title".localized, color: .white, forSize: 16)
+            let secondPartOfMessage = boldTextStyler.attributedString("start-login-subtitle".localized, color: .white, forSize: 16)
             let finalMessage = [firstPartOfMessage, secondPartOfMessage]
                 .joinedStrings()
                 .settingParagraphStyle {

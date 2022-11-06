@@ -45,7 +45,7 @@
 "reset-password-loading" = "Sending...";
 "reset-password-success" = "Email sent successfully";
 "reset-password-title" = "Forgot your password?";
-"reset-password-subtitle" = "Enter the email with which you registered to receive instructions to reset";
+"reset-password-subtitle" = "Enter email to receive instructions";
 "reset-password-button-action" = "Recover password";
 
 //RegisterViewController

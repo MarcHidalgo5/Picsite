@@ -77,7 +77,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .picsiteTintColor
         UITabBar.appearance().tintColor = .picsiteDeepBlueColor
         UITabBarItem.appearance().setTitleTextAttributes(
-            [NSAttributedString.Key.font: mediumTextStyler.fontForSize(12)],
+            [NSAttributedString.Key.font: mediumTextStyler.fontForSize(11)],
           for: .normal)
         UITextField.appearance().tintColor = .picsiteTintColor
         UITextField.appearance().font = regularTextStyler.fontForSize(18)
