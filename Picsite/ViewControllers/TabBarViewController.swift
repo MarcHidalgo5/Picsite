@@ -4,14 +4,14 @@
 
 import UIKit
 import PicsiteKit; import PicsiteUI
-import PicsiteAuthKit
+import PicsiteMapKit
 
 class TabBarController: UITabBarController {
 
     init() {
         super.init(nibName: nil, bundle: nil)
         let map: (UIViewController, UITabBarItem) = (
-            HomeViewController(),
+            MapViewController(),
             UITabBarItem(title: "Map", image: UIImage(systemName: "mappin.and.ellipse"), selectedImage: UIImage(systemName: "mappin.and.ellipse"))
         )
 

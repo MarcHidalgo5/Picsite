@@ -28,6 +28,7 @@
 		1A8525542913D2C5006C7DAA /* LoginViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8525532913D2C5006C7DAA /* LoginViewControllerTests.swift */; };
 		1A8525572913D542006C7DAA /* MockProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8525562913D542006C7DAA /* MockProviders.swift */; };
 		1A943A5627540A92008D7150 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A943A5527540A92008D7150 /* UIColor.swift */; };
+		1AA2DDE9291922FF00732EF3 /* PicsiteMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1AA2DDE8291922FF00732EF3 /* PicsiteMapKit */; };
 		1AADE10C27E5F5BB0014A884 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AADE10B27E5F5BB0014A884 /* ErrorView.swift */; };
 		1AC8543728218A9E00948232 /* PicsiteAuthenticationKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC8543628218A9E00948232 /* PicsiteAuthenticationKit.swift */; };
 		1AC8543A28218E1900948232 /* SocialNetworkManeger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC8543928218E1900948232 /* SocialNetworkManeger.swift */; };
@@ -136,6 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AA2DDE9291922FF00732EF3 /* PicsiteMapKit in Frameworks */,
 				1ADAF80127517FF100D8D480 /* BSWInterfaceKit in Frameworks */,
 				1A7AC43F27B65C2C006B7DF6 /* BSWFoundation in Frameworks */,
 				1ADAF7FE27517F7100D8D480 /* FirebaseStorageSwift-Beta in Frameworks */,
@@ -408,6 +410,7 @@
 				1A0EFFA927CA4479004B544C /* PicsiteUI */,
 				1A225D4127DFF2A800BED065 /* GoogleSignIn */,
 				1AE7B3FB290DC2A30021AFE1 /* PicsiteAuthKit */,
+				1AA2DDE8291922FF00732EF3 /* PicsiteMapKit */,
 			);
 			productName = Picsite;
 			productReference = 1ADAF7BF27517C8800D8D480 /* Picsite.app */;
@@ -1017,6 +1020,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1A7AC43D27B65C2C006B7DF6 /* XCRemoteSwiftPackageReference "BSWFoundation" */;
 			productName = BSWFoundation;
+		};
+		1AA2DDE8291922FF00732EF3 /* PicsiteMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PicsiteMapKit;
 		};
 		1ADAF7F527517F7100D8D480 /* FirebaseAnalyticsSwift-Beta */ = {
 			isa = XCSwiftPackageProductDependency;
