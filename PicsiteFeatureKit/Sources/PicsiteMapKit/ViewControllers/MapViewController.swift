@@ -9,8 +9,18 @@ import CoreLocation
 
 public class MapViewController: UIViewController {
     
+    public struct VM {
+        let annotations: [PicsiteAnnotation]
+        
+        public init(annotations: [PicsiteAnnotation]) {
+            self.annotations = annotations
+        }
+    }
+    
     private var locationManager: CLLocationManager!
     private var currentLocation: CLLocation?
+    
+    let dataSource = ModuleDependencies.mapDataSource!
     
     let mapView : MKMapView = {
         let map = MKMapView()
@@ -44,7 +54,24 @@ public class MapViewController: UIViewController {
         super.viewDidLoad()
         mapView.delegate = self
         createLocationManeger()
-        createTestAnnotation()
+        fetchData()
+    }
+    
+    private func fetchData(animated: Bool = true) {
+        fetchData(taskGenerator: { [unowned self] in
+            try await dataSource.fetchAnnotations()
+        },
+        animated: animated,
+        errorMessage: "fetch-error-message".localized,
+        completion: { [weak self] vm in
+            self?.configureFor(viewModel: vm)
+        })
+    }
+    
+    private func configureFor(viewModel: VM) {
+        viewModel.annotations.forEach { annotation in
+            mapView.addAnnotation(annotation)
+        }
     }
     
     private func createLocationManeger() {
@@ -60,35 +87,6 @@ public class MapViewController: UIViewController {
         default:
             break
         }
-    }
-}
-
-extension MapViewController {
-    
-    func createTestAnnotation() {
-        let startPin = MKPointAnnotation()
-        startPin.title = "start"
-        startPin.coordinate = CLLocationCoordinate2D(
-            latitude: 41.61803,
-            longitude: 0.62772
-        )
-        mapView.addAnnotation(startPin)
-        
-        let secondPin = MKPointAnnotation()
-        secondPin.title = "second"
-        secondPin.coordinate = CLLocationCoordinate2D(
-            latitude: 41.62803,
-            longitude: 0.63772
-        )
-        mapView.addAnnotation(secondPin)
-        
-        let lastPin = MKPointAnnotation()
-        lastPin.title = "last"
-        lastPin.coordinate = CLLocationCoordinate2D(
-            latitude: 41.60803,
-            longitude: 0.61772
-        )
-        mapView.addAnnotation(lastPin)
     }
 }
 

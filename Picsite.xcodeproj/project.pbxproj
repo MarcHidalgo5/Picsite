@@ -29,6 +29,7 @@
 		1A8525572913D542006C7DAA /* MockProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A8525562913D542006C7DAA /* MockProviders.swift */; };
 		1A943A5627540A92008D7150 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A943A5527540A92008D7150 /* UIColor.swift */; };
 		1AA2DDE9291922FF00732EF3 /* PicsiteMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1AA2DDE8291922FF00732EF3 /* PicsiteMapKit */; };
+		1AA2DDED291A880100732EF3 /* MapDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA2DDEC291A880100732EF3 /* MapDataSource.swift */; };
 		1AADE10C27E5F5BB0014A884 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AADE10B27E5F5BB0014A884 /* ErrorView.swift */; };
 		1AC8543728218A9E00948232 /* PicsiteAuthenticationKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC8543628218A9E00948232 /* PicsiteAuthenticationKit.swift */; };
 		1AC8543A28218E1900948232 /* SocialNetworkManeger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC8543928218E1900948232 /* SocialNetworkManeger.swift */; };
@@ -110,6 +111,7 @@
 		1A8C9A732801734800EF4B06 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1A9296F927C40AC200037BA4 /* PicsiteKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteKit; sourceTree = "<group>"; };
 		1A943A5527540A92008D7150 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		1AA2DDEC291A880100732EF3 /* MapDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDataSource.swift; sourceTree = "<group>"; };
 		1AADE10B27E5F5BB0014A884 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		1AC8543628218A9E00948232 /* PicsiteAuthenticationKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicsiteAuthenticationKit.swift; sourceTree = "<group>"; };
 		1AC8543928218E1900948232 /* SocialNetworkManeger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialNetworkManeger.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				1A141CEF27CD5A5A00AA8190 /* AuthenticationProvider.swift */,
+				1AA2DDEC291A880100732EF3 /* MapDataSource.swift */,
 			);
 			path = Providers;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				1A7AC43B27B64FF6006B7DF6 /* World.swift in Sources */,
 				1A66E4A827C94C7700177DEF /* HomeViewController.swift in Sources */,
 				1AC8543A28218E1900948232 /* SocialNetworkManeger.swift in Sources */,
+				1AA2DDED291A880100732EF3 /* MapDataSource.swift in Sources */,
 				1A0EFFB627CA7B8C004B544C /* UIFont+Extensions.swift in Sources */,
 				1AC8543728218A9E00948232 /* PicsiteAuthenticationKit.swift in Sources */,
 				1AADE10C27E5F5BB0014A884 /* ErrorView.swift in Sources */,
