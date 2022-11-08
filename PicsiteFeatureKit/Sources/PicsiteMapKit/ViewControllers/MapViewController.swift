@@ -5,6 +5,7 @@
 import UIKit
 import MapKit
 import PicsiteUI
+import CoreLocation
 
 public class MapViewController: UIViewController {
     
@@ -42,18 +43,23 @@ public class MapViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        
+        createLocationManeger()
+        createTestAnnotation()
+    }
+    
+    private func createLocationManeger() {
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        
-        // Check for Location Services
-        if CLLocationManager.locationServicesEnabled() {
+        switch locationManager.authorizationStatus {
+        case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
+        case .authorizedWhenInUse, .authorizedAlways:
+            locationManager.startUpdatingLocation()
+        default:
+            break
         }
-        
-        createTestAnnotation()
     }
 }
 
@@ -92,6 +98,7 @@ extension MapViewController: CLLocationManagerDelegate {
         if currentLocation == nil {
             // Zoom to user location
             if let userLocation = locations.last {
+                currentLocation = userLocation
                 let viewRegion = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 3000, longitudinalMeters: 3000)
                 let mapCamera = MKMapCamera()
                     mapCamera.centerCoordinate = userLocation.coordinate
@@ -102,6 +109,8 @@ extension MapViewController: CLLocationManagerDelegate {
             }
         }
     }
+    
+    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) { }
 }
 
 extension MapViewController: MKMapViewDelegate {
