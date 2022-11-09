@@ -11,6 +11,8 @@ class MapDataSource: MapDataSourceType {
         let startAnnotation = PicsiteAnnotation(
             title: "start",
             subtitle: nil,
+            annotationType: .landscape,
+            activity: .frequentlyUsed,
             coordinate: CLLocationCoordinate2D(
                 latitude: 41.61803,
                 longitude: 0.62772
@@ -20,6 +22,8 @@ class MapDataSource: MapDataSourceType {
         let secondAnnotation = PicsiteAnnotation(
             title: "second",
             subtitle: nil,
+            annotationType: .landscape,
+            activity: .normallyUsed,
             coordinate: CLLocationCoordinate2D(
                 latitude: 41.62803,
                 longitude: 0.63772
@@ -29,6 +33,8 @@ class MapDataSource: MapDataSourceType {
         let lastAnnotation = PicsiteAnnotation(
             title: "last",
             subtitle: nil,
+            annotationType: .landscape,
+            activity: .underutilized,
             coordinate: CLLocationCoordinate2D(
                 latitude: 41.60803,
                 longitude: 0.61772

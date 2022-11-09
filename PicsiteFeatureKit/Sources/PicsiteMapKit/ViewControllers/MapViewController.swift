@@ -53,6 +53,10 @@ public class MapViewController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        mapView.register(
+          PicsiteAnnotationMarkerView.self,
+          forAnnotationViewWithReuseIdentifier:
+            MKMapViewDefaultAnnotationViewReuseIdentifier)
         createLocationManeger()
         fetchData()
     }
@@ -69,9 +73,7 @@ public class MapViewController: UIViewController {
     }
     
     private func configureFor(viewModel: VM) {
-        viewModel.annotations.forEach { annotation in
-            mapView.addAnnotation(annotation)
-        }
+        mapView.addAnnotations(viewModel.annotations)
     }
     
     private func createLocationManeger() {
@@ -97,43 +99,33 @@ extension MapViewController: CLLocationManagerDelegate {
             // Zoom to user location
             if let userLocation = locations.last {
                 currentLocation = userLocation
-                let viewRegion = MKCoordinateRegion(center: userLocation.coordinate, latitudinalMeters: 3000, longitudinalMeters: 3000)
-                let mapCamera = MKMapCamera()
-                    mapCamera.centerCoordinate = userLocation.coordinate
-                    mapCamera.pitch = 25
-                    mapCamera.altitude = 3000
-                mapView.setRegion(viewRegion, animated: false)
-                mapView.setCamera(mapCamera, animated: true)
+                mapView.centerToLocation(userLocation)
+                mapView.centerCameraToLocation(userLocation)
             }
         }
     }
+}
+
+private extension MKMapView {
+    func centerToLocation(_ location: CLLocation, regionRadius: CLLocationDistance = 3000) {
+        let coordinateRegion = MKCoordinateRegion(
+            center: location.coordinate,
+            latitudinalMeters: regionRadius,
+            longitudinalMeters: regionRadius)
+        setRegion(coordinateRegion, animated: false)
+    }
     
-    public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) { }
+    func centerCameraToLocation(_ location: CLLocation, altitude: CLLocationDistance = 3000) {
+        let mapCamera = MKMapCamera()
+        mapCamera.centerCoordinate = location.coordinate
+            mapCamera.pitch = 25
+            mapCamera.altitude = altitude
+        setCamera(mapCamera, animated: true)
+    }
 }
 
 extension MapViewController: MKMapViewDelegate {
-    
-    static let annotationIdentifier = "PicsiteCustomAnnotation"
-    
-    public func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        
-        let annotationView = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: MapViewController.annotationIdentifier)
-        switch annotation.title {
-        case "start":
-            annotationView.markerTintColor = UIColor.green
-            annotationView.glyphImage = UIImage(systemName: "binoculars.fill")
-        case "second":
-            annotationView.markerTintColor = UIColor.yellow
-            annotationView.glyphImage = UIImage(systemName: "binoculars.fill")
-        case "last":
-            annotationView.markerTintColor = UIColor.red
-            annotationView.glyphImage = UIImage(systemName: "binoculars.fill")
-        default:
-            annotationView.markerTintColor = UIColor.blue
-        }
-        
-        return annotationView
-    }
+
 }
 
 extension MapViewController: TransparentNavigationBarPreferenceProvider {
