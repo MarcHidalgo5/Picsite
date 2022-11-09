@@ -126,15 +126,19 @@ private extension MKMapView {
 
 extension MapViewController: MKMapViewDelegate {
     public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        let view = AnnotationCalloutView()
-        view.configureView(fromVC: self)
+        let annotationCalloutView = AnnotationCalloutView()
+        annotationCalloutView.addPicsiteShadow()
+        annotationCalloutView.configureView(fromVC: self) {
+            guard let currentAnnotation = view as? AnnotationMarkerView else { return }
+            mapView.deselectAnnotation(currentAnnotation.annotation, animated: true)
+        }
         guard let window = self.view.window else {
             print("Failed to show CRNotification. No keywindow available.")
             return
         }
         
-        window.addSubview(view)
-        view.showPicsiteView()
+        window.addSubview(annotationCalloutView)
+        annotationCalloutView.showPicsiteView()
         
     }
 }

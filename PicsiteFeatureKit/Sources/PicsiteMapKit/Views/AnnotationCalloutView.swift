@@ -16,6 +16,8 @@ class AnnotationCalloutView: UIView {
         return label
     }()
     
+    private var completion: () -> () = {}
+    
     init() {
         super.init(frame: .zero)
         setupLayer()
@@ -25,13 +27,13 @@ class AnnotationCalloutView: UIView {
     
     required internal init?(coder aDecoder:NSCoder) { fatalError("Not implemented.") }
     
-    func configureView(fromVC: UIViewController) {
+    func configureView(fromVC: UIViewController, completion: @escaping () -> ()) {
         setBackgroundColor(color: .blue)
         setImage(image: nil)
         setTitle(title: FontPalette.mediumTextStyler.attributedString("hjkuhlijokpl", forSize: 22))
         setMessage(message: nil)
 //        setDismisTimer(delay: 0)
-//        view.setCompletionBlock(completion)
+        setCompletionBlock(completion)
         prepareFrame(fromVC: fromVC)
 //        showPicsiteView()
     }
@@ -104,6 +106,10 @@ class AnnotationCalloutView: UIView {
 //        imageView.isHidden = (image == nil)
     }
     
+    func setCompletionBlock(_ completion: @escaping () -> ()) {
+        self.completion = completion
+    }
+    
     func showPicsiteView() {
         UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.68, initialSpringVelocity: 0.1, options: UIView.AnimationOptions(), animations: {
             let newValue : CGFloat = {
@@ -129,7 +135,7 @@ class AnnotationCalloutView: UIView {
             UIView.animate(withDuration: 0.25, animations: {
                 self.frame.origin.y -= -self.frame.height - 180
             }, completion: { [weak self] (complete) in
-//                self?.completion()
+                self?.completion()
                 self?.removeFromSuperview()
             })
         })
