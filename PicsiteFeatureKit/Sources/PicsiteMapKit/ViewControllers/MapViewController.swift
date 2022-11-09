@@ -4,15 +4,16 @@
 
 import UIKit
 import MapKit
-import PicsiteUI
+import PicsiteUI; import PicsiteKit
 import CoreLocation
+
 
 public class MapViewController: UIViewController {
     
     public struct VM {
-        let annotations: [PicsiteAnnotation]
+        let annotations: [Annotation]
         
-        public init(annotations: [PicsiteAnnotation]) {
+        public init(annotations: [Annotation]) {
             self.annotations = annotations
         }
     }
@@ -54,9 +55,9 @@ public class MapViewController: UIViewController {
         super.viewDidLoad()
         mapView.delegate = self
         mapView.register(
-          PicsiteAnnotationMarkerView.self,
-          forAnnotationViewWithReuseIdentifier:
-            MKMapViewDefaultAnnotationViewReuseIdentifier)
+            AnnotationMarkerView.self,
+            forAnnotationViewWithReuseIdentifier:
+                MKMapViewDefaultAnnotationViewReuseIdentifier)
         createLocationManeger()
         fetchData()
     }

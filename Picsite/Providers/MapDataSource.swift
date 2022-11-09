@@ -5,10 +5,11 @@
 import Foundation
 import PicsiteMapKit
 import CoreLocation
+import PicsiteKit
 
 class MapDataSource: MapDataSourceType {
     func fetchAnnotations() async throws -> MapViewController.VM {
-        let startAnnotation = PicsiteAnnotation(
+        let startAnnotation = Annotation(
             title: "start",
             subtitle: nil,
             annotationType: .landscape,
@@ -19,7 +20,7 @@ class MapDataSource: MapDataSourceType {
             )
         )
         
-        let secondAnnotation = PicsiteAnnotation(
+        let secondAnnotation = Annotation(
             title: "second",
             subtitle: nil,
             annotationType: .landscape,
@@ -30,7 +31,7 @@ class MapDataSource: MapDataSourceType {
             )
         )
         
-        let lastAnnotation = PicsiteAnnotation(
+        let lastAnnotation = Annotation(
             title: "last",
             subtitle: nil,
             annotationType: .landscape,

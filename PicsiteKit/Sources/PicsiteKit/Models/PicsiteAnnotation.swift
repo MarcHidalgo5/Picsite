@@ -4,7 +4,7 @@
 
 import MapKit
 
-public class PicsiteAnnotation: NSObject, MKAnnotation {
+public class Annotation: NSObject, MKAnnotation {
     public let title: String?
     public var subtitle: String?
     public let annotationType: AnnotationType
@@ -30,7 +30,7 @@ public class PicsiteAnnotation: NSObject, MKAnnotation {
     }
 }
 
-extension PicsiteAnnotation {
+public extension Annotation {
     var markerTintColor: UIColor {
         switch activity {
         case .frequentlyUsed:
