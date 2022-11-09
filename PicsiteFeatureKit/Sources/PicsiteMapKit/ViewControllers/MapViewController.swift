@@ -25,9 +25,7 @@ public class MapViewController: UIViewController {
     
     let mapView : MKMapView = {
         let map = MKMapView()
-//        map.overrideUserInterfaceStyle = .dark
         map.pointOfInterestFilter = .excludingAll
-//        map.showsUserLocation = true
         return map
     }()
     
