@@ -13,6 +13,7 @@ class AnnotationMarkerView: MKMarkerAnnotationView {
             }
             markerTintColor = picsiteAnnotation.markerTintColor
             glyphImage = picsiteAnnotation.icon
+            animatesWhenAdded = true
         }
     }
 }

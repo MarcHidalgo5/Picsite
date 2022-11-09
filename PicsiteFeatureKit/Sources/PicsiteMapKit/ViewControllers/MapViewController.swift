@@ -7,7 +7,6 @@ import MapKit
 import PicsiteUI; import PicsiteKit
 import CoreLocation
 
-
 public class MapViewController: UIViewController {
     
     public struct VM {
@@ -20,10 +19,8 @@ public class MapViewController: UIViewController {
     
     private var locationManager: CLLocationManager!
     private var currentLocation: CLLocation?
-    
-    let dataSource = ModuleDependencies.mapDataSource!
-    
-    let mapView : MKMapView = {
+    private let dataSource = ModuleDependencies.mapDataSource!
+    private let mapView : MKMapView = {
         let map = MKMapView()
         map.pointOfInterestFilter = .excludingAll
         return map
@@ -59,6 +56,8 @@ public class MapViewController: UIViewController {
         createLocationManeger()
         fetchData()
     }
+    
+    //MARK: Private
     
     private func fetchData(animated: Bool = true) {
         fetchData(taskGenerator: { [unowned self] in
@@ -123,9 +122,24 @@ private extension MKMapView {
     }
 }
 
-extension MapViewController: MKMapViewDelegate {
+//MARK: MKMapViewDelegate
 
+extension MapViewController: MKMapViewDelegate {
+    public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let view = AnnotationCalloutView()
+        view.configureView(fromVC: self)
+        guard let window = self.view.window else {
+            print("Failed to show CRNotification. No keywindow available.")
+            return
+        }
+        
+        window.addSubview(view)
+        view.showPicsiteView()
+        
+    }
 }
+
+//MARK: TransparentNavigationBarPreferenceProvider
 
 extension MapViewController: TransparentNavigationBarPreferenceProvider {
     public var barStyle: TransparentNavigationBar.TintColorStyle { .transparent }
