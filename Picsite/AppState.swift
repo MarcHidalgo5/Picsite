@@ -5,7 +5,9 @@
 /// What state the app is in
 enum AppState: Equatable {
     /// In this state, there is no user, so the user should login
-    case unlogged
+    case start
     /// In this state, there is a user
-    case login
+    case normal
+    /// In this state, async configurations are performing
+    case loading
 }

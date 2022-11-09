@@ -12,6 +12,14 @@ import GoogleSignIn
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
+    static var shared: AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    
+    func loadWorld() async {
+        wireUpTheKits()
+    }
+    
     // MARK: UIApplicationDelegate
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -44,3 +52,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+import PicsiteMapKit
+
+@MainActor
+private func wireUpTheKits() {
+    //Map
+    PicsiteMapKit.ModuleDependencies.mapDataSource = Current.mapDataSourceFactory()
+}
