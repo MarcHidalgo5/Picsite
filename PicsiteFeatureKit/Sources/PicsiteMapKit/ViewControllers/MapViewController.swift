@@ -19,7 +19,10 @@ public class MapViewController: UIViewController {
     
     private var locationManager: CLLocationManager!
     private var currentLocation: CLLocation?
+    
     private let dataSource = ModuleDependencies.mapDataSource!
+    private var annotationCalloutView: AnnotationCalloutView?
+    
     private let mapView : MKMapView = {
         let map = MKMapView()
         map.pointOfInterestFilter = .excludingAll
@@ -126,20 +129,28 @@ private extension MKMapView {
 
 extension MapViewController: MKMapViewDelegate {
     public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        let annotationCalloutView = AnnotationCalloutView()
-        annotationCalloutView.addPicsiteShadow()
-        annotationCalloutView.configureView(fromVC: self) {
-            guard let currentAnnotation = view as? AnnotationMarkerView else { return }
-            mapView.deselectAnnotation(currentAnnotation.annotation, animated: true)
+        guard let currentAnnotation = view as? AnnotationMarkerView, let picsiteAnnotation = currentAnnotation.annotation as? Annotation  else { return }
+        if annotationCalloutView != nil {
+            annotationCalloutView?.dismissPicsiteView(animated: true)
+            annotationCalloutView?.removeFromSuperview()
+        }
+        createPicsiteAnnotationView(picsiteAnnotation: picsiteAnnotation)
+    }
+    
+    func createPicsiteAnnotationView(picsiteAnnotation: Annotation) {
+        let annotationCallout = AnnotationCalloutView()
+        annotationCallout.addPicsiteShadow()
+        annotationCallout.configureView(title: picsiteAnnotation.title ?? "", fromVC: self) {
+            self.mapView.deselectAnnotation(picsiteAnnotation, animated: true)
+            self.annotationCalloutView = nil
         }
         guard let window = self.view.window else {
-            print("Failed to show CRNotification. No keywindow available.")
+            print("Failed to show annotationCalloutView. No keywindow available.")
             return
         }
-        
-        window.addSubview(annotationCalloutView)
-        annotationCalloutView.showPicsiteView()
-        
+        window.addSubview(annotationCallout)
+        annotationCallout.showPicsiteView()
+        annotationCalloutView = annotationCallout
     }
 }
 

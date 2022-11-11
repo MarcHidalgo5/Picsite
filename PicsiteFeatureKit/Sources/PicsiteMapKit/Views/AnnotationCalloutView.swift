@@ -27,10 +27,10 @@ class AnnotationCalloutView: UIView {
     
     required internal init?(coder aDecoder:NSCoder) { fatalError("Not implemented.") }
     
-    func configureView(fromVC: UIViewController, completion: @escaping () -> ()) {
+    func configureView(title: String, fromVC: UIViewController, completion: @escaping () -> ()) {
         setBackgroundColor(color: .blue)
         setImage(image: nil)
-        setTitle(title: FontPalette.mediumTextStyler.attributedString("hjkuhlijokpl", forSize: 22))
+        setTitle(title: FontPalette.mediumTextStyler.attributedString(title, forSize: 22))
         setMessage(message: nil)
 //        setDismisTimer(delay: 0)
         setCompletionBlock(completion)
@@ -82,7 +82,7 @@ class AnnotationCalloutView: UIView {
     }
     
     private func setupTargets() {
-        let swipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(_dismissNotification))
+        let swipeRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(_dismissPicsiteView))
         swipeRecognizer.direction = .down
         addGestureRecognizer(swipeRecognizer)
     }
@@ -119,11 +119,11 @@ class AnnotationCalloutView: UIView {
         })
     }
     
-    @objc private func _dismissNotification() {
-        dismissNotification(animated: true)
+    @objc private func _dismissPicsiteView() {
+        dismissPicsiteView(animated: true)
     }
     
-    func dismissNotification(animated: Bool) {
+    func dismissPicsiteView(animated: Bool) {
         guard animated else {
             removeFromSuperview()
             return
