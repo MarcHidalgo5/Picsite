@@ -11,7 +11,7 @@ public class PicsiteAPIClient {
     
     let environment: PicsiteAPI.Environment
     
-    open var userID: String?
+//    open var userID: String?
     
     public init(environment: PicsiteAPI.Environment) {
         self.environment = environment

@@ -27,7 +27,7 @@ struct World {
         self.apiClient = PicsiteAPIClient(environment: environment)
         self.authProvider = AuthenticationProvider(apiClient: apiClient, environment: environment)
         self.mapDataSourceFactory = {
-            MapDataSource()
+            MapDataSource(apiClient: Current.apiClient)
         }
     }
 }

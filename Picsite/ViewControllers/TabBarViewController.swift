@@ -36,7 +36,7 @@ class TabBarController: UITabBarController {
         )
 
         let viewControllers: [UIViewController] = [
-            navigationController(with: map),
+            viewController(with: map),
             navigationController(with: feed),
             navigationController(with: uploadContent),
             navigationController(with: profile),
@@ -77,6 +77,12 @@ class TabBarController: UITabBarController {
         let navVC = MinimalNavigationController(rootViewController: tuple.0)
         navVC.tabBarItem = tuple.1
         return navVC
+    }
+    
+    private func viewController(with tuple:(UIViewController, UITabBarItem)) -> UIViewController {
+        let vc = tuple.0
+        vc.tabBarItem = tuple.1
+        return vc
     }
 }
 

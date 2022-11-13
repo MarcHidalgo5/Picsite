@@ -10,9 +10,9 @@ import CoreLocation
 public class MapViewController: UIViewController {
     
     public struct VM {
-        let annotations: [Annotation]
+        let annotations: [PicsiteAnnotation]
         
-        public init(annotations: [Annotation]) {
+        public init(annotations: [PicsiteAnnotation]) {
             self.annotations = annotations
         }
     }
@@ -56,6 +56,8 @@ public class MapViewController: UIViewController {
             AnnotationMarkerView.self,
             forAnnotationViewWithReuseIdentifier:
                 MKMapViewDefaultAnnotationViewReuseIdentifier)
+        let singleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOnMap))
+        mapView.addGestureRecognizer(singleTapRecognizer)
         createLocationManeger()
         fetchData()
     }
@@ -71,6 +73,12 @@ public class MapViewController: UIViewController {
         completion: { [weak self] vm in
             self?.configureFor(viewModel: vm)
         })
+    }
+    
+    @objc private func didTapOnMap() {
+        if annotationCalloutView != nil {
+            annotationCalloutView?.dismissPicsiteView(animated: true)
+        }
     }
     
     private func configureFor(viewModel: VM) {
@@ -129,33 +137,27 @@ private extension MKMapView {
 
 extension MapViewController: MKMapViewDelegate {
     public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        guard let currentAnnotation = view as? AnnotationMarkerView, let picsiteAnnotation = currentAnnotation.annotation as? Annotation  else { return }
-        if annotationCalloutView != nil {
-            annotationCalloutView?.dismissPicsiteView(animated: true)
-            annotationCalloutView?.removeFromSuperview()
-        }
+        guard let currentAnnotation = view as? AnnotationMarkerView, let picsiteAnnotation = currentAnnotation.annotation as? PicsiteAnnotation  else { return }
         createPicsiteAnnotationView(picsiteAnnotation: picsiteAnnotation)
     }
     
-    func createPicsiteAnnotationView(picsiteAnnotation: Annotation) {
-        let annotationCallout = AnnotationCalloutView()
-        annotationCallout.addPicsiteShadow()
-        annotationCallout.configureView(title: picsiteAnnotation.title ?? "", fromVC: self) {
-            self.mapView.deselectAnnotation(picsiteAnnotation, animated: true)
-            self.annotationCalloutView = nil
+    func createPicsiteAnnotationView(picsiteAnnotation: PicsiteAnnotation) {
+        Task { @MainActor in
+            let vm = try await self.dataSource.fetchDetailAFor(annotation: picsiteAnnotation)
+            let annotationCallout = AnnotationCalloutView()
+            annotationCallout.addPicsiteShadow()
+            annotationCallout.configureView(with: vm, fromVC: self) {
+                self.mapView.deselectAnnotation(picsiteAnnotation, animated: true)
+                self.annotationCalloutView = nil
+            }
+            guard let window = self.view.window else {
+                print("Failed to show annotationCalloutView. No keywindow available.")
+                return
+            }
+            window.addSubview(annotationCallout)
+            annotationCallout.showPicsiteView()
+            annotationCalloutView = annotationCallout
         }
-        guard let window = self.view.window else {
-            print("Failed to show annotationCalloutView. No keywindow available.")
-            return
-        }
-        window.addSubview(annotationCallout)
-        annotationCallout.showPicsiteView()
-        annotationCalloutView = annotationCallout
+        
     }
-}
-
-//MARK: TransparentNavigationBarPreferenceProvider
-
-extension MapViewController: TransparentNavigationBarPreferenceProvider {
-    public var barStyle: TransparentNavigationBar.TintColorStyle { .transparent }
 }

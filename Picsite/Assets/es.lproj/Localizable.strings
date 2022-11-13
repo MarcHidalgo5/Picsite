@@ -57,3 +57,13 @@
 "register-title-social" = "O inicia sesión con estas opciones:";
 "register-t&c-message" = "Acepto los Términos y condiciones";
 "register-t&c-message-link" = "Términos y condiciones";
+
+//MapViewController
+"map-recently-used-subtitle" = "Menos de una semana";
+"map-last-week-used-subtitle" = "Hace una semana";
+"map-last-two-week-used-subtitle" = "Hace dos semanas";
+"map-last-three-week-used-subtitle" = "Hace tres semanas";
+"map-last-month-used-subtitle" = "Hace un mes";
+"map-more-than-one-month-used-subtitle" = "Más de un mes";
+"map-annotation-photos-titel" = "Fotos";
+"map-annotation-info-titel" = "Actualizado:";

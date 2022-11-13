@@ -3,17 +3,18 @@
 //
 
 import MapKit
-import PicsiteKit
 
 class AnnotationMarkerView: MKMarkerAnnotationView {
     override var annotation: MKAnnotation? {
         willSet {
-            guard let picsiteAnnotation = newValue as? Annotation else {
+            guard let picsiteAnnotation = newValue as? PicsiteAnnotation else {
                 return
             }
             markerTintColor = picsiteAnnotation.markerTintColor
             glyphImage = picsiteAnnotation.icon
+            glyphTintColor = .black
             animatesWhenAdded = true
+            canShowCallout = false
         }
     }
 }
