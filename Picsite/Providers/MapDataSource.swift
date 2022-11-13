@@ -7,6 +7,7 @@ import PicsiteMapKit
 import CoreLocation
 import PicsiteKit
 import UIKit
+import BSWInterfaceKit
 
 class MapDataSource: MapDataSourceType {
     
@@ -19,7 +20,7 @@ class MapDataSource: MapDataSourceType {
     func fetchAnnotations() async throws -> MapViewController.VM {
         let startActivity: PicsiteAnnotation.Activity = .recentlyUsed
         let startAnnotation = PicsiteAnnotation(
-            id: "test",
+            id: "b6yYgKDLqw1Yj1HB3vH1",
             title: "La seu vella",
             subtitle: activityLabelFor(lastActivity: startActivity),
             annotationType: .landscape,
@@ -69,7 +70,26 @@ class MapDataSource: MapDataSourceType {
     }
     
     func fetchDetailAFor(annotation: PicsiteAnnotation) async throws -> AnnotationCalloutView.VM {
-        return .init(annotation: annotation, image: UIImage(systemName: "binoculars.fill")!)
+//        if let profilePhotoID = annotation.profilePhotoID {
+//
+//        } else {
+//
+//        }
+//        let path = "picsites/\(annotation.id)/profile_photos/\(annotation.profilePhotoID)/profile_photo_thumbnail.jpeg"
+//        let reference = Storage.storage().reference(withPath: path)
+//
+//        reference.getData(maxSize: (1 * 1024 * 1024)) { (data, error) in
+//                if let err = error {
+//                   print(err)
+//              } else {
+//                if let image  = data {
+//                     let myImage: UIImage! = UIImage(data: image)
+//
+//                     // Use Image
+//                }
+//             }
+//        }
+        return .init(annotation: annotation, photo: Photo(kind: .empty))
     }
 }
 
