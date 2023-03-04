@@ -28,10 +28,10 @@ extension AuthenticationPerformerViewController {
         
         private var buttonContainer = ActionButtonContainerView(actionTitle: "reset-password-button-action".localized)
         
-        private let provier: AuthenticationProviderType
+        private let dataSource: AuthenticationDataSourceType
         
-        init(provider: AuthenticationProviderType) {
-            self.provier = provider
+        init(dataSource: AuthenticationDataSourceType) {
+            self.dataSource = dataSource
             super.init(nibName: nil, bundle: nil)
         }
         
@@ -87,7 +87,7 @@ extension AuthenticationPerformerViewController {
                 return
             }
             performBlockingTask(loadingMessage: "reset-password-loading".localized, successMessage: "reset-password-success".localized, errorMessage: "reset-password-error".localized) {
-                try await self.provier.recoverPasword(email: email)
+                try await self.dataSource.recoverPasword(email: email)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1000)) {
                     self.closeViewController(sender: nil)
                 }

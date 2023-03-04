@@ -53,9 +53,9 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
         contentVC = {
             switch dependencies.mode {
             case .login:
-                return LoginViewController(provider: self.dependencies.authProvider, observer: dependencies.observer)
+                return LoginViewController(dataSource: self.dependencies.dataSource, observer: dependencies.observer)
             case .register:
-                return RegisterViewController(provider: self.dependencies.authProvider, observer: dependencies.observer)
+                return RegisterViewController(dataSource: self.dependencies.dataSource, observer: dependencies.observer)
             }
         }()
         

@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: UIApplicationDelegate
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        FirebaseApp.configure()
         Current = World(environment: {
             #if APPSTORE
                 return .production
@@ -30,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 return .development
             #endif
         }())
-        FirebaseApp.configure()
         SceneDelegate.themeApp()
         UIViewController.enhancedErrorAlertMessage = Current.enhancedErrorLogs
         return true

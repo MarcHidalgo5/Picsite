@@ -35,11 +35,11 @@ extension AuthenticationPerformerViewController {
            return titleLabel
        }()
        
-       private let provider: AuthenticationProviderType
+       private let dataSource: AuthenticationDataSourceType
        var observer: AuthenticationObserver
        
-       init(provider: AuthenticationProviderType, observer: AuthenticationObserver) {
-           self.provider = provider
+       init(dataSource: AuthenticationDataSourceType, observer: AuthenticationObserver) {
+           self.dataSource = dataSource
            self.observer = observer
            super.init(nibName: nil, bundle: nil)
        }
@@ -135,16 +135,10 @@ extension AuthenticationPerformerViewController {
        
        // MARK: IBActions
        
-       @objc private func onForgetPasswordTapped() {
-           self.view.endEditing(false)
-           let vc = ForgotPasswordViewController(provider: self.provider)
-           show(vc, sender: nil)
-       }
-       
        @objc private func onLoginWithGoogle() {
            performBlockingTask(errorMessage: "authentication-google-error".localized, {
                do {
-                   try await self.provider.loginUsingGoogle(from: self)
+                   try await self.dataSource.loginUsingGoogle(from: self)
                    self.observer.didAuthenticate(kind: .google)
                } catch let error {
                    if let socialError = error as? AuthenticationManagerError {
@@ -181,7 +175,7 @@ extension AuthenticationPerformerViewController {
        //MARK: AuthenticationPerformer
        
        func performAuthentication() async throws {
-           try await self.provider.registerUser(username: self.usernameTextField.text!, fullName: self.nameTextField.text!, email: self.emailTextField.text!, password: self.passwordTextField.text!)
+           try await self.dataSource.registerUser(username: self.usernameTextField.text!, fullName: self.nameTextField.text!, email: self.emailTextField.text!, password: self.passwordTextField.text!)
        }
        
        func validateFields() throws {

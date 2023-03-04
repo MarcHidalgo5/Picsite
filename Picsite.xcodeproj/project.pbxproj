@@ -12,7 +12,7 @@
 		1A0EFFAA27CA4479004B544C /* PicsiteUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1A0EFFA927CA4479004B544C /* PicsiteUI */; };
 		1A0EFFB427CA7B37004B544C /* TextStyler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0EFFB327CA7B37004B544C /* TextStyler.swift */; };
 		1A0EFFB627CA7B8C004B544C /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0EFFB527CA7B8C004B544C /* UIFont+Extensions.swift */; };
-		1A141CF027CD5A5A00AA8190 /* AuthenticationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A141CEF27CD5A5A00AA8190 /* AuthenticationProvider.swift */; };
+		1A141CF027CD5A5A00AA8190 /* AuthenticationDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A141CEF27CD5A5A00AA8190 /* AuthenticationDataSource.swift */; };
 		1A20451629167C960093663B /* RegisterViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A20451529167C960093663B /* RegisterViewControllerTests.swift */; };
 		1A204518291686870093663B /* ForgotPasswordViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A204517291686870093663B /* ForgotPasswordViewControllerTests.swift */; };
 		1A225D4227DFF2A800BED065 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 1A225D4127DFF2A800BED065 /* GoogleSignIn */; };
@@ -96,7 +96,7 @@
 		1A0EFFB827CA984A004B544C /* SF-Compact-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Bold.otf"; sourceTree = "<group>"; };
 		1A0EFFB927CA984A004B544C /* SF-Compact-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Regular.otf"; sourceTree = "<group>"; };
 		1A0EFFBA27CA984A004B544C /* SF-Compact-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Compact-Text-Medium.otf"; sourceTree = "<group>"; };
-		1A141CEF27CD5A5A00AA8190 /* AuthenticationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationProvider.swift; sourceTree = "<group>"; };
+		1A141CEF27CD5A5A00AA8190 /* AuthenticationDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationDataSource.swift; sourceTree = "<group>"; };
 		1A20451529167C960093663B /* RegisterViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerTests.swift; sourceTree = "<group>"; };
 		1A204517291686870093663B /* ForgotPasswordViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewControllerTests.swift; sourceTree = "<group>"; };
 		1A4CB8F82917C67B0000EC80 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -180,7 +180,7 @@
 		1A141CEE27CD5A3800AA8190 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
-				1A141CEF27CD5A5A00AA8190 /* AuthenticationProvider.swift */,
+				1A141CEF27CD5A5A00AA8190 /* AuthenticationDataSource.swift */,
 				1AA2DDEC291A880100732EF3 /* MapDataSource.swift */,
 			);
 			path = Providers;
@@ -543,7 +543,7 @@
 				1A4CB8F92917C67B0000EC80 /* TabBarViewController.swift in Sources */,
 				1AE7434F27DB3083007944C6 /* Configuration.swift in Sources */,
 				1A943A5627540A92008D7150 /* UIColor.swift in Sources */,
-				1A141CF027CD5A5A00AA8190 /* AuthenticationProvider.swift in Sources */,
+				1A141CF027CD5A5A00AA8190 /* AuthenticationDataSource.swift in Sources */,
 				1A0AA3BD27EA781E00A45AD1 /* StartingViewController.swift in Sources */,
 				1A7AC43927B64ED3006B7DF6 /* AppState.swift in Sources */,
 				1A0EFFB427CA7B37004B544C /* TextStyler.swift in Sources */,
@@ -658,7 +658,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -757,7 +757,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -824,7 +824,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -888,7 +888,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

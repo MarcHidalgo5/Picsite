@@ -18,14 +18,14 @@ struct World {
     
     var apiClient: PicsiteAPIClient
     
-    let authProvider: AuthenticationProviderType
+    let authDataSource: AuthenticationDataSourceType
     
     var mapDataSourceFactory: () -> MapDataSourceType
     
     init(environment: PicsiteAPI.Environment) {
         self.environment = environment
         self.apiClient = PicsiteAPIClient(environment: environment)
-        self.authProvider = AuthenticationProvider(apiClient: apiClient, environment: environment)
+        self.authDataSource = AuthenticationDataSource(apiClient: apiClient, environment: environment)
         self.mapDataSourceFactory = {
             MapDataSource(apiClient: Current.apiClient)
         }

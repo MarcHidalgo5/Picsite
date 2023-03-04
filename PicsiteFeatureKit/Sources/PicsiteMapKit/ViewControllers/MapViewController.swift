@@ -138,26 +138,26 @@ private extension MKMapView {
 extension MapViewController: MKMapViewDelegate {
     public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard let currentAnnotation = view as? AnnotationMarkerView, let picsiteAnnotation = currentAnnotation.annotation as? PicsiteAnnotation  else { return }
-        createPicsiteAnnotationView(picsiteAnnotation: picsiteAnnotation)
+//        createPicsiteAnnotationView(picsiteAnnotation: picsiteAnnotation)
     }
     
-    func createPicsiteAnnotationView(picsiteAnnotation: PicsiteAnnotation) {
-        Task { @MainActor in
-            let vm = try await self.dataSource.fetchDetailAFor(annotation: picsiteAnnotation)
-            let annotationCallout = AnnotationCalloutView()
-            annotationCallout.addPicsiteShadow()
-            annotationCallout.configureView(with: vm, fromVC: self) {
-                self.mapView.deselectAnnotation(picsiteAnnotation, animated: true)
-                self.annotationCalloutView = nil
-            }
-            guard let window = self.view.window else {
-                print("Failed to show annotationCalloutView. No keywindow available.")
-                return
-            }
-            window.addSubview(annotationCallout)
-            annotationCallout.showPicsiteView()
-            annotationCalloutView = annotationCallout
-        }
-        
-    }
+//    func createPicsiteAnnotationView(picsiteAnnotation: PicsiteAnnotation) {
+//        Task { @MainActor in
+//            let vm = try await self.dataSource.fetchDetailAFor(annotation: picsiteAnnotation)
+//            let annotationCallout = AnnotationCalloutView()
+//            annotationCallout.addPicsiteShadow()
+//            annotationCallout.configureView(with: vm, fromVC: self) {
+//                self.mapView.deselectAnnotation(picsiteAnnotation, animated: true)
+//                self.annotationCalloutView = nil
+//            }
+//            guard let window = self.view.window else {
+//                print("Failed to show annotationCalloutView. No keywindow available.")
+//                return
+//            }
+//            window.addSubview(annotationCallout)
+//            annotationCallout.showPicsiteView()
+//            annotationCalloutView = annotationCallout
+//        }
+//        
+//    }
 }

@@ -66,7 +66,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private var rootViewController: ContainerViewController!
     private var currentAppState: AppState {
-        if Current.authProvider.isUserLoggedIn {
+        if Current.authDataSource.isUserLoggedIn {
             return .normal
         } else {
             return .start
