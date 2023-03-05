@@ -46,11 +46,12 @@ class AuthenticationDataSource: AuthenticationDataSourceType {
         if try await self.apiClient.isUsernameCurrentlyUsed(username: username) {
             throw AuthenticationPerformerError.usenameUnavaliable
         }
-        try await apiClient.registerUser(email: email, password: password)
+        let userID = try await apiClient.registerUser(email: email, password: password)
         let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
         changeRequest?.displayName = username
         try await changeRequest?.commitChanges()
-        try await apiClient.createUser(docData: createUser(username: username, fullName: fullName))
+        let user = User(id: userID, username: username, fullName: fullName)
+        try await apiClient.createUser(user)
         self.authenticationKind = .email
     }
     

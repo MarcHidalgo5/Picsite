@@ -1,18 +1,44 @@
- //
+//
 //  Created by Marc Hidalgo on 8/11/22.
 //
 
 import MapKit
+import PicsiteKit
+
+public class PicsiteAnnotation_: NSObject, MKAnnotation {
+    public var coordinate: CLLocationCoordinate2D
+    public let title: String?
+    public let subtitle: String?
+    public let picsiteData: Picsite
+    
+    public init(coordinate: CLLocationCoordinate2D, title: String? = nil, subtitle: String? = nil, picsiteData: Picsite) {
+        self.coordinate = coordinate
+        self.title = title
+        self.subtitle = subtitle
+        self.picsiteData = picsiteData
+    }
+}
+
+extension PicsiteAnnotation_ {
+    var icon: UIImage {
+        switch picsiteData.type {
+        case .landscape:
+            return UIImage(systemName: "binoculars.fill")!
+        case .none:
+            return UIImage(systemName: "empty")!
+        }
+    }
+}
 
 public class PicsiteAnnotation: NSObject, MKAnnotation {
     public let id: String
     public let title: String?
     public let subtitle: String?
     public let annotationType: AnnotationType
-    public let lastActivity: Activity
+    public let lastActivity: Activity?
     public var coordinate: CLLocationCoordinate2D
     public let photoCount: Int
-    public let location: String
+    public let location: String?
     public let profilePhotoID: String?
     
     public enum AnnotationType {
@@ -45,11 +71,13 @@ public extension PicsiteAnnotation {
     var markerTintColor: UIColor {
         switch lastActivity {
         case .recentlyUsed, .lastWeekUsed:
-            return UIColor.green
+            return .green
         case .lastTwoWeeks, .lastThreeWeeks, .lastMonthUsed:
-            return UIColor.yellow
+            return .yellow
         case .moreThanAMonth:
-            return UIColor.red
+            return .red
+        case .none:
+            return .white
         }
     }
     

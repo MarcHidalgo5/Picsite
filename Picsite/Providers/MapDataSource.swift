@@ -18,55 +18,57 @@ class MapDataSource: MapDataSourceType {
     }
     
     func fetchAnnotations() async throws -> MapViewController.VM {
-        let startActivity: PicsiteAnnotation.Activity = .recentlyUsed
-        let startAnnotation = PicsiteAnnotation(
-            id: "b6yYgKDLqw1Yj1HB3vH1",
-            title: "La seu vella",
-            subtitle: activityLabelFor(lastActivity: startActivity),
-            annotationType: .landscape,
-            lastActivity: startActivity,
-            coordinate: CLLocationCoordinate2D(
-                latitude: 41.61803,
-                longitude: 0.62772
-            ),
-            photoCount: 32,
-            location: "Lleida, Lleida",
-            profilePhotoID: "ZFyDUHNxkH3oyV9eAzN2"
-        )
-        
-        let secondActivity: PicsiteAnnotation.Activity = .lastTwoWeeks
-        let secondAnnotation = PicsiteAnnotation(
-            id: "test",
-            title: "Test large title in annotation",
-            subtitle: activityLabelFor(lastActivity: secondActivity),
-            annotationType: .landscape,
-            lastActivity: secondActivity,
-            coordinate: CLLocationCoordinate2D(
-                latitude: 41.62803,
-                longitude: 0.63772
-            ),
-            photoCount: 32,
-            location: "Lleida, Lleida",
-            profilePhotoID: "ZFyDUHNxkH3oyV9eAzN2"
-        )
-        
-        let lastActivity: PicsiteAnnotation.Activity = .moreThanAMonth
-        let lastAnnotation = PicsiteAnnotation(
-            id: "test",
-            title: "Pis xenia",
-            subtitle: activityLabelFor(lastActivity: lastActivity),
-            annotationType: .landscape,
-            lastActivity: lastActivity,
-            coordinate: CLLocationCoordinate2D(
-                latitude: 41.60803,
-                longitude: 0.61772
-            ),
-            photoCount: 32,
-            location: "Lleida, Lleida",
-            profilePhotoID: "ZFyDUHNxkH3oyV9eAzN2"
-        )
-        let annotations = [startAnnotation, secondAnnotation, lastAnnotation]
-        return .init(annotations: annotations)
+        let annotations = try await apiClient.fetchAnnotations()
+        return .init(annotations: annotations.picsiteAnnotations())
+//        let startActivity: PicsiteAnnotation.Activity = .recentlyUsed
+//        let startAnnotation = PicsiteAnnotation(
+//            id: "b6yYgKDLqw1Yj1HB3vH1",
+//            title: "La seu vella",
+//            subtitle: activityLabelFor(lastActivity: startActivity),
+//            annotationType: .landscape,
+//            lastActivity: startActivity,
+//            coordinate: CLLocationCoordinate2D(
+//                latitude: 41.61803,
+//                longitude: 0.62772
+//            ),
+//            photoCount: 32,
+//            location: "Lleida, Lleida",
+//            profilePhotoID: "ZFyDUHNxkH3oyV9eAzN2"
+//        )
+//
+//        let secondActivity: PicsiteAnnotation.Activity = .lastTwoWeeks
+//        let secondAnnotation = PicsiteAnnotation(
+//            id: "test",
+//            title: "Test large title in annotation",
+//            subtitle: activityLabelFor(lastActivity: secondActivity),
+//            annotationType: .landscape,
+//            lastActivity: secondActivity,
+//            coordinate: CLLocationCoordinate2D(
+//                latitude: 41.62803,
+//                longitude: 0.63772
+//            ),
+//            photoCount: 32,
+//            location: "Lleida, Lleida",
+//            profilePhotoID: "ZFyDUHNxkH3oyV9eAzN2"
+//        )
+//
+//        let lastActivity: PicsiteAnnotation.Activity = .moreThanAMonth
+//        let lastAnnotation = PicsiteAnnotation(
+//            id: "test",
+//            title: "Pis xenia",
+//            subtitle: activityLabelFor(lastActivity: lastActivity),
+//            annotationType: .landscape,
+//            lastActivity: lastActivity,
+//            coordinate: CLLocationCoordinate2D(
+//                latitude: 41.60803,
+//                longitude: 0.61772
+//            ),
+//            photoCount: 32,
+//            location: "Lleida, Lleida",
+//            profilePhotoID: "ZFyDUHNxkH3oyV9eAzN2"
+//        )
+//        let annotations = [startAnnotation, secondAnnotation, lastAnnotation]
+//        return .init(annotations: annotations)
     }
     
     func fetchDetailAFor(annotation: PicsiteAnnotation) async throws -> AnnotationCalloutView.VM {
@@ -90,6 +92,14 @@ class MapDataSource: MapDataSourceType {
 //             }
 //        }
         return .init(annotation: annotation, photo: Photo(kind: .empty))
+    }
+}
+
+public extension Array where Element == Picsite {
+    func picsiteAnnotations() -> [PicsiteAnnotation_] {
+        self.map({
+            return .init(coordinate: .init(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude), picsiteData: $0)
+        })
     }
 }
 

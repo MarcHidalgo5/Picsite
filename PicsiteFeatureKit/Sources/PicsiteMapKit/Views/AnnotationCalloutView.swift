@@ -70,8 +70,8 @@ public class AnnotationCalloutView: UIView {
         setBackgroundColor(color: ColorPalette.picsiteBackgroundColor)
         setImage(photo: viewModel.photo)
         setTitle(title: FontPalette.mediumTextStyler.attributedString(viewModel.annotation.title ?? "", forSize: 18))
-        setSubtitle(subtitle: FontPalette.mediumTextStyler.attributedString(viewModel.annotation.location, forSize: 12))
-        setNumberOfPhotos(FontPalette.mediumTextStyler.attributedString(String(viewModel.annotation.photoCount), forSize: 16))
+//        setSubtitle(subtitle: FontPalette.mediumTextStyler.attributedString(viewModel.annotation.location, forSize: 12))
+//        setNumberOfPhotos(FontPalette.mediumTextStyler.attributedString(String(viewModel.annotation.photoCount), forSize: 16))
         setCompletionBlock(completion)
         prepareFrame(fromVC: fromVC)
     }

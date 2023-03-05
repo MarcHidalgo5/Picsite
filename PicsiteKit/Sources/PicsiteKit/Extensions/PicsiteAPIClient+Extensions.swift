@@ -15,6 +15,7 @@ public extension PicsiteAPIClient {
     
     enum RootFirestoreCollection: String {
         case users = "users"
+        case picsites = "picsites"
     }
     
     enum FirestoreField: String {

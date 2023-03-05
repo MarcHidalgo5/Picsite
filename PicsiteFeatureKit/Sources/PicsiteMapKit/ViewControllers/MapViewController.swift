@@ -10,9 +10,9 @@ import CoreLocation
 public class MapViewController: UIViewController {
     
     public struct VM {
-        let annotations: [PicsiteAnnotation]
+        let annotations: [PicsiteAnnotation_]
         
-        public init(annotations: [PicsiteAnnotation]) {
+        public init(annotations: [PicsiteAnnotation_]) {
             self.annotations = annotations
         }
     }
@@ -158,6 +158,6 @@ extension MapViewController: MKMapViewDelegate {
 //            annotationCallout.showPicsiteView()
 //            annotationCalloutView = annotationCallout
 //        }
-//        
+//
 //    }
 }
