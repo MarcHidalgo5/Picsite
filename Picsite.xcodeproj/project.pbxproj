@@ -177,13 +177,13 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		1A141CEE27CD5A3800AA8190 /* Providers */ = {
+		1A141CEE27CD5A3800AA8190 /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
 				1A141CEF27CD5A5A00AA8190 /* AuthenticationDataSource.swift */,
 				1AA2DDEC291A880100732EF3 /* MapDataSource.swift */,
 			);
-			path = Providers;
+			path = DataSource;
 			sourceTree = "<group>";
 		};
 		1A32012327FE049D0094FF84 /* Start */ = {
@@ -294,7 +294,7 @@
 				1ADAF7C427517C8800D8D480 /* SceneDelegate.swift */,
 				1A7AC43A27B64FF6006B7DF6 /* World.swift */,
 				1ADAF7D027517C8800D8D480 /* Info.plist */,
-				1A141CEE27CD5A3800AA8190 /* Providers */,
+				1A141CEE27CD5A3800AA8190 /* DataSource */,
 				1AC8543828218E0200948232 /* ThirdParty */,
 				1ADAF80627518E1000D8D480 /* Assets */,
 				1AA679F7275402BB00799CE1 /* Extensions */,

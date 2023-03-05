@@ -10,9 +10,9 @@ import CoreLocation
 public class MapViewController: UIViewController {
     
     public struct VM {
-        let annotations: [PicsiteAnnotation_]
+        let annotations: [PicsiteAnnotation]
         
-        public init(annotations: [PicsiteAnnotation_]) {
+        public init(annotations: [PicsiteAnnotation]) {
             self.annotations = annotations
         }
     }

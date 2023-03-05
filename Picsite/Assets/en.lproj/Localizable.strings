@@ -59,6 +59,7 @@
 "register-t&c-message-link" = "Terms and Conditions";
 
 //MapViewController
+"map-never-used-subtitle" = "New";
 "map-recently-used-subtitle" = "Less than a week";
 "map-last-week-used-subtitle" = "A week ago";
 "map-last-two-week-used-subtitle" = "Two weeks ago";

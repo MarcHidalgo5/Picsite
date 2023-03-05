@@ -5,44 +5,19 @@
 import MapKit
 import PicsiteKit
 
-public class PicsiteAnnotation_: NSObject, MKAnnotation {
+public class PicsiteAnnotation: NSObject, MKAnnotation {
     public var coordinate: CLLocationCoordinate2D
     public let title: String?
     public let subtitle: String?
+    public let activity: Activity
     public let picsiteData: Picsite
     
-    public init(coordinate: CLLocationCoordinate2D, title: String? = nil, subtitle: String? = nil, picsiteData: Picsite) {
+    public init(coordinate: CLLocationCoordinate2D, title: String? = nil, subtitle: String? = nil, activity: Activity, picsiteData: Picsite) {
         self.coordinate = coordinate
         self.title = title
         self.subtitle = subtitle
+        self.activity = activity
         self.picsiteData = picsiteData
-    }
-}
-
-extension PicsiteAnnotation_ {
-    var icon: UIImage {
-        switch picsiteData.type {
-        case .landscape:
-            return UIImage(systemName: "binoculars.fill")!
-        case .none:
-            return UIImage(systemName: "empty")!
-        }
-    }
-}
-
-public class PicsiteAnnotation: NSObject, MKAnnotation {
-    public let id: String
-    public let title: String?
-    public let subtitle: String?
-    public let annotationType: AnnotationType
-    public let lastActivity: Activity?
-    public var coordinate: CLLocationCoordinate2D
-    public let photoCount: Int
-    public let location: String?
-    public let profilePhotoID: String?
-    
-    public enum AnnotationType {
-        case landscape
     }
     
     public enum Activity {
@@ -52,39 +27,49 @@ public class PicsiteAnnotation: NSObject, MKAnnotation {
         case lastThreeWeeks
         case lastMonthUsed
         case moreThanAMonth
-    }
-    
-    public init(id: String, title: String? = nil, subtitle: String? = nil, annotationType: PicsiteAnnotation.AnnotationType, lastActivity: PicsiteAnnotation.Activity, coordinate: CLLocationCoordinate2D, photoCount: Int, location: String, profilePhotoID: String? = nil) {
-        self.id = id
-        self.title = title
-        self.subtitle = subtitle
-        self.annotationType = annotationType
-        self.lastActivity = lastActivity
-        self.coordinate = coordinate
-        self.photoCount = photoCount
-        self.location = location
-        self.profilePhotoID = profilePhotoID
+        case neverUsed
+        
+        public var title: String {
+            switch self {
+            case .recentlyUsed:
+                return "map-recently-used-subtitle".localized
+            case .lastWeekUsed:
+                return "map-last-week-used-subtitle".localized
+            case .lastTwoWeeks:
+                return "map-last-two-week-used-subtitle".localized
+            case .lastThreeWeeks:
+                return "map-last-three-week-used-subtitle".localized
+            case .lastMonthUsed:
+                return "map-last-month-used-subtitle".localized
+            case .moreThanAMonth:
+                return "map-more-than-one-month-used-subtitle".localized
+            case .neverUsed:
+                return "map-never-used-subtitle".localized
+            }
+        }
     }
 }
 
 public extension PicsiteAnnotation {
     var markerTintColor: UIColor {
-        switch lastActivity {
+        switch activity {
         case .recentlyUsed, .lastWeekUsed:
             return .green
         case .lastTwoWeeks, .lastThreeWeeks, .lastMonthUsed:
             return .yellow
         case .moreThanAMonth:
             return .red
-        case .none:
+        case .neverUsed:
             return .white
         }
     }
     
     var icon: UIImage {
-        switch annotationType {
+        switch picsiteData.type {
         case .landscape:
             return UIImage(systemName: "binoculars.fill")!
+        case .none:
+            return UIImage(systemName: "empty")!
         }
     }
 }
