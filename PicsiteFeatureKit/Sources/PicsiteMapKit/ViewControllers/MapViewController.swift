@@ -6,6 +6,7 @@ import UIKit
 import MapKit
 import PicsiteUI; import PicsiteKit
 import CoreLocation
+import BSWInterfaceKit
 
 public class MapViewController: UIViewController {
     
@@ -63,16 +64,12 @@ public class MapViewController: UIViewController {
     }
     
     //MARK: Private
-    
-    private func fetchData(animated: Bool = true) {
-        fetchData(taskGenerator: { [unowned self] in
-            try await dataSource.fetchAnnotations()
-        },
-        animated: animated,
-        errorMessage: "fetch-error-message".localized,
-        completion: { [weak self] vm in
-            self?.configureFor(viewModel: vm)
-        })
+
+    private func fetchData()  {
+        performBlockingTask(loadingMessage: "Loading picsites", errorMessage: "Fail to load picsties") {
+            let vm = try await self.dataSource.fetchAnnotations()
+            self.configureFor(viewModel: vm)
+        }
     }
     
     @objc private func didTapOnMap() {
