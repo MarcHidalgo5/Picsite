@@ -113,7 +113,7 @@ extension MapViewController: CLLocationManagerDelegate {
 }
 
 private extension MKMapView {
-    func centerToLocation(_ location: CLLocation, regionRadius: CLLocationDistance = 3000) {
+    func centerToLocation(_ location: CLLocation, regionRadius: CLLocationDistance = 4100) {
         let coordinateRegion = MKCoordinateRegion(
             center: location.coordinate,
             latitudinalMeters: regionRadius,
@@ -121,7 +121,7 @@ private extension MKMapView {
         setRegion(coordinateRegion, animated: false)
     }
     
-    func centerCameraToLocation(_ location: CLLocation, altitude: CLLocationDistance = 3000) {
+    func centerCameraToLocation(_ location: CLLocation, altitude: CLLocationDistance = 4100) {
         let mapCamera = MKMapCamera()
         mapCamera.centerCoordinate = location.coordinate
             mapCamera.pitch = 25
