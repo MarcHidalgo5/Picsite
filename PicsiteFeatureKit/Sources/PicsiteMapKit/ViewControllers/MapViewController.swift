@@ -22,7 +22,10 @@ public class MapViewController: UIViewController {
     private var currentLocation: CLLocation?
     
     private let dataSource = ModuleDependencies.mapDataSource!
-    private var annotationCalloutView: AnnotationCalloutView?
+    private var annotationCalloutView: UIView?
+    
+    private let myView = UIView(frame: CGRect(x: 10, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width - 20, height: 100))
+    private var initialTouchPoint: CGPoint = CGPoint(x: 0,y: 0)
     
     private let mapView : MKMapView = {
         let map = MKMapView()
@@ -33,6 +36,7 @@ public class MapViewController: UIViewController {
     public override func loadView() {
         view = UIView()
         view.addSubview(mapView)
+        view.addSubview(myView)
         mapView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             mapView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -72,9 +76,52 @@ public class MapViewController: UIViewController {
         }
     }
     
+    @objc private func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
+
+        let touchPoint = gestureRecognizer.location(in: self.view?.window)
+
+        if gestureRecognizer.state == .began {
+            initialTouchPoint = touchPoint
+        } else if gestureRecognizer.state == .changed {
+            if touchPoint.y - initialTouchPoint.y > 0 {
+                self.myView.frame.origin.y =  touchPoint.y - initialTouchPoint.y + UIScreen.main.bounds.height - (UIScreen.main.smallestScreen ? 180 : 210)
+            }
+        } else if gestureRecognizer.state == .ended || gestureRecognizer.state == .cancelled {
+            if self.annotationCalloutView != nil {
+                if touchPoint.y - self.initialTouchPoint.y > 45 {
+                    self.removeAnnotationView()
+                    self.deselectCurrentMapAnnotatons()
+                } else {
+                    // Redisplay in the initial position
+                    self.showAnnotationView()
+                }
+            }
+            initialTouchPoint = CGPoint(x: 0,y: 0)
+        }
+    }
+    
     @objc private func didTapOnMap() {
-        if annotationCalloutView != nil {
-            annotationCalloutView?.dismissPicsiteView(animated: true)
+        if mapView.selectedAnnotations.count > 0 {
+            removeAnnotationView()
+            deselectCurrentMapAnnotatons()
+        }
+    }
+    
+    private func showAnnotationView() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.myView.frame.origin.y =  UIScreen.main.bounds.height - (UIScreen.main.smallestScreen ? 180 : 210)
+        })
+    }
+    
+    func removeAnnotationView() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.myView.frame.origin.y =  UIScreen.main.bounds.height
+        })
+    }
+    
+    private func deselectCurrentMapAnnotatons() {
+        for annotation in mapView.selectedAnnotations {
+            mapView.deselectAnnotation(annotation, animated: true)
         }
     }
     
@@ -102,7 +149,6 @@ extension MapViewController: CLLocationManagerDelegate {
     
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if currentLocation == nil {
-            // Zoom to user location
             if let userLocation = locations.last {
                 currentLocation = userLocation
                 mapView.centerToLocation(userLocation)
@@ -113,7 +159,7 @@ extension MapViewController: CLLocationManagerDelegate {
 }
 
 private extension MKMapView {
-    func centerToLocation(_ location: CLLocation, regionRadius: CLLocationDistance = 4100) {
+    func centerToLocation(_ location: CLLocation, regionRadius: CLLocationDistance = 4000) {
         let coordinateRegion = MKCoordinateRegion(
             center: location.coordinate,
             latitudinalMeters: regionRadius,
@@ -121,7 +167,7 @@ private extension MKMapView {
         setRegion(coordinateRegion, animated: false)
     }
     
-    func centerCameraToLocation(_ location: CLLocation, altitude: CLLocationDistance = 4100) {
+    func centerCameraToLocation(_ location: CLLocation, altitude: CLLocationDistance = 4000) {
         let mapCamera = MKMapCamera()
         mapCamera.centerCoordinate = location.coordinate
             mapCamera.pitch = 25
@@ -134,7 +180,19 @@ private extension MKMapView {
 
 extension MapViewController: MKMapViewDelegate {
     public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        guard let currentAnnotation = view as? AnnotationMarkerView, let picsiteAnnotation = currentAnnotation.annotation as? PicsiteAnnotation  else { return }
+        
+        myView.backgroundColor = UIColor.blue
+       
+//        self.annotationCalloutView = myView
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        myView.addGestureRecognizer(panGesture)
+        
+        
+        self.annotationCalloutView = myView
+        self.showAnnotationView()
+        
+//        guard let currentAnnotation = view as? AnnotationMarkerView, let picsiteAnnotation = currentAnnotation.annotation as? PicsiteAnnotation  else { return }
 //        createPicsiteAnnotationView(picsiteAnnotation: picsiteAnnotation)
     }
     
