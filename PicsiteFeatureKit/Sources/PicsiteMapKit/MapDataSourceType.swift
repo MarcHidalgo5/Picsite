@@ -6,5 +6,4 @@ import UIKit
 
 public protocol MapDataSourceType {
     func fetchAnnotations() async throws -> MapViewController.VM
-    func fetchDetailAFor(annotation: PicsiteAnnotation) async throws -> AnnotationCalloutView.VM
 }

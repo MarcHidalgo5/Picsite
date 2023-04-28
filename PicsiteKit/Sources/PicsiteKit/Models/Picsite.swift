@@ -14,8 +14,8 @@ public struct Picsite: Codable {
     public let type: AnnotationType
     public let lastActivity: Date?
     public let photoCount: Int
-        //    public let location: String?
-    public let profilePhotoID: String?
+    public let thumbnailURLString: String?
+    public let location: String
     public var id: String {
         get {
             guard let ID else { fatalError() }
@@ -24,7 +24,7 @@ public struct Picsite: Codable {
     }
 
     enum CodingKeys: String, CodingKey {
-        case lastActivity = "last_activity", photoCount = "photo_count", profilePhotoID = "profile_photo_ID", title, coordinate, type, ID
+        case lastActivity = "last_activity", location, photoCount = "photo_count", thumbnailURLString = "thumbnail_image_url", title, coordinate, type, ID
     }
     
     public enum AnnotationType: Codable, Hashable {
@@ -56,12 +56,3 @@ public struct Picsite: Codable {
         }
     }
 }
-
-//    public enum Activity {
-//        case recentlyUsed
-//        case lastWeekUsed
-//        case lastTwoWeeks
-//        case lastThreeWeeks
-//        case lastMonthUsed
-//        case moreThanAMonth
-//    }

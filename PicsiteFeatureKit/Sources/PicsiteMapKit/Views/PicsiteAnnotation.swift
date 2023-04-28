@@ -11,13 +11,17 @@ public class PicsiteAnnotation: NSObject, MKAnnotation {
     public let subtitle: String?
     public let activity: Activity
     public let picsiteData: Picsite
+    public let thumbnailURL: URL?
+    public let lastActivityDateString: String
     
-    public init(coordinate: CLLocationCoordinate2D, title: String? = nil, subtitle: String? = nil, activity: Activity, picsiteData: Picsite) {
+    public init(coordinate: CLLocationCoordinate2D, title: String? = nil, subtitle: String? = nil, activity: Activity, picsiteData: Picsite, thumbnailURL: URL? = nil, lastActivityDateString: String) {
         self.coordinate = coordinate
         self.title = title
         self.subtitle = subtitle
         self.activity = activity
         self.picsiteData = picsiteData
+        self.thumbnailURL = thumbnailURL
+        self.lastActivityDateString = lastActivityDateString
     }
     
     public enum Activity {

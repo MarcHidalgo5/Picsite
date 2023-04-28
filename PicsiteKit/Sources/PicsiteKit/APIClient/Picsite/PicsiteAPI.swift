@@ -14,3 +14,10 @@ public enum PicsiteAPI {
     }
 }
 
+public let PicsiteDateDecodingStrategy: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.timeZone = TimeZone(identifier: "Europe/Madrid")
+    formatter.locale = Locale(identifier: "es_ES")
+    formatter.dateFormat = "dd/MM/yy"
+    return formatter
+}()

@@ -75,13 +75,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     static func themeApp() {
         ///Customize UIKit
-        UIWindow.appearance().tintColor = .picsiteTintColor
-        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .picsiteTintColor
+        UIWindow.appearance().tintColor = .picsiteBlackTintColor
+        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .picsiteBlackTintColor
         UITabBar.appearance().tintColor = .picsiteDeepBlueColor
         UITabBarItem.appearance().setTitleTextAttributes(
             [NSAttributedString.Key.font: mediumTextStyler.fontForSize(11)],
           for: .normal)
-        UITextField.appearance().tintColor = .picsiteTintColor
+        UITextField.appearance().tintColor = .picsiteBlackTintColor
         UITextField.appearance().font = regularTextStyler.fontForSize(18)
         
         UISwitch.appearance().onTintColor = .picsiteDeepBlueColor
@@ -89,8 +89,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UIViewController.loadingViewFactory = { UIView.picsiteLoadingView() }
         
         /// Hook up VideoAskUI with dependencies
-        PicsiteUI.ColorPalette.picsiteTintColor = UIColor.picsiteTintColor
+        PicsiteUI.ColorPalette.picsiteTintColor = UIColor.picsiteBlackTintColor
         PicsiteUI.ColorPalette.picsiteTitleColor = UIColor.picsiteTitleColor
+        PicsiteUI.ColorPalette.picsiteSecondaryTitleColor = UIColor.picsiteSecondaryTitleColor
+        PicsiteUI.ColorPalette.picsiteSecondaryBackgroundColor = UIColor.picsiteSecondaryBackgroundColor
         PicsiteUI.ColorPalette.picsiteBackgroundColor = UIColor.picsiteBackgroundColor
         PicsiteUI.ColorPalette.picsiteDeepBlueColor =
             UIColor.picsiteDeepBlueColor

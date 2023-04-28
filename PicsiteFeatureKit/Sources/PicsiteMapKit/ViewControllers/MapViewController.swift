@@ -20,13 +20,9 @@ public class MapViewController: UIViewController {
     
     private var locationManager: CLLocationManager!
     private var currentLocation: CLLocation?
-    
     private let dataSource = ModuleDependencies.mapDataSource!
-    private var annotationCalloutView: UIView?
-    
-    private let myView = UIView(frame: CGRect(x: 10, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width - 20, height: 100))
+    private let picsitAnnotationView = PicsiteAnnotationView(frame: CGRect(x: 10, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width - 20, height: 100))
     private var initialTouchPoint: CGPoint = CGPoint(x: 0,y: 0)
-    
     private let mapView : MKMapView = {
         let map = MKMapView()
         map.pointOfInterestFilter = .excludingAll
@@ -36,7 +32,7 @@ public class MapViewController: UIViewController {
     public override func loadView() {
         view = UIView()
         view.addSubview(mapView)
-        view.addSubview(myView)
+        view.addSubview(picsitAnnotationView)
         mapView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             mapView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -63,6 +59,8 @@ public class MapViewController: UIViewController {
                 MKMapViewDefaultAnnotationViewReuseIdentifier)
         let singleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapOnMap))
         mapView.addGestureRecognizer(singleTapRecognizer)
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        picsitAnnotationView.addGestureRecognizer(panGesture)
         createLocationManeger()
         fetchData()
     }
@@ -84,10 +82,10 @@ public class MapViewController: UIViewController {
             initialTouchPoint = touchPoint
         } else if gestureRecognizer.state == .changed {
             if touchPoint.y - initialTouchPoint.y > 0 {
-                self.myView.frame.origin.y =  touchPoint.y - initialTouchPoint.y + UIScreen.main.bounds.height - (UIScreen.main.smallestScreen ? 180 : 210)
+                self.picsitAnnotationView.frame.origin.y =  touchPoint.y - initialTouchPoint.y + UIScreen.main.bounds.height - (UIScreen.main.smallestScreen ? 180 : 210)
             }
         } else if gestureRecognizer.state == .ended || gestureRecognizer.state == .cancelled {
-            if self.annotationCalloutView != nil {
+            if mapView.selectedAnnotations.count > 0 {
                 if touchPoint.y - self.initialTouchPoint.y > 45 {
                     self.removeAnnotationView()
                     self.deselectCurrentMapAnnotatons()
@@ -109,13 +107,13 @@ public class MapViewController: UIViewController {
     
     private func showAnnotationView() {
         UIView.animate(withDuration: 0.3, animations: {
-            self.myView.frame.origin.y =  UIScreen.main.bounds.height - (UIScreen.main.smallestScreen ? 180 : 210)
+            self.picsitAnnotationView.frame.origin.y =  UIScreen.main.bounds.height - (UIScreen.main.smallestScreen ? 180 : 210)
         })
     }
     
     func removeAnnotationView() {
         UIView.animate(withDuration: 0.3, animations: {
-            self.myView.frame.origin.y =  UIScreen.main.bounds.height
+            self.picsitAnnotationView.frame.origin.y =  UIScreen.main.bounds.height
         })
     }
     
@@ -181,38 +179,9 @@ private extension MKMapView {
 extension MapViewController: MKMapViewDelegate {
     public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
-        myView.backgroundColor = UIColor.blue
-       
-//        self.annotationCalloutView = myView
+        guard let currentAnnotation = view as? AnnotationMarkerView, let picsiteAnnotation = currentAnnotation.annotation as? PicsiteAnnotation else { return }
         
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-        myView.addGestureRecognizer(panGesture)
-        
-        
-        self.annotationCalloutView = myView
+        self.picsitAnnotationView.configureFor(picsiteAnnotation: picsiteAnnotation)
         self.showAnnotationView()
-        
-//        guard let currentAnnotation = view as? AnnotationMarkerView, let picsiteAnnotation = currentAnnotation.annotation as? PicsiteAnnotation  else { return }
-//        createPicsiteAnnotationView(picsiteAnnotation: picsiteAnnotation)
     }
-    
-//    func createPicsiteAnnotationView(picsiteAnnotation: PicsiteAnnotation) {
-//        Task { @MainActor in
-//            let vm = try await self.dataSource.fetchDetailAFor(annotation: picsiteAnnotation)
-//            let annotationCallout = AnnotationCalloutView()
-//            annotationCallout.addPicsiteShadow()
-//            annotationCallout.configureView(with: vm, fromVC: self) {
-//                self.mapView.deselectAnnotation(picsiteAnnotation, animated: true)
-//                self.annotationCalloutView = nil
-//            }
-//            guard let window = self.view.window else {
-//                print("Failed to show annotationCalloutView. No keywindow available.")
-//                return
-//            }
-//            window.addSubview(annotationCallout)
-//            annotationCallout.showPicsiteView()
-//            annotationCalloutView = annotationCallout
-//        }
-//
-//    }
 }

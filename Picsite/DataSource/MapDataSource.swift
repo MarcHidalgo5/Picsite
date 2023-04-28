@@ -19,35 +19,12 @@ class MapDataSource: MapDataSourceType {
     
     func fetchAnnotations() async throws -> MapViewController.VM {
         let annotations = try await apiClient.fetchAnnotations()
-        return .init(annotations: annotations.picsiteAnnotations())
-    }
-    
-    func fetchDetailAFor(annotation: PicsiteAnnotation) async throws -> AnnotationCalloutView.VM {
-//        if let profilePhotoID = annotation.profilePhotoID {
-//
-//        } else {
-//
-//        }
-//        let path = "picsites/\(annotation.id)/profile_photos/\(annotation.profilePhotoID)/profile_photo_thumbnail.jpeg"
-//        let reference = Storage.storage().reference(withPath: path)
-//
-//        reference.getData(maxSize: (1 * 1024 * 1024)) { (data, error) in
-//                if let err = error {
-//                   print(err)
-//              } else {
-//                if let image  = data {
-//                     let myImage: UIImage! = UIImage(data: image)
-//
-//                     // Use Image
-//                }
-//             }
-//        }
-        return .init(annotation: annotation, photo: Photo(kind: .empty))
+        return .init(annotations: try await annotations.picsiteAnnotations())
     }
 }
 
 private extension Array where Element == Picsite {
-    func picsiteAnnotations() -> [PicsiteAnnotation] {
+    func picsiteAnnotations() async throws -> [PicsiteAnnotation] {
         self.map({
             let days = Date().days(toDate: $0.lastActivity)
             let activity = $0.activityForInterval(days)
@@ -58,9 +35,21 @@ private extension Array where Element == Picsite {
                 title: $0.title,
                 subtitle: activity.title,
                 activity: activity,
-                picsiteData: $0
+                picsiteData: $0,
+                thumbnailURL: thumnailURL(stringURL: $0.thumbnailURLString),
+                lastActivityDateString: dateFormatterString(date: $0.lastActivity)
             )
         })
+    }
+    
+    func dateFormatterString(date: Date?) -> String {
+        guard let lastActivity = date else { return "" }
+        return PicsiteDateDecodingStrategy.string(from: lastActivity)
+    }
+    
+    func thumnailURL(stringURL: String?) -> URL? {
+        guard let thumbnailURLString = stringURL else { return nil }
+        return URL(string: thumbnailURLString)
     }
 }
 

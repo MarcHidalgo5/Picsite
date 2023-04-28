@@ -68,3 +68,4 @@
 "map-more-than-one-month-used-subtitle" = "More than a month";
 "map-annotation-photos-titel" = "Photos";
 "map-annotation-info-titel" = "Updated:";
+"map-annotation-view-last-update-title" = "Last update: %@";

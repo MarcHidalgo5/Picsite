@@ -6,6 +6,7 @@ import Foundation
 import BSWFoundation
 import FirebaseFirestore
 import FirebaseAuth
+import FirebaseStorage
 
 public class PicsiteAPIClient {
     
@@ -34,7 +35,7 @@ public class PicsiteAPIClient {
     
     public func createUser(_ user: User) async throws {
         guard let userID = user.id else { throw LogicError.InvalidUser }
-        try await firestore.collection(RootFirestoreCollection.users.rawValue).document(userID).setData(from: user)
+        try await firestore.collection(RootFirestoreCollection.users.rawValue).document(userID).setData(user)
     }
     
     public func isUsernameCurrentlyUsed(username: String) async throws -> Bool {
@@ -48,10 +49,16 @@ public class PicsiteAPIClient {
             return try? queryDocumentSnapshot.data(as: Picsite.self)
         }
     }
+    
+    public func getPicsiteProfileThumnailURL(picsiteID: String, profilePhotoID: String) async throws -> URL {
+        let storage = Storage.storage()
+        let reference = storage.reference(withPath: "/picsites/\(picsiteID)/profile_photos/\(profilePhotoID)/profile_photo")
+        return try await reference.downloadURL()
+    }
 }
 
 private extension FirebaseFirestore.DocumentReference {
-    func setData<T: Encodable>(from: T, merge: Bool = false) async throws {
+    func setData<T: Encodable>(_ from: T, merge: Bool = false) async throws {
         let encoder = Firestore.Encoder()
         let data = try encoder.encode(from)
         try await setData(data, merge: merge)
