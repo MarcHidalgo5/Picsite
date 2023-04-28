@@ -8,18 +8,18 @@ import UIKit
 
 public struct ModuleDependencies {
     
-    let authProvider: AuthenticationProviderType
+    let dataSource: AuthenticationDataSourceType
     let socialManager: AuthenticationManagerSocialManagerType
     let mode: AuthenticationPerformerViewController.Mode
     let observer: AuthenticationObserver
     
     public init(
-        authProvider: AuthenticationProviderType,
+        dataSource: AuthenticationDataSourceType,
         socialManager: AuthenticationManagerSocialManagerType,
         mode: AuthenticationPerformerViewController.Mode,
         observer: AuthenticationObserver
     ) {
-        self.authProvider = authProvider
+        self.dataSource = dataSource
         self.socialManager = socialManager
         self.mode = mode
         self.observer = observer

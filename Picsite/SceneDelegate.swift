@@ -22,17 +22,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         return UIApplication.shared.connectedScenes.compactMap { $0.delegate as? SceneDelegate }.first
     }
 
-    func updateContainedViewController() {
+    func updateContainedViewController(animated: Bool = true) {
         /// Make sure nothing is on top of the rootVC before updating it
         rootViewController.presentedViewController?.dismiss(animated: false, completion: nil)
-        rootViewController.updateContainedViewController(createCurrentViewController())
+        rootViewController.updateContainedViewController(createCurrentViewController(forAppState: currentAppState), animated: animated)
     }
     
     //MARK: UIWindowSceneDelegate
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        let rootViewController = ContainerViewController(containedViewController: createCurrentViewController())
+        let rootViewController = ContainerViewController(containedViewController: createCurrentViewController(forAppState: .loading))
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
@@ -48,15 +48,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {}
     func sceneDidEnterBackground(_ scene: UIScene) {}
 
-    private func createCurrentViewController() -> UIViewController {
+    private func createCurrentViewController(forAppState appState: AppState) -> UIViewController {
         guard !UIApplication.shared.isRunningTests else {
             return UIViewController()
         }
-        switch currentAppState {
-        case .unlogged:
+        switch appState {
+        case .start:
             return StartingViewController.Factory.viewController(observer: self)
-        case .login:
+        case .normal:
             return TabBarController()
+        case .loading:
+            return LoadingAppStateViewController()
         }
     }
     
@@ -64,22 +66,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private var rootViewController: ContainerViewController!
     private var currentAppState: AppState {
-        if Current.authProvider.isUserLoggedIn {
-            return .login
+        if Current.authDataSource.isUserLoggedIn {
+            return .normal
         } else {
-            return .unlogged
+            return .start
         }
     }
     
     static func themeApp() {
         ///Customize UIKit
-        UIWindow.appearance().tintColor = .picsiteTintColor
-        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .picsiteTintColor
+        UIWindow.appearance().tintColor = .picsiteBlackTintColor
+        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .picsiteBlackTintColor
         UITabBar.appearance().tintColor = .picsiteDeepBlueColor
         UITabBarItem.appearance().setTitleTextAttributes(
             [NSAttributedString.Key.font: mediumTextStyler.fontForSize(11)],
           for: .normal)
-        UITextField.appearance().tintColor = .picsiteTintColor
+        UITextField.appearance().tintColor = .picsiteBlackTintColor
         UITextField.appearance().font = regularTextStyler.fontForSize(18)
         
         UISwitch.appearance().onTintColor = .picsiteDeepBlueColor
@@ -87,8 +89,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UIViewController.loadingViewFactory = { UIView.picsiteLoadingView() }
         
         /// Hook up VideoAskUI with dependencies
-        PicsiteUI.ColorPalette.picsiteTintColor = UIColor.picsiteTintColor
+        PicsiteUI.ColorPalette.picsiteTintColor = UIColor.picsiteBlackTintColor
         PicsiteUI.ColorPalette.picsiteTitleColor = UIColor.picsiteTitleColor
+        PicsiteUI.ColorPalette.picsiteSecondaryTitleColor = UIColor.picsiteSecondaryTitleColor
+        PicsiteUI.ColorPalette.picsiteSecondaryBackgroundColor = UIColor.picsiteSecondaryBackgroundColor
         PicsiteUI.ColorPalette.picsiteBackgroundColor = UIColor.picsiteBackgroundColor
         PicsiteUI.ColorPalette.picsiteDeepBlueColor =
             UIColor.picsiteDeepBlueColor
@@ -106,5 +110,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension SceneDelegate: StartingObserver {
     func didFinishAuthentication() {
         updateContainedViewController()
+    }
+}
+
+private class LoadingAppStateViewController: SplashViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        Task { @MainActor in
+            await AppDelegate.shared.loadWorld()
+            SceneDelegate.main?.updateContainedViewController(animated: false)
+        }
     }
 }

@@ -1,10 +1,32 @@
- //
+//
 //  Created by Marc Hidalgo on 28/2/22.
 //
 
 import Foundation
 import BSWFoundation
 import FirebaseAuth
+
+public protocol AuthenticationDataSourceType {
+    
+    var isUserLoggedIn: Bool { get }
+    var authenticationKind: AuthenticationType? { get }
+    
+    func loginUserByEmail(email: String, password: String) async throws
+    func loginUsingGoogle(from vc: UIViewController) async throws
+    func registerUser(username: String, fullName: String, email: String, password: String) async throws
+    func recoverPasword(email: String) async throws
+}
+
+#if canImport(UIKit)
+
+import UIKit
+
+public protocol AuthenticationManagerSocialManagerType {
+    func fetchSocialNetworkInfo(forSocialType social: AuthenticationManagerSocial, fromVC: UIViewController) async throws -> AuthenticationManagerSocialInfo
+}
+
+#endif
+
 
 public enum AuthenticationPerformerKind: String, Codable {
     case register
@@ -33,17 +55,6 @@ public enum AuthenticationType: String, Codable {
             return false
         }
     }
-}
-
-public protocol AuthenticationProviderType {
-    
-    var isUserLoggedIn: Bool { get }
-    var authenticationKind: AuthenticationType? { get }
-    
-    func loginUserByEmail(email: String, password: String) async throws 
-    func loginUsingGoogle(from vc: UIViewController) async throws
-    func registerUser(username: String, fullName: String, email: String, password: String) async throws
-    func recoverPasword(email: String) async throws
 }
 
 
@@ -99,12 +110,4 @@ public enum AuthenticationManagerSocial {
 
 public typealias AuthenticationManagerSocialInfo = (idToken: String, accesToken: String)
 
-#if canImport(UIKit)
 
-import UIKit
-
-public protocol AuthenticationManagerSocialManagerType {
-    func fetchSocialNetworkInfo(forSocialType social: AuthenticationManagerSocial, fromVC: UIViewController) async throws -> AuthenticationManagerSocialInfo
-}
-
-#endif

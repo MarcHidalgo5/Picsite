@@ -12,6 +12,9 @@ let package = Package(
         .library(
             name: "PicsiteAuthKit",
             targets: ["PicsiteAuthKit"]),
+        .library(
+            name: "PicsiteMapKit",
+            targets: ["PicsiteMapKit"]),
     ],
     dependencies: [
         .package(path: "PicsiteKit"),
@@ -22,6 +25,10 @@ let package = Package(
     targets: [
         .target(
             name: "PicsiteAuthKit",
+            dependencies: ["BSWFoundation", "BSWInterfaceKit", "PicsiteKit", "PicsiteUI"]
+        ),
+        .target(
+            name: "PicsiteMapKit",
             dependencies: ["BSWFoundation", "BSWInterfaceKit", "PicsiteKit", "PicsiteUI"]
         ),
     ]
