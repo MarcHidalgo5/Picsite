@@ -6,7 +6,7 @@ import Foundation
 import FirebaseFirestoreSwift
 
 public struct User: Codable {
-    @DocumentID var id: String? = UUID().uuidString
+    @DocumentID var id: String?
     public let username: String?
     public let fullName: String?
     

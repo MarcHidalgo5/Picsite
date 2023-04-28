@@ -6,7 +6,6 @@ import Foundation
 import BSWFoundation
 import FirebaseFirestore
 import FirebaseAuth
-import FirebaseStorage
 
 public class PicsiteAPIClient {
     
@@ -48,12 +47,6 @@ public class PicsiteAPIClient {
         return querySnapshot.documents.compactMap { (queryDocumentSnapshot) -> Picsite? in
             return try? queryDocumentSnapshot.data(as: Picsite.self)
         }
-    }
-    
-    public func getPicsiteProfileThumnailURL(picsiteID: String, profilePhotoID: String) async throws -> URL {
-        let storage = Storage.storage()
-        let reference = storage.reference(withPath: "/picsites/\(picsiteID)/profile_photos/\(profilePhotoID)/profile_photo")
-        return try await reference.downloadURL()
     }
 }
 

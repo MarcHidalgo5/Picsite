@@ -34,12 +34,7 @@ public class MapViewController: UIViewController {
         view.addSubview(mapView)
         view.addSubview(picsitAnnotationView)
         mapView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            mapView.topAnchor.constraint(equalTo: view.topAnchor),
-            mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            mapView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            mapView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+        mapView.pinToSuperview()
     }
     
     public init() {
