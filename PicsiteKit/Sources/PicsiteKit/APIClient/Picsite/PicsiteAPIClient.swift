@@ -34,16 +34,16 @@ public class PicsiteAPIClient {
     
     public func createUser(_ user: User) async throws {
         guard let userID = user.id else { throw LogicError.InvalidUser }
-        try await firestore.collection(RootFirestoreCollection.users.rawValue).document(userID).setData(user)
+        try await firestore.collection(FirestoreRootCollections.users.rawValue).document(userID).setData(user)
     }
     
     public func isUsernameCurrentlyUsed(username: String) async throws -> Bool {
-        let usernameQuery = try await firestore.collection(RootFirestoreCollection.users.rawValue).whereField(FirestoreField.username.rawValue, isEqualTo: username).getDocuments()
+        let usernameQuery = try await firestore.collection(FirestoreRootCollections.users.rawValue).whereField(FirestoreFields.username.rawValue, isEqualTo: username).getDocuments()
         return !usernameQuery.isEmpty
     }
     
     public func fetchAnnotations() async throws -> [Picsite] {
-        let querySnapshot = try await firestore.collection(RootFirestoreCollection.picsites.rawValue).getDocuments()
+        let querySnapshot = try await firestore.collection(FirestoreRootCollections.picsites.rawValue).getDocuments()
         return querySnapshot.documents.compactMap { (queryDocumentSnapshot) -> Picsite? in
             return try? queryDocumentSnapshot.data(as: Picsite.self)
         }

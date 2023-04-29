@@ -63,7 +63,7 @@ public class MapViewController: UIViewController {
     //MARK: Private
 
     private func fetchData()  {
-        performBlockingTask(loadingMessage: "Loading picsites", errorMessage: "Fail to load picsties") {
+        performBlockingTask(loadingMessage: "map-fetch-data-loading".localized, errorMessage: "map-fetch-error-fetching".localized) {
             let vm = try await self.dataSource.fetchAnnotations()
             self.configureFor(viewModel: vm)
         }

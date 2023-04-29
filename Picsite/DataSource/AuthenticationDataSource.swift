@@ -59,13 +59,3 @@ class AuthenticationDataSource: AuthenticationDataSourceType {
         try await apiClient.recoverPassword(email: email)
     }
 }
-
-#warning("Create endpoint correctly")
-extension AuthenticationDataSource {
-    func createUser(username: String, fullName: String) -> [String: Any] {
-        return [
-            "username": username,
-            "full_name": fullName
-        ]
-    }
-}

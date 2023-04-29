@@ -103,7 +103,7 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
             do {
                 let message = self.dependencies.mode == .login ? "login-indeterminate-message".localized : "register-indeterminate-message".localized
                 self.showIndeterminateLoadingView(message: message)
-                try await contentVC.validateFields()
+                try contentVC.validateFields()
                 contentVC.disableAllErrorFields()
                 try await contentVC.performAuthentication()
                 self.dependencies.observer.didAuthenticate(kind: self.dependencies.mode == .login ? .login : .register)
