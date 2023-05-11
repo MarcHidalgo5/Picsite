@@ -8,7 +8,7 @@ import PicsiteAuthKit
 import PicsiteKit
 import Firebase
 
-class SocialNetworkManager: NSObject, UIApplicationDelegate, AuthenticationManagerSocialManagerType {
+class SocialNetworkManager: NSObject, UIApplicationDelegate, AuthenticationManagerSocialType {
     
     static let shared = SocialNetworkManager()
     

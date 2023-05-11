@@ -21,7 +21,7 @@ public protocol AuthenticationDataSourceType {
 
 import UIKit
 
-public protocol AuthenticationManagerSocialManagerType {
+public protocol AuthenticationManagerSocialType {
     func fetchSocialNetworkInfo(forSocialType social: AuthenticationManagerSocial, fromVC: UIViewController) async throws -> AuthenticationManagerSocialInfo
 }
 

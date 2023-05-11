@@ -27,11 +27,14 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
     private let buttonContainer: ActionButtonContainerView
     private let scrollView = UIScrollView()
     private var contentVC: AuthenticationPerformerContentViewController!
-    public let dependencies: ModuleDependencies
+    private let mode: AuthenticationPerformerViewController.Mode
+    private let dataSource = ModuleDependencies.dataSource!
+    private let observer: AuthenticationObserver!
     
-    public init(dependecies: ModuleDependencies) {
-        self.dependencies = dependecies
-        self.buttonContainer = ActionButtonContainerView(actionTitle: dependencies.mode.actionTitle)
+    public init(mode: AuthenticationPerformerViewController.Mode, observer: AuthenticationObserver) {
+        self.mode = mode
+        self.observer = observer
+        self.buttonContainer = ActionButtonContainerView(actionTitle: mode.actionTitle)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -51,11 +54,11 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
         scrollView.pinToSuperview()
         
         contentVC = {
-            switch dependencies.mode {
+            switch mode {
             case .login:
-                return LoginViewController(dataSource: self.dependencies.dataSource, observer: dependencies.observer)
+                return LoginViewController(dataSource: self.dataSource, observer: self.observer)
             case .register:
-                return RegisterViewController(dataSource: self.dependencies.dataSource, observer: dependencies.observer)
+                return RegisterViewController(dataSource: self.dataSource, observer: self.observer)
             }
         }()
         
@@ -101,12 +104,12 @@ public class AuthenticationPerformerViewController: UIViewController, Transparen
         self.view.endEditing(true)
         Task { @MainActor in
             do {
-                let message = self.dependencies.mode == .login ? "login-indeterminate-message".localized : "register-indeterminate-message".localized
+                let message = self.mode == .login ? "login-indeterminate-message".localized : "register-indeterminate-message".localized
                 self.showIndeterminateLoadingView(message: message)
                 try contentVC.validateFields()
                 contentVC.disableAllErrorFields()
                 try await contentVC.performAuthentication()
-                self.dependencies.observer.didAuthenticate(kind: self.dependencies.mode == .login ? .login : .register)
+                self.observer.didAuthenticate(kind: self.mode == .login ? .login : .register)
             } catch let errors as ValidationErrors  {
                 contentVC.performValidationAnimations(contentVC.animationsFor(errors: errors))
             } catch let error as AuthenticationPerformerError {

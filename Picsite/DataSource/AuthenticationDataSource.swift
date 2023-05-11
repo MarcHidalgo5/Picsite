@@ -16,7 +16,7 @@ class AuthenticationDataSource: AuthenticationDataSourceType {
         
     private let authStorage = AuthStorage.defaultStorage
     private let apiClient: PicsiteAPIClient
-    private let socialManager: AuthenticationManagerSocialManagerType
+    private let socialManager: AuthenticationManagerSocialType
     
     init(apiClient: PicsiteAPIClient, environment: PicsiteAPI.Environment) {
         self.socialManager = SocialNetworkManager.shared
