@@ -82,14 +82,12 @@ class StartingViewController: UIViewController {
         addPlainBackButton()
         buttonContainer?.onGetStarted = { [weak self] in
             guard let self = self else { return }
-            let authVC =
-            AuthenticationPerformerViewController(dependecies: .forPicsiteRegister(observer: self))
+            let authVC = AuthenticationPerformerViewController(mode: .register, observer: self)
             self.show(authVC, sender: nil)
         }
         buttonContainer?.onLogIn = { [weak self] in
         guard let self = self else { return }
-            let authVC =
-            AuthenticationPerformerViewController(dependecies: .forPicsiteLogin(observer: self))
+            let authVC = AuthenticationPerformerViewController(mode: .login, observer: self)
             self.show(authVC, sender: nil)
         }
     }

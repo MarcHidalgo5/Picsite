@@ -16,7 +16,7 @@ class AuthenticationDataSource: AuthenticationDataSourceType {
         
     private let authStorage = AuthStorage.defaultStorage
     private let apiClient: PicsiteAPIClient
-    private let socialManager: AuthenticationManagerSocialManagerType
+    private let socialManager: AuthenticationManagerSocialType
     
     init(apiClient: PicsiteAPIClient, environment: PicsiteAPI.Environment) {
         self.socialManager = SocialNetworkManager.shared
@@ -57,15 +57,5 @@ class AuthenticationDataSource: AuthenticationDataSourceType {
     
     func recoverPasword(email: String) async throws {
         try await apiClient.recoverPassword(email: email)
-    }
-}
-
-#warning("Create endpoint correctly")
-extension AuthenticationDataSource {
-    func createUser(username: String, fullName: String) -> [String: Any] {
-        return [
-            "username": username,
-            "full_name": fullName
-        ]
     }
 }

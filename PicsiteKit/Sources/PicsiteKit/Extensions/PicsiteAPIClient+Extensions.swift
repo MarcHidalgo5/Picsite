@@ -13,15 +13,16 @@ public extension PicsiteAPIClient {
 
 public extension PicsiteAPIClient {
     
-    enum RootFirestoreCollection: String {
+    enum FirestoreRootCollections: String {
         case users = "users"
         case picsites = "picsites"
     }
     
-    enum FirestoreField: String {
-        case username = "username"
+    enum FirestoreCollections {
+        
     }
     
-    
-    
+    enum FirestoreFields: String {
+        case username = "username"
+    }
 }

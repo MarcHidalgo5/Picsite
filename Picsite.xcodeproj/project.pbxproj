@@ -31,7 +31,6 @@
 		1AA2DDE9291922FF00732EF3 /* PicsiteMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1AA2DDE8291922FF00732EF3 /* PicsiteMapKit */; };
 		1AA2DDED291A880100732EF3 /* MapDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA2DDEC291A880100732EF3 /* MapDataSource.swift */; };
 		1AADE10C27E5F5BB0014A884 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AADE10B27E5F5BB0014A884 /* ErrorView.swift */; };
-		1AC8543728218A9E00948232 /* PicsiteAuthenticationKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC8543628218A9E00948232 /* PicsiteAuthenticationKit.swift */; };
 		1AC8543A28218E1900948232 /* SocialNetworkManeger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AC8543928218E1900948232 /* SocialNetworkManeger.swift */; };
 		1AD0EC0628244A5900DE489A /* StartingBottomButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD0EC0528244A5900DE489A /* StartingBottomButtonViewController.swift */; };
 		1ADAF7C327517C8800D8D480 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ADAF7C227517C8800D8D480 /* AppDelegate.swift */; };
@@ -113,7 +112,6 @@
 		1A943A5527540A92008D7150 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		1AA2DDEC291A880100732EF3 /* MapDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDataSource.swift; sourceTree = "<group>"; };
 		1AADE10B27E5F5BB0014A884 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
-		1AC8543628218A9E00948232 /* PicsiteAuthenticationKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicsiteAuthenticationKit.swift; sourceTree = "<group>"; };
 		1AC8543928218E1900948232 /* SocialNetworkManeger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialNetworkManeger.swift; sourceTree = "<group>"; };
 		1AD0EC0528244A5900DE489A /* StartingBottomButtonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartingBottomButtonViewController.swift; sourceTree = "<group>"; };
 		1ADAF7BF27517C8800D8D480 /* Picsite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Picsite.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -298,7 +296,6 @@
 				1AC8543828218E0200948232 /* ThirdParty */,
 				1ADAF80627518E1000D8D480 /* Assets */,
 				1AA679F7275402BB00799CE1 /* Extensions */,
-				1AF1217D290C30D200792365 /* PicsiteFeatureKit */,
 				1ADAF80527518DEA00D8D480 /* Configuration */,
 				1ADAF80427518DCF00D8D480 /* Views */,
 				1ADAF80327518DBF00D8D480 /* ViewControllers */,
@@ -373,14 +370,6 @@
 				1A8525552913D534006C7DAA /* MockProviders */,
 			);
 			path = Tests;
-			sourceTree = "<group>";
-		};
-		1AF1217D290C30D200792365 /* PicsiteFeatureKit */ = {
-			isa = PBXGroup;
-			children = (
-				1AC8543628218A9E00948232 /* PicsiteAuthenticationKit.swift */,
-			);
-			path = PicsiteFeatureKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -553,7 +542,6 @@
 				1AC8543A28218E1900948232 /* SocialNetworkManeger.swift in Sources */,
 				1AA2DDED291A880100732EF3 /* MapDataSource.swift in Sources */,
 				1A0EFFB627CA7B8C004B544C /* UIFont+Extensions.swift in Sources */,
-				1AC8543728218A9E00948232 /* PicsiteAuthenticationKit.swift in Sources */,
 				1AADE10C27E5F5BB0014A884 /* ErrorView.swift in Sources */,
 				1ADAF7C527517C8800D8D480 /* SceneDelegate.swift in Sources */,
 				1AD0EC0628244A5900DE489A /* StartingBottomButtonViewController.swift in Sources */,

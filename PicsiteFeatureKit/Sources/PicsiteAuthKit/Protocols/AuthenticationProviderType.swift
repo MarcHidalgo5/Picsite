@@ -21,7 +21,7 @@ public protocol AuthenticationDataSourceType {
 
 import UIKit
 
-public protocol AuthenticationManagerSocialManagerType {
+public protocol AuthenticationManagerSocialType {
     func fetchSocialNetworkInfo(forSocialType social: AuthenticationManagerSocial, fromVC: UIViewController) async throws -> AuthenticationManagerSocialInfo
 }
 
@@ -64,7 +64,7 @@ public enum AuthenticationPerformerError: Swift.Error {
     public var errorDescription: String {
         switch self {
         case .usenameUnavaliable:
-            return "Username already exists"
+            return "authentication-validation-error-username-already-exists"
         }
     }
 }

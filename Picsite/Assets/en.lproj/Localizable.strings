@@ -33,6 +33,7 @@
 "authentication-validation-error-invalid-username" = "The username is already in use";
 "authentication-validation-error-invalid-username-lenght" = "Your username needs to have at least 6 characters";
 "authentication-validation-error-invalid-t&c" = "You must accept the terms and conditions before continuing";
+"authentication-validation-error-username-already-exists" = "Username already exists";
 
 //LoginViewController
 "login-indeterminate-message" = "Logging in";
@@ -69,3 +70,5 @@
 "map-annotation-photos-titel" = "Photos";
 "map-annotation-info-titel" = "Updated:";
 "map-annotation-view-last-update-title" = "Last update: %@";
+"map-fetch-data-loading" = "Loading picsites";
+"map-fetch-error-fetching" = "Fail loading picsties";
