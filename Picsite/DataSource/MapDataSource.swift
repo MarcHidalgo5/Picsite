@@ -8,6 +8,7 @@ import CoreLocation
 import PicsiteKit
 import UIKit
 import BSWInterfaceKit
+import PicisteProfileKit
 
 class MapDataSource: MapDataSourceType {
     
@@ -20,6 +21,10 @@ class MapDataSource: MapDataSourceType {
     func fetchAnnotations() async throws -> MapViewController.VM {
         let annotations = try await apiClient.fetchAnnotations()
         return .init(annotations: try await annotations.picsiteAnnotations())
+    }
+    
+    func picsiteProfileViewController() -> UIViewController {
+        return PicsiteProfileViewController()
     }
 }
 

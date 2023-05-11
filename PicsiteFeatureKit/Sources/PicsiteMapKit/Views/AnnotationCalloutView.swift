@@ -7,6 +7,10 @@ import PicsiteUI
 import BSWInterfaceKit
 import UIKit
 
+protocol PicsiteAnnotationViewObserver {
+    func didTapOnAnnotation(currentAnnotation: PicsiteAnnotation)
+}
+
 public class PicsiteAnnotationView: UIView {
     
     let profileImage = ShadowImageView(width: 80, height: 80)
@@ -46,6 +50,8 @@ public class PicsiteAnnotationView: UIView {
         label.textColor = UIColor.gray.withAlphaComponent(0.9)
         return label
     }()
+    
+    private var picsiteAnnotation: PicsiteAnnotation!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -101,7 +107,11 @@ public class PicsiteAnnotationView: UIView {
 
         roundCorners(radius: 12)
         addPicsiteShadow()
-
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        self.addGestureRecognizer(tapGestureRecognizer)
+        self.isUserInteractionEnabled = true
+        
         NSLayoutConstraint.activate([
             profileImage.heightAnchor.constraint(equalToConstant: 80),
             profileImage.widthAnchor.constraint(equalToConstant: 80),
@@ -125,6 +135,7 @@ public class PicsiteAnnotationView: UIView {
     }
     
     func configureFor(picsiteAnnotation: PicsiteAnnotation) {
+        self.picsiteAnnotation = picsiteAnnotation
         titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString(picsiteAnnotation.title ?? "", forSize: 18)
         subtitleLabel.attributedText = FontPalette.mediumTextStyler.attributedString(picsiteAnnotation.picsiteData.location, color: ColorPalette.picsitePlaceholderColor, forSize: 12)
         dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-view-last-update-title".localized(with: [picsiteAnnotation.lastActivityDateString]), forSize: 12)
@@ -132,6 +143,11 @@ public class PicsiteAnnotationView: UIView {
         profileImage.imageView.backgroundColor = picsiteAnnotation.markerTintColor.withAlphaComponent(0.5)
         guard let thumbnailURL = picsiteAnnotation.thumbnailURL else { return }
         profileImage.imageView.setImageWithURL(thumbnailURL)
+    }
+    
+    @objc func viewTapped() {
+        guard let next = self.next() as PicsiteAnnotationViewObserver? else { return }
+        next.didTapOnAnnotation(currentAnnotation: self.picsiteAnnotation)
     }
 }
 

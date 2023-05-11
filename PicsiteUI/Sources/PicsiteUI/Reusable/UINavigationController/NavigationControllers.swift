@@ -65,6 +65,7 @@ open class MinimalNavigationController: UINavigationController {
         
         if let preferencesProvider = correctVC as? TransparentNavigationBarPreferenceProvider {
             navBar.tintColorStyle = preferencesProvider.barStyle
+            navBar.isUserInteractionEnabled = false
         } else {
             /// Try to guess it depending on the status bar Style
             if correctVC.preferredStatusBarStyle == .lightContent {
@@ -95,6 +96,7 @@ public class TransparentNavigationBar: UINavigationBar {
     
     public enum TintColorStyle {
         case transparent
+        case transparentWithoutUserInteractionEnable
         case solid(TranslucencyPreference = .translucentOnLightContent)
     }
     
@@ -143,16 +145,14 @@ public class TransparentNavigationBar: UINavigationBar {
             case .translucentOnLightContent:
                 navBar.isTranslucent = (traitCollection.userInterfaceStyle == .light)
             }
+        case .transparentWithoutUserInteractionEnable:
+            navBar.isUserInteractionEnabled = false
+            fallthrough
         case .transparent:
-            if #available(iOS 15, *) {
-                let appearance = UINavigationBarAppearance()
-                appearance.configureWithTransparentBackground()
-                navBar.standardAppearance = appearance
-                navBar.scrollEdgeAppearance = appearance
-            } else {
-                navBar.barTintColor = nil
-                navBar.setBackgroundImage(UIImage(), for: .default)
-            }
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithTransparentBackground()
+            navBar.standardAppearance = appearance
+            navBar.scrollEdgeAppearance = appearance
             navBar.isTranslucent = true
         }
     }

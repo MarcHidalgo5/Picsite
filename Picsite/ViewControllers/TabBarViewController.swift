@@ -36,7 +36,7 @@ class TabBarController: UITabBarController {
         )
 
         let viewControllers: [UIViewController] = [
-            viewController(with: map),
+            navigationController(with: map),
             navigationController(with: feed),
             navigationController(with: uploadContent),
             navigationController(with: profile),
