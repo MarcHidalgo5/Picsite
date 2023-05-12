@@ -10,6 +10,7 @@ public class PicsiteProfileViewController: UIViewController {
     
     enum Constants {
         static let Spacing: CGFloat = 16
+        static let MediumSpacing: CGFloat = 8
     }
     
     private enum Section: Hashable {
@@ -79,7 +80,7 @@ public class PicsiteProfileViewController: UIViewController {
                 let config = ImageCell.Configuration(photo: .emptyPhoto())
                 return collectionView.dequeueConfiguredReusableCell(using: imageCellRegistration, for: indexPath, item: config)
             case .information:
-                let config = InformationCell.Configuration(title: "test", subtitle: "lleida", date: "22/09/22", photoCount: "10", profilPhoto: .emptyPhoto())
+                let config = InformationCell.Configuration(title: "La seu vella", subtitle: "Lleida", date: "22/09/22", photoCount: "10")
                 return collectionView.dequeueConfiguredReusableCell(using: informationCellRegistration, for: indexPath, item: config)
             case .photo:
                 fatalError()
@@ -89,29 +90,17 @@ public class PicsiteProfileViewController: UIViewController {
         })
         
         let headerRegistration = UICollectionView.SupplementaryRegistration
-        <UICollectionViewListCell>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
+        <UICollectionViewListCell>(elementKind: UICollectionView.elementKindSectionHeader) { view, _, indexPath in
             var configuration = UIListContentConfiguration.plainHeader()
             let _conf: (text: String, spacing: CGFloat) = {
-                guard let item = self?.diffDataSource.itemIdentifier(for: indexPath) else { fatalError() }
-                switch item {
-                case .information:
-                    return ("Test", 0)
-                case .profileImage:
-                    return ("Test", 0)
-                case .photo:
-                    return ("Test", 0)
-                case .loading:
-                    return ("", 0)
-                }
+                return ("", 0)
             }()
-            configuration.attributedText = FontPalette.boldTextStyler.attributedString(
+            configuration.attributedText = FontPalette.mediumTextStyler.attributedString(
                 _conf.text,
                 color: ColorPalette.picsiteTitleColor,
                 forStyle: .headline
             )
-            configuration.directionalLayoutMargins = .init(
-                top: Constants.Spacing, leading: _conf.spacing, bottom: Constants.Spacing, trailing: 0
-            )
+            configuration.directionalLayoutMargins = .init(uniform: 0)
             view.contentConfiguration = configuration
         }
         diffDataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
@@ -126,7 +115,7 @@ public class PicsiteProfileViewController: UIViewController {
             let snapshot = self.diffDataSource.snapshot()
             let section = snapshot.sectionIdentifiers[rawValue]
             switch section {
-            case .profileImage: return Self.imageProfileLayout
+            case .profileImage: return .list(using: Self.imageProfileLayout, layoutEnvironment: layoutEnviroment)
             case .information: return .list(using: Self.informationLayout, layoutEnvironment: layoutEnviroment)
             case .photos: return Self.photosLayout
             case .loading: return Self.loadingLayout
@@ -137,8 +126,9 @@ public class PicsiteProfileViewController: UIViewController {
 
     private func configureFor() async {
         var snapshot = diffDataSource.snapshot()
-        snapshot.appendSections([.information])
-        snapshot.appendItems([.information])
+        snapshot.appendSections([.profileImage,.information])
+        snapshot.appendItems([.profileImage], toSection: .profileImage)
+        snapshot.appendItems([.information], toSection: .information)
         await diffDataSource.apply(snapshot)
     }
 }
@@ -175,14 +165,13 @@ private extension PicsiteProfileViewController {
         return section
     }
     
-    static var imageProfileLayout: NSCollectionLayoutSection {
-        let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(400))
-        let item = NSCollectionLayoutItem(layoutSize: size)
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitems: [item])
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 0, leading: Constants.Spacing, bottom: Constants.Spacing, trailing: Constants.Spacing)
-        section.interGroupSpacing = Constants.Spacing
-        return section
+    static var imageProfileLayout: UICollectionLayoutListConfiguration {
+        var config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
+        config.showsSeparators = true
+        config.backgroundColor = ColorPalette.picsiteBackgroundColor
+        config.headerTopPadding = 0
+        config.headerMode = .supplementary
+        return config
     }
     
     static var informationLayout: UICollectionLayoutListConfiguration {
@@ -190,7 +179,7 @@ private extension PicsiteProfileViewController {
         config.showsSeparators = true
         config.backgroundColor = ColorPalette.picsiteBackgroundColor
         config.headerTopPadding = 0
-//        config.headerMode = .supplementary
+        config.headerMode = .supplementary
         return config
     }
 }

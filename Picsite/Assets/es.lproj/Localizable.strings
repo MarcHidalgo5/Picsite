@@ -72,3 +72,6 @@
 "map-annotation-view-last-update-title" = "Ultima pubicación: %@";
 "map-fetch-data-loading" = "Cargando picsites";
 "map-fetch-error-fetching" = "Error al cargar los picsties";
+
+//PicsiteProfileViewController
+"picsite-profile-information-header" = "Información";

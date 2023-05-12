@@ -64,7 +64,7 @@ public class PicsiteAnnotationView: UIView {
             return label
         }()
         
-        photosTitleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-photos-titel".localized, forSize: 16)
+        photosTitleLabel.attributedText = FontPalette.boldTextStyler.attributedString("map-annotation-photos-titel".localized, forSize: 18)
 
         let titleAndSubtitleStackView = UIStackView()
          titleAndSubtitleStackView.axis = .vertical
@@ -82,12 +82,12 @@ public class PicsiteAnnotationView: UIView {
 
         let photoStackView = UIStackView(arrangedSubviews: [photosTitleLabel, photoCountLabel])
         photoStackView.axis = .vertical
-        photoStackView.spacing = 0
+        photoStackView.spacing = 5
         photoStackView.alignment = .center
         photoStackView.layoutMargins = .init(top: 10, left: 0, bottom: 10, right: 0)
         photoStackView.isLayoutMarginsRelativeArrangement = true
 
-        let annotationSeparator = AnnotationSeparatorView(height: 70)
+        let annotationSeparator = AnnotationSeparatorView(height: 70, color: UIColor.opaqueSeparator)
         
         let horizontalStackView = UIStackView(arrangedSubviews: [
             profileImage,
@@ -115,7 +115,7 @@ public class PicsiteAnnotationView: UIView {
         NSLayoutConstraint.activate([
             profileImage.heightAnchor.constraint(equalToConstant: 80),
             profileImage.widthAnchor.constraint(equalToConstant: 80),
-            photoStackView.widthAnchor.constraint(equalToConstant: 50),
+            photoStackView.widthAnchor.constraint(equalToConstant: 70),
             annotationSeparator.widthAnchor.constraint(equalToConstant: 1),
             
             titleAndSubtitleStackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 10),
@@ -123,7 +123,7 @@ public class PicsiteAnnotationView: UIView {
             
             spacer.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor),
             spacer.bottomAnchor.constraint(equalTo: dateLabel.topAnchor),
-            spacer.heightAnchor.constraint(greaterThanOrEqualToConstant: 10),
+            spacer.heightAnchor.constraint(greaterThanOrEqualToConstant: 20),
             titleLabel.topAnchor.constraint(equalTo: titleAndSubtitleStackView.topAnchor),
             subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
             dateLabel.bottomAnchor.constraint(equalTo: titleAndSubtitleStackView.bottomAnchor),
@@ -136,9 +136,9 @@ public class PicsiteAnnotationView: UIView {
     
     func configureFor(picsiteAnnotation: PicsiteAnnotation) {
         self.picsiteAnnotation = picsiteAnnotation
-        titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString(picsiteAnnotation.title ?? "", forSize: 18)
-        subtitleLabel.attributedText = FontPalette.mediumTextStyler.attributedString(picsiteAnnotation.picsiteData.location, color: ColorPalette.picsitePlaceholderColor, forSize: 12)
-        dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-view-last-update-title".localized(with: [picsiteAnnotation.lastActivityDateString]), forSize: 12)
+        titleLabel.attributedText = FontPalette.boldTextStyler.attributedString(picsiteAnnotation.title ?? "", forSize: 18)
+        subtitleLabel.attributedText = FontPalette.mediumTextStyler.attributedString(picsiteAnnotation.picsiteData.location, color: ColorPalette.picsitePlaceholderColor, forSize: 13)
+        dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-view-last-update-title".localized(with: [picsiteAnnotation.lastActivityDateString]), forSize: 13)
         photoCountLabel.attributedText = FontPalette.mediumTextStyler.attributedString("\(picsiteAnnotation.picsiteData.photoCount)", color: ColorPalette.picsiteDeepBlueColor, forSize: 16)
         profileImage.imageView.backgroundColor = picsiteAnnotation.markerTintColor.withAlphaComponent(0.5)
         guard let thumbnailURL = picsiteAnnotation.thumbnailURL else { return }

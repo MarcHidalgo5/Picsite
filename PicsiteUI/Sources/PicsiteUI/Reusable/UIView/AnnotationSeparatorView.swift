@@ -5,10 +5,10 @@
 import UIKit
 
 public class AnnotationSeparatorView: UIView {
-    public init(height: CGFloat) {
+    public init(height: CGFloat, color: UIColor) {
         super.init(frame: .zero)
         let separatorView = UIView()
-        separatorView.backgroundColor = UIColor.opaqueSeparator
+        separatorView.backgroundColor = color
         addAutolayoutSubview(separatorView)
         NSLayoutConstraint.activate([
             separatorView.centerYAnchor.constraint(equalTo: centerYAnchor),

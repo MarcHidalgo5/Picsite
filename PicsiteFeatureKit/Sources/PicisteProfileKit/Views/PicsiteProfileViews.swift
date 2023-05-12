@@ -56,6 +56,11 @@ extension PicsiteProfileViewController {
                 imageView.contentMode = .scaleAspectFit
                 addAutolayoutSubview(imageView)
                 imageView.pinToSuperview()
+                
+                NSLayoutConstraint.activate([
+                    imageView.heightAnchor.constraint(equalToConstant: 300)
+                ])
+                
                 configureFor(configuration: configuration)
             }
             
@@ -76,16 +81,14 @@ extension PicsiteProfileViewController {
             let subtitle: String
             let date: String
             let photoCount: String
-            let profilPhoto: Photo
             
             private(set) var state: UICellConfigurationState?
             
-            public init(title: String, subtitle: String, date: String, photoCount: String, profilPhoto: Photo, state: UICellConfigurationState? = nil) {
+            public init(title: String, subtitle: String, date: String, photoCount: String, state: UICellConfigurationState? = nil) {
                 self.title = title
                 self.subtitle = subtitle
                 self.date = date
                 self.photoCount = photoCount
-                self.profilPhoto = profilPhoto
                 self.state = state
             }
             
@@ -104,9 +107,7 @@ extension PicsiteProfileViewController {
         
         @objc(AnnotationCellView)
         class View: UIView, UIContentView {
-            
-            let profileImage = ShadowImageView(width: 80, height: 80)
-            
+                        
             let titleLabel: UILabel = {
                 let label = UILabel()
                 label.numberOfLines = 1
@@ -130,6 +131,7 @@ extension PicsiteProfileViewController {
                 let label = UILabel()
                 label.translatesAutoresizingMaskIntoConstraints = false
                 label.numberOfLines = 0
+                label.textAlignment = .center
                 label.adjustsFontSizeToFitWidth = true
                 label.minimumScaleFactor = 0.9
                 return label
@@ -139,7 +141,6 @@ extension PicsiteProfileViewController {
                 let label = UILabel()
                 label.translatesAutoresizingMaskIntoConstraints = false
                 label.minimumScaleFactor = 0.8
-                label.textColor = UIColor.gray.withAlphaComponent(0.9)
                 return label
             }()
             
@@ -156,7 +157,7 @@ extension PicsiteProfileViewController {
             init(configuration: Configuration) {
                 self.configuration = configuration
                 super.init(frame: .zero)
-                backgroundColor = .white
+                backgroundColor = ColorPalette.picsiteDeepBlueColor.withAlphaComponent(0.1)
                 
                 let photosTitleLabel: UILabel = {
                     let label = UILabel()
@@ -165,10 +166,10 @@ extension PicsiteProfileViewController {
                     return label
                 }()
                 
-                let annotationSeparator = AnnotationSeparatorView(height: 70)
+                let annotationSeparator = AnnotationSeparatorView(height: 70, color: .gray.withAlphaComponent(0.6))
                 
                 // Setup labels
-                photosTitleLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-photos-titel".localized, forSize: 16)
+                photosTitleLabel.attributedText = FontPalette.boldTextStyler.attributedString("map-annotation-photos-titel".localized, forSize: 18)
 
                 let titleAndSubtitleStackView = UIStackView()
                  titleAndSubtitleStackView.axis = .vertical
@@ -186,13 +187,12 @@ extension PicsiteProfileViewController {
 
                 let photoStackView = UIStackView(arrangedSubviews: [photosTitleLabel, photoCountLabel])
                 photoStackView.axis = .vertical
-                photoStackView.spacing = 0
+                photoStackView.spacing = 5
                 photoStackView.alignment = .center
                 photoStackView.layoutMargins = .init(top: 10, left: 0, bottom: 10, right: 0)
                 photoStackView.isLayoutMarginsRelativeArrangement = true
                 
                 let horizontalStackView = UIStackView(arrangedSubviews: [
-                    profileImage,
                     titleAndSubtitleStackView,
                     annotationSeparator,
                     photoStackView
@@ -203,24 +203,21 @@ extension PicsiteProfileViewController {
                 horizontalStackView.spacing = 10
                 horizontalStackView.distribution = .fill
                 horizontalStackView.isLayoutMarginsRelativeArrangement = true
-                
+                            
                 addAutolayoutSubview(horizontalStackView)
                 horizontalStackView.pinToSuperview()
                 
                 NSLayoutConstraint.activate([
-                    profileImage.heightAnchor.constraint(equalToConstant: 80),
-                    profileImage.widthAnchor.constraint(equalToConstant: 80),
-                    photoStackView.widthAnchor.constraint(equalToConstant: 50),
+                    photoStackView.widthAnchor.constraint(equalToConstant: 70),
                     annotationSeparator.widthAnchor.constraint(equalToConstant: 1),
-                    
-                    titleAndSubtitleStackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 10),
-                    titleAndSubtitleStackView.widthAnchor.constraint(lessThanOrEqualToConstant: 300),
                     
                     spacer.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor),
                     spacer.bottomAnchor.constraint(equalTo: dateLabel.topAnchor),
                     spacer.heightAnchor.constraint(greaterThanOrEqualToConstant: 10),
                     titleLabel.topAnchor.constraint(equalTo: titleAndSubtitleStackView.topAnchor),
+                    titleLabel.leadingAnchor.constraint(equalTo: horizontalStackView.leadingAnchor, constant: 10),
                     subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+                    subtitleLabel.leadingAnchor.constraint(equalTo: horizontalStackView.leadingAnchor, constant: 10),
                     dateLabel.bottomAnchor.constraint(equalTo: titleAndSubtitleStackView.bottomAnchor),
                 ])
                 
@@ -232,11 +229,10 @@ extension PicsiteProfileViewController {
             }
             
             func configureFor(configuration: Configuration){
-                titleLabel.attributedText = FontPalette.mediumTextStyler.attributedString(configuration.title, forSize: 18)
-                subtitleLabel.attributedText = FontPalette.mediumTextStyler.attributedString(configuration.subtitle, color: ColorPalette.picsitePlaceholderColor, forSize: 12)
-                dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-view-last-update-title".localized(with: [configuration.date]), forSize: 12)
-                photoCountLabel.attributedText = FontPalette.mediumTextStyler.attributedString("\(configuration.photoCount)", color: ColorPalette.picsiteDeepBlueColor, forSize: 16)
-                profileImage.imageView.setPhoto(configuration.profilPhoto)
+                titleLabel.attributedText = FontPalette.boldTextStyler.attributedString(configuration.title, forSize: 20)
+                subtitleLabel.attributedText = FontPalette.mediumTextStyler.attributedString(configuration.subtitle, color: ColorPalette.picsitePlaceholderColor, forSize: 16)
+                dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-view-last-update-title".localized(with: [configuration.date]), forSize: 14)
+                photoCountLabel.attributedText = FontPalette.mediumTextStyler.attributedString("\(configuration.photoCount)", color: ColorPalette.picsitePlaceholderColor, forSize: 16)
             }
         }
     }
