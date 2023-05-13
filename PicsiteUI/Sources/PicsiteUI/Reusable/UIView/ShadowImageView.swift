@@ -22,14 +22,11 @@ public class ShadowImageView: UIView {
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 12
-        imageView.layoutMargins = .init(uniform: 10)
-
-        dontMakeBiggerOrSmaller()
         
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOffset = CGSize(width: 0, height: 2)
-        self.layer.shadowRadius = 4
-        self.layer.shadowOpacity = 0.3
+        self.layer.shadowRadius = 2
+        self.layer.shadowOpacity = 0.2
         self.layer.masksToBounds = false
         
         self.layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: width, height: height), cornerRadius: imageView.layer.cornerRadius).cgPath

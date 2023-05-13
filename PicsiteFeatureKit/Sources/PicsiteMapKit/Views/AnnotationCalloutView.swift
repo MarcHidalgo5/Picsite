@@ -141,8 +141,7 @@ public class PicsiteAnnotationView: UIView {
         dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-view-last-update-title".localized(with: [picsiteAnnotation.lastActivityDateString]), forSize: 13)
         photoCountLabel.attributedText = FontPalette.mediumTextStyler.attributedString("\(picsiteAnnotation.picsiteData.photoCount)", color: ColorPalette.picsiteDeepBlueColor, forSize: 16)
         profileImage.imageView.backgroundColor = picsiteAnnotation.markerTintColor.withAlphaComponent(0.5)
-        guard let thumbnailURL = picsiteAnnotation.thumbnailURL else { return }
-        profileImage.imageView.setImageWithURL(thumbnailURL)
+        profileImage.imageView.setPhoto(picsiteAnnotation.thumbnailPhoto)
     }
     
     @objc func viewTapped() {

@@ -39,7 +39,7 @@ private extension Array where Element == Picsite {
                 subtitle: activity.title,
                 activity: activity,
                 picsiteData: $0,
-                thumbnailURL: $0.thumbnailURLString?.toURL,
+                thumbnailPhoto: Photo.createWithDeepBlueColor(withURL: nil),
                 imageURL: $0.imageURLString?.toURL,
                 lastActivityDateString: $0.lastActivity.dateFormatterString
             )

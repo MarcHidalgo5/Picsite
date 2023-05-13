@@ -304,17 +304,15 @@ extension PicsiteProfileViewController {
                 backgroundColor = .white
                     
                 imageView.contentMode = .scaleAspectFill
+                imageView.clipsToBounds = true
                 addAutolayoutSubview(imageView)
                 imageView.pinToSuperview()
                 
-                roundCorners(radius: 2)
-                
-                let darkOverlayView = UIView(frame: imageView.bounds)
-                darkOverlayView.backgroundColor = UIColor.black.withAlphaComponent(0.2)
-                darkOverlayView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                roundCorners(radius: 12)
 
-                imageView.addSubview(darkOverlayView)
                 imageView.pinToSuperview()
+                
+                addPicsiteShadow()
                 
                 configureFor(configuration: configuration)
             }
@@ -325,7 +323,6 @@ extension PicsiteProfileViewController {
             
             private func configureFor(configuration: Configuration){
                 imageView.setPhoto(configuration.photo)
-                addPicsiteShadow()
             }
         }
         
@@ -333,7 +330,6 @@ extension PicsiteProfileViewController {
         class ThumbnailPhotoView: UIView, UIContentView {
             
             private let imageView = UIImageView()
-            let shadowImageView = ShadowImageView(width: 200, height: 200)
             
             var configuration: UIContentConfiguration {
                 didSet {
@@ -351,17 +347,16 @@ extension PicsiteProfileViewController {
                 backgroundColor = .white
                     
                 imageView.contentMode = .scaleAspectFill
+                imageView.clipsToBounds = true
+                imageView.roundCorners(radius: 12)
                 addAutolayoutSubview(imageView)
                 imageView.pinToSuperview()
                 
                 roundCorners(radius: 12)
-                
-                let darkOverlayView = UIView(frame: imageView.bounds)
-                darkOverlayView.backgroundColor = UIColor.black.withAlphaComponent(0.2)
-                darkOverlayView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
-                imageView.addSubview(darkOverlayView)
                 imageView.pinToSuperview()
+                
+                addPicsiteShadow()
                 
                 configureFor(configuration: configuration)
             }
@@ -372,7 +367,6 @@ extension PicsiteProfileViewController {
             
             private func configureFor(configuration: Configuration){
                 imageView.setPhoto(configuration.photo)
-//                addPicsiteShadow()
             }
         }
     }
