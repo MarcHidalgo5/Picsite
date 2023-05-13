@@ -16,6 +16,8 @@ public class PicsiteAPIClient {
         self.environment = environment
     }
     
+    //Auth
+    
     public func login(email: String, password: String) async throws {
         try await Auth.auth().signIn(withEmail: email, password: password)
     }
@@ -42,12 +44,31 @@ public class PicsiteAPIClient {
         return !usernameQuery.isEmpty
     }
     
+    //Map
+    
     public func fetchAnnotations() async throws -> [Picsite] {
         let querySnapshot = try await firestore.collection(FirestoreRootCollections.picsites.rawValue).getDocuments()
         return querySnapshot.documents.compactMap { (queryDocumentSnapshot) -> Picsite? in
             return try? queryDocumentSnapshot.data(as: Picsite.self)
         }
     }
+    
+    //Picsite Profile
+    
+    public func fetchPicsiteProfile(picsiteID: String) async throws -> Picsite {
+        let documentSnapshot = try await firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).getDocument()
+        guard let picsite = try documentSnapshot.data(as: Picsite.self) else { throw  PicsiteAPIError.userNotFound }
+        return picsite
+        
+    }
+    
+    public func fetchPicsitePhotosURLStrings(picsiteID: String) async throws -> [String] {
+        return []
+    }
+}
+
+enum PicsiteAPIError: Swift.Error {
+    case userNotFound
 }
 
 private extension FirebaseFirestore.DocumentReference {

@@ -5,5 +5,5 @@
 import Foundation
 
 public protocol PicsiteProfileDataSourceType {
-    
+    func fetchPicsiteDetails(picsiteID: String) async throws -> PicsiteProfileViewController.VM
 }

@@ -21,8 +21,8 @@ public class PicsiteProfileViewController: UIViewController {
     }
     
     private enum ItemID: PagingCollectionViewItem {
-        case profileImage
-        case information
+        case profileImage(ImageCell.Configuration)
+        case information(InformationCell.Configuration)
         case photo
         case loading
         
@@ -40,10 +40,28 @@ public class PicsiteProfileViewController: UIViewController {
         }
     }
     
-    private var collectionView: UICollectionView!
+    public struct VM {
+        public init(information: PicsiteProfileViewController.InformationCell.Configuration, profilePhoto: Photo, photos: [Photo]) {
+            self.information = information
+            self.profilePhoto = profilePhoto
+            self.photos = photos
+        }
+        
+        let information: InformationCell.Configuration
+        let profilePhoto: Photo
+        var photos: [Photo]
+    }
+    
+    private let collectionView: UICollectionView
     private var diffDataSource: PagingCollectionViewDiffableDataSource<Section, ItemID>!
     
-    public init() {
+    private let picsiteID: String
+    private var viewModel: VM!
+    
+    private let dataSource = ModuleDependencies.dataSource!
+    
+    public init(picsiteID: String) {
+        self.picsiteID = picsiteID
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         super.init(nibName: nil, bundle: nil)
     }
@@ -63,8 +81,14 @@ public class PicsiteProfileViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         createDataSource()
-        Task { @MainActor in
-            await configureFor()
+        fetchData()
+    }
+    
+    func fetchData() {
+        fetchData {
+            try await self.dataSource.fetchPicsiteDetails(picsiteID: self.picsiteID)
+        } completion: { vm in
+            await self.configureFor(viewModel: vm)
         }
     }
     
@@ -73,14 +97,11 @@ public class PicsiteProfileViewController: UIViewController {
         let imageCellRegistration = ImageCell.View.defaultCellRegistration()
         let informationCellRegistration = InformationCell.View.defaultCellRegistration()
         
-        diffDataSource = .init(collectionView: collectionView, cellProvider: { [weak self] collectionView, indexPath, itemIdentifier in
-            guard let self = self else { fatalError() }
+        diffDataSource = .init(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
-            case .profileImage:
-                let config = ImageCell.Configuration(photo: .emptyPhoto())
+            case .profileImage(let config):
                 return collectionView.dequeueConfiguredReusableCell(using: imageCellRegistration, for: indexPath, item: config)
-            case .information:
-                let config = InformationCell.Configuration(title: "La seu vella", subtitle: "Lleida", date: "22/09/22", photoCount: "10")
+            case .information(let config):
                 return collectionView.dequeueConfiguredReusableCell(using: informationCellRegistration, for: indexPath, item: config)
             case .photo:
                 fatalError()
@@ -111,12 +132,12 @@ public class PicsiteProfileViewController: UIViewController {
         }
         
         let layout = UICollectionViewCompositionalLayout { [weak self] rawValue, layoutEnviroment in
-            guard let self = self else { return Self.emptyLayout }
+            guard let self = self else { fatalError() }
             let snapshot = self.diffDataSource.snapshot()
             let section = snapshot.sectionIdentifiers[rawValue]
             switch section {
-            case .profileImage: return .list(using: Self.imageProfileLayout, layoutEnvironment: layoutEnviroment)
-            case .information: return .list(using: Self.informationLayout, layoutEnvironment: layoutEnviroment)
+            case .profileImage: return Self.imageProfileLayout
+            case .information: return Self.informationLayout
             case .photos: return Self.photosLayout
             case .loading: return Self.loadingLayout
             }
@@ -124,11 +145,12 @@ public class PicsiteProfileViewController: UIViewController {
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
 
-    private func configureFor() async {
+    private func configureFor(viewModel: VM) async {
+        self.viewModel = viewModel
         var snapshot = diffDataSource.snapshot()
         snapshot.appendSections([.profileImage,.information])
-        snapshot.appendItems([.profileImage], toSection: .profileImage)
-        snapshot.appendItems([.information], toSection: .information)
+        snapshot.appendItems([.profileImage(.init(photo: viewModel.profilePhoto))], toSection: .profileImage)
+        snapshot.appendItems([.information(viewModel.information)], toSection: .information)
         await diffDataSource.apply(snapshot)
     }
 }
@@ -138,10 +160,6 @@ extension PicsiteProfileViewController: UICollectionViewDelegate {
 }
 
 private extension PicsiteProfileViewController {
-    
-    static var emptyLayout: NSCollectionLayoutSection {
-        .init(group: .init(layoutSize: .init(widthDimension: .absolute(0), heightDimension: .absolute(0))))
-    }
     
     static var loadingLayout: NSCollectionLayoutSection {
         let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(200))
@@ -161,25 +179,27 @@ private extension PicsiteProfileViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = .init(top: 0, leading: Constants.Spacing, bottom: Constants.Spacing, trailing: Constants.Spacing)
         section.interGroupSpacing = Constants.Spacing
-//        section.addHeaderElement(estimatedHeight: 46)
         return section
     }
     
-    static var imageProfileLayout: UICollectionLayoutListConfiguration {
-        var config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
-        config.showsSeparators = true
-        config.backgroundColor = ColorPalette.picsiteBackgroundColor
-        config.headerTopPadding = 0
-        config.headerMode = .supplementary
-        return config
+    static var informationLayout: NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(80))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = itemSize
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = .init(top: 0, leading: Constants.MediumSpacing, bottom: Constants.Spacing, trailing: Constants.MediumSpacing)
+        return section
     }
     
-    static var informationLayout: UICollectionLayoutListConfiguration {
-        var config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
-        config.showsSeparators = true
-        config.backgroundColor = ColorPalette.picsiteBackgroundColor
-        config.headerTopPadding = 0
-        config.headerMode = .supplementary
-        return config
+    static var imageProfileLayout: NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(300))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = itemSize
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = .init(top: 0, leading: 0, bottom: -20, trailing: 0)
+        return section
     }
 }
+

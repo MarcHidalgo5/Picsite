@@ -21,6 +21,7 @@
 		1A4B17DF27DCF4D700390B1D /* SF-Compact-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A0EFFB927CA984A004B544C /* SF-Compact-Text-Regular.otf */; };
 		1A4CB8F92917C67B0000EC80 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4CB8F82917C67B0000EC80 /* TabBarViewController.swift */; };
 		1A4FEB5D2A0D85120006802D /* PicisteProfileKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1A4FEB5C2A0D85120006802D /* PicisteProfileKit */; };
+		1A4FEB5F2A0EE3540006802D /* PicsiteProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4FEB5E2A0EE3540006802D /* PicsiteProfileDataSource.swift */; };
 		1A66E4A827C94C7700177DEF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66E4A727C94C7700177DEF /* HomeViewController.swift */; };
 		1A76D08F27DDEB80005EEA29 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1A76D09127DDEB80005EEA29 /* Localizable.strings */; };
 		1A7AC43927B64ED3006B7DF6 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7AC43827B64ED3006B7DF6 /* AppState.swift */; };
@@ -100,6 +101,7 @@
 		1A20451529167C960093663B /* RegisterViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerTests.swift; sourceTree = "<group>"; };
 		1A204517291686870093663B /* ForgotPasswordViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewControllerTests.swift; sourceTree = "<group>"; };
 		1A4CB8F82917C67B0000EC80 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		1A4FEB5E2A0EE3540006802D /* PicsiteProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicsiteProfileDataSource.swift; sourceTree = "<group>"; };
 		1A66E4A727C94C7700177DEF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1A677D8027DBE42800BF3385 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A76D09027DDEB80005EEA29 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			children = (
 				1A141CEF27CD5A5A00AA8190 /* AuthenticationDataSource.swift */,
 				1AA2DDEC291A880100732EF3 /* MapDataSource.swift */,
+				1A4FEB5E2A0EE3540006802D /* PicsiteProfileDataSource.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A4FEB5F2A0EE3540006802D /* PicsiteProfileDataSource.swift in Sources */,
 				1A4CB8F92917C67B0000EC80 /* TabBarViewController.swift in Sources */,
 				1AE7434F27DB3083007944C6 /* Configuration.swift in Sources */,
 				1A943A5627540A92008D7150 /* UIColor+Extensions.swift in Sources */,

@@ -10,7 +10,7 @@ extension PicsiteProfileViewController {
     
     public enum ImageCell {
         
-        public struct Configuration: UIContentConfiguration, Equatable {
+        public struct Configuration: UIContentConfiguration, Hashable {
              let photo: Photo
             
             private(set) var state: UICellConfigurationState?
@@ -53,9 +53,11 @@ extension PicsiteProfileViewController {
                 super.init(frame: .zero)
                 backgroundColor = .white
                     
-                imageView.contentMode = .scaleAspectFit
+                imageView.contentMode = .scaleAspectFill
                 addAutolayoutSubview(imageView)
                 imageView.pinToSuperview()
+                
+                roundCorners(radius: 2)
                 
                 NSLayoutConstraint.activate([
                     imageView.heightAnchor.constraint(equalToConstant: 300)
@@ -76,7 +78,7 @@ extension PicsiteProfileViewController {
     
     public enum InformationCell {
         
-        public struct Configuration: UIContentConfiguration, Equatable {
+        public struct Configuration: UIContentConfiguration, Hashable {
             let title: String
             let subtitle: String
             let date: String
@@ -157,7 +159,7 @@ extension PicsiteProfileViewController {
             init(configuration: Configuration) {
                 self.configuration = configuration
                 super.init(frame: .zero)
-                backgroundColor = ColorPalette.picsiteDeepBlueColor.withAlphaComponent(0.1)
+                backgroundColor = ColorPalette.picsiteBackgroundColor
                 
                 let photosTitleLabel: UILabel = {
                     let label = UILabel()
@@ -207,6 +209,8 @@ extension PicsiteProfileViewController {
                 addAutolayoutSubview(horizontalStackView)
                 horizontalStackView.pinToSuperview()
                 
+                roundCorners(radius: 12)
+                
                 NSLayoutConstraint.activate([
                     photoStackView.widthAnchor.constraint(equalToConstant: 70),
                     annotationSeparator.widthAnchor.constraint(equalToConstant: 1),
@@ -233,6 +237,7 @@ extension PicsiteProfileViewController {
                 subtitleLabel.attributedText = FontPalette.mediumTextStyler.attributedString(configuration.subtitle, color: ColorPalette.picsitePlaceholderColor, forSize: 16)
                 dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-view-last-update-title".localized(with: [configuration.date]), forSize: 14)
                 photoCountLabel.attributedText = FontPalette.mediumTextStyler.attributedString("\(configuration.photoCount)", color: ColorPalette.picsitePlaceholderColor, forSize: 16)
+                addPicsiteShadow()
             }
         }
     }

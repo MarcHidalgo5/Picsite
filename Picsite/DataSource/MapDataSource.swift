@@ -2,13 +2,11 @@
 //  Created by Marc Hidalgo on 8/11/22.
 //
 
-import Foundation
-import PicsiteMapKit
-import CoreLocation
-import PicsiteKit
+import PicsiteKit; import PicsiteUI
 import UIKit
 import BSWInterfaceKit
 import PicisteProfileKit
+import PicsiteMapKit
 
 class MapDataSource: MapDataSourceType {
     
@@ -23,8 +21,8 @@ class MapDataSource: MapDataSourceType {
         return .init(annotations: try await annotations.picsiteAnnotations())
     }
     
-    func picsiteProfileViewController() -> UIViewController {
-        return PicsiteProfileViewController()
+    func picsiteProfileViewController(picsiteID: String) -> UIViewController {
+        return PicsiteProfileViewController(picsiteID: picsiteID)
     }
 }
 
@@ -41,27 +39,11 @@ private extension Array where Element == Picsite {
                 subtitle: activity.title,
                 activity: activity,
                 picsiteData: $0,
-                thumbnailURL: thumnailURL(stringURL: $0.thumbnailURLString),
-                lastActivityDateString: dateFormatterString(date: $0.lastActivity)
+                thumbnailURL: $0.thumbnailURLString?.toURL,
+                imageURL: $0.imageURLString?.toURL,
+                lastActivityDateString: $0.lastActivity.dateFormatterString
             )
         })
-    }
-    
-    func dateFormatterString(date: Date?) -> String {
-        guard let lastActivity = date else { return "" }
-        return PicsiteDateDecodingStrategy.string(from: lastActivity)
-    }
-    
-    func thumnailURL(stringURL: String?) -> URL? {
-        guard let thumbnailURLString = stringURL else { return nil }
-        return URL(string: thumbnailURLString)
-    }
-}
-
-private extension Date {
-    func days(toDate: Date?) -> Int? {
-        guard let toDate = toDate else { return nil }
-        return Calendar.current.dateComponents([.day], from: self, to: toDate).day
     }
 }
 
