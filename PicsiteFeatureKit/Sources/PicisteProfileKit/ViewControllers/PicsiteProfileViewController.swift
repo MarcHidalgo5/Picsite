@@ -72,9 +72,9 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
     
     override public func loadView() {
         view = UIView()
-        collectionView.backgroundColor = ColorPalette.picsiteLightBackgroundColor
+        collectionView.backgroundColor = ColorPalette.picsiteBackgroundColor
         collectionView.delegate = self
-        collectionView.contentInsetAdjustmentBehavior = .never
+//        collectionView.contentInsetAdjustmentBehavior = .
         view.addAutolayoutSubview(collectionView)
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -88,6 +88,7 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
         super.viewDidLoad()
         addPlainBackButton()
         createDataSource()
+        configureDataSource()
         fetchData()
     }
     
@@ -162,10 +163,40 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
         }
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
+    
+    private func configureDataSource() {
+//        dataSource.emptyConfiguration = .init(title: ContactListViewController.emptyTitle, button: nil)
+        diffDataSource.pullToRefreshProvider = .init(tintColor: ColorPalette.picsiteTitleColor, fetchHandler: { [weak self] snapshot in
+            await self?.handlePullToRefresh(snapshot: &snapshot)
+        })
+//        prepareForInfinitePages()
+    }
+//
+//    private func prepareForInfinitePages() {
+//        if provider.morePagesAreAvailable {
+//            dataSource.infiniteScrollProvider = .init(fetchHandler: { [weak self] snapshot in
+//                guard let self else { return false }
+//                return await self.fetchNextPage(snapshot: &snapshot)
+//            })
+//        } else {
+//            dataSource.infiniteScrollProvider = nil
+//        }
+//    }
+    
+    private func handlePullToRefresh(snapshot: inout NSDiffableDataSourceSnapshot<Section, ItemID>) async {
+        do {
+            let vm = try await self.dataSource.fetchPicsiteDetails(picsiteID: self.picsiteID)
+            await configureFor(viewModel: vm)
+//            prepareForInfinitePages()
+        } catch {
+            showErrorAlert("error".localized, error: error)
+        }
+    }
 
     private func configureFor(viewModel: VM) async {
         self.viewModel = viewModel
         var snapshot = diffDataSource.snapshot()
+        snapshot.deleteAllItems()
         snapshot.appendSections([.profileImage,.information, .photos])
         snapshot.appendItems([.profileImage(viewModel.profilePhotoConfig)], toSection: .profileImage)
         snapshot.appendItems([.information(viewModel.informationConfig)], toSection: .information)
@@ -223,7 +254,7 @@ private extension PicsiteProfileViewController {
         let groupSize = itemSize
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 0, leading: 0, bottom: -20, trailing: 0)
+        section.contentInsets = .init(top: UIScreen.main.smallestScreen ? -70 : -100, leading: 0, bottom: -20, trailing: 0)
         return section
     }
 }

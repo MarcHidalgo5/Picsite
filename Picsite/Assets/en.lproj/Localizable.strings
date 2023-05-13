@@ -1,7 +1,7 @@
 
 // Common
 "loading" = "Loading";
-"error" = "Something has gone wrong";
+"error" = "Something went wrong";
 "dismiss" = "Dismiss";
 "error-perform-blocking-task" = "An error has occurred";
 

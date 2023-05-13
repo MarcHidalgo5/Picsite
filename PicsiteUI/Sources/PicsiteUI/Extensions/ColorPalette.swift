@@ -18,5 +18,4 @@ public enum ColorPalette {
     public static var picsiteButtonTitleColor: UIColor!
     public static var picsitePlaceholderColor: UIColor!
     public static var picsiteErrorColor: UIColor!
-    public static var picsiteLightBackgroundColor: UIColor!
 }
