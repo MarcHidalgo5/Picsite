@@ -6,7 +6,7 @@ import UIKit
 import PicsiteUI
 import BSWInterfaceKit
 
-public class PicsiteProfileViewController: UIViewController {
+public class PicsiteProfileViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
     
     enum Constants {
         static let Spacing: CGFloat = 16
@@ -72,16 +72,31 @@ public class PicsiteProfileViewController: UIViewController {
     
     override public func loadView() {
         view = UIView()
-        collectionView.backgroundColor = ColorPalette.picsiteBackgroundColor
+        collectionView.backgroundColor = ColorPalette.picsiteLightBackgroundColor
         collectionView.delegate = self
+        collectionView.contentInsetAdjustmentBehavior = .never
         view.addAutolayoutSubview(collectionView)
-        collectionView.pinToSuperview()
+        NSLayoutConstraint.activate([
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
     
     override public func viewDidLoad() {
         super.viewDidLoad()
+        addPlainBackButton()
         createDataSource()
         fetchData()
+    }
+    
+    public var barStyle: TransparentNavigationBar.TintColorStyle {
+        .transparent
+    }
+    
+    public override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     func fetchData() {

@@ -125,18 +125,12 @@ public class TransparentNavigationBar: UINavigationBar {
         ]
         switch style {
         case .solid(let translucency):
-            if #available(iOS 15, *) {
-                let appearance = UINavigationBarAppearance()
-                appearance.configureWithTransparentBackground()
-                appearance.backgroundColor = ColorPalette.picsiteBackgroundColor
-                appearance.titleTextAttributes = titleTextAttributes
-                navBar.standardAppearance = appearance
-                navBar.scrollEdgeAppearance = appearance
-            } else {
-                navBar.barTintColor = ColorPalette.picsiteBackgroundColor
-                navBar.setBackgroundImage(nil, for: .default)
-                navBar.titleTextAttributes = titleTextAttributes
-            }
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithTransparentBackground()
+            appearance.backgroundColor = ColorPalette.picsiteBackgroundColor
+            appearance.titleTextAttributes = titleTextAttributes
+            navBar.standardAppearance = appearance
+            navBar.scrollEdgeAppearance = appearance
             switch translucency {
             case .alwaysTranslucent:
                 navBar.isTranslucent = true

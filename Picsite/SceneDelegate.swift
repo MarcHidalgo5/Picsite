@@ -84,6 +84,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UITextField.appearance().tintColor = .picsiteBlackTintColor
         UITextField.appearance().font = regularTextStyler.fontForSize(18)
         
+        [UIControl.State.normal, UIControl.State.highlighted].forEach {
+             UIBarButtonItem.appearance(whenContainedInInstancesOf: [TransparentNavigationBar.self]).setTitleTextAttributes([
+                 .font: mediumTextStyler.fontForSize(16)
+                 ], for: $0)
+         }
+        
         UISwitch.appearance().onTintColor = .picsiteDeepBlueColor
         
         UIViewController.loadingViewFactory = { UIView.picsiteLoadingView() }
@@ -99,6 +105,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         PicsiteUI.ColorPalette.picsiteButtonTitleColor = UIColor.picsiteButtonTitleColor
         PicsiteUI.ColorPalette.picsitePlaceholderColor = UIColor.picsitePlaceholderColor
         PicsiteUI.ColorPalette.picsiteErrorColor = UIColor.picsiteErrorColor
+        PicsiteUI.ColorPalette.picsiteLightBackgroundColor = UIColor.picsiteLightBackgroundColor
         
         PicsiteUI.FontPalette.boldTextStyler = boldTextStyler
         PicsiteUI.FontPalette.mediumTextStyler = mediumTextStyler

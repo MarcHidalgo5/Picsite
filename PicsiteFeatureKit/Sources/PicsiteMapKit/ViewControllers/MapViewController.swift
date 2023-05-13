@@ -190,7 +190,7 @@ extension MapViewController: MKMapViewDelegate {
 extension MapViewController: PicsiteAnnotationViewObserver {
     func didTapOnAnnotation(currentAnnotation: PicsiteAnnotation) {
         let profileVC = dataSource.picsiteProfileViewController(picsiteID: currentAnnotation.picsiteData.id)
-        show(profileVC, sender: nil)
+        self.navigationController?.pushViewController(profileVC, animated: true)
     }
 }
 

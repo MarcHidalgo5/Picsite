@@ -59,6 +59,12 @@ extension PicsiteProfileViewController {
                 
                 roundCorners(radius: 2)
                 
+                let darkOverlayView = UIView(frame: imageView.bounds)
+                darkOverlayView.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+                darkOverlayView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+                imageView.addSubview(darkOverlayView)
+                
                 NSLayoutConstraint.activate([
                     imageView.heightAnchor.constraint(equalToConstant: 300)
                 ])
@@ -236,7 +242,7 @@ extension PicsiteProfileViewController {
                 titleLabel.attributedText = FontPalette.boldTextStyler.attributedString(configuration.title, forSize: 20)
                 subtitleLabel.attributedText = FontPalette.mediumTextStyler.attributedString(configuration.subtitle, color: ColorPalette.picsitePlaceholderColor, forSize: 16)
                 dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-view-last-update-title".localized(with: [configuration.date]), forSize: 14)
-                photoCountLabel.attributedText = FontPalette.mediumTextStyler.attributedString("\(configuration.photoCount)", color: ColorPalette.picsitePlaceholderColor, forSize: 16)
+                photoCountLabel.attributedText = FontPalette.mediumTextStyler.attributedString("\(configuration.photoCount)", color: ColorPalette.picsiteDeepBlueColor, forSize: 16)
                 addPicsiteShadow()
             }
         }

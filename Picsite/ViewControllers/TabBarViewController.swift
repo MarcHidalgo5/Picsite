@@ -85,8 +85,3 @@ class TabBarController: UITabBarController {
         return vc
     }
 }
-
-extension TabBarController: StartingObserver {
-    func didFinishAuthentication() {
-    }
-}

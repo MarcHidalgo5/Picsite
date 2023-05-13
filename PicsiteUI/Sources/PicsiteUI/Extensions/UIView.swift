@@ -58,9 +58,9 @@ public extension UIView {
     
     struct PicsiteShadow {
         public init() {}
-        public let opacity: CGFloat = 0.15
+        public let opacity: CGFloat = 0.4
         public let radius: CGFloat = 2
-        public let offset = CGSize(width: 0, height: 1)
+        public let offset = CGSize(width: 0, height: 2)
     }
 
     @objc func addPicsiteShadow() {

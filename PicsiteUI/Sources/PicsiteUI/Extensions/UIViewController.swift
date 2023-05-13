@@ -4,10 +4,41 @@ import JGProgressHUD
 
 public extension UIViewController {
     
-    func addPlainBackButton() {
-        navigationItem.backButtonDisplayMode = .minimal
+    func addPlainBackButton(tintColorWhite: Bool = true) {
+        let config = UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)
+        let image = UIImage(systemName: "chevron.backward", withConfiguration: config)
+        let barButtonItem: UIBarButtonItem = {
+            if tintColorWhite {
+                return WhiteBarButtonItem(image: image, style: .plain, target: self, action: #selector(picsite_popController))
+            } else {
+                return UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(picsite_popController))
+            }
+        }()
+        navigationItem.leftBarButtonItem = barButtonItem
     }
     
+    func addCloseButton(tintColorWhite: Bool = true, prefersButtonOnTheLeft: Bool = false) {
+        let barButtonItem: UIBarButtonItem = {
+            if tintColorWhite {
+                return WhiteBarButtonItem(image: UIImage(systemName: "xmark")!, style: .plain, target: self, action: #selector(picsite_closeViewController))
+            } else {
+                return UIBarButtonItem(image: UIImage(systemName: "xmark")!, style: .plain, target: self, action: #selector(picsite_closeViewController))
+            }
+        }()
+        if prefersButtonOnTheLeft {
+            navigationItem.leftBarButtonItem = barButtonItem
+        } else {
+            navigationItem.rightBarButtonItem = barButtonItem
+        }
+    }
+    
+    @objc private func picsite_closeViewController() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func picsite_popController() {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 public extension UIViewController {
@@ -93,5 +124,15 @@ private class HUDLoadingView: JGProgressHUDIndicatorView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+}
+
+private class WhiteBarButtonItem: UIBarButtonItem {
+    override public var tintColor: UIColor? {
+        get {
+            return UIColor.white
+        } set {
+            // No-op
+        }
     }
 }
