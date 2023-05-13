@@ -8,7 +8,7 @@ import PicsiteUI
 
 extension PicsiteProfileViewController {
     
-    public enum ImageCell {
+    public enum ProfileImageCell {
         
         public struct Configuration: UIContentConfiguration, Hashable {
              let photo: Photo
@@ -244,6 +244,135 @@ extension PicsiteProfileViewController {
                 dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-view-last-update-title".localized(with: [configuration.date]), forSize: 14)
                 photoCountLabel.attributedText = FontPalette.mediumTextStyler.attributedString("\(configuration.photoCount)", color: ColorPalette.picsiteDeepBlueColor, forSize: 16)
                 addPicsiteShadow()
+            }
+        }
+    }
+    
+    public enum ImageCell {
+        
+        public struct Configuration: UIContentConfiguration, Hashable, Identifiable {
+            public let id: String
+            let photo: Photo
+            let thumbnailPhoto: Photo
+            public var isThumbnail: Bool = true
+            
+            private(set) var state: UICellConfigurationState?
+            
+            public init(id: String, photo: Photo, thumbnailPhoto: Photo, state: UICellConfigurationState? = nil) {
+                self.id = id
+                self.photo = photo
+                self.thumbnailPhoto = thumbnailPhoto
+                self.state = state
+            }
+            
+            public func makeContentView() -> UIView & UIContentView {
+                if isThumbnail {
+                   return ThumbnailPhotoView(configuration: self)
+                    
+                } else{
+                   return PhotoView(configuration: self)
+                }
+            }
+            
+            public func updated(for state: UIConfigurationState) -> Configuration {
+                var mutableCopy = self
+                if let cellState = state as? UICellConfigurationState {
+                    mutableCopy.state =  cellState
+                }
+                return mutableCopy
+            }
+        }
+        
+        @objc(ImageCellView)
+        class PhotoView: UIView, UIContentView {
+            
+            private let imageView = UIImageView()
+            
+            var configuration: UIContentConfiguration {
+                didSet {
+                    guard let config = configuration as? Configuration,
+                          let oldConfig = oldValue as? Configuration,
+                          config != oldConfig
+                    else { return }
+                    configureFor(configuration: config)
+                }
+            }
+            
+            init(configuration: Configuration) {
+                self.configuration = configuration
+                super.init(frame: .zero)
+                backgroundColor = .white
+                    
+                imageView.contentMode = .scaleAspectFill
+                addAutolayoutSubview(imageView)
+                imageView.pinToSuperview()
+                
+                roundCorners(radius: 2)
+                
+                let darkOverlayView = UIView(frame: imageView.bounds)
+                darkOverlayView.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+                darkOverlayView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+                imageView.addSubview(darkOverlayView)
+                imageView.pinToSuperview()
+                
+                configureFor(configuration: configuration)
+            }
+            
+            required init?(coder: NSCoder) {
+                fatalError("init(coder:) has not been implemented")
+            }
+            
+            private func configureFor(configuration: Configuration){
+                imageView.setPhoto(configuration.photo)
+                addPicsiteShadow()
+            }
+        }
+        
+        @objc(ThumbnailImageCellView)
+        class ThumbnailPhotoView: UIView, UIContentView {
+            
+            private let imageView = UIImageView()
+            let shadowImageView = ShadowImageView(width: 200, height: 200)
+            
+            var configuration: UIContentConfiguration {
+                didSet {
+                    guard let config = configuration as? Configuration,
+                          let oldConfig = oldValue as? Configuration,
+                          config != oldConfig
+                    else { return }
+                    configureFor(configuration: config)
+                }
+            }
+            
+            init(configuration: Configuration) {
+                self.configuration = configuration
+                super.init(frame: .zero)
+                backgroundColor = .white
+                    
+                imageView.contentMode = .scaleAspectFill
+                addAutolayoutSubview(imageView)
+                imageView.pinToSuperview()
+                
+                roundCorners(radius: 12)
+                
+                let darkOverlayView = UIView(frame: imageView.bounds)
+                darkOverlayView.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+                darkOverlayView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+                imageView.addSubview(darkOverlayView)
+                imageView.pinToSuperview()
+                
+                configureFor(configuration: configuration)
+            }
+            
+            required init?(coder: NSCoder) {
+                fatalError("init(coder:) has not been implemented")
+            }
+            
+            private func configureFor(configuration: Configuration){
+                imageView.setPhoto(configuration.photo)
+//                addPicsiteShadow()
             }
         }
     }

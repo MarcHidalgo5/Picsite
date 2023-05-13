@@ -21,9 +21,9 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
     }
     
     private enum ItemID: PagingCollectionViewItem {
-        case profileImage(ImageCell.Configuration)
+        case profileImage(ProfileImageCell.Configuration)
         case information(InformationCell.Configuration)
-        case photo
+        case photo(ImageCell.Configuration.ID)
         case loading
         
         public var isLoading: Bool {
@@ -41,15 +41,15 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
     }
     
     public struct VM {
-        public init(information: PicsiteProfileViewController.InformationCell.Configuration, profilePhoto: Photo, photos: [Photo]) {
-            self.information = information
-            self.profilePhoto = profilePhoto
+        public init(informationConfig: PicsiteProfileViewController.InformationCell.Configuration, profilePhotoConfig: ProfileImageCell.Configuration, photos: [ImageCell.Configuration]) {
+            self.informationConfig = informationConfig
+            self.profilePhotoConfig = profilePhotoConfig
             self.photos = photos
         }
         
-        let information: InformationCell.Configuration
-        let profilePhoto: Photo
-        var photos: [Photo]
+        let informationConfig: InformationCell.Configuration
+        let profilePhotoConfig: ProfileImageCell.Configuration
+        var photos: [ImageCell.Configuration]
     }
     
     private let collectionView: UICollectionView
@@ -109,8 +109,9 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
     
     private func createDataSource() {
         
-        let imageCellRegistration = ImageCell.View.defaultCellRegistration()
+        let imageCellRegistration = ProfileImageCell.View.defaultCellRegistration()
         let informationCellRegistration = InformationCell.View.defaultCellRegistration()
+        let photoCellRegistration = ImageCell.ThumbnailPhotoView.defaultCellRegistration()
         
         diffDataSource = .init(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
@@ -118,8 +119,10 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
                 return collectionView.dequeueConfiguredReusableCell(using: imageCellRegistration, for: indexPath, item: config)
             case .information(let config):
                 return collectionView.dequeueConfiguredReusableCell(using: informationCellRegistration, for: indexPath, item: config)
-            case .photo:
-                fatalError()
+            case .photo(let id):
+                guard var config = self.viewModel.photos.first(where: { $0.id == id }) else { fatalError() }
+                config.isThumbnail = true
+                return collectionView.dequeueConfiguredReusableCell(using: photoCellRegistration, for: indexPath, item: config)
             case .loading:
                 fatalError()
             }
@@ -163,9 +166,12 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
     private func configureFor(viewModel: VM) async {
         self.viewModel = viewModel
         var snapshot = diffDataSource.snapshot()
-        snapshot.appendSections([.profileImage,.information])
-        snapshot.appendItems([.profileImage(.init(photo: viewModel.profilePhoto))], toSection: .profileImage)
-        snapshot.appendItems([.information(viewModel.information)], toSection: .information)
+        snapshot.appendSections([.profileImage,.information, .photos])
+        snapshot.appendItems([.profileImage(viewModel.profilePhotoConfig)], toSection: .profileImage)
+        snapshot.appendItems([.information(viewModel.informationConfig)], toSection: .information)
+        viewModel.photos.forEach({
+            snapshot.appendItems([.photo($0.id)], toSection: .photos)
+        })
         await diffDataSource.apply(snapshot)
     }
 }
@@ -187,13 +193,17 @@ private extension PicsiteProfileViewController {
     }
     
     static var photosLayout: NSCollectionLayoutSection {
-        let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1))
-        let item = NSCollectionLayoutItem(layoutSize: size)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.5))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        // Definir el espacio entre los items.
+        let spacing = NSCollectionLayoutSpacing.fixed(Constants.Spacing)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.5))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
+        group.interItemSpacing = spacing
+
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 0, leading: Constants.Spacing, bottom: Constants.Spacing, trailing: Constants.Spacing)
-        section.interGroupSpacing = Constants.Spacing
+        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: Constants.Spacing, bottom: Constants.Spacing, trailing: Constants.Spacing)
         return section
     }
     

@@ -18,8 +18,9 @@ public extension PicsiteAPIClient {
         case picsites = "picsites"
     }
     
-    enum FirestoreCollections {
-        
+    enum FirestoreCollections: String {
+        case photos = "photos"
+        case profilePhotos = "profile_Photos"
     }
     
     enum FirestoreFields: String {

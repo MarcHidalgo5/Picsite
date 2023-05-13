@@ -47,7 +47,6 @@ class TabBarController: UITabBarController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBar.barTintColor = .picsiteDeepBlueColor
         tabBar.backgroundColor = .picsiteBackgroundColor
         
         //Lines:

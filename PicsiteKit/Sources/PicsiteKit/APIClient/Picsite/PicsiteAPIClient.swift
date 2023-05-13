@@ -56,14 +56,16 @@ public class PicsiteAPIClient {
     //Picsite Profile
     
     public func fetchPicsiteProfile(picsiteID: String) async throws -> Picsite {
-        let documentSnapshot = try await firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).getDocument()
-        guard let picsite = try documentSnapshot.data(as: Picsite.self) else { throw  PicsiteAPIError.userNotFound }
+        let querySnapshot = try await firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).getDocument()
+        guard let picsite = try querySnapshot.data(as: Picsite.self) else { throw  PicsiteAPIError.userNotFound }
         return picsite
-        
     }
     
-    public func fetchPicsitePhotosURLStrings(picsiteID: String) async throws -> [String] {
-        return []
+    public func fetchPhotoURLs(for picsiteID: String) async throws -> [PhotoDocument] {
+        let querySnapshot = try await firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).collection(FirestoreCollections.photos.rawValue).getDocuments()
+        return querySnapshot.documents.compactMap { (queryDocumentSnapshot) -> PhotoDocument? in
+            return try? queryDocumentSnapshot.data(as: PhotoDocument.self)
+        }
     }
 }
 
