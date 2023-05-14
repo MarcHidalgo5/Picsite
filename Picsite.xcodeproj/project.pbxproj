@@ -53,7 +53,8 @@
 		1AE1592028009DF600F086B3 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 1AE1591F28009DF600F086B3 /* SnapshotTesting */; };
 		1AE7434F27DB3083007944C6 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7434E27DB3083007944C6 /* Configuration.swift */; };
 		1AE7B3FC290DC2A30021AFE1 /* PicsiteAuthKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1AE7B3FB290DC2A30021AFE1 /* PicsiteAuthKit */; };
-		1AEF7F8F2A110FF1000C4126 /* PicsiteUploadKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1AEF7F8E2A110FF1000C4126 /* PicsiteUploadKit */; };
+		1AEF7F912A1197D7000C4126 /* PicsiteUploadContentKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1AEF7F902A1197D7000C4126 /* PicsiteUploadContentKit */; };
+		1AEF7F932A119908000C4126 /* UploadContentDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEF7F922A119908000C4126 /* UploadContentDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,6 +135,7 @@
 		1AE7434D27DA73B3007944C6 /* AppStore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppStore.xcconfig; sourceTree = "<group>"; };
 		1AE7434E27DB3083007944C6 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		1AE7B3F6290DB3B40021AFE1 /* PicsiteFeatureKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = PicsiteFeatureKit; sourceTree = "<group>"; };
+		1AEF7F922A119908000C4126 /* UploadContentDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadContentDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,7 +153,7 @@
 				1AE7B3FC290DC2A30021AFE1 /* PicsiteAuthKit in Frameworks */,
 				1A225D4227DFF2A800BED065 /* GoogleSignIn in Frameworks */,
 				1ADAF7FA27517F7100D8D480 /* FirebaseDatabaseSwift-Beta in Frameworks */,
-				1AEF7F8F2A110FF1000C4126 /* PicsiteUploadKit in Frameworks */,
+				1AEF7F912A1197D7000C4126 /* PicsiteUploadContentKit in Frameworks */,
 				1ADAF7FC27517F7100D8D480 /* FirebaseFirestoreSwift-Beta in Frameworks */,
 				1ADAF7F627517F7100D8D480 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
 				1ADAF7F827517F7100D8D480 /* FirebaseAuth in Frameworks */,
@@ -187,6 +189,7 @@
 				1A141CEF27CD5A5A00AA8190 /* AuthenticationDataSource.swift */,
 				1AA2DDEC291A880100732EF3 /* MapDataSource.swift */,
 				1A4FEB5E2A0EE3540006802D /* PicsiteProfileDataSource.swift */,
+				1AEF7F922A119908000C4126 /* UploadContentDataSource.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -411,7 +414,7 @@
 				1AE7B3FB290DC2A30021AFE1 /* PicsiteAuthKit */,
 				1AA2DDE8291922FF00732EF3 /* PicsiteMapKit */,
 				1A4FEB5C2A0D85120006802D /* PicisteProfileKit */,
-				1AEF7F8E2A110FF1000C4126 /* PicsiteUploadKit */,
+				1AEF7F902A1197D7000C4126 /* PicsiteUploadContentKit */,
 			);
 			productName = Picsite;
 			productReference = 1ADAF7BF27517C8800D8D480 /* Picsite.app */;
@@ -553,6 +556,7 @@
 				1AA2DDED291A880100732EF3 /* MapDataSource.swift in Sources */,
 				1A0EFFB627CA7B8C004B544C /* UIFont+Extensions.swift in Sources */,
 				1AADE10C27E5F5BB0014A884 /* ErrorView.swift in Sources */,
+				1AEF7F932A119908000C4126 /* UploadContentDataSource.swift in Sources */,
 				1ADAF7C527517C8800D8D480 /* SceneDelegate.swift in Sources */,
 				1AD0EC0628244A5900DE489A /* StartingBottomButtonViewController.swift in Sources */,
 			);
@@ -1080,9 +1084,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = PicsiteAuthKit;
 		};
-		1AEF7F8E2A110FF1000C4126 /* PicsiteUploadKit */ = {
+		1AEF7F902A1197D7000C4126 /* PicsiteUploadContentKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = PicsiteUploadKit;
+			productName = PicsiteUploadContentKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

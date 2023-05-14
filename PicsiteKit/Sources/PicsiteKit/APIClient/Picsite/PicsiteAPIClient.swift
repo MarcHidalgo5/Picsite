@@ -6,13 +6,12 @@ import Foundation
 import BSWFoundation
 import FirebaseFirestore
 import FirebaseAuth
+import FirebaseStorage
 
 public class PicsiteAPIClient {
     
     let environment: PicsiteAPI.Environment
     let firestore = Firestore.firestore()
-    
-    let pageSize = PicsiteAPI.PagingConfiguration.PageSize
     
     public init(environment: PicsiteAPI.Environment) {
         self.environment = environment
@@ -50,19 +49,35 @@ public class PicsiteAPIClient {
     
     public func fetchAnnotations() async throws -> [Picsite] {
         let query = firestore.collection(FirestoreRootCollections.picsites.rawValue)
-        return try await fetchAllDocuments(query: query)
+        return try await query.fetchAllDocuments()
     }
     
     //Picsite Profile
     
     public func fetchPicsiteProfile(picsiteID: String) async throws -> Picsite {
         let documentRef = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID)
-        return try await fetchDocument(documentRef: documentRef)
+        return try await documentRef.fetchDocument()
     }
 
-    public func fetchPhotoURLs(for picsiteID: String, startAfter: QueryDocumentSnapshot? = nil) async throws -> PagedResult<PhotoDocument> {
-        let baseQuery = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).collection(FirestoreCollections.photos.rawValue).order(by: FirestoreFields.createdAt.rawValue)
-        return try await fetchPaged(baseQuery: baseQuery, startAfter: startAfter)
+    public func fetchPhotoURLs(for picsiteID: String, lastDocument: QueryDocumentSnapshot? = nil) async throws -> PagedResult<PhotoDocument> {
+        let query = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).collection(FirestoreCollections.photos.rawValue).order(by: FirestoreFields.createdAt.rawValue)
+        return try await query.fetchPaged(startAfter: lastDocument)
+    }
+    
+    //Storage
+    
+    public func uploadImageToFirebaseStorage(data: Data, at path: String) async throws -> URL {
+        let storage = Storage.storage()
+        let storageRef = storage.reference().child(path)
+        
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        
+        try await storageRef.putData(data: data, metadata: metadata)
+                
+        // After the file is uploaded, get the download URL
+        let downloadURL = try await storageRef.downloadURL()
+        return downloadURL
     }
 }
 

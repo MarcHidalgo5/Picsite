@@ -5,5 +5,5 @@
 import Foundation
 
 public enum ModuleDependencies {
-    
+    public static var dataSource: UploadContentDataSourceType!
 }

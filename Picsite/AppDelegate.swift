@@ -55,6 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 import PicsiteMapKit
 import PicsiteAuthKit
 import PicisteProfileKit
+import PicsiteUploadContentKit
 
 @MainActor
 private func wireUpTheKits() {
@@ -67,4 +68,8 @@ private func wireUpTheKits() {
     
     //PicsiteProfile
     PicisteProfileKit.ModuleDependencies.dataSource = { Current.picsiteProfileDataSourceFactory($0) }
+    
+    //UploadContent
+    PicsiteUploadContentKit.ModuleDependencies.dataSource = Current.uploadContentDataSourceFactory()
+    
 }

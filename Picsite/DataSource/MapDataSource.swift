@@ -50,7 +50,7 @@ private extension Array where Element == Picsite {
 private extension Picsite {
     func activityForInterval(_ interval: Int?) -> PicsiteAnnotation.Activity {
         guard let interval else { return .neverUsed }
-        switch interval {
+        switch abs(interval) {
         case 0..<7:
             return .recentlyUsed
         case 7..<14:
