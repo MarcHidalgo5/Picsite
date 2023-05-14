@@ -8,6 +8,10 @@ import UIKit
 
 public enum PicsiteAPI {
     
+    public enum PagingConfiguration {
+        public static var PageSize: Int = 40
+    }
+    
     public enum Environment {
         case production
         case development

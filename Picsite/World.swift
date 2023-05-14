@@ -23,7 +23,7 @@ struct World {
     
     var mapDataSourceFactory: () -> MapDataSourceType
     
-    var picsiteProfileDataSourceFactory: () -> PicsiteProfileDataSourceType
+    var picsiteProfileDataSourceFactory: (String) -> PicsiteProfileDataSourceType
     
     init(environment: PicsiteAPI.Environment) {
         self.environment = environment
@@ -33,7 +33,7 @@ struct World {
             MapDataSource(apiClient: Current.apiClient)
         }
         self.picsiteProfileDataSourceFactory = {
-            PicsiteProfileDataSource(apiClient: Current.apiClient)
+            PicsiteProfileDataSource(picsiteID: $0, apiClient: Current.apiClient)
         }
     }
 }

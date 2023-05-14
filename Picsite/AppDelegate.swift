@@ -66,5 +66,5 @@ private func wireUpTheKits() {
     PicsiteMapKit.ModuleDependencies.mapDataSource = Current.mapDataSourceFactory()
     
     //PicsiteProfile
-    PicisteProfileKit.ModuleDependencies.dataSource = Current.picsiteProfileDataSourceFactory()
+    PicisteProfileKit.ModuleDependencies.dataSource = { Current.picsiteProfileDataSourceFactory($0) }
 }

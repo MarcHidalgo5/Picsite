@@ -74,4 +74,4 @@
 "map-fetch-error-fetching" = "Fail loading picsties";
 
 //PicsiteProfileViewController
-"picsite-profile-information-header" = "Information";
+"picsite-profile-empty-photos-error" = "No photos have been uploaded to this site yet";

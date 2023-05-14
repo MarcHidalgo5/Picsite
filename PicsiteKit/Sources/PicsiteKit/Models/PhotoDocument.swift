@@ -4,20 +4,40 @@
 
 import Foundation
 import FirebaseFirestoreSwift
+import FirebaseFirestore
 
-public struct PhotoDocument: Codable {
-    @DocumentID private var ID: String?
-    public let photoURLString: String
-    public let thumbnailPhotoURLString: String
+public struct PhotoURLsResult {
+    public let photos: [PhotoDocument]
+    public let morePageAvaliable: Bool
+    public let lastDocument: QueryDocumentSnapshot?
     
-    public var id: String {
-        guard let ID else { fatalError() }
-        return ID
-    }
-    
-    enum CodingKeys: String, CodingKey {
-        case ID
-        case photoURLString = "image_url"
-        case thumbnailPhotoURLString = "thumbnail_image_url"
+    public struct PhotoDocument: Codable {
+        @DocumentID private var _id: String?
+        private let _photoURLString: String
+        private let _thumbnailPhotoURLString: String
+
+        public var id: String {
+            guard let _id else { fatalError() }
+            return _id
+        }
+        
+        public var photoURL: URL? {
+            return URL(string: _photoURLString)
+        }
+        
+        public var thumbnailPhotoURL: URL? {
+            return URL(string: _thumbnailPhotoURLString)
+        }
+        
+        enum CodingKeys: String, CodingKey {
+            case _id
+            case _photoURLString = "image_url"
+            case _thumbnailPhotoURLString = "thumbnail_image_url"
+        }
+        
     }
 }
+
+
+
+

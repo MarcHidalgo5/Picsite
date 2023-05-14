@@ -12,6 +12,8 @@ public class PicsiteAPIClient {
     let environment: PicsiteAPI.Environment
     let firestore = Firestore.firestore()
     
+    let pageSize = PicsiteAPI.PagingConfiguration.PageSize
+    
     public init(environment: PicsiteAPI.Environment) {
         self.environment = environment
     }
@@ -61,11 +63,19 @@ public class PicsiteAPIClient {
         return picsite
     }
     
-    public func fetchPhotoURLs(for picsiteID: String) async throws -> [PhotoDocument] {
-        let querySnapshot = try await firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).collection(FirestoreCollections.photos.rawValue).getDocuments()
-        return querySnapshot.documents.compactMap { (queryDocumentSnapshot) -> PhotoDocument? in
-            return try? queryDocumentSnapshot.data(as: PhotoDocument.self)
+    public func fetchPhotoURLs(for picsiteID: String, startAfter: QueryDocumentSnapshot? = nil) async throws -> PhotoURLsResult {
+        let baseQuery = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).collection(FirestoreCollections.photos.rawValue).limit(to: pageSize)
+        let query = startAfter != nil ? baseQuery.start(afterDocument: startAfter!) : baseQuery
+        let querySnapshot = try await query.getDocuments()
+        guard let lastDocument = querySnapshot.documents.last else {
+            return .init(photos: [], morePageAvaliable: false, lastDocument: nil)
         }
+        let nextQuerySnapshot = try await baseQuery.start(afterDocument: lastDocument).limit(to: 1).getDocuments()
+        let morePageAvaliable = nextQuerySnapshot.documents.count > 0
+        let photos = querySnapshot.documents.compactMap { queryDocumentSnapshot -> PhotoURLsResult.PhotoDocument? in
+            try? queryDocumentSnapshot.data(as: PhotoURLsResult.PhotoDocument.self)
+        }
+        return .init(photos: photos, morePageAvaliable: morePageAvaliable, lastDocument: lastDocument)
     }
 }
 

@@ -5,5 +5,5 @@
 import Foundation
 
 public enum ModuleDependencies {
-    public static var dataSource: PicsiteProfileDataSourceType!
+    public static var dataSource: (String) -> PicsiteProfileDataSourceType = { _ in fatalError() }
 }

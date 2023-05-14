@@ -54,14 +54,14 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
     
     private let collectionView: UICollectionView
     private var diffDataSource: PagingCollectionViewDiffableDataSource<Section, ItemID>!
+    private var emptyView: ErrorView!
     
-    private let picsiteID: String
     private var viewModel: VM!
     
-    private let dataSource = ModuleDependencies.dataSource!
+    private let dataSource: PicsiteProfileDataSourceType
     
     public init(picsiteID: String) {
-        self.picsiteID = picsiteID
+        self.dataSource = ModuleDependencies.dataSource(picsiteID)
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         super.init(nibName: nil, bundle: nil)
     }
@@ -74,7 +74,6 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
         view = UIView()
         collectionView.backgroundColor = ColorPalette.picsiteBackgroundColor
         collectionView.delegate = self
-//        collectionView.contentInsetAdjustmentBehavior = .
         view.addAutolayoutSubview(collectionView)
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -88,7 +87,6 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
         super.viewDidLoad()
         addPlainBackButton()
         createDataSource()
-        configureDataSource()
         fetchData()
     }
     
@@ -102,9 +100,9 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
     
     func fetchData() {
         fetchData {
-            try await self.dataSource.fetchPicsiteDetails(picsiteID: self.picsiteID)
-        } completion: { vm in
-            await self.configureFor(viewModel: vm)
+            try await self.dataSource.fetchPicsiteDetails()
+        } completion: { [weak self] vm in
+            await self?.configureFor(viewModel: vm)
         }
     }
     
@@ -113,6 +111,10 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
         let imageCellRegistration = ProfileImageCell.View.defaultCellRegistration()
         let informationCellRegistration = InformationCell.View.defaultCellRegistration()
         let photoCellRegistration = ImageCell.ThumbnailPhotoView.defaultCellRegistration()
+        let loadingRegistration = UICollectionView.CellRegistration<GridLoadingCell, ItemID> { (cell, indexPath, vm) in
+            guard case .loading = vm else { fatalError() }
+            cell.accessories = []
+        }
         
         diffDataSource = .init(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
@@ -125,7 +127,7 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
                 config.isThumbnail = true
                 return collectionView.dequeueConfiguredReusableCell(using: photoCellRegistration, for: indexPath, item: config)
             case .loading:
-                fatalError()
+                return collectionView.dequeueConfiguredReusableCell(using: loadingRegistration, for: indexPath, item: itemIdentifier)
             }
         })
         
@@ -162,32 +164,76 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
             }
         }
         collectionView.setCollectionViewLayout(layout, animated: false)
+        configureDataSource()
+    }
+    
+    private func addEmptyViewIfNecessary(photos: [ImageCell.Configuration]) {
+        if emptyView != nil {
+            emptyView.removeFromSuperview()
+            emptyView = nil
+        }
+        if photos.isEmpty {
+            emptyView = .init(config: createEmptyConfiguration())
+            view.addAutolayoutSubview(emptyView)
+            view.layoutMargins = UIEdgeInsets(uniform: Constants.Spacing)
+            NSLayoutConstraint.activate([
+                view.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor),
+                view.layoutMarginsGuide.leadingAnchor.constraint(equalTo: emptyView.leadingAnchor),
+                view.layoutMarginsGuide.trailingAnchor.constraint(equalTo: emptyView.trailingAnchor),
+            ])
+            collectionView.isScrollEnabled = false
+        } else {
+            collectionView.isScrollEnabled = true
+        }
+    }
+    private func createEmptyConfiguration() -> ErrorView.Configuration {
+        return .init(title: FontPalette.mediumTextStyler.attributedString("picsite-profile-empty-photos-error".localized, color: ColorPalette.picsiteTitleColor, forSize: 16).settingParagraphStyle {
+            $0.alignment = .center
+        }, button: nil)
     }
     
     private func configureDataSource() {
-//        dataSource.emptyConfiguration = .init(title: ContactListViewController.emptyTitle, button: nil)
         diffDataSource.pullToRefreshProvider = .init(tintColor: ColorPalette.picsiteTitleColor, fetchHandler: { [weak self] snapshot in
             await self?.handlePullToRefresh(snapshot: &snapshot)
         })
-//        prepareForInfinitePages()
     }
-//
-//    private func prepareForInfinitePages() {
-//        if provider.morePagesAreAvailable {
-//            dataSource.infiniteScrollProvider = .init(fetchHandler: { [weak self] snapshot in
-//                guard let self else { return false }
-//                return await self.fetchNextPage(snapshot: &snapshot)
-//            })
-//        } else {
-//            dataSource.infiniteScrollProvider = nil
-//        }
-//    }
+
+    private func prepareForInfinitePages() {
+        if dataSource.morePagesAreAvailable {
+            diffDataSource.infiniteScrollProvider = .init(fetchHandler: { [weak self] snapshot in
+                guard let self else { return false }
+                return await self.fetchNextPage(snapshot: &snapshot)
+            })
+        } else {
+            diffDataSource.infiniteScrollProvider = nil
+        }
+    }
+    
+    private func fetchNextPage(snapshot: inout NSDiffableDataSourceSnapshot<Section,ItemID>) async -> Bool {
+        do {
+            let photos = try await dataSource.fetchPhotosNextPage()
+            self.viewModel.photos.append(contentsOf: photos)
+            photos.forEach({
+                snapshot.appendItems([.photo($0.id)])
+            })
+            return dataSource.morePagesAreAvailable
+        } catch {
+            self.showErrorAlert(error.localizedDescription, error: error)
+            return true
+        }
+    }
     
     private func handlePullToRefresh(snapshot: inout NSDiffableDataSourceSnapshot<Section, ItemID>) async {
         do {
-            let vm = try await self.dataSource.fetchPicsiteDetails(picsiteID: self.picsiteID)
-            await configureFor(viewModel: vm)
-//            prepareForInfinitePages()
+            self.viewModel = try await self.dataSource.fetchPicsiteDetails()
+            snapshot.deleteSections([.profileImage, .information, .photos])
+            snapshot.appendSections([.profileImage,.information, .photos])
+            snapshot.appendItems([.profileImage(viewModel.profilePhotoConfig)], toSection: .profileImage)
+            snapshot.appendItems([.information(viewModel.informationConfig)], toSection: .information)
+            viewModel.photos.forEach({
+                snapshot.appendItems([.photo($0.id)], toSection: .photos)
+            })
+            prepareForInfinitePages()
         } catch {
             showErrorAlert("error".localized, error: error)
         }
@@ -196,7 +242,6 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
     private func configureFor(viewModel: VM) async {
         self.viewModel = viewModel
         var snapshot = diffDataSource.snapshot()
-        snapshot.deleteAllItems()
         snapshot.appendSections([.profileImage,.information, .photos])
         snapshot.appendItems([.profileImage(viewModel.profilePhotoConfig)], toSection: .profileImage)
         snapshot.appendItems([.information(viewModel.informationConfig)], toSection: .information)
@@ -204,6 +249,8 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
             snapshot.appendItems([.photo($0.id)], toSection: .photos)
         })
         await diffDataSource.apply(snapshot)
+        addEmptyViewIfNecessary(photos: viewModel.photos)
+        prepareForInfinitePages()
     }
 }
 
@@ -214,11 +261,11 @@ extension PicsiteProfileViewController: UICollectionViewDelegate {
 private extension PicsiteProfileViewController {
     
     static var loadingLayout: NSCollectionLayoutSection {
-        let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(200))
+        let size = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: size)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: size, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 25, leading: Constants.Spacing, bottom: Constants.Spacing, trailing: Constants.Spacing)
+        section.contentInsets = .init(top: Constants.Spacing, leading: Constants.Spacing, bottom: Constants.Spacing, trailing: Constants.Spacing)
         section.interGroupSpacing = Constants.Spacing
         return section
     }

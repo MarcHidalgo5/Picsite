@@ -74,4 +74,4 @@
 "map-fetch-error-fetching" = "Error al cargar los picsties";
 
 //PicsiteProfileViewController
-"picsite-profile-information-header" = "Información";
+"picsite-profile-empty-photos-error" = "Aún no se ha subido ninguna foto a este sitio";

@@ -268,8 +268,7 @@ extension PicsiteProfileViewController {
             public func makeContentView() -> UIView & UIContentView {
                 if isThumbnail {
                    return ThumbnailPhotoView(configuration: self)
-                    
-                } else{
+                } else {
                    return PhotoView(configuration: self)
                 }
             }
