@@ -10,7 +10,8 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
     
     enum Constants {
         static let Spacing: CGFloat = 16
-        static let MediumSpacing: CGFloat = 8
+        static let MediumSpacing: CGFloat = 12
+        static let SmallSpacing: CGFloat = 8
     }
     
     private enum Section: Hashable {
@@ -281,7 +282,7 @@ private extension PicsiteProfileViewController {
         group.interItemSpacing = spacing
 
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: Constants.Spacing, bottom: Constants.Spacing, trailing: Constants.Spacing)
+        section.contentInsets = NSDirectionalEdgeInsets(top: Constants.SmallSpacing, leading: Constants.MediumSpacing, bottom: Constants.MediumSpacing, trailing: Constants.MediumSpacing)
         return section
     }
     
@@ -291,7 +292,7 @@ private extension PicsiteProfileViewController {
         let groupSize = itemSize
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: 0, leading: Constants.MediumSpacing, bottom: Constants.Spacing, trailing: Constants.MediumSpacing)
+        section.contentInsets = .init(top: -15, leading: Constants.MediumSpacing, bottom: Constants.MediumSpacing, trailing: Constants.MediumSpacing)
         return section
     }
     
@@ -301,7 +302,7 @@ private extension PicsiteProfileViewController {
         let groupSize = itemSize
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: UIScreen.main.smallestScreen ? -70 : -100, leading: 0, bottom: -20, trailing: 0)
+        section.contentInsets = .init(top: UIScreen.main.smallestScreen ? -70 : -100, leading: 0, bottom: 0, trailing: 0)
         return section
     }
 }
