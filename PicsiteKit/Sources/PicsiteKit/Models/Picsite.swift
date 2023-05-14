@@ -8,24 +8,33 @@ import MapKit
 import FirebaseFirestore
 
 public struct Picsite: Codable {
-    @DocumentID private var ID: String?
+    @DocumentID private var _id: String?
     public let title: String
     public let coordinate: GeoPoint
     public let type: AnnotationType
     public let lastActivity: Date?
     public let photoCount: Int
-    public let thumbnailURLString: String?
-    public let imageURLString: String?
+    private let _thumbnailURLString: String?
+    private let _imageURLString: String?
     public let location: String
     
     public var id: String {
-        guard let ID else { fatalError() }
-        return ID
+        guard let _id else { fatalError() }
+        return _id
     }
     
+    public var thumbnailURL: URL? {
+        guard let _thumbnailURLString = _thumbnailURLString else { return nil }
+        return URL(string: _thumbnailURLString)
+    }
+    
+    public var imageURL: URL? {
+        guard let _imageURLString = _imageURLString else { return nil }
+        return URL(string: _imageURLString)
+    }
 
     enum CodingKeys: String, CodingKey {
-        case lastActivity = "last_activity", location, photoCount = "photo_count",imageURLString = "image_url" ,thumbnailURLString = "thumbnail_image_url", title, coordinate, type, ID
+        case lastActivity = "last_activity", location, photoCount = "photo_count", _imageURLString = "image_url" , _thumbnailURLString = "thumbnail_image_url", title, coordinate, type, _id
     }
     
     public enum AnnotationType: Codable, Hashable {

@@ -56,7 +56,7 @@ extension Array where Element == PhotoURLsResult.PhotoDocument {
     var profilePhotosConfig: [PicsiteProfileViewController.ImageCell.Configuration] {
         return self.compactMap({
             guard let photoURL = $0.photoURL, let thumnbnailPhotoURL = $0.thumbnailPhotoURL else { fatalError() }
-            return .init(id: $0.id, photo: Photo.createWithDeepBlueColor(withURL: photoURL), thumbnailPhoto: Photo.createWithDeepBlueColor(withURL: thumnbnailPhotoURL))
+            return .init(id: $0.id, photo: Photo.createPhoto(withURL: photoURL), thumbnailPhoto: Photo.createPhoto(withURL: thumnbnailPhotoURL))
         })
     }
 }
@@ -73,7 +73,7 @@ private extension Picsite {
     }
     
     var profilePhoto: Photo {
-        guard let url = self.imageURLString?.toURL else { return .emptyPhoto() }
-        return Photo.createWithDeepBlueColor(withURL: url)
+        guard let url = self.imageURL else { return .createEmptyPhoto() }
+        return Photo.createPhoto(withURL: url)
     }
 }
