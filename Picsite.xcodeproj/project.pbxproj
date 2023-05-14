@@ -53,6 +53,7 @@
 		1AE1592028009DF600F086B3 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 1AE1591F28009DF600F086B3 /* SnapshotTesting */; };
 		1AE7434F27DB3083007944C6 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7434E27DB3083007944C6 /* Configuration.swift */; };
 		1AE7B3FC290DC2A30021AFE1 /* PicsiteAuthKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1AE7B3FB290DC2A30021AFE1 /* PicsiteAuthKit */; };
+		1AEF7F8F2A110FF1000C4126 /* PicsiteUploadKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1AEF7F8E2A110FF1000C4126 /* PicsiteUploadKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +151,7 @@
 				1AE7B3FC290DC2A30021AFE1 /* PicsiteAuthKit in Frameworks */,
 				1A225D4227DFF2A800BED065 /* GoogleSignIn in Frameworks */,
 				1ADAF7FA27517F7100D8D480 /* FirebaseDatabaseSwift-Beta in Frameworks */,
+				1AEF7F8F2A110FF1000C4126 /* PicsiteUploadKit in Frameworks */,
 				1ADAF7FC27517F7100D8D480 /* FirebaseFirestoreSwift-Beta in Frameworks */,
 				1ADAF7F627517F7100D8D480 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
 				1ADAF7F827517F7100D8D480 /* FirebaseAuth in Frameworks */,
@@ -409,6 +411,7 @@
 				1AE7B3FB290DC2A30021AFE1 /* PicsiteAuthKit */,
 				1AA2DDE8291922FF00732EF3 /* PicsiteMapKit */,
 				1A4FEB5C2A0D85120006802D /* PicisteProfileKit */,
+				1AEF7F8E2A110FF1000C4126 /* PicsiteUploadKit */,
 			);
 			productName = Picsite;
 			productReference = 1ADAF7BF27517C8800D8D480 /* Picsite.app */;
@@ -1076,6 +1079,10 @@
 		1AE7B3FB290DC2A30021AFE1 /* PicsiteAuthKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PicsiteAuthKit;
+		};
+		1AEF7F8E2A110FF1000C4126 /* PicsiteUploadKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PicsiteUploadKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -18,6 +18,9 @@ let package = Package(
         .library(
             name: "PicisteProfileKit",
             targets: ["PicisteProfileKit"]),
+        .library(
+            name: "PicsiteUploadKit",
+            targets: ["PicsiteUploadKit"]),
     ],
     dependencies: [
         .package(path: "PicsiteKit"),
@@ -36,6 +39,10 @@ let package = Package(
         ),
         .target(
             name: "PicisteProfileKit",
+            dependencies: ["BSWFoundation", "BSWInterfaceKit", "PicsiteKit", "PicsiteUI"]
+        ),
+        .target(
+            name: "PicsiteUploadKit",
             dependencies: ["BSWFoundation", "BSWInterfaceKit", "PicsiteKit", "PicsiteUI"]
         ),
     ]
