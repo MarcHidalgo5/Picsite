@@ -49,38 +49,26 @@ public class PicsiteAPIClient {
     //Map
     
     public func fetchAnnotations() async throws -> [Picsite] {
-        let querySnapshot = try await firestore.collection(FirestoreRootCollections.picsites.rawValue).getDocuments()
-        return querySnapshot.documents.compactMap { (queryDocumentSnapshot) -> Picsite? in
-            return try? queryDocumentSnapshot.data(as: Picsite.self)
-        }
+        let query = firestore.collection(FirestoreRootCollections.picsites.rawValue)
+        return try await fetchAllDocuments(query: query)
     }
     
     //Picsite Profile
     
     public func fetchPicsiteProfile(picsiteID: String) async throws -> Picsite {
-        let querySnapshot = try await firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).getDocument()
-        guard let picsite = try querySnapshot.data(as: Picsite.self) else { throw  PicsiteAPIError.userNotFound }
-        return picsite
+        let documentRef = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID)
+        return try await fetchDocument(documentRef: documentRef)
     }
-    
-    public func fetchPhotoURLs(for picsiteID: String, startAfter: QueryDocumentSnapshot? = nil) async throws -> PhotoURLsResult {
-        let baseQuery = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).collection(FirestoreCollections.photos.rawValue).limit(to: pageSize)
-        let query = startAfter != nil ? baseQuery.start(afterDocument: startAfter!) : baseQuery
-        let querySnapshot = try await query.getDocuments()
-        guard let lastDocument = querySnapshot.documents.last else {
-            return .init(photos: [], morePageAvaliable: false, lastDocument: nil)
-        }
-        let nextQuerySnapshot = try await baseQuery.start(afterDocument: lastDocument).limit(to: 1).getDocuments()
-        let morePageAvaliable = nextQuerySnapshot.documents.count > 0
-        let photos = querySnapshot.documents.compactMap { queryDocumentSnapshot -> PhotoURLsResult.PhotoDocument? in
-            try? queryDocumentSnapshot.data(as: PhotoURLsResult.PhotoDocument.self)
-        }
-        return .init(photos: photos, morePageAvaliable: morePageAvaliable, lastDocument: lastDocument)
+
+    public func fetchPhotoURLs(for picsiteID: String, startAfter: QueryDocumentSnapshot? = nil) async throws -> PagedResult<PhotoDocument> {
+        let baseQuery = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).collection(FirestoreCollections.photos.rawValue).order(by: FirestoreFields.createdAt.rawValue)
+        return try await fetchPaged(baseQuery: baseQuery, startAfter: startAfter)
     }
 }
 
 enum PicsiteAPIError: Swift.Error {
     case userNotFound
+    case documentNotFound
 }
 
 private extension FirebaseFirestore.DocumentReference {

@@ -17,6 +17,7 @@ public struct Picsite: Codable {
     private let _thumbnailURLString: String?
     private let _imageURLString: String?
     public let location: String
+    public let createdAt: Date
     
     public var id: String {
         guard let _id else { fatalError() }
@@ -34,7 +35,7 @@ public struct Picsite: Codable {
     }
 
     enum CodingKeys: String, CodingKey {
-        case lastActivity = "last_activity", location, photoCount = "photo_count", _imageURLString = "image_url" , _thumbnailURLString = "thumbnail_image_url", title, coordinate, type, _id
+        case lastActivity = "last_activity", location, photoCount = "photo_count", _imageURLString = "image_url" , _thumbnailURLString = "thumbnail_image_url", title, coordinate, type, _id, createdAt = "created_at"
     }
     
     public enum AnnotationType: Codable, Hashable {

@@ -29,7 +29,7 @@ public class PicsiteAnnotationView: UIView {
         label.numberOfLines = 1
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.9
+        label.minimumScaleFactor = 0.8
         label.textColor = ColorPalette.picsitePlaceholderColor
         return label
     }()
@@ -115,7 +115,7 @@ public class PicsiteAnnotationView: UIView {
         NSLayoutConstraint.activate([
             profileImage.heightAnchor.constraint(equalToConstant: 80),
             profileImage.widthAnchor.constraint(equalToConstant: 80),
-            photoStackView.widthAnchor.constraint(equalToConstant: 70),
+            photoStackView.widthAnchor.constraint(equalToConstant: 65),
             annotationSeparator.widthAnchor.constraint(equalToConstant: 1),
             
             titleAndSubtitleStackView.widthAnchor.constraint(greaterThanOrEqualToConstant: 10),

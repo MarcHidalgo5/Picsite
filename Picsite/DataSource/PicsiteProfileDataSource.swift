@@ -28,31 +28,32 @@ class PicsiteProfileDataSource: PicsiteProfileDataSourceType {
     
     func fetchPicsiteDetails() async throws -> PicsiteProfileViewController.VM {
         self.pagingInfo = PagingInfo()
-        async let photosURLString = apiClient.fetchPhotoURLs(for: self.picsiteID)
+        async let photosPage = apiClient.fetchPhotoURLs(for: self.picsiteID)
         async let picsiteDetails = apiClient.fetchPicsiteProfile(picsiteID: self.picsiteID)
         let picsiteProfileVM = try await picsiteDetails.picsiteProfileVM
-        let photoURLsResults = try await photosURLString
-        let photos = photoURLsResults.photos.profilePhotosConfig
-        self.pagingInfo.morePagesAreAvailable = photoURLsResults.morePageAvaliable
-        self.pagingInfo.lastDocument = photoURLsResults.lastDocument
+        let photoPageResult = try await photosPage
+        let photos = photoPageResult.items
+        self.pagingInfo.morePagesAreAvailable = photoPageResult.morePageAvailable
+        self.pagingInfo.lastDocument = photoPageResult.lastDocument
         return .init(
             informationConfig: picsiteProfileVM.informationConfig,
             profilePhotoConfig: picsiteProfileVM.profilePhotoConfig,
-            photos: photos)
+            photos: photos.profilePhotosConfig)
     }
+
     
     func fetchPhotosNextPage() async throws -> [PicsiteProfileViewController.ImageCell.Configuration] {
         guard morePagesAreAvailable else {
            throw NoPagingAvailable()
         }
-        let photosURLsString = try await apiClient.fetchPhotoURLs(for: self.picsiteID, startAfter: pagingInfo.lastDocument)
-        self.pagingInfo.morePagesAreAvailable = photosURLsString.morePageAvaliable
-        self.pagingInfo.lastDocument = photosURLsString.lastDocument
-        return photosURLsString.photos.profilePhotosConfig
+        let photoPageResult = try await apiClient.fetchPhotoURLs(for: self.picsiteID, startAfter: pagingInfo.lastDocument)
+        self.pagingInfo.morePagesAreAvailable = photoPageResult.morePageAvailable
+        self.pagingInfo.lastDocument = photoPageResult.lastDocument
+        return photoPageResult.items.profilePhotosConfig
     }
 }
 
-extension Array where Element == PhotoURLsResult.PhotoDocument {
+extension Array where Element == PhotoDocument {
     var profilePhotosConfig: [PicsiteProfileViewController.ImageCell.Configuration] {
         return self.compactMap({
             guard let photoURL = $0.photoURL, let thumnbnailPhotoURL = $0.thumbnailPhotoURL else { fatalError() }
