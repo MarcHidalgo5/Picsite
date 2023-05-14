@@ -65,7 +65,6 @@ open class MinimalNavigationController: UINavigationController {
         
         if let preferencesProvider = correctVC as? TransparentNavigationBarPreferenceProvider {
             navBar.tintColorStyle = preferencesProvider.barStyle
-            navBar.isUserInteractionEnabled = false
         } else {
             /// Try to guess it depending on the status bar Style
             if correctVC.preferredStatusBarStyle == .lightContent {
