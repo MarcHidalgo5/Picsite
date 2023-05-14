@@ -20,6 +20,8 @@
 		1A4B17DE27DCF4D500390B1D /* SF-Compact-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A0EFFBA27CA984A004B544C /* SF-Compact-Text-Medium.otf */; };
 		1A4B17DF27DCF4D700390B1D /* SF-Compact-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A0EFFB927CA984A004B544C /* SF-Compact-Text-Regular.otf */; };
 		1A4CB8F92917C67B0000EC80 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4CB8F82917C67B0000EC80 /* TabBarViewController.swift */; };
+		1A4FEB5D2A0D85120006802D /* PicisteProfileKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1A4FEB5C2A0D85120006802D /* PicisteProfileKit */; };
+		1A4FEB5F2A0EE3540006802D /* PicsiteProfileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4FEB5E2A0EE3540006802D /* PicsiteProfileDataSource.swift */; };
 		1A66E4A827C94C7700177DEF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66E4A727C94C7700177DEF /* HomeViewController.swift */; };
 		1A76D08F27DDEB80005EEA29 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1A76D09127DDEB80005EEA29 /* Localizable.strings */; };
 		1A7AC43927B64ED3006B7DF6 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7AC43827B64ED3006B7DF6 /* AppState.swift */; };
@@ -51,6 +53,7 @@
 		1AE1592028009DF600F086B3 /* SnapshotTesting in Frameworks */ = {isa = PBXBuildFile; productRef = 1AE1591F28009DF600F086B3 /* SnapshotTesting */; };
 		1AE7434F27DB3083007944C6 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AE7434E27DB3083007944C6 /* Configuration.swift */; };
 		1AE7B3FC290DC2A30021AFE1 /* PicsiteAuthKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1AE7B3FB290DC2A30021AFE1 /* PicsiteAuthKit */; };
+		1AEF7F8F2A110FF1000C4126 /* PicsiteUploadKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1AEF7F8E2A110FF1000C4126 /* PicsiteUploadKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +102,7 @@
 		1A20451529167C960093663B /* RegisterViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewControllerTests.swift; sourceTree = "<group>"; };
 		1A204517291686870093663B /* ForgotPasswordViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewControllerTests.swift; sourceTree = "<group>"; };
 		1A4CB8F82917C67B0000EC80 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		1A4FEB5E2A0EE3540006802D /* PicsiteProfileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicsiteProfileDataSource.swift; sourceTree = "<group>"; };
 		1A66E4A727C94C7700177DEF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		1A677D8027DBE42800BF3385 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1A76D09027DDEB80005EEA29 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -141,11 +145,13 @@
 				1ADAF80127517FF100D8D480 /* BSWInterfaceKit in Frameworks */,
 				1A7AC43F27B65C2C006B7DF6 /* BSWFoundation in Frameworks */,
 				1ADAF7FE27517F7100D8D480 /* FirebaseStorageSwift-Beta in Frameworks */,
+				1A4FEB5D2A0D85120006802D /* PicisteProfileKit in Frameworks */,
 				1A0EFFAA27CA4479004B544C /* PicsiteUI in Frameworks */,
 				1A0EFFA727CA433A004B544C /* PicsiteKit in Frameworks */,
 				1AE7B3FC290DC2A30021AFE1 /* PicsiteAuthKit in Frameworks */,
 				1A225D4227DFF2A800BED065 /* GoogleSignIn in Frameworks */,
 				1ADAF7FA27517F7100D8D480 /* FirebaseDatabaseSwift-Beta in Frameworks */,
+				1AEF7F8F2A110FF1000C4126 /* PicsiteUploadKit in Frameworks */,
 				1ADAF7FC27517F7100D8D480 /* FirebaseFirestoreSwift-Beta in Frameworks */,
 				1ADAF7F627517F7100D8D480 /* FirebaseAnalyticsSwift-Beta in Frameworks */,
 				1ADAF7F827517F7100D8D480 /* FirebaseAuth in Frameworks */,
@@ -180,6 +186,7 @@
 			children = (
 				1A141CEF27CD5A5A00AA8190 /* AuthenticationDataSource.swift */,
 				1AA2DDEC291A880100732EF3 /* MapDataSource.swift */,
+				1A4FEB5E2A0EE3540006802D /* PicsiteProfileDataSource.swift */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";
@@ -403,6 +410,8 @@
 				1A225D4127DFF2A800BED065 /* GoogleSignIn */,
 				1AE7B3FB290DC2A30021AFE1 /* PicsiteAuthKit */,
 				1AA2DDE8291922FF00732EF3 /* PicsiteMapKit */,
+				1A4FEB5C2A0D85120006802D /* PicisteProfileKit */,
+				1AEF7F8E2A110FF1000C4126 /* PicsiteUploadKit */,
 			);
 			productName = Picsite;
 			productReference = 1ADAF7BF27517C8800D8D480 /* Picsite.app */;
@@ -529,6 +538,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A4FEB5F2A0EE3540006802D /* PicsiteProfileDataSource.swift in Sources */,
 				1A4CB8F92917C67B0000EC80 /* TabBarViewController.swift in Sources */,
 				1AE7434F27DB3083007944C6 /* Configuration.swift in Sources */,
 				1A943A5627540A92008D7150 /* UIColor+Extensions.swift in Sources */,
@@ -964,8 +974,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/theleftbit/BSWFoundation";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.1.1;
+				kind = exactVersion;
+				version = 5.3.8;
 			};
 		};
 		1ADAF7F427517F7100D8D480 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
@@ -980,16 +990,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/theleftbit/BSWInterfaceKit";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.3.2;
+				kind = exactVersion;
+				version = 7.0.5;
 			};
 		};
 		1AE1591E28009DF600F086B3 /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-snapshot-testing.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = exactVersion;
+				version = 1.11.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1007,6 +1017,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1A225D4027DFF2A700BED065 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignIn;
+		};
+		1A4FEB5C2A0D85120006802D /* PicisteProfileKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PicisteProfileKit;
 		};
 		1A7AC43E27B65C2C006B7DF6 /* BSWFoundation */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1065,6 +1079,10 @@
 		1AE7B3FB290DC2A30021AFE1 /* PicsiteAuthKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PicsiteAuthKit;
+		};
+		1AEF7F8E2A110FF1000C4126 /* PicsiteUploadKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PicsiteUploadKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

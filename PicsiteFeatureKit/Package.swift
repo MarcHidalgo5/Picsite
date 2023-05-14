@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "PicsiteFeatureKit",
     platforms: [
-        .iOS(.v14),
+        .iOS(.v15),
     ],
     products: [
         .library(
@@ -15,12 +15,18 @@ let package = Package(
         .library(
             name: "PicsiteMapKit",
             targets: ["PicsiteMapKit"]),
+        .library(
+            name: "PicisteProfileKit",
+            targets: ["PicisteProfileKit"]),
+        .library(
+            name: "PicsiteUploadKit",
+            targets: ["PicsiteUploadKit"]),
     ],
     dependencies: [
         .package(path: "PicsiteKit"),
         .package(path: "PicsiteUI"),
         .package(url: "https://github.com/theleftbit/BSWFoundation.git", from: "5.0.0"),
-        .package(url: "https://github.com/theleftbit/BSWInterfaceKit.git", from: "5.0.0"),
+        .package(url: "https://github.com/theleftbit/BSWInterfaceKit.git", from: "7.0.0"),
     ],
     targets: [
         .target(
@@ -29,6 +35,14 @@ let package = Package(
         ),
         .target(
             name: "PicsiteMapKit",
+            dependencies: ["BSWFoundation", "BSWInterfaceKit", "PicsiteKit", "PicsiteUI"]
+        ),
+        .target(
+            name: "PicisteProfileKit",
+            dependencies: ["BSWFoundation", "BSWInterfaceKit", "PicsiteKit", "PicsiteUI"]
+        ),
+        .target(
+            name: "PicsiteUploadKit",
             dependencies: ["BSWFoundation", "BSWInterfaceKit", "PicsiteKit", "PicsiteUI"]
         ),
     ]

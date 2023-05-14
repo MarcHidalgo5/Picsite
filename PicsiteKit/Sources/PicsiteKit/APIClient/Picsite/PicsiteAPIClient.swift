@@ -12,9 +12,13 @@ public class PicsiteAPIClient {
     let environment: PicsiteAPI.Environment
     let firestore = Firestore.firestore()
     
+    let pageSize = PicsiteAPI.PagingConfiguration.PageSize
+    
     public init(environment: PicsiteAPI.Environment) {
         self.environment = environment
     }
+    
+    //Auth
     
     public func login(email: String, password: String) async throws {
         try await Auth.auth().signIn(withEmail: email, password: password)
@@ -42,12 +46,29 @@ public class PicsiteAPIClient {
         return !usernameQuery.isEmpty
     }
     
+    //Map
+    
     public func fetchAnnotations() async throws -> [Picsite] {
-        let querySnapshot = try await firestore.collection(FirestoreRootCollections.picsites.rawValue).getDocuments()
-        return querySnapshot.documents.compactMap { (queryDocumentSnapshot) -> Picsite? in
-            return try? queryDocumentSnapshot.data(as: Picsite.self)
-        }
+        let query = firestore.collection(FirestoreRootCollections.picsites.rawValue)
+        return try await fetchAllDocuments(query: query)
     }
+    
+    //Picsite Profile
+    
+    public func fetchPicsiteProfile(picsiteID: String) async throws -> Picsite {
+        let documentRef = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID)
+        return try await fetchDocument(documentRef: documentRef)
+    }
+
+    public func fetchPhotoURLs(for picsiteID: String, startAfter: QueryDocumentSnapshot? = nil) async throws -> PagedResult<PhotoDocument> {
+        let baseQuery = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).collection(FirestoreCollections.photos.rawValue).order(by: FirestoreFields.createdAt.rawValue)
+        return try await fetchPaged(baseQuery: baseQuery, startAfter: startAfter)
+    }
+}
+
+enum PicsiteAPIError: Swift.Error {
+    case userNotFound
+    case documentNotFound
 }
 
 private extension FirebaseFirestore.DocumentReference {

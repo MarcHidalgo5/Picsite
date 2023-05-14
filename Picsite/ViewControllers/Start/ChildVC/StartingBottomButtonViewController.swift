@@ -20,10 +20,19 @@ extension StartingViewController {
         
         override func loadView() {
             let fontSize: CGFloat = UIScreen.main.isSmallScreen ? 18 : 22
-
-            let getStartedButton = UIButton(buttonConfiguration: .init(buttonTitle: .text(mediumTextStyler.attributedString("start-button".localized, color: .white, forSize: fontSize)), tintColor: .white, backgroundColor: UIColor.picsiteDeepBlueColor, contentInset: UIEdgeInsets(uniform: 20), cornerRadius: BottomButtonViewController.CornerRadius) { [weak self] in
-                self?.onGetStarted?()
-                })
+            
+            let getStartedButton: UIButton = {
+                var config = UIButton.Configuration.filled()
+                config.title = "start-button".localized
+                config.setFont(fontDescriptor: mediumTextStyler.fontDescriptor!, size: fontSize, foregroundColor: .white)
+                config.baseForegroundColor = .white
+                config.baseBackgroundColor = ColorPalette.picsiteDeepBlueColor
+                config.cornerStyle = .medium
+                config.contentInsets = .init(uniform: 20)
+                return .init(configuration: config, primaryAction: UIAction(handler: { [weak self] action in
+                    self?.onGetStarted?()
+                }))
+            }()
             
             let signUpView = SignUpView(onLogin: { [weak self] in
                 self?.onLogIn?()

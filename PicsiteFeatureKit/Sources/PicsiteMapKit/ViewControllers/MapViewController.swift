@@ -8,7 +8,7 @@ import PicsiteUI; import PicsiteKit
 import CoreLocation
 import BSWInterfaceKit
 
-public class MapViewController: UIViewController {
+public class MapViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
     
     public struct VM {
         let annotations: [PicsiteAnnotation]
@@ -58,6 +58,10 @@ public class MapViewController: UIViewController {
         picsitAnnotationView.addGestureRecognizer(panGesture)
         createLocationManeger()
         fetchData()
+    }
+    
+    public var barStyle: TransparentNavigationBar.TintColorStyle {
+        .transparentWithoutUserInteractionEnable
     }
     
     //MARK: Private
@@ -180,3 +184,13 @@ extension MapViewController: MKMapViewDelegate {
         self.showAnnotationView()
     }
 }
+
+//MARK: PicsiteAnnotationViewObserver
+
+extension MapViewController: PicsiteAnnotationViewObserver {
+    func didTapOnAnnotation(currentAnnotation: PicsiteAnnotation) {
+        let profileVC = dataSource.picsiteProfileViewController(picsiteID: currentAnnotation.picsiteData.id)
+        self.navigationController?.pushViewController(profileVC, animated: true)
+    }
+}
+

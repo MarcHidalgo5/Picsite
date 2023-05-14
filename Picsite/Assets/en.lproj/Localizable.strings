@@ -1,7 +1,7 @@
 
 // Common
 "loading" = "Loading";
-"error" = "Something has gone wrong";
+"error" = "Something went wrong";
 "dismiss" = "Dismiss";
 "error-perform-blocking-task" = "An error has occurred";
 
@@ -72,3 +72,6 @@
 "map-annotation-view-last-update-title" = "Last update: %@";
 "map-fetch-data-loading" = "Loading picsites";
 "map-fetch-error-fetching" = "Fail loading picsties";
+
+//PicsiteProfileViewController
+"picsite-profile-empty-photos-error" = "No photos have been uploaded to this site yet";

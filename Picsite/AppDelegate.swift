@@ -54,6 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 import PicsiteMapKit
 import PicsiteAuthKit
+import PicisteProfileKit
 
 @MainActor
 private func wireUpTheKits() {
@@ -63,4 +64,7 @@ private func wireUpTheKits() {
     
     //Map
     PicsiteMapKit.ModuleDependencies.mapDataSource = Current.mapDataSourceFactory()
+    
+    //PicsiteProfile
+    PicisteProfileKit.ModuleDependencies.dataSource = { Current.picsiteProfileDataSourceFactory($0) }
 }

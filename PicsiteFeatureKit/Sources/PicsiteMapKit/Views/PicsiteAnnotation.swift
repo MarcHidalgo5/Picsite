@@ -4,6 +4,7 @@
 
 import MapKit
 import PicsiteKit
+import BSWInterfaceKit
 
 public class PicsiteAnnotation: NSObject, MKAnnotation {
     public var coordinate: CLLocationCoordinate2D
@@ -11,16 +12,18 @@ public class PicsiteAnnotation: NSObject, MKAnnotation {
     public let subtitle: String?
     public let activity: Activity
     public let picsiteData: Picsite
-    public let thumbnailURL: URL?
+    public let thumbnailPhoto: Photo
+    public let imageURL: URL?
     public let lastActivityDateString: String
     
-    public init(coordinate: CLLocationCoordinate2D, title: String? = nil, subtitle: String? = nil, activity: Activity, picsiteData: Picsite, thumbnailURL: URL? = nil, lastActivityDateString: String) {
+    public init(coordinate: CLLocationCoordinate2D, title: String? = nil, subtitle: String? = nil, activity: Activity, picsiteData: Picsite, thumbnailPhoto: Photo, imageURL: URL? = nil, lastActivityDateString: String) {
         self.coordinate = coordinate
         self.title = title
         self.subtitle = subtitle
         self.activity = activity
         self.picsiteData = picsiteData
-        self.thumbnailURL = thumbnailURL
+        self.thumbnailPhoto = thumbnailPhoto
+        self.imageURL = imageURL
         self.lastActivityDateString = lastActivityDateString
     }
     

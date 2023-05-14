@@ -36,7 +36,7 @@ class TabBarController: UITabBarController {
         )
 
         let viewControllers: [UIViewController] = [
-            viewController(with: map),
+            navigationController(with: map),
             navigationController(with: feed),
             navigationController(with: uploadContent),
             navigationController(with: profile),
@@ -47,7 +47,6 @@ class TabBarController: UITabBarController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBar.barTintColor = .picsiteDeepBlueColor
         tabBar.backgroundColor = .picsiteBackgroundColor
         
         //Lines:
@@ -83,10 +82,5 @@ class TabBarController: UITabBarController {
         let vc = tuple.0
         vc.tabBarItem = tuple.1
         return vc
-    }
-}
-
-extension TabBarController: StartingObserver {
-    func didFinishAuthentication() {
     }
 }
