@@ -3,8 +3,8 @@
 //
 
 import MapKit
-import PicsiteKit
 import BSWInterfaceKit
+import PicsiteKit
 
 public class PicsiteAnnotation: NSObject, MKAnnotation {
     public var coordinate: CLLocationCoordinate2D

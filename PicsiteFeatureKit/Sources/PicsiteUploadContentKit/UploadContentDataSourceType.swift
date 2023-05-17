@@ -3,6 +3,7 @@
 //
 
 import Foundation
+import PicsiteUI
 
 public protocol UploadContentDataSourceType {
     func uploadImageToFirebaseStorage(with localImageURL: URL) async throws -> URL

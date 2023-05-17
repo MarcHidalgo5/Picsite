@@ -3,13 +3,8 @@
 //
 
 import UIKit
-import PicsiteUI
 import BSWInterfaceKit
 import UIKit
-
-protocol PicsiteAnnotationViewObserver {
-    func didTapOnAnnotation(currentAnnotation: PicsiteAnnotation)
-}
 
 public class PicsiteAnnotationView: UIView {
     
@@ -53,7 +48,7 @@ public class PicsiteAnnotationView: UIView {
     
     private var picsiteAnnotation: PicsiteAnnotation!
     
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = ColorPalette.picsiteBackgroundColor
 
@@ -134,7 +129,7 @@ public class PicsiteAnnotationView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureFor(picsiteAnnotation: PicsiteAnnotation) {
+    public func configureFor(picsiteAnnotation: PicsiteAnnotation) {
         self.picsiteAnnotation = picsiteAnnotation
         titleLabel.attributedText = FontPalette.boldTextStyler.attributedString(picsiteAnnotation.title ?? "", forSize: 18)
         subtitleLabel.attributedText = FontPalette.mediumTextStyler.attributedString(picsiteAnnotation.picsiteData.location, color: ColorPalette.picsitePlaceholderColor, forSize: 13)

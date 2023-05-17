@@ -22,7 +22,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
 
     private lazy var scrollableStackView: ScrollableStackView = {
         let stackView = ScrollableStackView(axis: .vertical, alignment: .fill)
-        stackView.spacing = 20
+        stackView.spacing = 10
         stackView.layoutMargins = .init(uniform: 10)
         return stackView
     }()
@@ -31,12 +31,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         let view = UIView()
         view.addCustomShadow()
         view.addAutolayoutSubview(imageView)
-        NSLayoutConstraint.activate([
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: view.topAnchor),
-            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
+        imageView.pinToSuperview()
         return view
     }()
 
@@ -55,11 +50,11 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         configuration.setFont(fontDescriptor: FontPalette.boldTextStyler.fontDescriptor!, size: 16, foregroundColor: ColorPalette.picsiteSecondaryTitleColor)
         configuration.cornerStyle = .large
         let action = UIAction { [weak self] _ in
-            print("tappppp")
+            
         }
         let button = UIButton(configuration: configuration, primaryAction: action)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         return button
     }()
      
@@ -67,6 +62,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         self.selectedPhoto = photo
         super.init(nibName: nil, bundle: nil)
         addPlainBackButton(tintColorWhite: false)
+        self.title = "Foto Seleccionada"
     }
     
     required init?(coder: NSCoder) {
@@ -77,19 +73,21 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         super.viewDidLoad()
         view.backgroundColor = ColorPalette.picsiteBackgroundColor
         
-        scrollableStackView.addArrangedSubview(imageViewContainer)
-        view.addAutolayoutSubview(scrollableStackView)
-        
         imageView.setPhoto(selectedPhoto)
+        nextButton.addCustomVideoAskShadow()
         
         let confirmButtonView = ConfirmButtonView()
         confirmButtonView.selectPicsite = {
-            print("tap2")
+            let vc = UploadPhotoMapViewController()
+            let navVC = MinimalNavigationController(rootViewController: vc)
+            self.present(navVC, animated: true)
         }
-        nextButton.addCustomVideoAskShadow()
         
+        scrollableStackView.addArrangedSubview(imageViewContainer)
         scrollableStackView.addArrangedSubview(confirmButtonView)
-        scrollableStackView.addArrangedSubview(nextButton) // Add the new button here
+        scrollableStackView.addArrangedSubview(nextButton)
+        
+        view.addAutolayoutSubview(scrollableStackView)
         
         NSLayoutConstraint.activate([
             scrollableStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: -10),
