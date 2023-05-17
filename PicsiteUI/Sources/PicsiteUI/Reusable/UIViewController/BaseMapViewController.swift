@@ -34,7 +34,7 @@ open class BaseMapViewController: UIViewController, BaseMapViewControlleType, Tr
         return map
     }()
 
-    public override func loadView() {
+    open override func loadView() {
         view = UIView()
         view.addSubview(mapView)
         view.addSubview(picsitAnnotationView)
@@ -73,7 +73,7 @@ open class BaseMapViewController: UIViewController, BaseMapViewControlleType, Tr
             initialTouchPoint = touchPoint
         } else if gestureRecognizer.state == .changed {
             if touchPoint.y - initialTouchPoint.y > 0 {
-                self.picsitAnnotationView.frame.origin.y =  touchPoint.y - initialTouchPoint.y + UIScreen.main.bounds.height - (UIScreen.main.smallestScreen ? 180 : 210)
+                self.picsitAnnotationView.frame.origin.y = touchPoint.y - initialTouchPoint.y + UIScreen.main.bounds.height - (UIScreen.main.smallestScreen ? 180 : 210)
             }
         } else if gestureRecognizer.state == .ended || gestureRecognizer.state == .cancelled {
             if mapView.selectedAnnotations.count > 0 {
@@ -96,7 +96,7 @@ open class BaseMapViewController: UIViewController, BaseMapViewControlleType, Tr
         }
     }
     
-    private func showAnnotationView() {
+    open func showAnnotationView() {
         UIView.animate(withDuration: 0.3, animations: {
             self.picsitAnnotationView.frame.origin.y =  UIScreen.main.bounds.height - (UIScreen.main.smallestScreen ? 180 : 210)
         })
@@ -108,7 +108,7 @@ open class BaseMapViewController: UIViewController, BaseMapViewControlleType, Tr
         })
     }
     
-    private func deselectCurrentMapAnnotatons() {
+    open func deselectCurrentMapAnnotatons() {
         for annotation in mapView.selectedAnnotations {
             mapView.deselectAnnotation(annotation, animated: true)
         }
