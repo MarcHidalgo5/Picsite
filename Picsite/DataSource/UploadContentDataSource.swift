@@ -14,7 +14,9 @@ class UploadContentDataSource: UploadContentDataSourceType {
         self.apiClient = apiClient
     }
     
-    func uploadImageToFirebaseStorage(data: Data, at path: String) async throws -> URL {
-        try await self.apiClient.uploadImageToFirebaseStorage(data: data, at: path)
+    func uploadImageToFirebaseStorage(with localImageURL: URL) async throws -> URL {
+        let data = try Data(contentsOf: localImageURL)
+        let path = "\(PicsiteAPIClient.FirestoreRootCollections.picsites)/fileName.jpeg"
+        return try await self.apiClient.uploadImageToFirebaseStorage(data: data, at: path)
     }
 }

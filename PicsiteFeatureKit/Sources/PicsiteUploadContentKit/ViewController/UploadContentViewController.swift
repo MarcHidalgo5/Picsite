@@ -22,7 +22,7 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
         fatalError("init(coder:) has not been implemented")
     }
     
-    private let mediaPicker = MediaPickerBehavior()
+    private let mediaPicker = PicsiteMediaPickerBehavior()
     private let dataSource = ModuleDependencies.dataSource!
     
     public override func viewDidLoad() {
@@ -74,24 +74,16 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
     
     private func onSelectPhoto() {
         Task { @MainActor in
-            guard let url = await self.mediaPicker.getMedia(fromVC: self, kind: .photo, source: .photoAlbum) else { return }
-            do {
-                let data = try Data(contentsOf: url)
-                let path = "FolderName/fileName.jpeg"
-                
-                Task {
-                    do {
-                        let downloadURL = try await dataSource.uploadImageToFirebaseStorage(data: data, at: path)
-                        print("Image uploaded successfully: \(downloadURL)")
-                    } catch {
-                        print("Failed to upload image: \(error)")
-                    }
-                }
-            } catch {
-                print("Failed to create Data from URL: \(error)")
-            }
-
-//            self.data.photo = Photo(url: url)
+            guard let localImageURL = await self.mediaPicker.getMedia(fromVC: self, kind: .photo, source: .photoAlbum) else { return }
+            let vc = UploadPhotoConfirmationViewController(photo: Photo(url: localImageURL))
+            self.show(vc, sender: self)
+//            do {
+//
+////                let downloadURL = try await dataSource.uploadImageToFirebaseStorage(with: localImageURL)
+////                print(downloadURL)
+//            } catch {
+//                showErrorAlert("error".localized, error: error)
+//            }
         }
     }
     

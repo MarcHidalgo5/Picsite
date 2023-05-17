@@ -23,7 +23,7 @@ public extension UIButton {
         /// using our shadow APIs was not working and we need to add custom code here.
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOpacity = 0.15
-        self.layer.shadowOffset = CGSize(width: 0, height: 1.25)
+        self.layer.shadowOffset = CGSize(width: 0, height: 4)
         self.layer.shadowRadius = 2
         self.layer.contentsScale = UIScreen.main.scale
     }

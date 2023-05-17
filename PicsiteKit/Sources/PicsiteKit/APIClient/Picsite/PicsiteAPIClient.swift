@@ -17,7 +17,7 @@ public class PicsiteAPIClient {
         self.environment = environment
     }
     
-    //Auth
+    //MARK: Auth
     
     public func login(email: String, password: String) async throws {
         try await Auth.auth().signIn(withEmail: email, password: password)
@@ -45,14 +45,14 @@ public class PicsiteAPIClient {
         return !usernameQuery.isEmpty
     }
     
-    //Map
+    //MARK: Map
     
     public func fetchAnnotations() async throws -> [Picsite] {
         let query = firestore.collection(FirestoreRootCollections.picsites.rawValue)
         return try await query.fetchAllDocuments()
     }
     
-    //Picsite Profile
+    //MARK: Picsite Profile
     
     public func fetchPicsiteProfile(picsiteID: String) async throws -> Picsite {
         let documentRef = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID)
@@ -64,7 +64,7 @@ public class PicsiteAPIClient {
         return try await query.fetchPaged(startAfter: lastDocument)
     }
     
-    //Storage
+    //MARK: Storage
     
     public func uploadImageToFirebaseStorage(data: Data, at path: String) async throws -> URL {
         let storage = Storage.storage()

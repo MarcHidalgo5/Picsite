@@ -9,6 +9,15 @@ public class SectionContainerView<T: UIView>: UIView {
     
     public let view: T
     
+    @objc public var onTap: (() -> ())? {
+        didSet {
+            if onTap != nil {
+                let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapGesture))
+                addGestureRecognizer(tapGestureRecognizer)
+            }
+        }
+    }
+    
     public init(_ view: T, attributedTitle: NSAttributedString? = nil, addSeparators: Bool = true) {
         self.view = view
         super.init(frame: .zero)
@@ -40,4 +49,10 @@ public class SectionContainerView<T: UIView>: UIView {
     }
     
     required init(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    
+    @objc func onTapGesture() {
+        self.onTap?()
+    }
 }
+
+

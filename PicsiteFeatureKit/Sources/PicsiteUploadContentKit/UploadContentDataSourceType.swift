@@ -5,5 +5,5 @@
 import Foundation
 
 public protocol UploadContentDataSourceType {
-    func uploadImageToFirebaseStorage(data: Data, at path: String) async throws -> URL
+    func uploadImageToFirebaseStorage(with localImageURL: URL) async throws -> URL
 }
