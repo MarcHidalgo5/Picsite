@@ -4,7 +4,8 @@
 
 import Foundation
 import PicsiteUI
+import PicsiteKit
 
 public protocol UploadContentDataSourceType {
-    func uploadImageToFirebaseStorage(with localImageURL: URL) async throws -> URL
+    func uploadImageToFirebaseStorage(with localImageURL: URL, into picsiteID: Picsite.ID) async throws
 }

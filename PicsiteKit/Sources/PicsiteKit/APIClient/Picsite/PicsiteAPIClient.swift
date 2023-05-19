@@ -13,6 +13,13 @@ public class PicsiteAPIClient {
     let environment: PicsiteAPI.Environment
     let firestore = Firestore.firestore()
     
+    var userID: String {
+        get {
+            guard let userID = Auth.auth().currentUser?.uid else { fatalError() }
+            return userID
+        }
+    }
+    
     public init(environment: PicsiteAPI.Environment) {
         self.environment = environment
     }
@@ -64,9 +71,21 @@ public class PicsiteAPIClient {
         return try await query.fetchPaged(startAfter: lastDocument)
     }
     
+    //MARK: Upload Content
+    
+    public func uploadImage(into picsiteID: String, localImageURL: URL) async throws {
+        let ref = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).collection(FirestoreCollections.photos.rawValue)
+        let newDocumentID = ref.document().documentID
+        let data = try Data(contentsOf: localImageURL)
+        let path = "\(PicsiteAPIClient.FirestoreRootCollections.picsites)/\(picsiteID)/photos/\(newDocumentID).jpeg"
+        let downloadURL = try await uploadImageToFirebaseStorage(data: data, at: path)
+        let photoDocument = PhotoDocument(_photoURLString: downloadURL.absoluteString, _thumbnailPhotoURLString: "", createdAt: Date(), userCreatedID: userID)
+        try await ref.document(newDocumentID).setData(photoDocument)
+    }
+    
     //MARK: Storage
     
-    public func uploadImageToFirebaseStorage(data: Data, at path: String) async throws -> URL {
+    private func uploadImageToFirebaseStorage(data: Data, at path: String) async throws -> URL {
         let storage = Storage.storage()
         let storageRef = storage.reference().child(path)
         

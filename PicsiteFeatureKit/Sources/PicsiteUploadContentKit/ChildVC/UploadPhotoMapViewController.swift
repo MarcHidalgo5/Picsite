@@ -7,17 +7,24 @@ import PicsiteUI; import PicsiteKit
 import CoreLocation
 import BSWInterfaceKit
 
+public protocol UploadPhotoMapViewControllerDelegate: AnyObject {
+    func didSelectPicsite(id: Picsite.ID)
+}
+ 
 public class UploadPhotoMapViewController: BaseMapViewController {
     
     let dataSource = ModuleDependencies.dataSource!
     
-    private let picsiteCheckView = RoundCheckButtonView()
-    private let picsiteCancelView = RoundCancelButtonView()
+    weak var delegate: UploadPhotoMapViewControllerDelegate?
     
-    override public init() {
+    private let picsiteCheckView = RoundButtonView(imageButton: UIImage(systemName: "checkmark")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .bold)), color: ColorPalette.picsiteGreenColor)
+    private let picsiteCancelView = RoundButtonView(imageButton: UIImage(systemName: "xmark")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .bold)), color: ColorPalette.picsiteErrorColor)
+    
+    public init(delegate: UploadPhotoMapViewControllerDelegate) {
+        self.delegate = delegate
         super.init()
         addCloseButton(tintColorWhite: false)
-        self.title = "Picsite seleccionado"
+        self.title = "Seleccionar picsite"
     }
     
     required init?(coder: NSCoder) {
@@ -31,6 +38,15 @@ public class UploadPhotoMapViewController: BaseMapViewController {
         view.addSubview(picsiteCancelView)
         view.addSubview(picsiteCheckView)
 
+        picsiteCheckView.onTapButton = { [weak self] in
+            guard let self else { return }
+            self.delegate?.didSelectPicsite(id: self.currentIDSelected)
+        }
+        
+        picsiteCancelView.onTapButton = { [weak self] in
+            self?.deselectCurrentMapAnnotatons()
+        }
+        
         picsiteCheckView.translatesAutoresizingMaskIntoConstraints = false
         picsiteCancelView.translatesAutoresizingMaskIntoConstraints = false
 

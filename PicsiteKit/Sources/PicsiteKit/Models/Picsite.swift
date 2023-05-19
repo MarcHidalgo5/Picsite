@@ -7,7 +7,7 @@ import FirebaseFirestoreSwift
 import MapKit
 import FirebaseFirestore
 
-public struct Picsite: Codable {
+public struct Picsite: Codable, Identifiable {
     @DocumentID private var _id: String?
     public let title: String
     public let coordinate: GeoPoint

@@ -23,7 +23,6 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
     }
     
     private let mediaPicker = PicsiteMediaPickerBehavior()
-    private let dataSource = ModuleDependencies.dataSource!
     
     public override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,15 +74,8 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
     private func onSelectPhoto() {
         Task { @MainActor in
             guard let localImageURL = await self.mediaPicker.getMedia(fromVC: self, kind: .photo, source: .photoAlbum) else { return }
-            let vc = UploadPhotoConfirmationViewController(photo: Photo(url: localImageURL))
+            let vc = UploadPhotoConfirmationViewController(localImageURL: localImageURL)
             self.show(vc, sender: self)
-//            do {
-//
-////                let downloadURL = try await dataSource.uploadImageToFirebaseStorage(with: localImageURL)
-////                print(downloadURL)
-//            } catch {
-//                showErrorAlert("error".localized, error: error)
-//            }
         }
     }
     

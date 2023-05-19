@@ -48,6 +48,12 @@ public class PicsiteAnnotationView: UIView {
     
     private var picsiteAnnotation: PicsiteAnnotation!
     
+    public var id: String {
+        get {
+            return picsiteAnnotation.picsiteData.id
+        }
+    }
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = ColorPalette.picsiteBackgroundColor

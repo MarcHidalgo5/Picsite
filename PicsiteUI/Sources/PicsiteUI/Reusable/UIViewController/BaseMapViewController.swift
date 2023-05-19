@@ -33,6 +33,12 @@ open class BaseMapViewController: UIViewController, BaseMapViewControlleType, Tr
         map.pointOfInterestFilter = .excludingAll
         return map
     }()
+    
+    public var currentIDSelected: String {
+        get {
+            picsitAnnotationView.id
+        }
+    }
 
     open override func loadView() {
         view = UIView()

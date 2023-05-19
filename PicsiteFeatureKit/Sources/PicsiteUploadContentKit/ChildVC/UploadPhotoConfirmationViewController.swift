@@ -5,6 +5,7 @@
 import UIKit
 import PicsiteUI
 import BSWInterfaceKit
+import PicsiteKit
 
 extension UIView {
     public func addCustomShadow() {
@@ -19,6 +20,11 @@ extension UIView {
 class UploadPhotoConfirmationViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
     
     private var selectedPhoto: Photo
+    private var localImageURL: URL
+    
+    private var currentPicsiteIDselected: Picsite.ID?
+    
+    private let dataSource = ModuleDependencies.dataSource!
 
     private lazy var scrollableStackView: ScrollableStackView = {
         let stackView = ScrollableStackView(axis: .vertical, alignment: .fill)
@@ -42,24 +48,10 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         imageView.roundCorners(radius: 12)
         return imageView
     }()
-
-    private lazy var nextButton: UIButton = {
-        var configuration = UIButton.Configuration.filled()
-        configuration.title = "Subir foto"
-        configuration.baseBackgroundColor = ColorPalette.picsiteDeepBlueColor
-        configuration.setFont(fontDescriptor: FontPalette.boldTextStyler.fontDescriptor!, size: 16, foregroundColor: ColorPalette.picsiteSecondaryTitleColor)
-        configuration.cornerStyle = .large
-        let action = UIAction { [weak self] _ in
-            
-        }
-        let button = UIButton(configuration: configuration, primaryAction: action)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        return button
-    }()
      
-    init(photo: Photo) {
-        self.selectedPhoto = photo
+    init(localImageURL: URL) {
+        self.selectedPhoto = Photo(url: localImageURL)
+        self.localImageURL = localImageURL
         super.init(nibName: nil, bundle: nil)
         addPlainBackButton(tintColorWhite: false)
         self.title = "Foto Seleccionada"
@@ -73,12 +65,34 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         super.viewDidLoad()
         view.backgroundColor = ColorPalette.picsiteBackgroundColor
         
+        let nextButton: UIButton = {
+            var configuration = UIButton.Configuration.filled()
+            configuration.title = "Subir foto"
+            configuration.baseBackgroundColor = ColorPalette.picsiteDeepBlueColor
+            configuration.setFont(fontDescriptor: FontPalette.boldTextStyler.fontDescriptor!, size: 16, foregroundColor: ColorPalette.picsiteSecondaryTitleColor)
+            configuration.cornerStyle = .large
+            let action = UIAction { [weak self] _ in
+                guard let self, let picsiteID = self.currentPicsiteIDselected else { return }
+                Task {
+                    do {
+                        try await self.dataSource.uploadImageToFirebaseStorage(with: self.localImageURL, into: picsiteID)
+                    } catch {
+                        self.showErrorAlert("error".localized, error: error)
+                    }
+                }
+            }
+            let button = UIButton(configuration: configuration, primaryAction: action)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            return button
+        }()
+        
         imageView.setPhoto(selectedPhoto)
         nextButton.addCustomVideoAskShadow()
         
         let confirmButtonView = ConfirmButtonView()
         confirmButtonView.selectPicsite = {
-            let vc = UploadPhotoMapViewController()
+            let vc = UploadPhotoMapViewController(delegate: self)
             let navVC = MinimalNavigationController(rootViewController: vc)
             self.present(navVC, animated: true)
         }
@@ -149,6 +163,14 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         
         required init(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
+        }
+    }
+}
+
+extension UploadPhotoConfirmationViewController: UploadPhotoMapViewControllerDelegate {
+    func didSelectPicsite(id: Picsite.ID) {
+        self.dismiss(animated: true) {
+            self.currentPicsiteIDselected = id
         }
     }
 }
