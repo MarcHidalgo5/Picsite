@@ -16,9 +16,9 @@ class MapDataSource: MapDataSourceType {
         self.apiClient = apiClient
     }
     
-    func fetchAnnotations() async throws -> MapViewController.VM {
-        let annotations = try await apiClient.fetchAnnotations()
-        return .init(annotations: try await annotations.picsiteAnnotations())
+    func fetchAnnotations() async throws -> BaseMapViewController.VM {
+        let picsites = try await apiClient.fetchPicsites()
+        return .init(annotations: picsites.picsiteAnnotations())
     }
     
     func picsiteProfileViewController(picsiteID: String) -> UIViewController {
@@ -26,8 +26,8 @@ class MapDataSource: MapDataSourceType {
     }
 }
 
-private extension Array where Element == Picsite {
-    func picsiteAnnotations() async throws -> [PicsiteAnnotation] {
+extension Array where Element == Picsite {
+    func picsiteAnnotations() -> [PicsiteAnnotation] {
         self.map({
             let days = Date().days(toDate: $0.lastActivity)
             let activity = $0.activityForInterval(days)

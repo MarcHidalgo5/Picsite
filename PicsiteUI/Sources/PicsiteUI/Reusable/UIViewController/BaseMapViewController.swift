@@ -34,9 +34,9 @@ open class BaseMapViewController: UIViewController, BaseMapViewControlleType, Tr
         return map
     }()
     
-    public var currentIDSelected: String {
+    public var currentPicsiteSelected: Picsite {
         get {
-            picsitAnnotationView.id
+            picsitAnnotationView.picsite
         }
     }
 

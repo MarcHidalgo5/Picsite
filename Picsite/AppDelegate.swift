@@ -70,8 +70,5 @@ private func wireUpTheKits() {
     PicisteProfileKit.ModuleDependencies.dataSource = { Current.picsiteProfileDataSourceFactory($0) }
     
     //UploadContent
-    PicsiteUploadContentKit.ModuleDependencies.dataSource = Current.uploadContentDataSourceFactory()
-    PicsiteUploadContentKit.ModuleDependencies.fetchAnnotations = { try await Current.mapDataSourceFactory().fetchAnnotations()
-    }
-    
+    PicsiteUploadContentKit.ModuleDependencies.dataSource = Current.uploadContentDataSourceFactory()    
 }

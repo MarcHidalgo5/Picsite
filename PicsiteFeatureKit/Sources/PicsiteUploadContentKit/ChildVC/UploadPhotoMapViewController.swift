@@ -8,7 +8,7 @@ import CoreLocation
 import BSWInterfaceKit
 
 public protocol UploadPhotoMapViewControllerDelegate: AnyObject {
-    func didSelectPicsite(id: Picsite.ID)
+    func didSelectPicsite(_ picsite: Picsite)
 }
  
 public class UploadPhotoMapViewController: BaseMapViewController {
@@ -40,7 +40,7 @@ public class UploadPhotoMapViewController: BaseMapViewController {
 
         picsiteCheckView.onTapButton = { [weak self] in
             guard let self else { return }
-            self.delegate?.didSelectPicsite(id: self.currentIDSelected)
+            self.delegate?.didSelectPicsite(self.currentPicsiteSelected)
         }
         
         picsiteCancelView.onTapButton = { [weak self] in
@@ -86,7 +86,7 @@ public class UploadPhotoMapViewController: BaseMapViewController {
     
     public override func fetchData() {
         performBlockingTask(loadingMessage: "map-fetch-data-loading".localized, errorMessage: "map-fetch-error-fetching".localized) {
-            let vm = try await ModuleDependencies.fetchAnnotations()
+            let vm = try await self.dataSource.fetchAnnotations()
             self.configureFor(viewModel: vm)
         }
     }

@@ -7,5 +7,4 @@ import PicsiteUI
 
 public enum ModuleDependencies {
     public static var dataSource: UploadContentDataSourceType!
-    public static var fetchAnnotations: () async throws -> BaseMapViewController.VM = { fatalError() }
 }

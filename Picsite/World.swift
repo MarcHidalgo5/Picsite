@@ -39,7 +39,7 @@ struct World {
             PicsiteProfileDataSource(picsiteID: $0, apiClient: Current.apiClient)
         }
         self.uploadContentDataSourceFactory = {
-            UploadContentDataSource(apiClient: Current.apiClient)
+            UploadContentDataSource(apiClient: Current.apiClient, mapDataSource: Current.mapDataSourceFactory())
         }
     }
 }

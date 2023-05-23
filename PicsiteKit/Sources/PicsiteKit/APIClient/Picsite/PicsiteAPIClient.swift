@@ -60,7 +60,7 @@ public class PicsiteAPIClient {
 //    
     //MARK: Map
     
-    public func fetchAnnotations() async throws -> [Picsite] {
+    public func fetchPicsites() async throws -> [Picsite] {
         let query = firestore.collection(FirestoreRootCollections.picsites.rawValue)
         return try await query.fetchAllDocuments()
     }
@@ -78,10 +78,6 @@ public class PicsiteAPIClient {
     }
     
     //MARK: Upload Content
-    
-    public func getPicsite(for location: CLLocation) async throws -> Picsite {
-        fatalError()
-    }
     
     public func uploadImage(into picsiteID: String, localImageURL: URL) async throws {
         let ref = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).collection(FirestoreCollections.photos.rawValue)
