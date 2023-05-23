@@ -7,6 +7,8 @@ import BSWFoundation
 import FirebaseFirestore
 import FirebaseAuth
 import FirebaseStorage
+import CoreLocation
+
 
 public class PicsiteAPIClient {
     
@@ -52,6 +54,10 @@ public class PicsiteAPIClient {
         return !usernameQuery.isEmpty
     }
     
+//    public func a() {
+//        let hash = GFUtils.geoHash(forLocation: location)
+//    }
+//    
     //MARK: Map
     
     public func fetchAnnotations() async throws -> [Picsite] {
@@ -67,11 +73,15 @@ public class PicsiteAPIClient {
     }
 
     public func fetchPhotoURLs(for picsiteID: String, lastDocument: QueryDocumentSnapshot? = nil) async throws -> PagedResult<PhotoDocument> {
-        let query = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).collection(FirestoreCollections.photos.rawValue).order(by: FirestoreFields.createdAt.rawValue)
+        let query = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).collection(FirestoreCollections.photos.rawValue).order(by: FirestoreFields.createdAt.rawValue, descending: true)
         return try await query.fetchPaged(startAfter: lastDocument)
     }
     
     //MARK: Upload Content
+    
+    public func getPicsite(for location: CLLocation) -> Picsite {
+        fatalError()
+    }
     
     public func uploadImage(into picsiteID: String, localImageURL: URL) async throws {
         let ref = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).collection(FirestoreCollections.photos.rawValue)

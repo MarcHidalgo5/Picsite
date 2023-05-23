@@ -113,7 +113,8 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         nextButton.addCustomVideoAskShadow()
         nextButton.roundCorners(radius: 12)
         
-        confirmButtonView.selectPicsite = {
+        confirmButtonView.selectPicsite = { [weak self] in
+            guard let self else { return }
             let vc = UploadPhotoMapViewController(delegate: self)
             let navVC = MinimalNavigationController(rootViewController: vc)
             self.present(navVC, animated: true)
@@ -135,6 +136,14 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         ])
     }
 
+    func fetchData() {
+        fetchData {
+//            try await self.dataSource.fetchPicsiteDetails()
+        } completion: { [weak self] vm in
+//            await self?.configureFor(viewModel: vm)
+        }
+    }
+    
     public var barStyle: TransparentNavigationBar.TintColorStyle {
         .transparent
     }

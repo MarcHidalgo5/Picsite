@@ -14,18 +14,19 @@ public extension PicsiteAPIClient {
 
 public extension PicsiteAPIClient {
     
-    public enum FirestoreRootCollections: String {
+    enum FirestoreRootCollections: String {
         case users = "users"
         case picsites = "picsites"
     }
     
-    public enum FirestoreCollections: String {
+    enum FirestoreCollections: String {
         case photos = "photos"
         case profilePhotos = "profile_Photos"
     }
     
-    public enum FirestoreFields: String {
+    enum FirestoreFields: String {
         case username = "username"
         case createdAt = "created_at"
+        case coordinate = "coordinate"
     }
 }
