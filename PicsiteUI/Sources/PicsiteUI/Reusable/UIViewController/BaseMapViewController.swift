@@ -84,7 +84,6 @@ open class BaseMapViewController: UIViewController, BaseMapViewControlleType, Tr
         } else if gestureRecognizer.state == .ended || gestureRecognizer.state == .cancelled {
             if mapView.selectedAnnotations.count > 0 {
                 if touchPoint.y - self.initialTouchPoint.y > 45 {
-                    self.removeAnnotationView()
                     self.deselectCurrentMapAnnotatons()
                 } else {
                     // Redisplay in the initial position
@@ -97,7 +96,6 @@ open class BaseMapViewController: UIViewController, BaseMapViewControlleType, Tr
     
     @objc private func didTapOnMap() {
         if mapView.selectedAnnotations.count > 0 {
-            removeAnnotationView()
             deselectCurrentMapAnnotatons()
         }
     }
@@ -115,6 +113,7 @@ open class BaseMapViewController: UIViewController, BaseMapViewControlleType, Tr
     }
     
     open func deselectCurrentMapAnnotatons() {
+        removeAnnotationView()
         for annotation in mapView.selectedAnnotations {
             mapView.deselectAnnotation(annotation, animated: true)
         }

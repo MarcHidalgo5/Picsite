@@ -106,6 +106,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         PicsiteUI.ColorPalette.picsitePlaceholderColor = UIColor.picsitePlaceholderColor
         PicsiteUI.ColorPalette.picsiteErrorColor = UIColor.picsiteErrorColor
         PicsiteUI.ColorPalette.picsiteGreenColor = UIColor.picsiteGreenColor
+        PicsiteUI.ColorPalette.picsiteLightGray = UIColor.picsiteLightGray
+        PicsiteUI.ColorPalette.picsiteDarkGray = UIColor.picsiteDarkGray
         
         PicsiteUI.FontPalette.boldTextStyler = boldTextStyler
         PicsiteUI.FontPalette.mediumTextStyler = mediumTextStyler

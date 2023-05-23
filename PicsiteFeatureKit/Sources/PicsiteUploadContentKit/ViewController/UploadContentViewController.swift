@@ -5,6 +5,7 @@
 import UIKit
 import PicsiteUI
 import BSWInterfaceKit
+import Photos
 
 public class UploadContentViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
     
@@ -72,10 +73,30 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
     }
     
     private func onSelectPhoto() {
+        requestPhotoLibraryAccess()
         Task { @MainActor in
-            guard let localImageURL = await self.mediaPicker.getMedia(fromVC: self, kind: .photo, source: .photoAlbum) else { return }
-            let vc = UploadPhotoConfirmationViewController(localImageURL: localImageURL)
+            guard let imageData = await self.mediaPicker.getMedia(fromVC: self, kind: .photo, source: .photoAlbum), imageData.localURL != nil else { return }
+            let vc = UploadPhotoConfirmationViewController(imageData: imageData)
             self.show(vc, sender: self)
+        }
+    }
+    
+    func requestPhotoLibraryAccess() {
+        PHPhotoLibrary.requestAuthorization { (status) in
+            switch status {
+            case .authorized:
+                print("El acceso a la biblioteca de fotos ha sido autorizado.")
+            case .denied:
+                print("El acceso a la biblioteca de fotos ha sido denegado.")
+            case .restricted:
+                print("El acceso a la biblioteca de fotos está restringido.")
+            case .limited:
+                print("El acceso a la biblioteca de fotos es limitado.")
+            case .notDetermined:
+                print("El usuario todavía no ha decidido si permitir el acceso a la biblioteca de fotos.")
+            @unknown default:
+                print("Un estado desconocido ha sido retornado.")
+            }
         }
     }
     

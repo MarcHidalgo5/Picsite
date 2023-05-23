@@ -6,6 +6,7 @@ import UIKit
 import PicsiteUI
 import BSWInterfaceKit
 import PicsiteKit
+import CoreLocation
 
 extension UIView {
     public func addCustomShadow() {
@@ -20,9 +21,17 @@ extension UIView {
 class UploadPhotoConfirmationViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
     
     private var selectedPhoto: Photo
-    private var localImageURL: URL
+    private let imageData: PicsiteMediaPickerBehavior.ImageData
     
-    private var currentPicsiteIDselected: Picsite.ID?
+    private var nextButton: UIButton!
+    private let confirmButtonView = ConfirmButtonView()
+    
+    private var currentPicsiteIDselected: Picsite.ID? {
+        didSet {
+            nextButton.isEnabled = currentPicsiteIDselected != nil
+            confirmButtonView.configureFor(title: "La seu vella")
+        }
+    }
     
     private let dataSource = ModuleDependencies.dataSource!
 
@@ -49,14 +58,15 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         return imageView
     }()
      
-    init(localImageURL: URL) {
-        self.selectedPhoto = Photo(url: localImageURL)
-        self.localImageURL = localImageURL
-        super.init(nibName: nil, bundle: nil)
-        addPlainBackButton(tintColorWhite: false)
-        self.title = "Foto Seleccionada"
-    }
     
+    init(imageData: PicsiteMediaPickerBehavior.ImageData) {
+        self.imageData = imageData
+        self.selectedPhoto = Photo(url: imageData.localURL)
+             super.init(nibName: nil, bundle: nil)
+        addPlainBackButton(tintColorWhite: false)
+        self.title = "Foto seleccionada"
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -65,17 +75,17 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         super.viewDidLoad()
         view.backgroundColor = ColorPalette.picsiteBackgroundColor
         
-        let nextButton: UIButton = {
+        nextButton = {
             var configuration = UIButton.Configuration.filled()
             configuration.title = "Subir foto"
-            configuration.baseBackgroundColor = ColorPalette.picsiteDeepBlueColor
-            configuration.setFont(fontDescriptor: FontPalette.boldTextStyler.fontDescriptor!, size: 16, foregroundColor: ColorPalette.picsiteSecondaryTitleColor)
+            configuration.setFont(fontDescriptor: FontPalette.boldTextStyler.fontDescriptor!, size: 16)
             configuration.cornerStyle = .large
             let action = UIAction { [weak self] _ in
-                guard let self, let picsiteID = self.currentPicsiteIDselected else { return }
-                Task {
+                guard let self, let picsiteID = self.currentPicsiteIDselected, let localImageURL = self.imageData.localURL else { return }
+                performBlockingTask(loadingMessage: "Uploading photo") {
                     do {
-                        try await self.dataSource.uploadImageToFirebaseStorage(with: self.localImageURL, into: picsiteID)
+                        try await self.dataSource.uploadImageToFirebaseStorage(with: localImageURL, into: picsiteID)
+                        self.closeViewController(sender: nil)
                     } catch {
                         self.showErrorAlert("error".localized, error: error)
                     }
@@ -87,10 +97,22 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
             return button
         }()
         
+        nextButton.isEnabled = currentPicsiteIDselected != nil
+        
+        nextButton.configurationUpdateHandler = { button in
+            if button.state.contains(.disabled) {
+                button.configuration?.baseBackgroundColor = .gray.withAlphaComponent(0.2)
+                button.configuration?.baseForegroundColor = ColorPalette.picsiteTitleColor
+            } else {
+                button.configuration?.baseBackgroundColor = ColorPalette.picsiteDeepBlueColor
+                button.configuration?.baseForegroundColor = .white
+            }
+        }
+
         imageView.setPhoto(selectedPhoto)
         nextButton.addCustomVideoAskShadow()
+        nextButton.roundCorners(radius: 12)
         
-        let confirmButtonView = ConfirmButtonView()
         confirmButtonView.selectPicsite = {
             let vc = UploadPhotoMapViewController(delegate: self)
             let navVC = MinimalNavigationController(rootViewController: vc)
@@ -121,6 +143,8 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         
         var selectPicsite: (() -> ())?
         
+        var confirmButton: UIButton!
+        
         let picsiteLabel: UILabel = {
             let label = UILabel()
             label.attributedText = FontPalette.mediumTextStyler.attributedString("Selecciona el lugar donde pertenece esta fotografia:", color: ColorPalette.picsiteTitleColor, forSize: 16)
@@ -133,20 +157,21 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
             super.init(frame: .zero)
             axis = .vertical
             alignment = .fill
-            spacing = 5
+            spacing = 10
             backgroundColor = ColorPalette.picsiteBackgroundColor
             addPicsiteShadow()
             roundCorners(radius: 12)
             layoutMargins = .init(uniform: 10)
             isLayoutMarginsRelativeArrangement = true
             
-            let confirmButton: UIButton = {
-                var configuration = UIButton.Configuration.plain()
-                configuration.title = "La seu vella"
-                configuration.baseForegroundColor = ColorPalette.picsiteDeepBlueColor
+            confirmButton = {
+                var configuration = UIButton.Configuration.filled()
+                configuration.title = "Seleccionar picsite"
+                configuration.baseForegroundColor = .white
+                configuration.baseBackgroundColor = ColorPalette.picsiteDeepBlueColor
                 configuration.setFont(fontDescriptor: FontPalette.boldTextStyler.fontDescriptor!, size: 16)
                 configuration.cornerStyle = .large
-                let image = UIImage(systemName: "chevron.right")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .small))?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .bold))
+                let image = UIImage(systemName: "chevron.down")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .small))?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .bold))
                 configuration.image = image
                 configuration.imagePadding = 5
                 configuration.imagePlacement = .trailing
@@ -163,6 +188,12 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         
         required init(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
+        }
+        
+        public func configureFor(title: String) {
+            confirmButton.configuration?.title = title
+            confirmButton.configuration?.baseForegroundColor = ColorPalette.picsiteDeepBlueColor
+            confirmButton.configuration?.baseBackgroundColor = .clear
         }
     }
 }

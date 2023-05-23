@@ -79,7 +79,7 @@ public class PicsiteAPIClient {
         let data = try Data(contentsOf: localImageURL)
         let path = "\(PicsiteAPIClient.FirestoreRootCollections.picsites)/\(picsiteID)/photos/\(newDocumentID).jpeg"
         let downloadURL = try await uploadImageToFirebaseStorage(data: data, at: path)
-        let photoDocument = PhotoDocument(_photoURLString: downloadURL.absoluteString, _thumbnailPhotoURLString: "", createdAt: Date(), userCreatedID: userID)
+        let photoDocument = PhotoDocument(_photoURLString: downloadURL.absoluteString, _thumbnailPhotoURLString: downloadURL.absoluteString, createdAt: Date(), userCreatedID: userID)
         try await ref.document(newDocumentID).setData(photoDocument)
     }
     

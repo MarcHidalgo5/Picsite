@@ -50,13 +50,18 @@ final public class PicsiteMediaPickerBehavior: NSObject, UIDocumentPickerDelegat
     private struct Request {
         let kind: Kind
         let fromVC: UIViewController
-        let cont: CheckedContinuation<URL?, Never>
+        let cont: CheckedContinuation<ImageData?, Never>
+    }
+    
+    public struct ImageData {
+        public let localURL: URL?
+        public let location:  CLLocation?
     }
     
     private var currentRequest: Request?
     private let fileManager = FileManager.default
  
-    public func getMedia(fromVC: UIViewController, kind: Kind = .photo, source: Source = .photoAlbum) async -> URL? {
+    public func getMedia(fromVC: UIViewController, kind: Kind = .photo, source: Source = .photoAlbum) async -> ImageData? {
         
         guard self.currentRequest == nil else {
             return nil
@@ -178,23 +183,43 @@ final public class PicsiteMediaPickerBehavior: NSObject, UIDocumentPickerDelegat
             self.finishRequest(withURL: nil)
             return
         }
-        let _ = itemProvider.loadFileRepresentation(forTypeIdentifier: contentType.identifier) { url, _ in
-            guard let url = url else {
-                self.finishRequest(withURL: nil)
-                return
-            }
-            let targetURL = self.cachePathForMedia(currentRequest.kind)
-            let didSucceed: Bool = {
-                do {
-                    try self.fileManager.moveItem(at: url, to: targetURL)
-                    return true
-                } catch {
-                    return false
+        
+        if itemProvider.hasItemConformingToTypeIdentifier(UTType.image.identifier) {
+            itemProvider.loadFileRepresentation(forTypeIdentifier: UTType.image.identifier) { url, error in
+                guard let url = url else {
+                    self.finishRequest(withURL: nil)
+                    return
                 }
-            }()
-            self.finishRequest(withURL: didSucceed ? targetURL : nil)
+                let location = self.getLocationFrom(url: url)
+                let targetURL = self.cachePathForMedia(currentRequest.kind)
+                let didSucceed: Bool = {
+                    do {
+                        try self.fileManager.moveItem(at: url, to: targetURL)
+                        return true
+                    } catch {
+                        return false
+                    }
+                }()
+                self.finishRequest(withURL: didSucceed ? targetURL : nil, location: location)
+            }
         }
     }
+    
+    func getLocationFrom(url: URL) -> CLLocation? {
+        let options = [kCGImageSourceShouldCache as String:  kCFBooleanFalse]
+        guard let data = NSData(contentsOf: url),
+              let imgSrc = CGImageSourceCreateWithData(data, options as CFDictionary),
+              let metadata = CGImageSourceCopyPropertiesAtIndex(imgSrc, 0, options as CFDictionary) as? NSDictionary,
+              let gpsData = metadata.object(forKey: "{GPS}") as? NSDictionary,
+              let latitude = gpsData.object(forKey: "Latitude") as? Double,
+              let longitude = gpsData.object(forKey: "Longitude") as? Double
+        else {
+            return nil
+        }
+        return CLLocation(latitude: latitude, longitude: longitude)
+        
+    }
+
     
     // MARK: Private
 
@@ -273,7 +298,6 @@ final public class PicsiteMediaPickerBehavior: NSObject, UIDocumentPickerDelegat
     }
 
     private func handlePhotoRequest(info: [UIImagePickerController.InfoKey : Any], request: Request) {
-        
         guard let image = info[.originalImage] as? UIImage else {
             self.finishRequest(withURL: nil)
             return
@@ -281,7 +305,14 @@ final public class PicsiteMediaPickerBehavior: NSObject, UIDocumentPickerDelegat
         
         do {
             let finalURL = try writeToCache(image: image, kind: request.kind)
-            self.finishRequest(withURL: finalURL)
+            var location: CLLocation? {
+                if let asset: PHAsset = info[UIImagePickerController.InfoKey.phAsset] as? PHAsset {
+                    return asset.location
+                } else {
+                    return nil
+                }
+            }
+            self.finishRequest(withURL: finalURL, location: location)
         } catch {
             self.finishRequest(withURL: nil)
         }
@@ -324,7 +355,7 @@ final public class PicsiteMediaPickerBehavior: NSObject, UIDocumentPickerDelegat
         
         do {
             let url = try writeToCache(image: image, kind: request.kind)
-            request.cont.resume(returning: url)
+            request.cont.resume(returning: ImageData(localURL: url, location: nil))
         } catch {
             request.cont.resume(returning: nil)
         }
@@ -346,9 +377,10 @@ final public class PicsiteMediaPickerBehavior: NSObject, UIDocumentPickerDelegat
         }
     }
     
-    private func finishRequest(withURL url: URL?, shouldDismissVC: Bool = true) {
-        guard let currentRequest = self.currentRequest  else { return }
-        currentRequest.cont.resume(returning: url)
+    private func finishRequest(withURL url: URL?, location: CLLocation? = nil, shouldDismissVC: Bool = true) {
+        guard let currentRequest = self.currentRequest else { return }
+        let imageData = ImageData(localURL: url, location: location)
+        currentRequest.cont.resume(returning: imageData)
         if shouldDismissVC {
             let vc = currentRequest.fromVC
             DispatchQueue.main.async {
@@ -365,4 +397,3 @@ final public class PicsiteMediaPickerBehavior: NSObject, UIDocumentPickerDelegat
     }
 }
 #endif
-
