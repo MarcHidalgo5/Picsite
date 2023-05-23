@@ -79,7 +79,7 @@ public class PicsiteAPIClient {
     
     //MARK: Upload Content
     
-    public func getPicsite(for location: CLLocation) -> Picsite {
+    public func getPicsite(for location: CLLocation) async throws -> Picsite {
         fatalError()
     }
     

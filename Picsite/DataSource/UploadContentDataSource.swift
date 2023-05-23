@@ -20,7 +20,7 @@ class UploadContentDataSource: UploadContentDataSourceType {
         return try await self.apiClient.uploadImage(into: picsiteID, localImageURL: localImageURL)
     }
     
-    func getPicsite(for location: CLLocation) -> Picsite {
+    func getPicsite(for location: CLLocation) async throws -> Picsite {
         return try await self.apiClient.getPicsite(for: location)
     }
 }
