@@ -26,10 +26,14 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
     private var nextButton: UIButton!
     private let confirmButtonView = ConfirmButtonView()
     
-    private var currentPicsiteIDselected: Picsite.ID? {
+    private var currentPicsiteSelected: Picsite? {
         didSet {
-            nextButton.isEnabled = currentPicsiteIDselected != nil
-            confirmButtonView.configureFor(title: "La seu vella")
+            if let title = currentPicsiteSelected?.title {
+                nextButton.isEnabled = true
+                confirmButtonView.configureFor(title: title)
+            } else {
+                nextButton.isEnabled = false
+            }
         }
     }
     
@@ -81,7 +85,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
             configuration.setFont(fontDescriptor: FontPalette.boldTextStyler.fontDescriptor!, size: 16)
             configuration.cornerStyle = .large
             let action = UIAction { [weak self] _ in
-                guard let self, let picsiteID = self.currentPicsiteIDselected, let localImageURL = self.imageData.localURL else { return }
+                guard let self, let picsiteID = self.currentPicsiteSelected?.id, let localImageURL = self.imageData.localURL else { return }
                 performBlockingTask(loadingMessage: "Uploading photo") {
                     do {
                         try await self.dataSource.uploadImageToFirebaseStorage(with: localImageURL, into: picsiteID)
@@ -97,7 +101,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
             return button
         }()
         
-        nextButton.isEnabled = currentPicsiteIDselected != nil
+        nextButton.isEnabled = currentPicsiteSelected != nil
         
         nextButton.configurationUpdateHandler = { button in
             if button.state.contains(.disabled) {
@@ -134,18 +138,26 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
 
             imageViewContainer.heightAnchor.constraint(equalToConstant: 355),
         ])
+        
+        fetchData()
     }
 
     func fetchData() {
         fetchData {
-//            try await self.dataSource.fetchPicsiteDetails()
+            try await self.dataSource.getClosestPicsite(to: self.imageData.location)
         } completion: { [weak self] vm in
-//            await self?.configureFor(viewModel: vm)
+            self?.configureFor(picsite: vm)
         }
     }
     
     public var barStyle: TransparentNavigationBar.TintColorStyle {
         .transparent
+    }
+    
+    public func configureFor(picsite: Picsite?) {
+        guard let picsite else { return }
+        self.confirmButtonView.configureFor(title: picsite.title)
+        self.currentPicsiteSelected = picsite
     }
     
     public class ConfirmButtonView: UIStackView {
@@ -190,6 +202,8 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
                 return UIButton(configuration: configuration, primaryAction: action)
             }()
             confirmButton.backgroundColor = .clear
+            confirmButton.translatesAutoresizingMaskIntoConstraints = false
+            confirmButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
             
             addArrangedSubview(picsiteLabel)
             addArrangedSubview(confirmButton)
@@ -208,9 +222,9 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
 }
 
 extension UploadPhotoConfirmationViewController: UploadPhotoMapViewControllerDelegate {
-    func didSelectPicsite(id: Picsite.ID) {
+    func didSelectPicsite(_ picsite: Picsite) {
         self.dismiss(animated: true) {
-            self.currentPicsiteIDselected = id
+            self.currentPicsiteSelected = picsite
         }
     }
 }

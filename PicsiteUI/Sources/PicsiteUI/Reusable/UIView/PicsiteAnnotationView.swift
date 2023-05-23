@@ -5,6 +5,7 @@
 import UIKit
 import BSWInterfaceKit
 import UIKit
+import PicsiteKit
 
 public class PicsiteAnnotationView: UIView {
     
@@ -48,9 +49,9 @@ public class PicsiteAnnotationView: UIView {
     
     private var picsiteAnnotation: PicsiteAnnotation!
     
-    public var id: String {
+    public var picsite: Picsite {
         get {
-            return picsiteAnnotation.picsiteData.id
+            return picsiteAnnotation.picsiteData
         }
     }
     

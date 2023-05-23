@@ -3,10 +3,11 @@
 //
 
 import Foundation
-import PicsiteKit
+import PicsiteKit; import PicsiteUI
 import CoreLocation
 
 public protocol UploadContentDataSourceType {
     func uploadImageToFirebaseStorage(with localImageURL: URL, into picsiteID: Picsite.ID) async throws
-    func getPicsite(for location: CLLocation) async throws -> Picsite
+    func getClosestPicsite(to location: CLLocation?) async throws -> Picsite?
+    func fetchAnnotations() async throws -> BaseMapViewController.VM
 }
