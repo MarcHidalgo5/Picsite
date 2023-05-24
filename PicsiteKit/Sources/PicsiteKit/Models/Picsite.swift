@@ -8,6 +8,18 @@ import MapKit
 import FirebaseFirestore
 
 public struct Picsite: Codable, Identifiable {
+    public init(title: String, coordinate: GeoPoint, type: Picsite.AnnotationType = .landscape, lastActivity: Date? = nil, photoCount: Int = 0, _thumbnailURLString: String? = nil, _imageURLString: String? = nil, location: String, createdAt: Date = Date()) {
+        self.title = title
+        self.coordinate = coordinate
+        self.type = type
+        self.lastActivity = lastActivity
+        self.photoCount = photoCount
+        self._thumbnailURLString = _thumbnailURLString
+        self._imageURLString = _imageURLString
+        self.location = location
+        self.createdAt = createdAt
+    }
+    
     @DocumentID private var _id: String?
     public let title: String
     public let coordinate: GeoPoint

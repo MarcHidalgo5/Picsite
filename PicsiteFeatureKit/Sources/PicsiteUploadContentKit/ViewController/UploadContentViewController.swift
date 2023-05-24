@@ -17,6 +17,7 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
     
     public init() {
         super.init(nibName: nil, bundle: nil)
+        self.title = "Crea contenido"
     }
     
     required init?(coder: NSCoder) {
@@ -29,26 +30,18 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
         super.viewDidLoad()
         view.backgroundColor = ColorPalette.picsiteDeepBlueColor
         
-        let titleLabel: UILabel = {
-            let label = UILabel()
-            label.attributedText = FontPalette.boldTextStyler.attributedString("Crea contenido", color: ColorPalette.picsiteSecondaryTitleColor, forSize: 24)
-            label.textAlignment = .center
-            label.numberOfLines = 0
-            return label
-        }()
-        
         let photoUploadSection = SectionContainerView(PhotoUploadView())
         let picsiteUploadSection = SectionContainerView(PicsiteUploadView())
         
-        photoUploadSection.view.onSelectUploadPhoto = {
-            self.onSelectPhoto()
+        photoUploadSection.view.onSelectUploadPhoto = { [weak self] in
+            self?.onSelectPhoto()
         }
         
-        picsiteUploadSection.view.onSelectCreatePicsite = {
-            print("create picsite")
+        picsiteUploadSection.view.onSelectCreatePicsite = { [weak self] in
+            self?.onSelectCreatePicsite()
         }
         
-        let stackView = UIStackView(arrangedSubviews: [titleLabel, photoUploadSection, picsiteUploadSection])
+        let stackView = UIStackView(arrangedSubviews: [photoUploadSection, picsiteUploadSection])
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.spacing = Constants.Spacing
@@ -65,15 +58,14 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
     }
     
     public var barStyle: TransparentNavigationBar.TintColorStyle {
-        .transparent
+        .solid()
     }
     
     public override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return .default
     }
     
     private func onSelectPhoto() {
-        requestPhotoLibraryAccess()
         Task { @MainActor in
             guard let imageData = await self.mediaPicker.getMedia(fromVC: self, kind: .photo, source: .photoAlbum), imageData.localURL != nil else { return }
             let vc = UploadPhotoConfirmationViewController(imageData: imageData)
@@ -81,23 +73,9 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
         }
     }
     
-    func requestPhotoLibraryAccess() {
-        PHPhotoLibrary.requestAuthorization { (status) in
-            switch status {
-            case .authorized:
-                print("El acceso a la biblioteca de fotos ha sido autorizado.")
-            case .denied:
-                print("El acceso a la biblioteca de fotos ha sido denegado.")
-            case .restricted:
-                print("El acceso a la biblioteca de fotos está restringido.")
-            case .limited:
-                print("El acceso a la biblioteca de fotos es limitado.")
-            case .notDetermined:
-                print("El usuario todavía no ha decidido si permitir el acceso a la biblioteca de fotos.")
-            @unknown default:
-                print("Un estado desconocido ha sido retornado.")
-            }
-        }
+    private func onSelectCreatePicsite() {
+        let vc = UploadPicsiteMapViewController()
+        self.show(vc, sender: self)
     }
     
     public class PhotoUploadView: UIStackView {

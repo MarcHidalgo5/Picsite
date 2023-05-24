@@ -7,10 +7,9 @@ import PicsiteUploadContentKit
 import PicsiteMapKit
 import PicsiteKit; import PicsiteUI
 import CoreLocation
-//import GeoFire
 
 class UploadContentDataSource: UploadContentDataSourceType {
-   
+  
     let apiClient: PicsiteAPIClient
     let mapDataSource: MapDataSourceType
     
@@ -23,6 +22,18 @@ class UploadContentDataSource: UploadContentDataSourceType {
     
     func uploadImageToFirebaseStorage(with localImageURL: URL, into picsiteID: Picsite.ID) async throws {
         return try await self.apiClient.uploadImage(into: picsiteID, localImageURL: localImageURL)
+    }
+    
+    func uploadNewPicsite(title: String, location: CLLocation, localImageURL: URL?) async throws {
+        let geocoder = CLGeocoder()
+        let localeID = NSLocale.localeIdentifier(fromComponents: [NSLocale.Key.countryCode.rawValue: "ES"])
+        let locale = Locale(identifier: localeID)
+        let placemarks = try await geocoder.reverseGeocodeLocation(location, preferredLocale: locale)
+        var city: String {
+            guard let placemark = placemarks.first, let city = placemark.locality, let administrativeArea = placemark.administrativeArea else { return "" }
+            return "\(city), \(administrativeArea)"
+        }
+        try await self.apiClient.uploadPicsite(title: title, geoPoint: .init(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude), city: city, localImageURL: localImageURL)
     }
 
     func getClosestPicsite(to location: CLLocation?) async throws -> Picsite? {

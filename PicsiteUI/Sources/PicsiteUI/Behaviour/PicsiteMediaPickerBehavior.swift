@@ -184,8 +184,8 @@ final public class PicsiteMediaPickerBehavior: NSObject, UIDocumentPickerDelegat
             return
         }
         
-        if itemProvider.hasItemConformingToTypeIdentifier(UTType.image.identifier) {
-            itemProvider.loadFileRepresentation(forTypeIdentifier: UTType.image.identifier) { url, error in
+        if itemProvider.hasItemConformingToTypeIdentifier(contentType.identifier) {
+            itemProvider.loadFileRepresentation(forTypeIdentifier: contentType.identifier) { url, error in
                 guard let url = url else {
                     self.finishRequest(withURL: nil)
                     return

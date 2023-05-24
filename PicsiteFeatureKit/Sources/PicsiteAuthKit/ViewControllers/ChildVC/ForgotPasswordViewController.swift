@@ -10,7 +10,7 @@ extension AuthenticationPerformerViewController {
     
     class ForgotPasswordViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
         
-        private let emailTextField = TextField(kind: .email)
+        private let emailTextField = TitleTextField(kind: .email)
         
         private let titleView: UIView = {
             let titleLabel = UILabel.unlimitedLinesLabel()

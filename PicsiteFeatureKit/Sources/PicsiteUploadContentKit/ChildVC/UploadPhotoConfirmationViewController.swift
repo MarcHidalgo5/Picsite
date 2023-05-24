@@ -8,16 +8,6 @@ import BSWInterfaceKit
 import PicsiteKit
 import CoreLocation
 
-extension UIView {
-    public func addCustomShadow() {
-        self.clipsToBounds = false
-        self.layer.shadowColor = UIColor.black.cgColor
-        self.layer.shadowOffset = CGSize(width: 0, height: 2)
-        self.layer.shadowOpacity = 0.4
-        self.layer.shadowRadius = 2
-    }
-}
-
 class UploadPhotoConfirmationViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
     
     private var selectedPhoto: Photo

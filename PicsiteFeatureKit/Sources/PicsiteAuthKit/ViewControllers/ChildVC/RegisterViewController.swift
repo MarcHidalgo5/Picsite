@@ -14,11 +14,10 @@ extension AuthenticationPerformerViewController {
        private let DefaultSpacing: CGFloat = 20
        private let SocialButtonsSpacing: CGFloat = 60
        
-       private let nameTextField = TextField(kind: .name)
-       private let usernameTextField = TextField(kind: .username)
-       private let emailTextField = TextField(kind: .email)
-       private let passwordTextField = TextField(kind:
-           .password(newPassword: true))
+       private let nameTextField = TitleTextField(kind: .name)
+       private let usernameTextField = TitleTextField(kind: .username)
+       private let emailTextField = TitleTextField(kind: .email)
+       private let passwordTextField = TitleTextField(kind: .password(newPassword: true))
        private let legalTermsView = LegalTermsView()
        
        private let titleView: UIView = {

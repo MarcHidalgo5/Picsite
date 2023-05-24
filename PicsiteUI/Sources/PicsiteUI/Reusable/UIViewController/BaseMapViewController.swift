@@ -170,7 +170,7 @@ extension BaseMapViewController: CLLocationManagerDelegate {
 //MARK: MKMapViewDelegate
 
 extension BaseMapViewController: MKMapViewDelegate {
-    public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+    open func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
         guard let currentAnnotation = view as? AnnotationMarkerView, let picsiteAnnotation = currentAnnotation.annotation as? PicsiteAnnotation else { return }
         
