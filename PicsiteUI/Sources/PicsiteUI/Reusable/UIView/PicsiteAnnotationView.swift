@@ -16,7 +16,7 @@ public class PicsiteAnnotationView: UIView {
         label.numberOfLines = 1
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
-        label.minimumScaleFactor = 0.9
+        label.minimumScaleFactor = 0.6
         return label
     }()
     
@@ -66,7 +66,7 @@ public class PicsiteAnnotationView: UIView {
             return label
         }()
         
-        photosTitleLabel.attributedText = FontPalette.boldTextStyler.attributedString("map-annotation-photos-titel".localized, forSize: 18)
+        photosTitleLabel.attributedText = FontPalette.boldTextStyler.attributedString("map-annotation-photos-titel".localized, forSize: 15)
 
         let titleAndSubtitleStackView = UIStackView()
          titleAndSubtitleStackView.axis = .vertical
@@ -138,10 +138,14 @@ public class PicsiteAnnotationView: UIView {
     
     public func configureFor(picsiteAnnotation: PicsiteAnnotation) {
         self.picsiteAnnotation = picsiteAnnotation
-        titleLabel.attributedText = FontPalette.boldTextStyler.attributedString(picsiteAnnotation.title ?? "", forSize: 18)
+        titleLabel.attributedText = FontPalette.boldTextStyler.attributedString(picsiteAnnotation.title ?? "", forSize: 16)
         subtitleLabel.attributedText = FontPalette.mediumTextStyler.attributedString(picsiteAnnotation.picsiteData.location, color: ColorPalette.picsitePlaceholderColor, forSize: 13)
-        dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-view-last-update-title".localized(with: [picsiteAnnotation.lastActivityDateString]), forSize: 13)
-        photoCountLabel.attributedText = FontPalette.mediumTextStyler.attributedString("\(picsiteAnnotation.picsiteData.photoCount)", color: ColorPalette.picsiteDeepBlueColor, forSize: 16)
+        if picsiteAnnotation.lastActivityDateString != "" {
+            dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-view-last-update-title".localized(with: [picsiteAnnotation.lastActivityDateString]), forSize: 12)
+        } else {
+            dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("Ninguna publicación".localized, forSize: 12)
+        }
+        photoCountLabel.attributedText = FontPalette.mediumTextStyler.attributedString("\(picsiteAnnotation.picsiteData.photoCount)", color: ColorPalette.picsiteDeepBlueColor, forSize: 15)
         profileImage.imageView.backgroundColor = picsiteAnnotation.markerTintColor.withAlphaComponent(0.5)
         profileImage.imageView.setPhoto(picsiteAnnotation.thumbnailPhoto)
     }

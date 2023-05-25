@@ -31,7 +31,12 @@ class UploadContentDataSource: UploadContentDataSourceType {
         let placemarks = try await geocoder.reverseGeocodeLocation(location, preferredLocale: locale)
         var city: String {
             guard let placemark = placemarks.first, let city = placemark.locality, let administrativeArea = placemark.administrativeArea else { return "" }
-            return "\(city), \(administrativeArea)"
+            if city == administrativeArea {
+                return "\(city)"
+            } else {
+                return "\(city), \(administrativeArea)"
+            }
+            
         }
         try await self.apiClient.uploadPicsite(title: title, geoPoint: .init(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude), city: city, localImageURL: localImageURL)
     }

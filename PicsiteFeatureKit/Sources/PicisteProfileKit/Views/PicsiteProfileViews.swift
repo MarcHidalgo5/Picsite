@@ -177,7 +177,7 @@ extension PicsiteProfileViewController {
                 let annotationSeparator = AnnotationSeparatorView(height: 70, color: .gray.withAlphaComponent(0.6))
                 
                 // Setup labels
-                photosTitleLabel.attributedText = FontPalette.boldTextStyler.attributedString("map-annotation-photos-titel".localized, forSize: 18)
+                photosTitleLabel.attributedText = FontPalette.boldTextStyler.attributedString("map-annotation-photos-titel".localized, forSize: 16)
 
                 let titleAndSubtitleStackView = UIStackView()
                  titleAndSubtitleStackView.axis = .vertical
@@ -239,10 +239,14 @@ extension PicsiteProfileViewController {
             }
             
             func configureFor(configuration: Configuration){
-                titleLabel.attributedText = FontPalette.boldTextStyler.attributedString(configuration.title, forSize: 20)
+                titleLabel.attributedText = FontPalette.boldTextStyler.attributedString(configuration.title, forSize: 18)
                 subtitleLabel.attributedText = FontPalette.mediumTextStyler.attributedString(configuration.subtitle, color: ColorPalette.picsitePlaceholderColor, forSize: 16)
-                dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-view-last-update-title".localized(with: [configuration.date]), forSize: 14)
-                photoCountLabel.attributedText = FontPalette.mediumTextStyler.attributedString("\(configuration.photoCount)", color: ColorPalette.picsiteDeepBlueColor, forSize: 18)
+                if configuration.date != "" {
+                    dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-view-last-update-title".localized(with: [configuration.date]), forSize: 13)
+                } else {
+                    dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("Ninguna publicación".localized, forSize: 13)
+                }
+                photoCountLabel.attributedText = FontPalette.mediumTextStyler.attributedString("\(configuration.photoCount)", color: ColorPalette.picsiteDeepBlueColor, forSize: 16)
                 addPicsiteShadow()
             }
         }

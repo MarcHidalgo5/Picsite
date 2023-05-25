@@ -155,7 +155,7 @@ class UploadPicsiteConfirmationViewController: UIViewController, UITextFieldDele
             guard let imageData = await self.mediaPicker.getMedia(fromVC: self, kind: .photo, source: .photoAlbum), imageData.localURL != nil else { return }
             imageView.contentMode = .scaleAspectFill
             imageView.setPhoto(Photo(url: imageData.localURL))
-            self.localImageURL = localImageURL
+            self.localImageURL = imageData.localURL
         }
     }
     
