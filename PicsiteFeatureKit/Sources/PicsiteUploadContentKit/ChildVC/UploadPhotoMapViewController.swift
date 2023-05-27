@@ -13,12 +13,18 @@ public protocol UploadPhotoMapViewControllerDelegate: AnyObject {
  
 public class UploadPhotoMapViewController: BaseMapViewController {
     
-    let dataSource = ModuleDependencies.dataSource!
-    
-    weak var delegate: UploadPhotoMapViewControllerDelegate?
+    struct Constants {
+        static let AnimationDuration = 0.3
+        static let ButtonSize: CGFloat = 50
+        static let ButtonMargin: CGFloat = 25
+    }
     
     private let picsiteCheckView = RoundButtonView(imageButton: UIImage(systemName: "checkmark")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .bold)), color: ColorPalette.picsiteGreenColor)
     private let picsiteCancelView = RoundButtonView(imageButton: UIImage(systemName: "xmark")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .bold)), color: ColorPalette.picsiteErrorColor)
+    
+    let dataSource = ModuleDependencies.dataSource!
+
+    weak var delegate: UploadPhotoMapViewControllerDelegate?
     
     public init(delegate: UploadPhotoMapViewControllerDelegate) {
         self.delegate = delegate
@@ -35,8 +41,8 @@ public class UploadPhotoMapViewController: BaseMapViewController {
         super.loadView()
         picsiteCheckView.alpha = 0
         picsiteCancelView.alpha = 0
-        view.addSubview(picsiteCancelView)
-        view.addSubview(picsiteCheckView)
+        view.addAutolayoutSubview(picsiteCancelView)
+        view.addAutolayoutSubview(picsiteCheckView)
 
         picsiteCheckView.onTapButton = { [weak self] in
             guard let self else { return }
@@ -51,33 +57,36 @@ public class UploadPhotoMapViewController: BaseMapViewController {
         picsiteCancelView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            picsiteCheckView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            picsiteCheckView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            picsiteCheckView.widthAnchor.constraint(equalToConstant: 50),
-            picsiteCheckView.heightAnchor.constraint(equalToConstant: 50),
+            picsiteCheckView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Constants.ButtonMargin),
+            picsiteCheckView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.ButtonMargin),
+            picsiteCheckView.widthAnchor.constraint(equalToConstant: Constants.ButtonMargin),
+            picsiteCheckView.heightAnchor.constraint(equalToConstant: Constants.ButtonMargin),
 
-            picsiteCancelView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            picsiteCancelView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            picsiteCancelView.widthAnchor.constraint(equalToConstant: 50),
-            picsiteCancelView.heightAnchor.constraint(equalToConstant: 50)
+            picsiteCancelView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Constants.ButtonMargin),
+            picsiteCancelView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.ButtonMargin),
+            picsiteCancelView.widthAnchor.constraint(equalToConstant: Constants.ButtonMargin),
+            picsiteCancelView.heightAnchor.constraint(equalToConstant: Constants.ButtonMargin)
         ])
     }
 
     
     override public func deselectCurrentMapAnnotatons() {
         super.deselectCurrentMapAnnotatons()
-        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+        UIView.animate(withDuration: Constants.AnimationDuration, animations: { [weak self] in
             self?.picsiteCheckView.alpha = 0
             self?.picsiteCancelView.alpha = 0
+            self?.title = "Seleccionar picsite"
         })
     }
     
     override public func showAnnotationView() {
         super.showAnnotationView()
-        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+        UIView.animate(withDuration: Constants.AnimationDuration, animations: { [weak self] in
             self?.picsiteCheckView.alpha = 1
             self?.picsiteCancelView.alpha = 1
+            self?.title = "Confirmar?"
         })
+        
     }
     
     public override var barStyle: TransparentNavigationBar.TintColorStyle {

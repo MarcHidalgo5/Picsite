@@ -92,7 +92,7 @@ class UploadPicsiteConfirmationViewController: UIViewController, UITextFieldDele
             
             let button = UIButton(configuration: configuration, primaryAction: action)
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            button.heightAnchor.constraint(equalToConstant: 40).isActive = true
             return button
         }()
         
@@ -162,8 +162,7 @@ class UploadPicsiteConfirmationViewController: UIViewController, UITextFieldDele
     // MARK: UITextFieldDelegate
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        guard let text = textField.text else { return }
-        if text.count < 5 {
+        if textField.isTextFieldValid {
             self.nextButton.isEnabled = false
             animator.addAnimations {
                 self.titleTextField.showErrorMessage(message: FontPalette.mediumTextStyler.attributedString("El nombre debe contener almenos 5 caracteres", color: ColorPalette.picsiteErrorColor, forSize: 14))
@@ -180,6 +179,13 @@ class UploadPicsiteConfirmationViewController: UIViewController, UITextFieldDele
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         titleTextField.textField.resignFirstResponder()
+        return true
+    }
+}
+
+private extension UITextField {
+    var isTextFieldValid: Bool {
+         guard let text = self.text, text.count >= 5 else { return false }
         return true
     }
 }

@@ -26,7 +26,7 @@ public class RoundButtonView: UIView {
             return button
         }()
         
-        self.addSubview(cancelButton)
+        self.addAutolayoutSubview(cancelButton)
         cancelButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         cancelButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         cancelButton.widthAnchor.constraint(equalToConstant: 50).isActive = true

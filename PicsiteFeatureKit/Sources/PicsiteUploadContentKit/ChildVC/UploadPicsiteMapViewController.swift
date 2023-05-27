@@ -10,12 +10,16 @@ import SwiftUI
 
 class UploadPicsiteMapViewController: BaseMapViewController {
     
+    struct Constants {
+        static let AnimationDuration = 0.3
+        static let ButtonSize: CGFloat = 50
+        static let ButtonMargin: CGFloat = 10
+    }
+    
     var horizontalLine: UIView!
     var verticalLine: UIView!
-    var coordinateButton: UIButton!
+    var createPicsiteButton: UIButton!
     var pinImageView: UIImageView!
-    var clearView: UIView!
-    var blurView: UIVisualEffectView!
     let currentAnnotation = MKPointAnnotation()
     
     private let picsiteCheckView = RoundButtonView(imageButton: UIImage(systemName: "checkmark")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .bold)), color: ColorPalette.picsiteGreenColor)
@@ -50,24 +54,22 @@ class UploadPicsiteMapViewController: BaseMapViewController {
         verticalLine.isUserInteractionEnabled = false
         view.addAutolayoutSubview(verticalLine)
         
-        coordinateButton = {
+        createPicsiteButton = {
             var configuration = UIButton.Configuration.filled()
             configuration.title = "Añadir picsite"
             configuration.setFont(fontDescriptor: FontPalette.mediumTextStyler.fontDescriptor!, size: 18, foregroundColor: .white)
             configuration.baseBackgroundColor = ColorPalette.picsiteDeepBlueColor
-            configuration.cornerStyle = .capsule
+            configuration.cornerStyle = .large
 
             return UIButton(configuration: configuration, primaryAction: UIAction(handler: { [weak self] _ in
-                self?.getCenterCoordinates()
+                self?.createPicsiteSelected()
             }))
         }()
 
-        coordinateButton.translatesAutoresizingMaskIntoConstraints = false
-        coordinateButton.addCustomShadow()
-        view.addAutolayoutSubview(coordinateButton)
-        
-        coordinateButton.addTarget(self, action: #selector(getCenterCoordinates), for: .touchUpInside)
-        
+        createPicsiteButton.translatesAutoresizingMaskIntoConstraints = false
+        createPicsiteButton.addCustomShadow()
+        view.addAutolayoutSubview(createPicsiteButton)
+                
         pinImageView = UIImageView(image: UIImage(systemName: "pin.fill")?.withRenderingMode(.alwaysTemplate))
         pinImageView.tintColor = ColorPalette.picsiteDeepBlueColor
         pinImageView.layer.anchorPoint = CGPoint(x: 0.5, y: 0.9)
@@ -76,8 +78,8 @@ class UploadPicsiteMapViewController: BaseMapViewController {
 
         picsiteCheckView.alpha = 0
         picsiteCancelView.alpha = 0
-        view.addSubview(picsiteCancelView)
-        view.addSubview(picsiteCheckView)
+        view.addAutolayoutSubview(picsiteCancelView)
+        view.addAutolayoutSubview(picsiteCheckView)
         
         picsiteCheckView.onTapButton = { [weak self] in
             guard let self else { return }
@@ -103,25 +105,25 @@ class UploadPicsiteMapViewController: BaseMapViewController {
             horizontalLine.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             horizontalLine.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            coordinateButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-            coordinateButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            coordinateButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            coordinateButton.heightAnchor.constraint(equalToConstant: 50),
+            createPicsiteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+            createPicsiteButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            createPicsiteButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            createPicsiteButton.heightAnchor.constraint(equalToConstant: 40),
             
             pinImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pinImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             pinImageView.widthAnchor.constraint(equalToConstant: 25),
             pinImageView.heightAnchor.constraint(equalToConstant: 25),
             
-            picsiteCheckView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            picsiteCheckView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            picsiteCheckView.widthAnchor.constraint(equalToConstant: 50),
-            picsiteCheckView.heightAnchor.constraint(equalToConstant: 50),
+            picsiteCheckView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Constants.ButtonMargin),
+            picsiteCheckView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.ButtonMargin),
+            picsiteCheckView.widthAnchor.constraint(equalToConstant: Constants.ButtonSize),
+            picsiteCheckView.heightAnchor.constraint(equalToConstant: Constants.ButtonSize),
 
-            picsiteCancelView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            picsiteCancelView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            picsiteCancelView.widthAnchor.constraint(equalToConstant: 50),
-            picsiteCancelView.heightAnchor.constraint(equalToConstant: 50)
+            picsiteCancelView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Constants.ButtonMargin),
+            picsiteCancelView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.ButtonMargin),
+            picsiteCancelView.widthAnchor.constraint(equalToConstant: Constants.ButtonSize),
+            picsiteCancelView.heightAnchor.constraint(equalToConstant: Constants.ButtonSize)
         ])
     }
     
@@ -148,12 +150,12 @@ class UploadPicsiteMapViewController: BaseMapViewController {
     
     //MARK: Objc actions
     
-    @objc func getCenterCoordinates() {
+    @objc func createPicsiteSelected() {
         
-        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+        UIView.animate(withDuration: Constants.AnimationDuration, animations: { [weak self] in
             self?.picsiteCheckView.alpha = 1
             self?.picsiteCancelView.alpha = 1
-            self?.coordinateButton.alpha = 0
+            self?.createPicsiteButton.alpha = 0
             self?.verticalLine.alpha = 0
             self?.horizontalLine.alpha = 0
             self?.pinImageView.alpha = 0
@@ -161,21 +163,25 @@ class UploadPicsiteMapViewController: BaseMapViewController {
         currentAnnotation.coordinate = mapView.centerCoordinate
         mapView.addAnnotation(currentAnnotation)
         mapView.selectAnnotation(currentAnnotation, animated: true)
+        mapView.isUserInteractionEnabled = false
+        self.title = "Confirmar?"
     }
     
     //MARK: Private
     
     private func cancelCreatePicsite() {
-        UIView.animate(withDuration: 0.3, animations: { [weak self] in
+        UIView.animate(withDuration: Constants.AnimationDuration, animations: { [weak self] in
             self?.picsiteCheckView.alpha = 0
             self?.picsiteCancelView.alpha = 0
-            self?.coordinateButton.alpha = 1
+            self?.createPicsiteButton.alpha = 1
             self?.verticalLine.alpha = 0.3
             self?.horizontalLine.alpha = 0.3
             self?.pinImageView.alpha = 1
         })
         
         mapView.removeAnnotation(currentAnnotation)
+        mapView.isUserInteractionEnabled = true
+        self.title = "Crear lugar"
     }
     
     private func confirmCreatePicsite() {

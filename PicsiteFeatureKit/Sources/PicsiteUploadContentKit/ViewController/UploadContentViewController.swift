@@ -41,19 +41,22 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
             self?.onSelectCreatePicsite()
         }
         
-        let stackView = UIStackView(arrangedSubviews: [photoUploadSection, picsiteUploadSection])
+        let stackView = UIStackView(arrangedSubviews: [picsiteUploadSection, photoUploadSection])
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.spacing = Constants.Spacing
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(stackView)
+        view.addAutolayoutSubview(stackView)
         
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            picsiteUploadSection.widthAnchor.constraint(greaterThanOrEqualToConstant: UIScreen.main.bounds.width - 40),
+            photoUploadSection.widthAnchor.constraint(greaterThanOrEqualToConstant: UIScreen.main.bounds.width - 40)
         ])
     }
     
@@ -106,6 +109,8 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
                 return UIButton(configuration: configuration, primaryAction: action)
             }()
             
+            uploadPhotoButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            
             spacing = Constants.SmallSpacing
             addArrangedSubview(uploadPhotoLabel)
             addArrangedSubview(uploadPhotoButton)
@@ -145,7 +150,9 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
                 }
                 return UIButton(configuration: configuration, primaryAction: action)
             }()
+            uploadPhotoButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
             
+            spacing = Constants.SmallSpacing
             addArrangedSubview(uploadPhotoLabel)
             addArrangedSubview(uploadPhotoButton)
         }

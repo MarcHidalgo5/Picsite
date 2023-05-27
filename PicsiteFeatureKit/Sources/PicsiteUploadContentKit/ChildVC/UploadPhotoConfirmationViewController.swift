@@ -72,7 +72,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         nextButton = {
             var configuration = UIButton.Configuration.filled()
             configuration.title = "Subir foto"
-            configuration.setFont(fontDescriptor: FontPalette.boldTextStyler.fontDescriptor!, size: 16)
+            configuration.setFont(fontDescriptor: FontPalette.mediumTextStyler.fontDescriptor!, size: 16)
             configuration.cornerStyle = .large
             let action = UIAction { [weak self] _ in
                 guard let self, let picsiteID = self.currentPicsiteSelected?.id, let localImageURL = self.imageData.localURL else { return }
@@ -87,7 +87,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
             }
             let button = UIButton(configuration: configuration, primaryAction: action)
             button.translatesAutoresizingMaskIntoConstraints = false
-            button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            button.heightAnchor.constraint(equalToConstant: 40).isActive = true
             return button
         }()
         
@@ -180,7 +180,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
                 configuration.title = "Seleccionar picsite"
                 configuration.baseForegroundColor = .white
                 configuration.baseBackgroundColor = ColorPalette.picsiteDeepBlueColor
-                configuration.setFont(fontDescriptor: FontPalette.boldTextStyler.fontDescriptor!, size: 16)
+                configuration.setFont(fontDescriptor: FontPalette.mediumTextStyler.fontDescriptor!, size: 16)
                 configuration.cornerStyle = .large
                 let image = UIImage(systemName: "chevron.down")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .small))?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .bold))
                 configuration.image = image
@@ -193,7 +193,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
             }()
             confirmButton.backgroundColor = .clear
             confirmButton.translatesAutoresizingMaskIntoConstraints = false
-            confirmButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            confirmButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
             
             addArrangedSubview(picsiteLabel)
             addArrangedSubview(confirmButton)
