@@ -69,6 +69,7 @@ open class BaseMapViewController: UIViewController, BaseMapViewControlleType, Tr
         picsitAnnotationView.addGestureRecognizer(panGesture)
         createLocationManeger()
         fetchData()
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchData), name: UploadContentNotification, object: nil)
     }
     
     @objc private func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
@@ -140,7 +141,7 @@ open class BaseMapViewController: UIViewController, BaseMapViewControlleType, Tr
         fatalError("barStyle has not been implemented")
     }
     
-    open func fetchData() {
+    @objc open func fetchData() {
         fatalError("fetchData() has not been implemented")
     }
     

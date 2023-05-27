@@ -24,6 +24,7 @@ public class MapViewController: BaseMapViewController {
     }
     
     public override func configureFor(viewModel: BaseMapViewController.VM) {
+        self.deselectCurrentMapAnnotatons()
         mapView.addAnnotations(viewModel.annotations)
     }
     

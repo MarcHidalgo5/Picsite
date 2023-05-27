@@ -3,7 +3,7 @@
 //
 
 import UIKit
-import PicsiteUI
+import PicsiteUI; import PicsiteKit
 import BSWInterfaceKit
 import CoreLocation
 
@@ -144,6 +144,7 @@ class UploadPicsiteConfirmationViewController: UIViewController, UITextFieldDele
         guard let text = self.titleTextField.text else { return }
         performBlockingTask(loadingMessage: "upload-picsite-confirmation-loading-message".localized) {
             try await self.dataSource.uploadNewPicsite(title: text, location: self.location, localImageURL: self.localImageURL)
+            NotificationCenter.default.post(name: UploadContentNotification, object: nil)
             self.navigationController?.popToRootViewController(animated: true)
         }
     }

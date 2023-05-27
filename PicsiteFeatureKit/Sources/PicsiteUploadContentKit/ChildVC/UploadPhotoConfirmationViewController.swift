@@ -79,6 +79,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
                 performBlockingTask(loadingMessage: "upload-photo-confirmation-loading-message".localized) {
                     do {
                         try await self.dataSource.uploadImageToFirebaseStorage(with: localImageURL, into: picsiteID)
+                        NotificationCenter.default.post(name: UploadContentNotification, object: nil)
                         self.closeViewController(sender: nil)
                     } catch {
                         self.showErrorAlert("error".localized, error: error)
