@@ -13,17 +13,17 @@ class TabBarController: UITabBarController {
         super.init(nibName: nil, bundle: nil)
         let map: (UIViewController, UITabBarItem) = (
             MapViewController(),
-            UITabBarItem(title: "Map", image: UIImage(systemName: "mappin.and.ellipse"), selectedImage: UIImage(systemName: "mappin.and.ellipse"))
+            UITabBarItem(title: "tabbar-controller-map-title".localized, image: UIImage(systemName: "mappin.and.ellipse"), selectedImage: UIImage(systemName: "mappin.and.ellipse"))
         )
         
         let uploadContent: (UIViewController, UITabBarItem) = (
             UploadContentViewController(),
-            UITabBarItem(title: "Add", image: UIImage(systemName: "plus"), selectedImage: UIImage(systemName: "plus"))
+            UITabBarItem(title: "tabbar-controller-add-title".localized, image: UIImage(systemName: "plus"), selectedImage: UIImage(systemName: "plus"))
         )
 
         let profile: (UIViewController, UITabBarItem) = (
             HomeViewController(),
-            UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), selectedImage: UIImage(systemName: "person.crop.circle"))
+            UITabBarItem(title: "tabbar-controller-profile-title".localized, image: UIImage(systemName: "person.crop.circle"), selectedImage: UIImage(systemName: "person.crop.circle"))
         )
         
         let viewControllers: [UIViewController] = [

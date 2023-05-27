@@ -8,6 +8,11 @@
 //Google
 "authentication-google-error" = "Failed to login";
 
+//TabBarController
+"tabbar-controller-map-title" = "Map";
+"tabbar-controller-add-title" = "Add";
+"tabbar-controller-profile-title" = "Profile";
+
 //TextField
 "textField-name-placeholder" = "";
 "textField-name-title" = "Full name";
