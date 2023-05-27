@@ -17,7 +17,7 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
     
     public init() {
         super.init(nibName: nil, bundle: nil)
-        self.title = "Crea contenido"
+        self.title = "upload-content-navigation-title".localized
     }
     
     required init?(coder: NSCoder) {
@@ -91,7 +91,7 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
             
             let uploadPhotoLabel: UILabel = {
                 let label = UILabel()
-                label.attributedText = FontPalette.mediumTextStyler.attributedString("Sube tus fotografías y compártelas en los picsites existentes en el mapa", color: ColorPalette.picsiteTitleColor, forSize: 16)
+                label.attributedText = FontPalette.mediumTextStyler.attributedString("upload-content-upload-photo-label".localized, color: ColorPalette.picsiteTitleColor, forSize: 16)
                 label.textAlignment = .center
                 label.numberOfLines = 0
                 return label
@@ -99,7 +99,7 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
             
             let uploadPhotoButton: UIButton = {
                 var configuration = UIButton.Configuration.filled()
-                configuration.title = "Subir foto"
+                configuration.title = "upload-content-upload-photo-button".localized
                 configuration.baseBackgroundColor = ColorPalette.picsiteDeepBlueColor
                 configuration.setFont(fontDescriptor: FontPalette.mediumTextStyler.fontDescriptor!)
                 configuration.cornerStyle = .large
@@ -133,7 +133,7 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
             
             let uploadPhotoLabel: UILabel = {
                 let label = UILabel()
-                label.attributedText = FontPalette.mediumTextStyler.attributedString("Crea un nuevo punto de interes en el mapa para poder compartir nuevas fotos", color: ColorPalette.picsiteTitleColor, forSize: 16)
+                label.attributedText = FontPalette.mediumTextStyler.attributedString("upload-content-upload-picsite-label".localized, color: ColorPalette.picsiteTitleColor, forSize: 16)
                 label.textAlignment = .center
                 label.numberOfLines = 0
                 return label
@@ -141,7 +141,7 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
             
             let uploadPhotoButton: UIButton = {
                 var configuration = UIButton.Configuration.filled()
-                configuration.title = "Crear picsite"
+                configuration.title = "upload-content-upload-picsite-button".localized
                 configuration.baseBackgroundColor = ColorPalette.picsiteDeepBlueColor
                 configuration.setFont(fontDescriptor: FontPalette.mediumTextStyler.fontDescriptor!)
                 configuration.cornerStyle = .large

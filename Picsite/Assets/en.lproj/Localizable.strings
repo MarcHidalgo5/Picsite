@@ -70,8 +70,40 @@
 "map-annotation-photos-titel" = "Photos";
 "map-annotation-info-titel" = "Updated:";
 "map-annotation-view-last-update-title" = "Last update: %@";
+"map-annotation-view-none-last-update-title" = "No publication yet";
 "map-fetch-data-loading" = "Loading picsites";
 "map-fetch-error-fetching" = "Fail loading picsties";
 
 //PicsiteProfileViewController
 "picsite-profile-empty-photos-error" = "No photos have been uploaded to this site yet";
+
+//UploadPhotoConfirmationViewController
+"upload-photo-confirmation-select-place-title" = "Select the place where this photograph belongs:";
+"upload-photo-confirmation-select-place-button" = "Select picsite";
+"upload-photo-confirmation-loading-message" = "Uploading new photo";
+"upload-photo-confirmation-upload-photo-button" = "Upload new photo";
+"upload-photo-confirmation-navigation-title" = "Selected photo";
+
+//UploadPicsiteConfirmationViewController
+"upload-picsite-confirmation-title-text-field-picsite-name" = "Name of the new place";
+"upload-picsite-confirmation-select-profile-photo-title" = "Upload a profile picture for this new site";
+"upload-picsite-confirmation-upload-picsite-button" = "Upload new picsite";
+"upload-picsite-confirmation-loading-message" = "Uploading picsite";
+"upload-picsite-confirmation-title-text-field-picsite-error" = "The name must contain at least 5 characters";
+"upload-picsite-confirmation-navigation-title" = "Information";
+
+//UploadContentViewController
+"upload-content-navigation-title" = "Create content";
+"upload-content-upload-photo-label" = "Upload your photos and share them on the existing picsites on the map";
+"upload-content-upload-photo-button" = "Upload photo";
+"upload-content-upload-picsite-label" = "Create a new point of interest on the map to be able to share new photos";
+"upload-content-upload-picsite-button" = "Create picsite";
+
+//UploadPhotoMapViewController
+"upload-photo-map-title" = "Select picsite";
+"upload-photo-map-second-title" = "Confirm?";
+
+//UploadPicsiteMapViewController
+"upload-picsite-map-title" = "Create place";
+"upload-picsite-map-second-title" = "Confirm?";
+"upload-picsite-map-create-picsite-title" = "Create picsite";

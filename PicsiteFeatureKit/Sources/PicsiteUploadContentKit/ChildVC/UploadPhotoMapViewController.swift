@@ -30,7 +30,7 @@ public class UploadPhotoMapViewController: BaseMapViewController {
         self.delegate = delegate
         super.init()
         addCloseButton(tintColorWhite: false)
-        self.title = "Seleccionar picsite"
+        self.title = "upload-photo-map-title".localized
     }
     
     required init?(coder: NSCoder) {
@@ -75,7 +75,7 @@ public class UploadPhotoMapViewController: BaseMapViewController {
         UIView.animate(withDuration: Constants.AnimationDuration, animations: { [weak self] in
             self?.picsiteCheckView.alpha = 0
             self?.picsiteCancelView.alpha = 0
-            self?.title = "Seleccionar picsite"
+            self?.title = "upload-photo-map-title".localized
         })
     }
     
@@ -84,7 +84,7 @@ public class UploadPhotoMapViewController: BaseMapViewController {
         UIView.animate(withDuration: Constants.AnimationDuration, animations: { [weak self] in
             self?.picsiteCheckView.alpha = 1
             self?.picsiteCancelView.alpha = 1
-            self?.title = "Confirmar?"
+            self?.title = "upload-photo-map-second-title".localized
         })
         
     }

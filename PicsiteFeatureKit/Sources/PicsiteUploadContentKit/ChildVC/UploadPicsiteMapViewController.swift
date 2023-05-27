@@ -30,7 +30,7 @@ class UploadPicsiteMapViewController: BaseMapViewController {
     override init() {
         super.init()
         addPlainBackButton(tintColorWhite: false)
-        self.title = "Crear lugar"
+        self.title = "upload-picsite-map-title".localized
     }
     
     required init?(coder: NSCoder) {
@@ -56,7 +56,7 @@ class UploadPicsiteMapViewController: BaseMapViewController {
         
         createPicsiteButton = {
             var configuration = UIButton.Configuration.filled()
-            configuration.title = "Añadir picsite"
+            configuration.title = "upload-picsite-map-create-picsite-title".localized
             configuration.setFont(fontDescriptor: FontPalette.mediumTextStyler.fontDescriptor!, size: 18, foregroundColor: .white)
             configuration.baseBackgroundColor = ColorPalette.picsiteDeepBlueColor
             configuration.cornerStyle = .large
@@ -164,7 +164,7 @@ class UploadPicsiteMapViewController: BaseMapViewController {
         mapView.addAnnotation(currentAnnotation)
         mapView.selectAnnotation(currentAnnotation, animated: true)
         mapView.isUserInteractionEnabled = false
-        self.title = "Confirmar?"
+        self.title = "upload-picsite-map-second-title".localized
     }
     
     //MARK: Private
@@ -181,7 +181,7 @@ class UploadPicsiteMapViewController: BaseMapViewController {
         
         mapView.removeAnnotation(currentAnnotation)
         mapView.isUserInteractionEnabled = true
-        self.title = "Crear lugar"
+        self.title = "upload-picsite-map-title".localized
     }
     
     private func confirmCreatePicsite() {

@@ -244,7 +244,7 @@ extension PicsiteProfileViewController {
                 if configuration.date != "" {
                     dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-view-last-update-title".localized(with: [configuration.date]), forSize: 13)
                 } else {
-                    dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("Ninguna publicación".localized, forSize: 13)
+                    dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-view-none-last-update-title".localized, forSize: 13)
                 }
                 photoCountLabel.attributedText = FontPalette.mediumTextStyler.attributedString("\(configuration.photoCount)", color: ColorPalette.picsiteDeepBlueColor, forSize: 16)
                 addPicsiteShadow()

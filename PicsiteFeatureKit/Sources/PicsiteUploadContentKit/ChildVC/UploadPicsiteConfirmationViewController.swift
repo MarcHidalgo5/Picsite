@@ -42,7 +42,7 @@ class UploadPicsiteConfirmationViewController: UIViewController, UITextFieldDele
             textContentType: .name,
             keyboardType: .asciiCapable,
             autocapitalizationType: .none,
-            title: FontPalette.boldTextStyler.attributedString("Nombre del lugar".localized, color: ColorPalette.picsiteTitleColor, forSize: 14)
+            title: FontPalette.boldTextStyler.attributedString("upload-picsite-confirmation-title-text-field-picsite-name".localized, color: ColorPalette.picsiteTitleColor, forSize: 14)
         )
     )
     
@@ -59,7 +59,7 @@ class UploadPicsiteConfirmationViewController: UIViewController, UITextFieldDele
         self.location = location
         super.init(nibName: nil, bundle: nil)
         addPlainBackButton(tintColorWhite: false)
-        self.title = "Información"
+        self.title = "upload-picsite-confirmation-navigation-title".localized
     }
     
     required init?(coder: NSCoder) {
@@ -74,7 +74,7 @@ class UploadPicsiteConfirmationViewController: UIViewController, UITextFieldDele
         
         titleTextField.textField.delegate = self
         
-        titleLabel.attributedText = FontPalette.boldTextStyler.attributedString("Upload a profile picture for this site", forSize: 14)
+        titleLabel.attributedText = FontPalette.boldTextStyler.attributedString("upload-picsite-confirmation-select-profile-photo-title".localized, forSize: 14)
         
         let image = UIImage(systemName: "plus")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .small))?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(pointSize: 50, weight: .bold))
         imageView.image = image
@@ -83,7 +83,7 @@ class UploadPicsiteConfirmationViewController: UIViewController, UITextFieldDele
         
         nextButton = {
             var configuration = UIButton.Configuration.filled()
-            configuration.title = "Subir picsite"
+            configuration.title = "upload-picsite-confirmation-upload-picsite-button".localized
             configuration.setFont(fontDescriptor: FontPalette.boldTextStyler.fontDescriptor!, size: 16)
             configuration.cornerStyle = .large
             let action = UIAction { [weak self] _ in
@@ -142,7 +142,7 @@ class UploadPicsiteConfirmationViewController: UIViewController, UITextFieldDele
     
     private func onSelectUpload() {
         guard let text = self.titleTextField.text else { return }
-        performBlockingTask(loadingMessage: "Uploading picsite") {
+        performBlockingTask(loadingMessage: "upload-picsite-confirmation-loading-message".localized) {
             try await self.dataSource.uploadNewPicsite(title: text, location: self.location, localImageURL: self.localImageURL)
             self.navigationController?.popToRootViewController(animated: true)
         }
@@ -162,18 +162,18 @@ class UploadPicsiteConfirmationViewController: UIViewController, UITextFieldDele
     // MARK: UITextFieldDelegate
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        if textField.isTextFieldValid {
+        if !textField.isTextFieldValid {
             self.nextButton.isEnabled = false
             animator.addAnimations {
-                self.titleTextField.showErrorMessage(message: FontPalette.mediumTextStyler.attributedString("El nombre debe contener almenos 5 caracteres", color: ColorPalette.picsiteErrorColor, forSize: 14))
+                self.titleTextField.showErrorMessage(message: FontPalette.mediumTextStyler.attributedString("upload-picsite-confirmation-title-text-field-picsite-error".localized, color: ColorPalette.picsiteErrorColor, forSize: 14))
             }
             animator.startAnimation()
         } else {
+            self.nextButton.isEnabled = true
             animator.addAnimations {
                 self.titleTextField.showErrorMessage(message: nil)
             }
             animator.startAnimation()
-            self.nextButton.isEnabled = true
         }
     }
     

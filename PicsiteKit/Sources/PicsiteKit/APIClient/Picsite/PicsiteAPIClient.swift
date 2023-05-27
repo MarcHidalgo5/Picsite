@@ -1,4 +1,4 @@
- //
+//
 //  Created by Marc Hidalgo on 28/2/22.
 //
 
@@ -54,10 +54,6 @@ public class PicsiteAPIClient {
         return !usernameQuery.isEmpty
     }
     
-//    public func a() {
-//        let hash = GFUtils.geoHash(forLocation: location)
-//    }
-//    
     //MARK: Map
     
     public func fetchPicsites() async throws -> [Picsite] {
@@ -121,7 +117,6 @@ public class PicsiteAPIClient {
         let picsite = Picsite(title: title, coordinate: geoPoint, _thumbnailURLString: thumbnailURLString, _imageURLString: imageURLString, location: city)
         try await picsiteRef.document(newPicsiteID).setData(picsite)
     }
-
 
     //MARK: Storage
     

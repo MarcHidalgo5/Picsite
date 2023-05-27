@@ -58,7 +58,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         self.selectedPhoto = Photo(url: imageData.localURL)
              super.init(nibName: nil, bundle: nil)
         addPlainBackButton(tintColorWhite: false)
-        self.title = "Foto seleccionada"
+        self.title = "upload-photo-confirmation-navigation-title".localized
     }
 
     required init?(coder: NSCoder) {
@@ -71,12 +71,12 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         
         nextButton = {
             var configuration = UIButton.Configuration.filled()
-            configuration.title = "Subir foto"
+            configuration.title = "upload-photo-confirmation-upload-photo-button".localized
             configuration.setFont(fontDescriptor: FontPalette.mediumTextStyler.fontDescriptor!, size: 16)
             configuration.cornerStyle = .large
             let action = UIAction { [weak self] _ in
                 guard let self, let picsiteID = self.currentPicsiteSelected?.id, let localImageURL = self.imageData.localURL else { return }
-                performBlockingTask(loadingMessage: "Uploading photo") {
+                performBlockingTask(loadingMessage: "upload-photo-confirmation-loading-message".localized) {
                     do {
                         try await self.dataSource.uploadImageToFirebaseStorage(with: localImageURL, into: picsiteID)
                         self.closeViewController(sender: nil)
@@ -158,7 +158,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         
         let picsiteLabel: UILabel = {
             let label = UILabel()
-            label.attributedText = FontPalette.mediumTextStyler.attributedString("Selecciona el lugar donde pertenece esta fotografia:", color: ColorPalette.picsiteTitleColor, forSize: 16)
+            label.attributedText = FontPalette.mediumTextStyler.attributedString("upload-photo-confirmation-select-place-title".localized, color: ColorPalette.picsiteTitleColor, forSize: 16)
             label.numberOfLines = 2
             label.textAlignment = .center
             return label
@@ -177,7 +177,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
             
             confirmButton = {
                 var configuration = UIButton.Configuration.filled()
-                configuration.title = "Seleccionar picsite"
+                configuration.title = "upload-photo-confirmation-select-place-button".localized
                 configuration.baseForegroundColor = .white
                 configuration.baseBackgroundColor = ColorPalette.picsiteDeepBlueColor
                 configuration.setFont(fontDescriptor: FontPalette.mediumTextStyler.fontDescriptor!, size: 16)
