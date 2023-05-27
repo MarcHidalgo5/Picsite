@@ -8,6 +8,11 @@
 //Google
 "authentication-google-error" = "Error al iniciar session";
 
+//TabBarController
+"tabbar-controller-map-title" = "Mapa";
+"tabbar-controller-add-title" = "Añadir";
+"tabbar-controller-profile-title" = "Perfil";
+
 //TextField
 "textField-name-placeholder" = "";
 "textField-name-title" = "Nombre completo";
