@@ -46,7 +46,7 @@ class PicsiteProfileDataSource: PicsiteProfileDataSourceType {
         guard morePagesAreAvailable else {
            throw NoPagingAvailable()
         }
-        let photoPageResult = try await apiClient.fetchPhotoURLs(for: self.picsiteID, startAfter: pagingInfo.lastDocument)
+        let photoPageResult = try await apiClient.fetchPhotoURLs(for: self.picsiteID, lastDocument: pagingInfo.lastDocument)
         self.pagingInfo.morePagesAreAvailable = photoPageResult.morePageAvailable
         self.pagingInfo.lastDocument = photoPageResult.lastDocument
         return photoPageResult.items.profilePhotosConfig

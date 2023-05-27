@@ -1,17 +1,23 @@
 //
-//  Created by Marc Hidalgo on 7/11/22.
+//  Created by Marc Hidalgo on 17/5/23.
 //
 
 import UIKit
 import MapKit
-import PicsiteUI; import PicsiteKit
+import PicsiteKit
 import CoreLocation
 import BSWInterfaceKit
 
-public class MapViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
-    
+public protocol BaseMapViewControlleType: UIViewController, TransparentNavigationBarPreferenceProvider, PicsiteAnnotationViewObserver{
+    func fetchData()
+    func didTapOnAnnotation(currentAnnotation: PicsiteAnnotation)
+    func configureFor(viewModel: BaseMapViewController.VM)
+}
+
+open class BaseMapViewController: UIViewController, BaseMapViewControlleType, TransparentNavigationBarPreferenceProvider {
+        
     public struct VM {
-        let annotations: [PicsiteAnnotation]
+        public let annotations: [PicsiteAnnotation]
         
         public init(annotations: [PicsiteAnnotation]) {
             self.annotations = annotations
@@ -20,16 +26,21 @@ public class MapViewController: UIViewController, TransparentNavigationBarPrefer
     
     private var locationManager: CLLocationManager!
     private var currentLocation: CLLocation?
-    private let dataSource = ModuleDependencies.mapDataSource!
     private let picsitAnnotationView = PicsiteAnnotationView(frame: CGRect(x: 10, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width - 20, height: 100))
     private var initialTouchPoint: CGPoint = CGPoint(x: 0,y: 0)
-    private let mapView : MKMapView = {
+    public let mapView : MKMapView = {
         let map = MKMapView()
         map.pointOfInterestFilter = .excludingAll
         return map
     }()
     
-    public override func loadView() {
+    public var currentPicsiteSelected: Picsite {
+        get {
+            picsitAnnotationView.picsite
+        }
+    }
+
+    open override func loadView() {
         view = UIView()
         view.addSubview(mapView)
         view.addSubview(picsitAnnotationView)
@@ -41,7 +52,7 @@ public class MapViewController: UIViewController, TransparentNavigationBarPrefer
         super.init(nibName: nil, bundle: nil)
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -58,19 +69,7 @@ public class MapViewController: UIViewController, TransparentNavigationBarPrefer
         picsitAnnotationView.addGestureRecognizer(panGesture)
         createLocationManeger()
         fetchData()
-    }
-    
-    public var barStyle: TransparentNavigationBar.TintColorStyle {
-        .transparentWithoutUserInteractionEnable
-    }
-    
-    //MARK: Private
-
-    private func fetchData()  {
-        performBlockingTask(loadingMessage: "map-fetch-data-loading".localized, errorMessage: "map-fetch-error-fetching".localized) {
-            let vm = try await self.dataSource.fetchAnnotations()
-            self.configureFor(viewModel: vm)
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchData), name: UploadContentNotification, object: nil)
     }
     
     @objc private func handlePan(_ gestureRecognizer: UIPanGestureRecognizer) {
@@ -81,12 +80,11 @@ public class MapViewController: UIViewController, TransparentNavigationBarPrefer
             initialTouchPoint = touchPoint
         } else if gestureRecognizer.state == .changed {
             if touchPoint.y - initialTouchPoint.y > 0 {
-                self.picsitAnnotationView.frame.origin.y =  touchPoint.y - initialTouchPoint.y + UIScreen.main.bounds.height - (UIScreen.main.smallestScreen ? 180 : 210)
+                self.picsitAnnotationView.frame.origin.y = touchPoint.y - initialTouchPoint.y + UIScreen.main.bounds.height - (UIScreen.main.smallestScreen ? 180 : 210)
             }
         } else if gestureRecognizer.state == .ended || gestureRecognizer.state == .cancelled {
             if mapView.selectedAnnotations.count > 0 {
                 if touchPoint.y - self.initialTouchPoint.y > 45 {
-                    self.removeAnnotationView()
                     self.deselectCurrentMapAnnotatons()
                 } else {
                     // Redisplay in the initial position
@@ -99,12 +97,11 @@ public class MapViewController: UIViewController, TransparentNavigationBarPrefer
     
     @objc private func didTapOnMap() {
         if mapView.selectedAnnotations.count > 0 {
-            removeAnnotationView()
             deselectCurrentMapAnnotatons()
         }
     }
     
-    private func showAnnotationView() {
+    open func showAnnotationView() {
         UIView.animate(withDuration: 0.3, animations: {
             self.picsitAnnotationView.frame.origin.y =  UIScreen.main.bounds.height - (UIScreen.main.smallestScreen ? 180 : 210)
         })
@@ -116,14 +113,11 @@ public class MapViewController: UIViewController, TransparentNavigationBarPrefer
         })
     }
     
-    private func deselectCurrentMapAnnotatons() {
+    open func deselectCurrentMapAnnotatons() {
+        removeAnnotationView()
         for annotation in mapView.selectedAnnotations {
             mapView.deselectAnnotation(annotation, animated: true)
         }
-    }
-    
-    private func configureFor(viewModel: VM) {
-        mapView.addAnnotations(viewModel.annotations)
     }
     
     private func createLocationManeger() {
@@ -140,10 +134,29 @@ public class MapViewController: UIViewController, TransparentNavigationBarPrefer
             break
         }
     }
+    
+    // Implement this
+    
+    open var barStyle: PicsiteUI.TransparentNavigationBar.TintColorStyle {
+        fatalError("barStyle has not been implemented")
+    }
+    
+    @objc open func fetchData() {
+        fatalError("fetchData() has not been implemented")
+    }
+    
+    open func didTapOnAnnotation(currentAnnotation: PicsiteAnnotation) {
+        fatalError("didTapOnAnnotation(currentAnnotation: PicsiteAnnotation) has not been implemented")
+    }
+    
+    open func configureFor(viewModel: VM) {
+        fatalError("configureFor(viewModel: VM)")
+    }
 }
 
-extension MapViewController: CLLocationManagerDelegate {
-    
+//MARK: CLLocationManegerDelegate
+
+extension BaseMapViewController: CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if currentLocation == nil {
             if let userLocation = locations.last {
@@ -152,6 +165,18 @@ extension MapViewController: CLLocationManagerDelegate {
                 mapView.centerCameraToLocation(userLocation)
             }
         }
+    }
+}
+
+//MARK: MKMapViewDelegate
+
+extension BaseMapViewController: MKMapViewDelegate {
+    open func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        
+        guard let currentAnnotation = view as? AnnotationMarkerView, let picsiteAnnotation = currentAnnotation.annotation as? PicsiteAnnotation else { return }
+        
+        self.picsitAnnotationView.configureFor(picsiteAnnotation: picsiteAnnotation)
+        self.showAnnotationView()
     }
 }
 
@@ -172,25 +197,3 @@ private extension MKMapView {
         setCamera(mapCamera, animated: true)
     }
 }
-
-//MARK: MKMapViewDelegate
-
-extension MapViewController: MKMapViewDelegate {
-    public func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
-        guard let currentAnnotation = view as? AnnotationMarkerView, let picsiteAnnotation = currentAnnotation.annotation as? PicsiteAnnotation else { return }
-        
-        self.picsitAnnotationView.configureFor(picsiteAnnotation: picsiteAnnotation)
-        self.showAnnotationView()
-    }
-}
-
-//MARK: PicsiteAnnotationViewObserver
-
-extension MapViewController: PicsiteAnnotationViewObserver {
-    func didTapOnAnnotation(currentAnnotation: PicsiteAnnotation) {
-        let profileVC = dataSource.picsiteProfileViewController(picsiteID: currentAnnotation.picsiteData.id)
-        self.navigationController?.pushViewController(profileVC, animated: true)
-    }
-}
-

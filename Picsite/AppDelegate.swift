@@ -55,6 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 import PicsiteMapKit
 import PicsiteAuthKit
 import PicisteProfileKit
+import PicsiteUploadContentKit
 
 @MainActor
 private func wireUpTheKits() {
@@ -63,8 +64,11 @@ private func wireUpTheKits() {
     PicsiteAuthKit.ModuleDependencies.socialManeger = SocialNetworkManager.shared
     
     //Map
-    PicsiteMapKit.ModuleDependencies.mapDataSource = Current.mapDataSourceFactory()
+    PicsiteMapKit.ModuleDependencies.dataSource = Current.mapDataSourceFactory()
     
     //PicsiteProfile
     PicisteProfileKit.ModuleDependencies.dataSource = { Current.picsiteProfileDataSourceFactory($0) }
+    
+    //UploadContent
+    PicsiteUploadContentKit.ModuleDependencies.dataSource = Current.uploadContentDataSourceFactory()    
 }

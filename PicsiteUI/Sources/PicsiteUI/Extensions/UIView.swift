@@ -68,5 +68,13 @@ public extension UIView {
         addShadow(opacity: shadow.opacity, radius: shadow.radius, offset: shadow.offset)
         setNeedsLayout()
     }
+    
+    func addCustomShadow() {
+        self.clipsToBounds = false
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.layer.shadowOpacity = 0.4
+        self.layer.shadowRadius = 2
+    }
 }
 

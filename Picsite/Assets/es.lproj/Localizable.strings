@@ -70,8 +70,40 @@
 "map-annotation-photos-titel" = "Fotos";
 "map-annotation-info-titel" = "Actualizado:";
 "map-annotation-view-last-update-title" = "Ultima pubicación: %@";
+"map-annotation-view-none-last-update-title" = "Aún no hay publicaciónes";
 "map-fetch-data-loading" = "Cargando picsites";
 "map-fetch-error-fetching" = "Error al cargar los picsties";
 
 //PicsiteProfileViewController
 "picsite-profile-empty-photos-error" = "Aún no se ha subido ninguna foto a este sitio";
+
+//UploadPhotoConfirmationViewController
+"upload-photo-confirmation-select-place-title" = "Selecciona el lugar al que pertenece esta fotografía:";
+"upload-photo-confirmation-select-place-button" = "Seleccionar picsite";
+"upload-photo-confirmation-loading-message" = "Subiendo foto";
+"upload-photo-confirmation-upload-photo-button" = "Subir foto";
+"upload-photo-confirmation-navigation-title" = "Foto seleccionada";
+
+//UploadPicsiteConfirmationViewController
+"upload-picsite-confirmation-title-text-field-picsite-name" = "Nombre del lugar";
+"upload-picsite-confirmation-select-profile-photo-title" = "Sube una foto de perfil para este sitio";
+"upload-picsite-confirmation-upload-picsite-button" = "Subir picsite";
+"upload-picsite-confirmation-loading-message" = "Subiendo picsite";
+"upload-picsite-confirmation-title-text-field-picsite-error" = "El nombre debe contener al menos 5 caracteres";
+"upload-picsite-confirmation-navigation-title" = "Información";
+
+//UploadContentViewController
+"upload-content-navigation-title" = "Crear contenido";
+"upload-content-upload-photo-label" = "Sube tus fotos y compártelas en los picsites existentes en el mapa";
+"upload-content-upload-photo-button" = "Subir foto";
+"upload-content-upload-picsite-label" = "Crea un nuevo punto de interés en el mapa para poder compartir nuevas fotos";
+"upload-content-upload-picsite-button" = "Crear picsite";
+
+//UploadPhotoMapViewController
+"upload-photo-map-title" = "Seleccionar picsite";
+"upload-photo-map-second-title" = "¿Confirmar?";
+
+//UploadPicsiteMapViewController
+"upload-picsite-map-title" = "Crear lugar";
+"upload-picsite-map-second-title" = "¿Confirmar?";
+"upload-picsite-map-create-picsite-title" = "Crear picsite";

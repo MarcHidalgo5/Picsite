@@ -6,6 +6,7 @@ import BSWFoundation
 import PicsiteAuthKit
 import PicsiteMapKit
 import PicisteProfileKit
+import PicsiteUploadContentKit
 
 /// It is the AppDelegate's responsibility to initialise the world with the correct environment
 var Current: World!
@@ -25,6 +26,8 @@ struct World {
     
     var picsiteProfileDataSourceFactory: (String) -> PicsiteProfileDataSourceType
     
+    var uploadContentDataSourceFactory: () -> UploadContentDataSourceType
+    
     init(environment: PicsiteAPI.Environment) {
         self.environment = environment
         self.apiClient = PicsiteAPIClient(environment: environment)
@@ -34,6 +37,9 @@ struct World {
         }
         self.picsiteProfileDataSourceFactory = {
             PicsiteProfileDataSource(picsiteID: $0, apiClient: Current.apiClient)
+        }
+        self.uploadContentDataSourceFactory = {
+            UploadContentDataSource(apiClient: Current.apiClient, mapDataSource: Current.mapDataSourceFactory())
         }
     }
 }

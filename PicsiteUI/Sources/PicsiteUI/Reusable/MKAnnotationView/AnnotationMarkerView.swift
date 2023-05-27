@@ -4,8 +4,8 @@
 
 import MapKit
 
-class AnnotationMarkerView: MKMarkerAnnotationView {
-    override var annotation: MKAnnotation? {
+public class AnnotationMarkerView: MKMarkerAnnotationView {
+    public override var annotation: MKAnnotation? {
         willSet {
             guard let picsiteAnnotation = newValue as? PicsiteAnnotation else {
                 return

@@ -11,7 +11,6 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
     enum Constants {
         static let Spacing: CGFloat = 16
         static let MediumSpacing: CGFloat = 12
-        static let SmallSpacing: CGFloat = 8
     }
     
     private enum Section: Hashable {
@@ -274,15 +273,13 @@ private extension PicsiteProfileViewController {
     static var photosLayout: NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalWidth(0.5))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        // Definir el espacio entre los items.
         let spacing = NSCollectionLayoutSpacing.fixed(Constants.Spacing)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.5))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
         group.interItemSpacing = spacing
-
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: Constants.SmallSpacing, leading: Constants.MediumSpacing, bottom: Constants.MediumSpacing, trailing: Constants.MediumSpacing)
+        section.contentInsets = NSDirectionalEdgeInsets(top: Constants.MediumSpacing, leading: Constants.MediumSpacing, bottom: Constants.MediumSpacing, trailing: Constants.MediumSpacing)
+        section.interGroupSpacing = Constants.MediumSpacing / 2
         return section
     }
     
@@ -292,7 +289,7 @@ private extension PicsiteProfileViewController {
         let groupSize = itemSize
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: -15, leading: Constants.MediumSpacing, bottom: Constants.MediumSpacing, trailing: Constants.MediumSpacing)
+        section.contentInsets = .init(top: Constants.MediumSpacing, leading: Constants.MediumSpacing, bottom: 0, trailing: Constants.MediumSpacing)
         return section
     }
     

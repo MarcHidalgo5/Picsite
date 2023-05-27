@@ -5,6 +5,7 @@
 import UIKit
 import PicsiteKit; import PicsiteUI
 import PicsiteMapKit
+import PicsiteUploadContentKit
 
 class TabBarController: UITabBarController {
 
@@ -14,14 +15,9 @@ class TabBarController: UITabBarController {
             MapViewController(),
             UITabBarItem(title: "Map", image: UIImage(systemName: "mappin.and.ellipse"), selectedImage: UIImage(systemName: "mappin.and.ellipse"))
         )
-
-        let feed: (UIViewController, UITabBarItem) = (
-            HomeViewController(),
-            UITabBarItem(title: "Feed", image: UIImage(systemName: "person.crop.rectangle.stack"), selectedImage: UIImage(systemName: "person.crop.rectangle.stack"))
-        )
         
         let uploadContent: (UIViewController, UITabBarItem) = (
-            HomeViewController(),
+            UploadContentViewController(),
             UITabBarItem(title: "Add", image: UIImage(systemName: "plus"), selectedImage: UIImage(systemName: "plus"))
         )
 
@@ -29,18 +25,11 @@ class TabBarController: UITabBarController {
             HomeViewController(),
             UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), selectedImage: UIImage(systemName: "person.crop.circle"))
         )
-
-        let settings: (UIViewController, UITabBarItem) = (
-            HomeViewController(),
-            UITabBarItem(title: "Settings", image: UIImage(systemName: "gear"), selectedImage: UIImage(systemName: "gear"))
-        )
-
+        
         let viewControllers: [UIViewController] = [
             navigationController(with: map),
-            navigationController(with: feed),
             navigationController(with: uploadContent),
             navigationController(with: profile),
-            navigationController(with: settings),
         ]
         self.setViewControllers(viewControllers, animated: true)
     }

@@ -1,4 +1,4 @@
- //
+//
 //  Created by Marc Hidalgo on 28/2/22.
 //
 
@@ -6,19 +6,27 @@ import Foundation
 import BSWFoundation
 import FirebaseFirestore
 import FirebaseAuth
+import FirebaseStorage
+import CoreLocation
+
 
 public class PicsiteAPIClient {
     
     let environment: PicsiteAPI.Environment
     let firestore = Firestore.firestore()
     
-    let pageSize = PicsiteAPI.PagingConfiguration.PageSize
+    var userID: String {
+        get {
+            guard let userID = Auth.auth().currentUser?.uid else { fatalError() }
+            return userID
+        }
+    }
     
     public init(environment: PicsiteAPI.Environment) {
         self.environment = environment
     }
     
-    //Auth
+    //MARK: Auth
     
     public func login(email: String, password: String) async throws {
         try await Auth.auth().signIn(withEmail: email, password: password)
@@ -46,23 +54,84 @@ public class PicsiteAPIClient {
         return !usernameQuery.isEmpty
     }
     
-    //Map
+    //MARK: Map
     
-    public func fetchAnnotations() async throws -> [Picsite] {
+    public func fetchPicsites() async throws -> [Picsite] {
         let query = firestore.collection(FirestoreRootCollections.picsites.rawValue)
-        return try await fetchAllDocuments(query: query)
+        return try await query.fetchAllDocuments()
     }
     
-    //Picsite Profile
+    //MARK: Picsite Profile
     
     public func fetchPicsiteProfile(picsiteID: String) async throws -> Picsite {
         let documentRef = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID)
-        return try await fetchDocument(documentRef: documentRef)
+        return try await documentRef.fetchDocument()
     }
 
-    public func fetchPhotoURLs(for picsiteID: String, startAfter: QueryDocumentSnapshot? = nil) async throws -> PagedResult<PhotoDocument> {
-        let baseQuery = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).collection(FirestoreCollections.photos.rawValue).order(by: FirestoreFields.createdAt.rawValue)
-        return try await fetchPaged(baseQuery: baseQuery, startAfter: startAfter)
+    public func fetchPhotoURLs(for picsiteID: String, lastDocument: QueryDocumentSnapshot? = nil) async throws -> PagedResult<PhotoDocument> {
+        let query = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).collection(FirestoreCollections.photos.rawValue).order(by: FirestoreFields.createdAt.rawValue, descending: true)
+        return try await query.fetchPaged(startAfter: lastDocument)
+    }
+    
+    //MARK: Upload Content
+    
+    public func uploadImage(into picsiteID: String, localImageURL: URL) async throws {
+        let ref = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).collection(FirestoreCollections.photos.rawValue)
+        let newDocumentID = ref.document().documentID
+        let data = try Data(contentsOf: localImageURL)
+        let path = "\(PicsiteAPIClient.FirestoreRootCollections.picsites)/\(picsiteID)/photos/\(newDocumentID).jpeg"
+        let downloadURL = try await uploadImageToFirebaseStorage(data: data, at: path)
+        let photoDocument = PhotoDocument(_photoURLString: downloadURL.absoluteString, _thumbnailPhotoURLString: downloadURL.absoluteString, createdAt: Date(), userCreatedID: userID)
+        try await ref.document(newDocumentID).setData(photoDocument)
+        
+        let picsiteRef = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID)
+        try await picsiteRef.updateData([
+                "photo_count": FieldValue.increment(Int64(1)),
+                "last_activity": FieldValue.serverTimestamp()
+            ])
+    }
+    
+    public func uploadPicsite(title: String, geoPoint: GeoPoint, city: String, localImageURL: URL?) async throws {
+        let picsiteRef = firestore.collection(FirestoreRootCollections.picsites.rawValue)
+        let newPicsiteID = picsiteRef.document().documentID
+
+        var thumbnailURLString: String? = nil
+        var imageURLString: String? = nil
+
+        if let imageURL = localImageURL {
+            let profilePhotoRef = picsiteRef.document(newPicsiteID).collection(FirestoreCollections.profilePhotos.rawValue)
+            let newProfilePhotoID = profilePhotoRef.document().documentID
+
+            let data = try Data(contentsOf: imageURL)
+            let path = "\(PicsiteAPIClient.FirestoreRootCollections.picsites)/\(newPicsiteID)/profile_photos/\(newProfilePhotoID).jpeg"
+            let downloadURL = try await uploadImageToFirebaseStorage(data: data, at: path)
+
+            thumbnailURLString = downloadURL.absoluteString
+            imageURLString = downloadURL.absoluteString
+
+            let photoDocument = PhotoDocument(_photoURLString: downloadURL.absoluteString, _thumbnailPhotoURLString: downloadURL.absoluteString, createdAt: Date(), userCreatedID: userID)
+
+            try await profilePhotoRef.document(newProfilePhotoID).setData(photoDocument)
+        }
+
+        let picsite = Picsite(title: title, coordinate: geoPoint, _thumbnailURLString: thumbnailURLString, _imageURLString: imageURLString, location: city)
+        try await picsiteRef.document(newPicsiteID).setData(picsite)
+    }
+
+    //MARK: Storage
+    
+    private func uploadImageToFirebaseStorage(data: Data, at path: String) async throws -> URL {
+        let storage = Storage.storage()
+        let storageRef = storage.reference().child(path)
+        
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        
+        try await storageRef.putData(data: data, metadata: metadata)
+                
+        // After the file is uploaded, get the download URL
+        let downloadURL = try await storageRef.downloadURL()
+        return downloadURL
     }
 }
 

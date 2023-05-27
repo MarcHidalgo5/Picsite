@@ -5,5 +5,5 @@
 import Foundation
 
 public enum ModuleDependencies {
-    public static var mapDataSource: MapDataSourceType!
+    public static var dataSource: MapDataSourceType!
 }
