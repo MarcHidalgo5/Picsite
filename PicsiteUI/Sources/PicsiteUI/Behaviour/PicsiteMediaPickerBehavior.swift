@@ -209,10 +209,10 @@ final public class PicsiteMediaPickerBehavior: NSObject, UIDocumentPickerDelegat
         let options = [kCGImageSourceShouldCache as String:  kCFBooleanFalse]
         guard let data = NSData(contentsOf: url),
               let imgSrc = CGImageSourceCreateWithData(data, options as CFDictionary),
-              let metadata = CGImageSourceCopyPropertiesAtIndex(imgSrc, 0, options as CFDictionary) as? NSDictionary,
-              let gpsData = metadata.object(forKey: "{GPS}") as? NSDictionary,
-              let latitude = gpsData.object(forKey: "Latitude") as? Double,
-              let longitude = gpsData.object(forKey: "Longitude") as? Double
+              let metadata = CGImageSourceCopyPropertiesAtIndex(imgSrc, 0, options as CFDictionary) as? [String: Any],
+              let gpsData = metadata["{GPS}"] as? [String: Any],
+              let latitude = gpsData["Latitude"] as? Double,
+              let longitude = gpsData["Longitude"] as? Double
         else {
             return nil
         }

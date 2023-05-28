@@ -75,7 +75,7 @@
 "map-annotation-photos-titel" = "Photos";
 "map-annotation-info-titel" = "Updated:";
 "map-annotation-view-last-update-title" = "Last update: %@";
-"map-annotation-view-none-last-update-title" = "No publication yet";
+"map-annotation-view-none-last-update-title" = "No activity yet";
 "map-fetch-data-loading" = "Loading picsites";
 "map-fetch-error-fetching" = "Fail loading picsties";
 
