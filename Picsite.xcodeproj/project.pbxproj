@@ -16,6 +16,7 @@
 		1A20451629167C960093663B /* RegisterViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A20451529167C960093663B /* RegisterViewControllerTests.swift */; };
 		1A204518291686870093663B /* ForgotPasswordViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A204517291686870093663B /* ForgotPasswordViewControllerTests.swift */; };
 		1A225D4227DFF2A800BED065 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 1A225D4127DFF2A800BED065 /* GoogleSignIn */; };
+		1A2C05052A2365750019613D /* PicsiteUserProfileKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1A2C05042A2365750019613D /* PicsiteUserProfileKit */; };
 		1A4B17DD27DCF4D200390B1D /* SF-Compact-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A0EFFB827CA984A004B544C /* SF-Compact-Text-Bold.otf */; };
 		1A4B17DE27DCF4D500390B1D /* SF-Compact-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A0EFFBA27CA984A004B544C /* SF-Compact-Text-Medium.otf */; };
 		1A4B17DF27DCF4D700390B1D /* SF-Compact-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1A0EFFB927CA984A004B544C /* SF-Compact-Text-Regular.otf */; };
@@ -146,6 +147,7 @@
 				1AA2DDE9291922FF00732EF3 /* PicsiteMapKit in Frameworks */,
 				1ADAF80127517FF100D8D480 /* BSWInterfaceKit in Frameworks */,
 				1A7AC43F27B65C2C006B7DF6 /* BSWFoundation in Frameworks */,
+				1A2C05052A2365750019613D /* PicsiteUserProfileKit in Frameworks */,
 				1ADAF7FE27517F7100D8D480 /* FirebaseStorageSwift-Beta in Frameworks */,
 				1A4FEB5D2A0D85120006802D /* PicisteProfileKit in Frameworks */,
 				1A0EFFAA27CA4479004B544C /* PicsiteUI in Frameworks */,
@@ -415,6 +417,7 @@
 				1AA2DDE8291922FF00732EF3 /* PicsiteMapKit */,
 				1A4FEB5C2A0D85120006802D /* PicisteProfileKit */,
 				1AEF7F902A1197D7000C4126 /* PicsiteUploadContentKit */,
+				1A2C05042A2365750019613D /* PicsiteUserProfileKit */,
 			);
 			productName = Picsite;
 			productReference = 1ADAF7BF27517C8800D8D480 /* Picsite.app */;
@@ -1021,6 +1024,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1A225D4027DFF2A700BED065 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignIn;
+		};
+		1A2C05042A2365750019613D /* PicsiteUserProfileKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PicsiteUserProfileKit;
 		};
 		1A4FEB5C2A0D85120006802D /* PicisteProfileKit */ = {
 			isa = XCSwiftPackageProductDependency;
