@@ -75,16 +75,13 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
             configuration.setFont(fontDescriptor: FontPalette.mediumTextStyler.fontDescriptor!, size: 16)
             configuration.cornerStyle = .large
             let action = UIAction { [weak self] _ in
-                guard let self, let picsiteID = self.currentPicsiteSelected?.id, let localImageURL = self.imageData.localURL else { return }
-                performBlockingTask(loadingMessage: "upload-photo-confirmation-loading-message".localized) {
-                    do {
-                        try await self.dataSource.uploadImageToFirebaseStorage(with: localImageURL, into: picsiteID)
-                        NotificationCenter.default.post(name: UploadContentNotification, object: nil)
-                        self.closeViewController(sender: nil)
-                    } catch {
-                        self.showErrorAlert("error".localized, error: error)
-                    }
+                guard let self else { return }
+                Task {
+                    try await self.uploadTask()
+                    try await Task.sleep(nanoseconds: 2_500_000_000)
+                    self.closeViewController(sender: nil)
                 }
+               
             }
             let button = UIButton(configuration: configuration, primaryAction: action)
             button.translatesAutoresizingMaskIntoConstraints = false
@@ -138,6 +135,18 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
             try await self.dataSource.getClosestPicsite(to: self.imageData.location)
         } completion: { [weak self] vm in
             self?.configureFor(picsite: vm)
+        }
+    }
+    
+    private func uploadTask() async throws {
+        guard let picsiteID = self.currentPicsiteSelected?.id, let localImageURL = self.imageData.localURL else { return }
+        performBlockingTask(loadingMessage: "upload-photo-confirmation-loading-message".localized, successMessage: "upload-photo-confirmation-success".localized) {
+            do {
+                try await self.dataSource.uploadImageToFirebaseStorage(with: localImageURL, into: picsiteID)
+                NotificationCenter.default.post(name: UploadContentNotification, object: nil)
+            } catch {
+                self.showErrorAlert("error".localized, error: error)
+            }
         }
     }
     

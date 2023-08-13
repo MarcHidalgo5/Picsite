@@ -86,6 +86,7 @@
 "upload-photo-confirmation-loading-message" = "Uploading photo";
 "upload-photo-confirmation-upload-photo-button" = "Upload photo";
 "upload-photo-confirmation-navigation-title" = "Selected Photo";
+"upload-photo-confirmation-success" = "Photo uploaded";
 
 //UploadPicsiteConfirmationViewController
 "upload-picsite-confirmation-title-text-field-picsite-name" = "Place Name";

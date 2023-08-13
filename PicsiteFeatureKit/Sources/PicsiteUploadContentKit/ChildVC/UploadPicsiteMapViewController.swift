@@ -85,9 +85,6 @@ class UploadPicsiteMapViewController: BaseMapViewController {
             self.cancelCreatePicsite()
         }
         
-        picsiteCheckView.translatesAutoresizingMaskIntoConstraints = false
-        picsiteCancelView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             verticalLine.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             verticalLine.widthAnchor.constraint(equalToConstant: 2),

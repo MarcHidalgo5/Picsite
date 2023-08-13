@@ -62,16 +62,12 @@ public class UploadPhotoMapViewController: BaseMapViewController {
         picsiteCancelView.onTapButton = { [weak self] in
             self?.deselectCurrentMapAnnotatons()
         }
-        
-        picsiteCheckView.translatesAutoresizingMaskIntoConstraints = false
-        picsiteCancelView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-
             picsiteCheckView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Constants.ButtonMargin),
             picsiteCheckView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.ButtonMargin),
-            picsiteCheckView.widthAnchor.constraint(equalToConstant: Constants.ButtonMargin),
-            picsiteCheckView.heightAnchor.constraint(equalToConstant: Constants.ButtonMargin),
+            picsiteCheckView.widthAnchor.constraint(equalToConstant: Constants.ButtonSize),
+            picsiteCheckView.heightAnchor.constraint(equalToConstant: Constants.ButtonSize),
 
             picsiteCancelView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Constants.ButtonMargin),
             picsiteCancelView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.ButtonMargin),
@@ -185,7 +181,7 @@ extension UploadPhotoMapViewController {
         
         let createPicsiteButton: UIButton = {
             var configuration = UIButton.Configuration.filled()
-            configuration.title = "upload-photo-picsite-button".localized
+            configuration.title = "upload-content-upload-picsite-button".localized
             configuration.baseBackgroundColor = ColorPalette.picsiteDeepBlueColor
             configuration.setFont(fontDescriptor: FontPalette.mediumTextStyler.fontDescriptor!)
             configuration.cornerStyle = .large
