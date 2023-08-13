@@ -145,6 +145,16 @@ class UploadPicsiteMapViewController: BaseMapViewController {
     //MARK: Objc actions
     
     @objc func createPicsiteSelected() {
+        let centerCoordinate = mapView.centerCoordinate
+        let radiusInMeters: CLLocationDistance = 500
+        let centerPoint = MKMapPoint(centerCoordinate)
+        let rect = MKMapRect(x: centerPoint.x - radiusInMeters, y: centerPoint.y - radiusInMeters, width: radiusInMeters * 2, height: radiusInMeters * 2)
+        let annotationsInRegion = mapView.annotations(in: rect)
+        if !annotationsInRegion.isEmpty {
+            showAlert("upload-picsite-region-error-title".localized)
+            return
+        }
+        
         UIView.animate(withDuration: Constants.AnimationDuration, animations: { [weak self] in
             self?.picsiteCheckView.alpha = 1
             self?.picsiteCancelView.alpha = 1
@@ -154,6 +164,7 @@ class UploadPicsiteMapViewController: BaseMapViewController {
             self?.horizontalLine.alpha = 0
             self?.pinImageView.alpha = 0
         })
+        
         currentAnnotation.coordinate = mapView.centerCoordinate
         mapView.addAnnotation(currentAnnotation)
         mapView.selectAnnotation(currentAnnotation, animated: true)

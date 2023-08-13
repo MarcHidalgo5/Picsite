@@ -114,6 +114,7 @@
 "upload-picsite-map-title" = "Create picsite";
 "upload-picsite-map-second-title" = "Confirm?";
 "upload-picsite-map-create-picsite-title" = "Create picsite";
-"upload-picsite-map-create-picsite-section-title" = "Choose where to create the new picsite; remember that you cannot create them less than 50m apart";
+"upload-picsite-map-create-picsite-section-title" = "Choose where to create the new picsite; remember that you cannot create them less than 500m apart";
 "upload-picsite-map-create-picsite-success" = "Picsite created";
 "upload-picsite-button-title" = "Select";
+"upload-picsite-region-error-title" = "There is already a point within 500 meters of this location";
