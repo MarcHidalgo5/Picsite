@@ -18,7 +18,7 @@ public extension UIButton {
         }))
     }
     
-    func addCustomVideoAskShadow() {
+    func addCustomPicsiteShadow() {
         /// Turns out that buttons created with `UIButton.Configuration`
         /// using our shadow APIs was not working and we need to add custom code here.
         self.layer.shadowColor = UIColor.black.cgColor

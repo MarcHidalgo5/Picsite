@@ -53,10 +53,13 @@ class UploadPicsiteConfirmationViewController: UIViewController, UITextFieldDele
     private let location: CLLocation!
     private var localImageURL: URL?
     
+    let mode: UploadNewPicsiteMode
+    
     let animator = UIViewPropertyAnimator(duration: 0.3, curve: .easeInOut)
     
-    init(location: CLLocation) {
+    init(location: CLLocation, mode: UploadNewPicsiteMode) {
         self.location = location
+        self.mode = mode
         super.init(nibName: nil, bundle: nil)
         addPlainBackButton(tintColorWhite: false)
         self.title = "upload-picsite-confirmation-navigation-title".localized
@@ -108,7 +111,7 @@ class UploadPicsiteConfirmationViewController: UIViewController, UITextFieldDele
             }
         }
         
-        nextButton.addCustomVideoAskShadow()
+        nextButton.addCustomPicsiteShadow()
         nextButton.roundCorners(radius: 12)
         
         scrollableStackView.addArrangedSubview(titleLabel)
@@ -141,11 +144,19 @@ class UploadPicsiteConfirmationViewController: UIViewController, UITextFieldDele
     //MARK: Private
     
     private func onSelectUpload() {
+        Task {
+            try await uploadTask()
+            try await Task.sleep(nanoseconds: 1_500_000_000)
+            self.dismiss(animated: true)
+        }
+    }
+    
+    private func uploadTask() async throws {
         guard let text = self.titleTextField.text else { return }
-        performBlockingTask(loadingMessage: "upload-picsite-confirmation-loading-message".localized) {
+        performBlockingTask(loadingMessage: "upload-picsite-confirmation-loading-message".localized, successMessage: "upload-picsite-map-create-picsite-success".localized) { [weak self] in
+            guard let self = self else { return }
             try await self.dataSource.uploadNewPicsite(title: text, location: self.location, localImageURL: self.localImageURL)
             NotificationCenter.default.post(name: UploadContentNotification, object: nil)
-            self.navigationController?.popToRootViewController(animated: true)
         }
     }
     

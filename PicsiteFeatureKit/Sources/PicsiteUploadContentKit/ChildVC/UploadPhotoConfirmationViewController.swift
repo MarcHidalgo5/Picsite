@@ -105,7 +105,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         }
 
         imageView.setPhoto(selectedPhoto)
-        nextButton.addCustomVideoAskShadow()
+        nextButton.addCustomPicsiteShadow()
         nextButton.roundCorners(radius: 12)
         
         confirmButtonView.selectPicsite = { [weak self] in
@@ -159,7 +159,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         
         let picsiteLabel: UILabel = {
             let label = UILabel()
-            label.attributedText = FontPalette.mediumTextStyler.attributedString("upload-photo-confirmation-select-place-title".localized, color: ColorPalette.picsiteTitleColor, forSize: 16)
+            label.attributedText = FontPalette.mediumTextStyler.attributedString("upload-photo-confirmation-select-place-title".localized, color: ColorPalette.picsiteTitleColor, forSize: 16).settingLineSpacing(5)
             label.numberOfLines = 2
             label.textAlignment = .center
             return label

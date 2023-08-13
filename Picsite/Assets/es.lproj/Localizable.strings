@@ -107,8 +107,14 @@
 //UploadPhotoMapViewController
 "upload-photo-map-title" = "Seleccionar picsite";
 "upload-photo-map-second-title" = "¿Confirmar?";
+"upload-photo-map-select-picsite-section-title" = "Selecciona el lugar donde pertenece la imagen";
+"upload-photo-map-select-picsite-button-section-title" = "Puedes crear un lugar de interes si aun no existe:";
+"upload-photo-picsite-button" = "Crear picsite";
 
 //UploadPicsiteMapViewController
-"upload-picsite-map-title" = "Crear lugar";
+"upload-picsite-map-title" = "Crear picsite";
 "upload-picsite-map-second-title" = "¿Confirmar?";
 "upload-picsite-map-create-picsite-title" = "Crear picsite";
+"upload-picsite-map-create-picsite-section-title" = "Elige donde creare el nuevo picsite, recuerda que no puedes crearlos a menos de 50m entre ellos";
+"upload-picsite-map-create-picsite-success" = "Picsite creado";
+"upload-picsite-button-title" = "Seleccionar";

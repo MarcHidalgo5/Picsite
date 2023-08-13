@@ -18,18 +18,21 @@ class UploadPicsiteMapViewController: BaseMapViewController {
     
     var horizontalLine: UIView!
     var verticalLine: UIView!
-    var createPicsiteButton: UIButton!
     var pinImageView: UIImageView!
     let currentAnnotation = MKPointAnnotation()
+    private let uploadPicsiteButtonView = UploadPicsiteButtonView()
+    private let uploadPicsiteTitleView = UploadPicsiteTitleView()
     
     private let picsiteCheckView = RoundButtonView(imageButton: UIImage(systemName: "checkmark")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .bold)), color: ColorPalette.picsiteGreenColor)
     private let picsiteCancelView = RoundButtonView(imageButton: UIImage(systemName: "xmark")?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(scale: .large))?.applyingSymbolConfiguration(UIImage.SymbolConfiguration(weight: .bold)), color: ColorPalette.picsiteErrorColor)
     
     let dataSource = ModuleDependencies.dataSource!
+    let mode: UploadNewPicsiteMode
     
-    override init() {
+    public init(mode: UploadNewPicsiteMode = .normal) {
+        self.mode = mode
         super.init()
-        addPlainBackButton(tintColorWhite: false)
+        addCloseButton(tintColorWhite: false)
         self.title = "upload-picsite-map-title".localized
     }
     
@@ -54,22 +57,13 @@ class UploadPicsiteMapViewController: BaseMapViewController {
         verticalLine.isUserInteractionEnabled = false
         view.addAutolayoutSubview(verticalLine)
         
-        createPicsiteButton = {
-            var configuration = UIButton.Configuration.filled()
-            configuration.title = "upload-picsite-map-create-picsite-title".localized
-            configuration.setFont(fontDescriptor: FontPalette.mediumTextStyler.fontDescriptor!, size: 18, foregroundColor: .white)
-            configuration.baseBackgroundColor = ColorPalette.picsiteDeepBlueColor
-            configuration.cornerStyle = .large
+        uploadPicsiteButtonView.onSelectCreatePicsite = { [weak self] in
+            self?.createPicsiteSelected()
+        }
+        
+        view.addAutolayoutSubview(uploadPicsiteButtonView)
+        view.addAutolayoutSubview(uploadPicsiteTitleView)
 
-            return UIButton(configuration: configuration, primaryAction: UIAction(handler: { [weak self] _ in
-                self?.createPicsiteSelected()
-            }))
-        }()
-
-        createPicsiteButton.translatesAutoresizingMaskIntoConstraints = false
-        createPicsiteButton.addCustomShadow()
-        view.addAutolayoutSubview(createPicsiteButton)
-                
         pinImageView = UIImageView(image: UIImage(systemName: "pin.fill")?.withRenderingMode(.alwaysTemplate))
         pinImageView.tintColor = ColorPalette.picsiteDeepBlueColor
         pinImageView.layer.anchorPoint = CGPoint(x: 0.5, y: 0.9)
@@ -105,11 +99,6 @@ class UploadPicsiteMapViewController: BaseMapViewController {
             horizontalLine.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             horizontalLine.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             
-            createPicsiteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-            createPicsiteButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            createPicsiteButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            createPicsiteButton.heightAnchor.constraint(equalToConstant: 40),
-            
             pinImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             pinImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             pinImageView.widthAnchor.constraint(equalToConstant: 25),
@@ -123,7 +112,15 @@ class UploadPicsiteMapViewController: BaseMapViewController {
             picsiteCancelView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Constants.ButtonMargin),
             picsiteCancelView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.ButtonMargin),
             picsiteCancelView.widthAnchor.constraint(equalToConstant: Constants.ButtonSize),
-            picsiteCancelView.heightAnchor.constraint(equalToConstant: Constants.ButtonSize)
+            picsiteCancelView.heightAnchor.constraint(equalToConstant: Constants.ButtonSize),
+            
+            uploadPicsiteButtonView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            uploadPicsiteButtonView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            uploadPicsiteButtonView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            uploadPicsiteTitleView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            uploadPicsiteTitleView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            uploadPicsiteTitleView.topAnchor.constraint(equalTo: view.topAnchor),
         ])
     }
     
@@ -151,11 +148,11 @@ class UploadPicsiteMapViewController: BaseMapViewController {
     //MARK: Objc actions
     
     @objc func createPicsiteSelected() {
-        
         UIView.animate(withDuration: Constants.AnimationDuration, animations: { [weak self] in
             self?.picsiteCheckView.alpha = 1
             self?.picsiteCancelView.alpha = 1
-            self?.createPicsiteButton.alpha = 0
+            self?.uploadPicsiteButtonView.alpha = 0
+            self?.uploadPicsiteTitleView.alpha = 0
             self?.verticalLine.alpha = 0
             self?.horizontalLine.alpha = 0
             self?.pinImageView.alpha = 0
@@ -173,7 +170,8 @@ class UploadPicsiteMapViewController: BaseMapViewController {
         UIView.animate(withDuration: Constants.AnimationDuration, animations: { [weak self] in
             self?.picsiteCheckView.alpha = 0
             self?.picsiteCancelView.alpha = 0
-            self?.createPicsiteButton.alpha = 1
+            self?.uploadPicsiteButtonView.alpha = 1
+            self?.uploadPicsiteTitleView.alpha = 1
             self?.verticalLine.alpha = 0.3
             self?.horizontalLine.alpha = 0.3
             self?.pinImageView.alpha = 1
@@ -186,7 +184,80 @@ class UploadPicsiteMapViewController: BaseMapViewController {
     
     private func confirmCreatePicsite() {
         let location: CLLocation = .init(latitude: currentAnnotation.coordinate.latitude, longitude: currentAnnotation.coordinate.longitude)
-        let vc = UploadPicsiteConfirmationViewController(location: location)
+        let vc = UploadPicsiteConfirmationViewController(location: location, mode: mode)
         self.show(vc, sender: self)
     }
 }
+
+private extension UploadPicsiteMapViewController {
+    private class UploadPicsiteButtonView: UIView {
+        
+        enum Constants {
+            static let SmallSpacing: CGFloat = 12
+        }
+        
+        public var onSelectCreatePicsite: () -> () = { }
+        
+        let createPicsiteButton: UIButton = {
+            var configuration = UIButton.Configuration.filled()
+            configuration.title = "upload-picsite-button-title".localized
+            configuration.baseBackgroundColor = ColorPalette.picsiteDeepBlueColor
+            configuration.setFont(fontDescriptor: FontPalette.mediumTextStyler.fontDescriptor!)
+            configuration.cornerStyle = .large
+            return UIButton(configuration: configuration)
+        }()
+        
+        public override init(frame: CGRect) {
+            super.init(frame: frame)
+            
+            createPicsiteButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+            
+            addSubview(createPicsiteButton)
+            self.layoutMargins = .init(top: 0, left: 10, bottom: 25, right: 10)
+            createPicsiteButton.pinToSuperviewLayoutMargins()
+            createPicsiteButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+            createPicsiteButton.addCustomPicsiteShadow()
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+        
+        @objc func buttonPressed() {
+            onSelectCreatePicsite()
+        }
+    }
+    
+    private class UploadPicsiteTitleView: UIView {
+        
+        enum Constants {
+            static let SmallSpacing: CGFloat = 12
+        }
+                
+        let uploadPhotoLabel: UILabel = {
+            let label = UILabel()
+            label.attributedText = FontPalette.mediumTextStyler.attributedString("upload-picsite-map-create-picsite-section-title".localized, color: ColorPalette.picsiteTitleColor, forSize: 16).settingLineSpacing(5)
+            label.textAlignment = .center
+            label.numberOfLines = 0
+            return label
+        }()
+        
+        public override init(frame: CGRect) {
+            super.init(frame: frame)
+                    
+            let stackView = UIStackView()
+            stackView.axis = .vertical
+            stackView.spacing = Constants.SmallSpacing
+            stackView.addArrangedSubview(uploadPhotoLabel)
+            
+            let sectionContainer = SectionContainerView(stackView)
+            addSubview(sectionContainer)
+            sectionContainer.pinToSuperviewLayoutMargins()
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+    }
+}
+
