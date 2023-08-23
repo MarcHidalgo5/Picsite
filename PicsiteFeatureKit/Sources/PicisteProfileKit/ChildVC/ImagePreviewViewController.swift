@@ -34,14 +34,6 @@ class ImagePreviewViewController: UIViewController, TransparentNavigationBarPref
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupUI()
-    }
-    
-    public var barStyle: TransparentNavigationBar.TintColorStyle {
-        .transparent
-    }
-
-    private func setupUI() {
         let blurEffect = UIBlurEffect(style: .dark)
         let blurredEffectView = UIVisualEffectView(effect: blurEffect)
         blurredEffectView.frame = view.bounds
@@ -59,7 +51,11 @@ class ImagePreviewViewController: UIViewController, TransparentNavigationBarPref
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         view.addGestureRecognizer(tapGesture)
     }
-
+    
+    public var barStyle: TransparentNavigationBar.TintColorStyle {
+        .transparent
+    }
+    
     @objc private func handleTap() {
         dismiss(animated: true, completion: nil)
     }

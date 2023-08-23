@@ -28,6 +28,7 @@ open class BaseMapViewController: UIViewController, BaseMapViewControlleType, Tr
     private var currentLocation: CLLocation?
     private let picsitAnnotationView = PicsiteAnnotationView(frame: CGRect(x: 10, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width - 20, height: 100))
     private var initialTouchPoint: CGPoint = CGPoint(x: 0,y: 0)
+    private var loadingAnnotation = false
     public let mapView : MKMapView = {
         let map = MKMapView()
         map.pointOfInterestFilter = .excludingAll
@@ -104,7 +105,9 @@ open class BaseMapViewController: UIViewController, BaseMapViewControlleType, Tr
     open func showAnnotationView() {
         UIView.animate(withDuration: 0.3, animations: {
             self.picsitAnnotationView.frame.origin.y =  UIScreen.main.bounds.height - (UIScreen.main.smallestScreen ? 180 : 210)
-        })
+        }) { _ in
+            self.loadingAnnotation = false
+        }
     }
     
     func removeAnnotationView() {
@@ -172,7 +175,8 @@ extension BaseMapViewController: CLLocationManagerDelegate {
 
 extension BaseMapViewController: MKMapViewDelegate {
     open func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
+        guard !self.loadingAnnotation else { return }
+        self.loadingAnnotation = true
         guard let currentAnnotation = view as? AnnotationMarkerView, let picsiteAnnotation = currentAnnotation.annotation as? PicsiteAnnotation else { return }
         
         self.picsitAnnotationView.configureFor(picsiteAnnotation: picsiteAnnotation)

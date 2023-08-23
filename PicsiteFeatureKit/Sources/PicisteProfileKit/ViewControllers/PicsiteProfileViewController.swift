@@ -259,9 +259,14 @@ extension PicsiteProfileViewController: UICollectionViewDelegate {
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = diffDataSource.itemIdentifier(for: indexPath) else { return }
         switch item {
+        case .profileImage(let config):
+            guard let image = config.photo.uiImage else { return }
+            let previewVC = ImagePreviewViewController()
+            previewVC.image = image
+            let navVC = MinimalNavigationController(rootViewController: previewVC)
+            present(navVC, animated: true, completion: nil)
         case .photo(let id):
-            guard let imageConfiguration = viewModel.photos.filter({ $0.id == id }).first else { return }
-            let image = imageConfiguration.photo.uiImage
+            guard let imageConfiguration = viewModel.photos.filter({ $0.id == id }).first, let image = imageConfiguration.photo.uiImage else { return }
             let previewVC = ImagePreviewViewController()
             previewVC.image = image
             let navVC = MinimalNavigationController(rootViewController: previewVC)
