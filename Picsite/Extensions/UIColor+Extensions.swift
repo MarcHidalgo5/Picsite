@@ -22,4 +22,8 @@ extension UIColor {
     static let picsiteDarkGray = UIColor(named: "picsite-dark-gray")!
     
     static let picsiteButtonTitleColor = UIColor(light: .white, dark: .white)
+    
+    static var picsiteAnnotationRecent = UIColor(named: "picsite-recent-annotation")!
+    static var picsiteAnnotationMoreOneWeek = UIColor(named: "picsite-more-one-week-annotation")!
+    static var picsiteAnnotationMoreOneMonth = UIColor(named: "picsite-more-one-month-annotation")!
 }

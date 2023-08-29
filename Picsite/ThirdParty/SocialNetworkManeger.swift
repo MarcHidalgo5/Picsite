@@ -26,7 +26,8 @@ class SocialNetworkManager: NSObject, UIApplicationDelegate, AuthenticationManag
         }
     }
 }
-    // MARK: Google
+
+// MARK: Google
     
 private extension SocialNetworkManager {
     func fetchGoogleData(clientID: String, fromVC: UIViewController) async throws -> AuthenticationManagerSocialInfo {

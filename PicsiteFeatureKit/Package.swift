@@ -38,7 +38,7 @@ let package = Package(
         ),
         .target(
             name: "PicsiteMapKit",
-            dependencies: ["BSWFoundation", "BSWInterfaceKit", "PicsiteKit", "PicsiteUI"]
+            dependencies: ["BSWFoundation", "BSWInterfaceKit", "PicsiteKit", "PicsiteUI", "PicsiteUploadContentKit"]
         ),
         .target(
             name: "PicisteProfileKit",

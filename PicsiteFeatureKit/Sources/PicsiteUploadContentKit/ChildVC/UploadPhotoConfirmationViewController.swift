@@ -8,7 +8,7 @@ import BSWInterfaceKit
 import PicsiteKit
 import CoreLocation
 
-class UploadPhotoConfirmationViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
+public class UploadPhotoConfirmationViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
     
     private var selectedPhoto: Photo
     private let imageData: PicsiteMediaPickerBehavior.ImageData
@@ -53,10 +53,11 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
     }()
      
     
-    init(imageData: PicsiteMediaPickerBehavior.ImageData) {
+    public init(imageData: PicsiteMediaPickerBehavior.ImageData, selectedPicsite: Picsite? = nil) {
         self.imageData = imageData
+        self.currentPicsiteSelected = selectedPicsite
         self.selectedPhoto = Photo(url: imageData.localURL)
-             super.init(nibName: nil, bundle: nil)
+        super.init(nibName: nil, bundle: nil)
         addPlainBackButton(tintColorWhite: false)
         self.title = "upload-photo-confirmation-navigation-title".localized
     }
@@ -65,7 +66,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = ColorPalette.picsiteBackgroundColor
         
@@ -128,6 +129,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         ])
         
         fetchData()
+        configureFor(picsite: currentPicsiteSelected)
     }
 
     func fetchData() {
@@ -222,7 +224,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
 }
 
 extension UploadPhotoConfirmationViewController: UploadPhotoMapViewControllerDelegate {
-    func didSelectPicsite(_ picsite: Picsite) {
+    public func didSelectPicsite(_ picsite: Picsite) {
         self.dismiss(animated: true) {
             self.currentPicsiteSelected = picsite
         }

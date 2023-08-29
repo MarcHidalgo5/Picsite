@@ -61,11 +61,11 @@ public extension PicsiteAnnotation {
     var markerTintColor: UIColor {
         switch activity {
         case .recentlyUsed, .lastWeekUsed:
-            return .green
+            return ColorPalette.picsiteAnnotationRecent
         case .lastTwoWeeks, .lastThreeWeeks, .lastMonthUsed:
-            return .yellow
+            return ColorPalette.picsiteAnnotationMoreOneWeek
         case .moreThanAMonth:
-            return .red
+            return ColorPalette.picsiteAnnotationMoreOneMonth
         case .neverUsed:
             return .white
         }

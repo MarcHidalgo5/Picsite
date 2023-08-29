@@ -13,7 +13,9 @@ import PicsiteKit
 class LoginViewControllerTests: BSWSnapshotTest {
     
     func testLayout() {
-        let sut = AuthenticationPerformerViewController(dependecies: .forPicsiteLogin(observer: self))
+        ModuleDependencies.dataSource = MockAuthKit()
+        ModuleDependencies.socialManeger = SocialNetworkManager()
+        let sut = AuthenticationPerformerViewController(mode: .login, observer: self)
         let navVC = MinimalNavigationController(rootViewController: sut)
 //        debug(viewController: navVC)
         waitABitAndVerify(viewController: navVC, testDarkMode: true)
@@ -23,8 +25,4 @@ class LoginViewControllerTests: BSWSnapshotTest {
 extension LoginViewControllerTests: AuthenticationObserver {
     func didAuthenticate(kind: AuthenticationPerformerKind) { }
     func didCancelAuthentication() { }
-}
-
-func forPicsiteLogin(observer: AuthenticationObserver) -> ModuleDependencies {
-    return ModuleDependencies(authProvider: MockAuthKit(), socialManager: SocialNetworkManager.shared, mode: .login, observer: observer)
 }

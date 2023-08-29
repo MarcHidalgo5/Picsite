@@ -64,8 +64,8 @@ public class UploadPhotoMapViewController: BaseMapViewController {
         }
 
         NSLayoutConstraint.activate([
-            picsiteCheckView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Constants.ButtonMargin),
-            picsiteCheckView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.ButtonMargin),
+            picsiteCheckView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Constants.ButtonMargin / 2),
+            picsiteCheckView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.ButtonMargin / 2),
             picsiteCheckView.widthAnchor.constraint(equalToConstant: Constants.ButtonSize),
             picsiteCheckView.heightAnchor.constraint(equalToConstant: Constants.ButtonSize),
 

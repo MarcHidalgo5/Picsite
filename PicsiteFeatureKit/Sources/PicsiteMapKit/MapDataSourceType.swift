@@ -3,9 +3,9 @@
 //
 
 import UIKit
-import PicsiteUI
+import PicsiteUI; import PicsiteKit
 
 public protocol MapDataSourceType {
     func fetchAnnotations() async throws -> BaseMapViewController.VM
-    func picsiteProfileViewController(picsiteID: String) -> UIViewController 
+    func picsiteProfileViewController(picsite: Picsite) -> UIViewController
 }

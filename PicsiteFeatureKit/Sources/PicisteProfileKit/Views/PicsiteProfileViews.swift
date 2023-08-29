@@ -177,7 +177,7 @@ extension PicsiteProfileViewController {
                 let annotationSeparator = AnnotationSeparatorView(height: 70, color: .gray.withAlphaComponent(0.6))
                 
                 // Setup labels
-                photosTitleLabel.attributedText = FontPalette.boldTextStyler.attributedString("map-annotation-photos-titel".localized, forSize: 16)
+                photosTitleLabel.attributedText = FontPalette.boldTextStyler.attributedString("map-annotation-photos-title".localized, forSize: 16)
 
                 let titleAndSubtitleStackView = UIStackView()
                  titleAndSubtitleStackView.axis = .vertical

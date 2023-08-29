@@ -72,7 +72,7 @@
 "map-last-three-week-used-subtitle" = "Hace tres semanas";
 "map-last-month-used-subtitle" = "Hace un mes";
 "map-more-than-one-month-used-subtitle" = "Más de un mes";
-"map-annotation-photos-titel" = "Fotos";
+"map-annotation-photos-title" = "Fotos";
 "map-annotation-info-titel" = "Actualizado:";
 "map-annotation-view-last-update-title" = "Ultima pubicación: %@";
 "map-annotation-view-none-last-update-title" = "Aún no hay actividad";
@@ -81,6 +81,7 @@
 
 //PicsiteProfileViewController
 "picsite-profile-empty-photos-error" = "Aún no se ha subido ninguna foto a este sitio";
+"picsite-profile-empty-photos-button-title" = "Subir primera foto";
 
 //UploadPhotoConfirmationViewController
 "upload-photo-confirmation-select-place-title" = "Selecciona el lugar al que pertenece esta fotografía:";

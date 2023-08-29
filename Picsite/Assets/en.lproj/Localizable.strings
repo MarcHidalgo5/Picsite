@@ -72,13 +72,14 @@
 "map-more-than-one-month-used-subtitle" = "More than a month";
 "map-annotation-photos-title" = "Photos";
 "map-annotation-info-title" = "Updated:";
-"map-annotation-view-last-update-title" = "Last location: %@";
+"map-annotation-view-last-update-title" = "Last update: %@";
 "map-annotation-view-none-last-update-title" = "No activity yet";
 "map-fetch-data-loading" = "Loading picsites";
 "map-fetch-error-fetching" = "Error loading picsties";
 
 //PicsiteProfileViewController
 "picsite-profile-empty-photos-error" = "No photos have been uploaded to this site yet";
+"picsite-profile-empty-photos-button-title" = "Upload first image";
 
 //UploadPhotoConfirmationViewController
 "upload-photo-confirmation-select-place-title" = "Select the place this photo belongs to:";

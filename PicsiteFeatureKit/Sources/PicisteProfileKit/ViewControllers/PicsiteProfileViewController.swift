@@ -3,8 +3,9 @@
 //
 
 import UIKit
-import PicsiteUI
+import PicsiteUI; import PicsiteKit
 import BSWInterfaceKit
+import PicsiteUploadContentKit
 
 public class PicsiteProfileViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
     
@@ -57,11 +58,14 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
     private var emptyView: ErrorView!
     
     private var viewModel: VM!
+    private let currentPicsite: Picsite
+    private let mediaPicker = PicsiteMediaPickerBehavior()
     
     private let dataSource: PicsiteProfileDataSourceType
     
-    public init(picsiteID: String) {
-        self.dataSource = ModuleDependencies.dataSource(picsiteID)
+    public init(picsite: Picsite) {
+        self.currentPicsite = picsite
+        self.dataSource = ModuleDependencies.dataSource(picsite.id)
         self.collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         super.init(nibName: nil, bundle: nil)
     }
@@ -81,6 +85,7 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        NotificationCenter.default.addObserver(self, selector: #selector(fetchData), name: UploadContentNotification, object: nil)
     }
     
     override public func viewDidLoad() {
@@ -98,7 +103,7 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
         return .lightContent
     }
     
-    func fetchData() {
+    @objc func fetchData() {
         fetchData {
             try await self.dataSource.fetchPicsiteDetails()
         } completion: { [weak self] vm in
@@ -177,7 +182,7 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
             view.addAutolayoutSubview(emptyView)
             view.layoutMargins = UIEdgeInsets(uniform: Constants.Spacing)
             NSLayoutConstraint.activate([
-                view.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor),
+                view.layoutMarginsGuide.centerYAnchor.constraint(equalTo: emptyView.centerYAnchor, constant: -20),
                 view.layoutMarginsGuide.leadingAnchor.constraint(equalTo: emptyView.leadingAnchor),
                 view.layoutMarginsGuide.trailingAnchor.constraint(equalTo: emptyView.trailingAnchor),
             ])
@@ -189,7 +194,17 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
     private func createEmptyConfiguration() -> ErrorView.Configuration {
         return .init(title: FontPalette.mediumTextStyler.attributedString("picsite-profile-empty-photos-error".localized, color: ColorPalette.picsiteTitleColor, forSize: 16).settingParagraphStyle {
             $0.alignment = .center
-        }, button: nil)
+        }, button: .fillButton(withTitle: "picsite-profile-empty-photos-button-title".localized, handler: { [weak self] in
+            self?.onSelectPhoto()
+        }))
+    }
+    
+    private func onSelectPhoto() {
+        Task { @MainActor in
+            guard let imageData = await self.mediaPicker.getMedia(fromVC: self, kind: .photo, source: .photoAlbum), imageData.localURL != nil else { return }
+            let vc = UploadPhotoConfirmationViewController(imageData: imageData, selectedPicsite: self.currentPicsite)
+            self.show(vc, sender: self)
+        }
     }
     
     private func configureDataSource() {
@@ -242,6 +257,7 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
     private func configureFor(viewModel: VM) async {
         self.viewModel = viewModel
         var snapshot = diffDataSource.snapshot()
+        snapshot.deleteAllItems()
         snapshot.appendSections([.profileImage,.information, .photos])
         snapshot.appendItems([.profileImage(viewModel.profilePhotoConfig)], toSection: .profileImage)
         snapshot.appendItems([.information(viewModel.informationConfig)], toSection: .information)
@@ -274,7 +290,6 @@ extension PicsiteProfileViewController: UICollectionViewDelegate {
         default:
             return
         }
-        
     }
 }
 
