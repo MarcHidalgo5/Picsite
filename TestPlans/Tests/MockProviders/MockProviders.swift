@@ -22,6 +22,7 @@ class MockAuthKit: AuthenticationDataSourceType {
 }
 
 class MockMapDataSource: MapDataSourceType {
+    
     func fetchAnnotations() async throws -> BaseMapViewController.VM {
         return .init(
             annotations: [
@@ -36,7 +37,7 @@ class MockMapDataSource: MapDataSourceType {
         )
     }
     
-    func picsiteProfileViewController(picsiteID: String) -> UIViewController {
+    func picsiteProfileViewController(picsite: PicsiteKit.Picsite) -> UIViewController {
         return UIViewController()
     }
 }
