@@ -1,17 +1,17 @@
 //
-//  Created by Marc Hidalgo on 12/5/23.
+//  Created by Marc Hidalgo on 31/8/23.
 //
 
 import UIKit
 import BSWInterfaceKit
 import PicsiteUI
 
-extension PicsiteProfileViewController {
+extension UserProfileViewController {
     
     public enum ProfileImageCell {
         
         public struct Configuration: UIContentConfiguration, Hashable {
-             let photo: Photo
+            let photo: Photo
             
             private(set) var state: UICellConfigurationState?
             
@@ -33,7 +33,7 @@ extension PicsiteProfileViewController {
             }
         }
         
-        @objc(PicsiteProfileImageCellView)
+        @objc(ImageCellView)
         class View: UIView, UIContentView {
             
             private let imageView = UIImageView()
@@ -54,10 +54,11 @@ extension PicsiteProfileViewController {
                 backgroundColor = .white
                     
                 imageView.contentMode = .scaleAspectFill
+                imageView.clipsToBounds = true
                 addAutolayoutSubview(imageView)
                 imageView.pinToSuperview()
                 
-                roundCorners(radius: 2)
+                roundCorners(radius: 50)
                 
                 let darkOverlayView = UIView(frame: imageView.bounds)
                 darkOverlayView.backgroundColor = UIColor.black.withAlphaComponent(0.2)
@@ -66,7 +67,10 @@ extension PicsiteProfileViewController {
                 imageView.addSubview(darkOverlayView)
                 
                 NSLayoutConstraint.activate([
-                    imageView.heightAnchor.constraint(equalToConstant: 300)
+                    imageView.heightAnchor.constraint(equalToConstant: 100),
+                    imageView.widthAnchor.constraint(equalToConstant: 100),
+                    imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+                    imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
                 ])
                 
                 configureFor(configuration: configuration)
@@ -113,9 +117,9 @@ extension PicsiteProfileViewController {
             }
         }
         
-        @objc(PicsiteProfileAnnotationCellView)
+        @objc(UserProfileAnnotationCellView)
         class View: UIView, UIContentView {
-                        
+            
             let titleLabel: UILabel = {
                 let label = UILabel()
                 label.numberOfLines = 1
@@ -237,10 +241,11 @@ extension PicsiteProfileViewController {
             required init?(coder: NSCoder) {
                 fatalError("init(coder:) has not been implemented")
             }
-            
-            func configureFor(configuration: Configuration){
+
+            private func configureFor(configuration: Configuration){
                 titleLabel.attributedText = FontPalette.boldTextStyler.attributedString(configuration.title, forSize: 18)
                 subtitleLabel.attributedText = FontPalette.mediumTextStyler.attributedString(configuration.subtitle, color: ColorPalette.picsitePlaceholderColor, forSize: 16)
+                
                 if configuration.date != "" {
                     dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-view-last-update-title".localized(with: [configuration.date]), forSize: 13)
                 } else {
@@ -270,11 +275,7 @@ extension PicsiteProfileViewController {
             }
             
             public func makeContentView() -> UIView & UIContentView {
-                if isThumbnail {
-                   return ThumbnailPhotoView(configuration: self)
-                } else {
-                   return PhotoView(configuration: self)
-                }
+                PhotoView(configuration: self)
             }
             
             public func updated(for state: UIConfigurationState) -> Configuration {
@@ -286,7 +287,7 @@ extension PicsiteProfileViewController {
             }
         }
         
-        @objc(PicsiteImageCellView)
+        @objc(UserProfileImageCellView)
         class PhotoView: UIView, UIContentView {
             
             private let imageView = UIImageView()
@@ -313,52 +314,6 @@ extension PicsiteProfileViewController {
                 
                 roundCorners(radius: 12)
 
-                imageView.pinToSuperview()
-                
-                addPicsiteShadow()
-                
-                configureFor(configuration: configuration)
-            }
-            
-            required init?(coder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
-            }
-            
-            private func configureFor(configuration: Configuration){
-                imageView.setPhoto(configuration.photo)
-            }
-        }
-        
-        @objc(ThumbnailImageCellView)
-        class ThumbnailPhotoView: UIView, UIContentView {
-            
-            private let imageView = UIImageView()
-            
-            var configuration: UIContentConfiguration {
-                didSet {
-                    guard let config = configuration as? Configuration,
-                          let oldConfig = oldValue as? Configuration,
-                          config != oldConfig
-                    else { return }
-                    configureFor(configuration: config)
-                }
-            }
-            
-            init(configuration: Configuration) {
-                self.configuration = configuration
-                super.init(frame: .zero)
-                backgroundColor = .white
-                    
-                imageView.contentMode = .scaleAspectFill
-                imageView.clipsToBounds = true
-                imageView.roundCorners(radius: 12)
-                addAutolayoutSubview(imageView)
-                imageView.pinToSuperview()
-                
-                roundCorners(radius: 12)
-
-                imageView.pinToSuperview()
-                
                 addPicsiteShadow()
                 
                 configureFor(configuration: configuration)
