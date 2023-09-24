@@ -7,10 +7,7 @@ import FirebaseFirestore
 public extension DocumentReference {
     func fetchDocument<T: Decodable>() async throws -> T {
         let documentSnapshot = try await self.getDocument()
-        guard let document = try documentSnapshot.data(as: T.self) else {
-            throw PicsiteAPIError.documentNotFound
-        }
-        return document
+        return try documentSnapshot.data(as: T.self)
     }
 }
 
