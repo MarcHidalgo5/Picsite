@@ -146,7 +146,6 @@ class UploadPicsiteConfirmationViewController: UIViewController, UITextFieldDele
     private func onSelectUpload() {
         Task {
             try await uploadTask()
-            try await Task.sleep(nanoseconds: 1_500_000_000)
             self.dismiss(animated: true)
         }
     }
@@ -155,7 +154,8 @@ class UploadPicsiteConfirmationViewController: UIViewController, UITextFieldDele
         guard let text = self.titleTextField.text else { return }
         performBlockingTask(loadingMessage: "upload-picsite-confirmation-loading-message".localized, successMessage: "upload-picsite-map-create-picsite-success".localized) { [weak self] in
             guard let self = self else { return }
-            try await self.dataSource.uploadNewPicsite(title: text, location: self.location, localImageURL: self.localImageURL)
+            _ = try await self.dataSource.uploadNewPicsite(title: text, location: self.location, localImageURL: self.localImageURL)
+            try await Task.sleep(nanoseconds: 1_500_000_000)
             NotificationCenter.default.post(name: UploadContentNotification, object: nil)
         }
     }
@@ -197,7 +197,7 @@ class UploadPicsiteConfirmationViewController: UIViewController, UITextFieldDele
 
 private extension UITextField {
     var isTextFieldValid: Bool {
-         guard let text = self.text, text.count >= 5 else { return false }
+         guard let text = self.text, text.count > 0 else { return false }
         return true
     }
 }

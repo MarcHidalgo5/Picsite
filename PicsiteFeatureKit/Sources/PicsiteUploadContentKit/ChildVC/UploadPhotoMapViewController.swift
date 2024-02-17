@@ -87,6 +87,7 @@ public class UploadPhotoMapViewController: BaseMapViewController {
     @objc func createPicsiteSelected() {
         let vc = UploadPicsiteMapViewController(mode: .withUploadPhoto)
         let navVC = MinimalNavigationController(rootViewController: vc)
+        navVC.modalPresentationStyle = .fullScreen
         self.present(navVC, animated: true)
     }
     

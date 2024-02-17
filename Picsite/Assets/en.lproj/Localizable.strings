@@ -94,7 +94,7 @@
 "upload-picsite-confirmation-select-profile-photo-title" = "Upload a profile photo for this site";
 "upload-picsite-confirmation-upload-picsite-button" = "Upload picsite";
 "upload-picsite-confirmation-loading-message" = "Uploading picsite";
-"upload-picsite-confirmation-title-text-field-picsite-error" = "Name must be at least 5 characters long";
+"upload-picsite-confirmation-title-text-field-picsite-error" = "Name must be at least 1 characters long";
 "upload-picsite-confirmation-navigation-title" = "Information";
 
 //UploadContentViewController

@@ -3,14 +3,6 @@
 //
 
 import Foundation
-import FirebaseFirestore
-
-public extension PicsiteAPIClient {
-    enum LogicError: Int, Swift.Error {
-        case InvalidState = -1
-        case InvalidUser = -2
-    }
-}
 
 public extension PicsiteAPIClient {
     
@@ -23,6 +15,21 @@ public extension PicsiteAPIClient {
         case photos = "photos"
         case profilePhotos = "profile_Photos"
     }
+    
+    enum StoragePath {
+        case uploadImageIntoPicsite(picsiteID: String, newDocumentID: String)
+        case uploadPicsiteWithProfilePhoto(newPicsiteID: String, newProfilePhotoID: String)
+        
+        var path: String {
+            switch self {
+            case .uploadImageIntoPicsite(let picsiteID, let newDocumentID):
+                return "\(FirestoreRootCollections.picsites.rawValue)/\(picsiteID)/\(FirestoreCollections.photos.rawValue)/\(newDocumentID).jpeg"
+            case .uploadPicsiteWithProfilePhoto(let newPicsiteID, let newProfilePhotoID):
+                return "\(FirestoreRootCollections.picsites.rawValue)/\(newPicsiteID)/\(FirestoreCollections.profilePhotos.rawValue)/\(newProfilePhotoID).jpeg"
+            }
+        }
+    }
+
     
     enum FirestoreFields: String {
         case username = "username"

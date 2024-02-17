@@ -3,7 +3,6 @@
 //
 
 import Foundation
-import BSWFoundation
 import FirebaseFirestore
 import FirebaseAuth
 import FirebaseStorage
@@ -45,7 +44,7 @@ public class PicsiteAPIClient {
     }
     
     public func createUser(_ user: User) async throws {
-        guard let userID = user.id else { throw LogicError.InvalidUser }
+        guard let userID = user.id else { throw PicsiteAPIError.invalidUser }
         try await firestore.collection(FirestoreRootCollections.users.rawValue).document(userID).setData(user)
     }
     
@@ -67,7 +66,7 @@ public class PicsiteAPIClient {
         let documentRef = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID)
         return try await documentRef.fetchDocument()
     }
-
+    
     public func fetchPhotoURLs(for picsiteID: String, lastDocument: QueryDocumentSnapshot? = nil) async throws -> PagedResult<PhotoDocument> {
         let query = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).collection(FirestoreCollections.photos.rawValue).order(by: FirestoreFields.createdAt.rawValue, descending: true)
         return try await query.fetchPaged(startAfter: lastDocument)
@@ -79,45 +78,46 @@ public class PicsiteAPIClient {
         let ref = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID).collection(FirestoreCollections.photos.rawValue)
         let newDocumentID = ref.document().documentID
         let data = try Data(contentsOf: localImageURL)
-        let path = "\(PicsiteAPIClient.FirestoreRootCollections.picsites)/\(picsiteID)/photos/\(newDocumentID).jpeg"
+        let path = StoragePath.uploadImageIntoPicsite(picsiteID: picsiteID, newDocumentID: newDocumentID).path
         let downloadURL = try await uploadImageToFirebaseStorage(data: data, at: path)
         let photoDocument = PhotoDocument(_photoURLString: downloadURL.absoluteString, _thumbnailPhotoURLString: downloadURL.absoluteString, createdAt: Date(), userCreatedID: userID)
         try await ref.document(newDocumentID).setData(photoDocument)
         
         let picsiteRef = firestore.collection(FirestoreRootCollections.picsites.rawValue).document(picsiteID)
         try await picsiteRef.updateData([
-                "photo_count": FieldValue.increment(Int64(1)),
-                "last_activity": FieldValue.serverTimestamp()
-            ])
+            "photo_count": FieldValue.increment(Int64(1)),
+            "last_activity": FieldValue.serverTimestamp()
+        ])
     }
     
-    public func uploadPicsite(title: String, geoPoint: GeoPoint, city: String, localImageURL: URL?) async throws {
+    public func uploadPicsite(title: String, geoPoint: GeoPoint, city: String, localImageURL: URL?) async throws -> Picsite {
         let picsiteRef = firestore.collection(FirestoreRootCollections.picsites.rawValue)
         let newPicsiteID = picsiteRef.document().documentID
-
+        
         var thumbnailURLString: String? = nil
         var imageURLString: String? = nil
-
+        
         if let imageURL = localImageURL {
             let profilePhotoRef = picsiteRef.document(newPicsiteID).collection(FirestoreCollections.profilePhotos.rawValue)
             let newProfilePhotoID = profilePhotoRef.document().documentID
-
+            
             let data = try Data(contentsOf: imageURL)
-            let path = "\(PicsiteAPIClient.FirestoreRootCollections.picsites)/\(newPicsiteID)/profile_photos/\(newProfilePhotoID).jpeg"
+            let path = StoragePath.uploadPicsiteWithProfilePhoto(newPicsiteID: newPicsiteID, newProfilePhotoID: newProfilePhotoID).path
             let downloadURL = try await uploadImageToFirebaseStorage(data: data, at: path)
-
+            
             thumbnailURLString = downloadURL.absoluteString
             imageURLString = downloadURL.absoluteString
-
+            
             let photoDocument = PhotoDocument(_photoURLString: downloadURL.absoluteString, _thumbnailPhotoURLString: downloadURL.absoluteString, createdAt: Date(), userCreatedID: userID)
-
+            
             try await profilePhotoRef.document(newProfilePhotoID).setData(photoDocument)
         }
-
+        
         let picsite = Picsite(title: title, coordinate: geoPoint, _thumbnailURLString: thumbnailURLString, _imageURLString: imageURLString, location: city)
         try await picsiteRef.document(newPicsiteID).setData(picsite)
+        return picsite
     }
-
+    
     //MARK: Storage
     
     private func uploadImageToFirebaseStorage(data: Data, at path: String) async throws -> URL {
@@ -128,22 +128,15 @@ public class PicsiteAPIClient {
         metadata.contentType = "image/jpeg"
         
         try await storageRef.putData(data: data, metadata: metadata)
-                
+        
         // After the file is uploaded, get the download URL
         let downloadURL = try await storageRef.downloadURL()
         return downloadURL
     }
-}
-
-enum PicsiteAPIError: Swift.Error {
-    case userNotFound
-    case documentNotFound
-}
-
-private extension FirebaseFirestore.DocumentReference {
-    func setData<T: Encodable>(_ from: T, merge: Bool = false) async throws {
-        let encoder = Firestore.Encoder()
-        let data = try encoder.encode(from)
-        try await setData(data, merge: merge)
+    
+    enum PicsiteAPIError: Swift.Error {
+        case invalidUser
     }
 }
+
+

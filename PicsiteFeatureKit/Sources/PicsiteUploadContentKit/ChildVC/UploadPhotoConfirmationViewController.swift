@@ -79,7 +79,6 @@ public class UploadPhotoConfirmationViewController: UIViewController, Transparen
                 guard let self else { return }
                 Task {
                     try await self.uploadTask()
-                    try await Task.sleep(nanoseconds: 2_500_000_000)
                     self.closeViewController(sender: nil)
                 }
                
@@ -110,6 +109,7 @@ public class UploadPhotoConfirmationViewController: UIViewController, Transparen
             guard let self else { return }
             let vc = UploadPhotoMapViewController(delegate: self)
             let navVC = MinimalNavigationController(rootViewController: vc)
+            navVC.modalPresentationStyle = .fullScreen
             self.present(navVC, animated: true)
         }
         
@@ -145,6 +145,7 @@ public class UploadPhotoConfirmationViewController: UIViewController, Transparen
         performBlockingTask(loadingMessage: "upload-photo-confirmation-loading-message".localized, successMessage: "upload-photo-confirmation-success".localized) {
             do {
                 try await self.dataSource.uploadImageToFirebaseStorage(with: localImageURL, into: picsiteID)
+                try await Task.sleep(nanoseconds: 1_500_000_000)
                 NotificationCenter.default.post(name: UploadContentNotification, object: nil)
             } catch {
                 self.showErrorAlert("error".localized, error: error)

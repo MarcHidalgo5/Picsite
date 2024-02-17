@@ -79,6 +79,7 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
     private func onSelectCreatePicsite() {
         let vc = UploadPicsiteMapViewController()
         let navVC = MinimalNavigationController(rootViewController: vc)
+        navVC.modalPresentationStyle = .fullScreen
         self.present(navVC, animated: true)
     }
     

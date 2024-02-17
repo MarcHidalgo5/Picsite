@@ -96,7 +96,7 @@
 "upload-picsite-confirmation-select-profile-photo-title" = "Sube una foto de perfil para este sitio";
 "upload-picsite-confirmation-upload-picsite-button" = "Subir picsite";
 "upload-picsite-confirmation-loading-message" = "Subiendo picsite";
-"upload-picsite-confirmation-title-text-field-picsite-error" = "El nombre debe contener al menos 5 caracteres";
+"upload-picsite-confirmation-title-text-field-picsite-error" = "El nombre debe contener al menos 1 caracter";
 "upload-picsite-confirmation-navigation-title" = "Información";
 
 //UploadContentViewController

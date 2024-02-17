@@ -37,3 +37,11 @@ public extension Query {
         return PagedResult(items: items, morePageAvailable: morePageAvailable, lastDocument: lastDocument)
     }
 }
+
+public extension FirebaseFirestore.DocumentReference {
+    func setData<T: Encodable>(_ from: T, merge: Bool = false) async throws {
+        let encoder = Firestore.Encoder()
+        let data = try encoder.encode(from)
+        try await setData(data, merge: merge)
+    }
+}

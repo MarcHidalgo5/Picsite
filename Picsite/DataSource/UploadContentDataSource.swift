@@ -24,7 +24,7 @@ class UploadContentDataSource: UploadContentDataSourceType {
         return try await self.apiClient.uploadImage(into: picsiteID, localImageURL: localImageURL)
     }
     
-    func uploadNewPicsite(title: String, location: CLLocation, localImageURL: URL?) async throws {
+    func uploadNewPicsite(title: String, location: CLLocation, localImageURL: URL?) async throws -> Picsite {
         let geocoder = CLGeocoder()
         let localeID = NSLocale.localeIdentifier(fromComponents: [NSLocale.Key.countryCode.rawValue: "ES"])
         let locale = Locale(identifier: localeID)
@@ -38,7 +38,7 @@ class UploadContentDataSource: UploadContentDataSourceType {
             }
             
         }
-        try await self.apiClient.uploadPicsite(title: title, geoPoint: .init(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude), city: city, localImageURL: localImageURL)
+        return try await self.apiClient.uploadPicsite(title: title, geoPoint: .init(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude), city: city, localImageURL: localImageURL)
     }
 
     func getClosestPicsite(to location: CLLocation?) async throws -> Picsite? {
