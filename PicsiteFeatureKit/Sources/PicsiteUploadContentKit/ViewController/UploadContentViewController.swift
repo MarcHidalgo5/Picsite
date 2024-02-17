@@ -78,7 +78,9 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
     
     private func onSelectCreatePicsite() {
         let vc = UploadPicsiteMapViewController()
-        self.show(vc, sender: self)
+        let navVC = MinimalNavigationController(rootViewController: vc)
+        navVC.modalPresentationStyle = .fullScreen
+        self.present(navVC, animated: true)
     }
     
     public class PhotoUploadView: UIStackView {
@@ -91,7 +93,7 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
             
             let uploadPhotoLabel: UILabel = {
                 let label = UILabel()
-                label.attributedText = FontPalette.mediumTextStyler.attributedString("upload-content-upload-photo-label".localized, color: ColorPalette.picsiteTitleColor, forSize: 16)
+                label.attributedText = FontPalette.mediumTextStyler.attributedString("upload-content-upload-photo-label".localized, color: ColorPalette.picsiteTitleColor, forSize: 16).settingLineSpacing(5)
                 label.textAlignment = .center
                 label.numberOfLines = 0
                 return label
@@ -133,7 +135,7 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
             
             let uploadPhotoLabel: UILabel = {
                 let label = UILabel()
-                label.attributedText = FontPalette.mediumTextStyler.attributedString("upload-content-upload-picsite-label".localized, color: ColorPalette.picsiteTitleColor, forSize: 16)
+                label.attributedText = FontPalette.mediumTextStyler.attributedString("upload-content-upload-picsite-label".localized, color: ColorPalette.picsiteTitleColor, forSize: 16).settingLineSpacing(5)
                 label.textAlignment = .center
                 label.numberOfLines = 0
                 return label
@@ -161,5 +163,4 @@ public class UploadContentViewController: UIViewController, TransparentNavigatio
             fatalError("init(coder:) has not been implemented")
         }
     }
-    
 }

@@ -21,8 +21,8 @@ class MapDataSource: MapDataSourceType {
         return .init(annotations: picsites.picsiteAnnotations())
     }
     
-    func picsiteProfileViewController(picsiteID: String) -> UIViewController {
-        return PicsiteProfileViewController(picsiteID: picsiteID)
+    func picsiteProfileViewController(picsite: Picsite) -> UIViewController {
+        return PicsiteProfileViewController(picsite: picsite)
     }
 }
 

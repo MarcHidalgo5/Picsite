@@ -33,7 +33,7 @@ extension PicsiteProfileViewController {
             }
         }
         
-        @objc(ImageCellView)
+        @objc(PicsiteProfileImageCellView)
         class View: UIView, UIContentView {
             
             private let imageView = UIImageView()
@@ -113,7 +113,7 @@ extension PicsiteProfileViewController {
             }
         }
         
-        @objc(AnnotationCellView)
+        @objc(PicsiteProfileAnnotationCellView)
         class View: UIView, UIContentView {
                         
             let titleLabel: UILabel = {
@@ -177,7 +177,7 @@ extension PicsiteProfileViewController {
                 let annotationSeparator = AnnotationSeparatorView(height: 70, color: .gray.withAlphaComponent(0.6))
                 
                 // Setup labels
-                photosTitleLabel.attributedText = FontPalette.boldTextStyler.attributedString("map-annotation-photos-titel".localized, forSize: 16)
+                photosTitleLabel.attributedText = FontPalette.boldTextStyler.attributedString("map-annotation-photos-title".localized, forSize: 16)
 
                 let titleAndSubtitleStackView = UIStackView()
                  titleAndSubtitleStackView.axis = .vertical
@@ -286,7 +286,7 @@ extension PicsiteProfileViewController {
             }
         }
         
-        @objc(ImageCellView)
+        @objc(PicsiteImageCellView)
         class PhotoView: UIView, UIContentView {
             
             private let imageView = UIImageView()

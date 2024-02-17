@@ -75,11 +75,11 @@ class BSWSnapshotTest: XCTestCase {
         let _ = waiter.wait(for: [exp], timeout: 10)
     }
     
-    func waitABitAndVerify(viewController: UIViewController, testDarkMode: Bool = true, file: StaticString = #file, testName: String = #function) {
+    func waitABitAndVerify(viewController: UIViewController, testDarkMode: Bool = true, file: StaticString = #file, testName: String = #function, deadlineTime: Int = 300) {
         rootViewController = viewController
         let waiter = XCTWaiter()
         let exp = expectation(description: "verify view")
-        let deadlineTime = DispatchTime.now() + .milliseconds(300)
+        let deadlineTime = DispatchTime.now() + .milliseconds(deadlineTime)
         DispatchQueue.main.asyncAfter(deadline: deadlineTime) {
             
             let screenSize = UIScreen.main.bounds

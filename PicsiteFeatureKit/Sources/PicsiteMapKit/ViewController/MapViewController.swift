@@ -30,7 +30,7 @@ public class MapViewController: BaseMapViewController {
     }
     
     public override func didTapOnAnnotation(currentAnnotation: PicsiteAnnotation) {
-        let profileVC = dataSource.picsiteProfileViewController(picsiteID: currentAnnotation.picsiteData.id)
+        let profileVC = dataSource.picsiteProfileViewController(picsite: currentAnnotation.picsiteData)
         self.navigationController?.pushViewController(profileVC, animated: true)
     }
 }

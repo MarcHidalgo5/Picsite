@@ -66,7 +66,7 @@ public class PicsiteAnnotationView: UIView {
             return label
         }()
         
-        photosTitleLabel.attributedText = FontPalette.boldTextStyler.attributedString("map-annotation-photos-titel".localized, forSize: 15)
+        photosTitleLabel.attributedText = FontPalette.boldTextStyler.attributedString("map-annotation-photos-title".localized, forSize: 15)
 
         let titleAndSubtitleStackView = UIStackView()
          titleAndSubtitleStackView.axis = .vertical
@@ -143,7 +143,7 @@ public class PicsiteAnnotationView: UIView {
         if picsiteAnnotation.lastActivityDateString != "" {
             dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-view-last-update-title".localized(with: [picsiteAnnotation.lastActivityDateString]), forSize: 12)
         } else {
-            dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("Ninguna publicación".localized, forSize: 12)
+            dateLabel.attributedText = FontPalette.mediumTextStyler.attributedString("map-annotation-view-none-last-update-title" .localized, forSize: 12)
         }
         photoCountLabel.attributedText = FontPalette.mediumTextStyler.attributedString("\(picsiteAnnotation.picsiteData.photoCount)", color: ColorPalette.picsiteDeepBlueColor, forSize: 15)
         profileImage.imageView.backgroundColor = picsiteAnnotation.markerTintColor.withAlphaComponent(0.5)

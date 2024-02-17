@@ -1,59 +1,59 @@
-
 // Common
 "loading" = "Loading";
 "error" = "Something went wrong";
 "dismiss" = "Dismiss";
-"error-perform-blocking-task" = "An error has occurred";
+"error-perform-blocking-task" = "An issue has occurred";
 
 //Google
-"authentication-google-error" = "Failed to login";
+"authentication-google-error" = "Error signing in";
 
 //TabBarController
 "tabbar-controller-map-title" = "Map";
 "tabbar-controller-add-title" = "Add";
-"tabbar-controller-profile-title" = "Profile";
+"tabbar-controller-profile-title" = "Configuration";
+"sign-out" = "Sign out";
+"sign-out-loading-title" = "Closing session";
 
 //TextField
 "textField-name-placeholder" = "";
-"textField-name-title" = "Full name";
+"textField-name-title" = "Full Name";
 "textField-username-placeholder" = "";
 "textField-username-title" = "Username";
 "textField-password-placeholder" = "";
-"textField-password-title" = "Password";
+"textField-password-title" = "Password (minimum 8 characters)";
 "textField-email-placeholder" = "";
 "textField-email-title" = "Email";
 
 //StartingViewController
-"start-button" = "Get started";
+"start-button" = "Start";
 "start-subtitle" = "Discover places";
-"start-login-title" = "Do you already have an account?";
-"start-login-subtitle" = "Log in";
+"start-login-title" = "Already have an account?";
+"start-login-subtitle" = "Sign in";
 
 //AuthenticationPerformerViewController
 "authentication-performer-login-button" = "Log in";
 "authentication-performer-signup-button" = "Sign up";
-"authentication-validation-error-invalid-name" = "Introduce a valid name";
-"authentication-validation-error-invalid-email" = "Introduce a valid email address";
-"authentication-validation-error-invalid-password" = "Your password needs to have at least 8 characters";
-"authentication-validation-error-invalid-username" = "The username is already in use";
-"authentication-validation-error-invalid-username-lenght" = "Your username needs to have at least 6 characters";
-"authentication-validation-error-invalid-t&c" = "You must accept the terms and conditions before continuing";
-"authentication-validation-error-username-already-exists" = "Username already exists";
+"authentication-validation-error-invalid-name" = "Enter a valid name";
+"authentication-validation-error-invalid-email" = "Enter a valid email";
+"authentication-validation-error-invalid-password" = "Password must be at least 8 characters long";
+"authentication-validation-error-invalid-username" = "Username is already in use";
+"authentication-validation-error-invalid-username-length" = "Username must be at least 8 characters long";
+"authentication-validation-error-invalid-t&c" = "You must accept the terms and conditions before proceeding";
+"authentication-validation-error-username-already-exists" = "This username already exists";
 
 //LoginViewController
-"login-indeterminate-message" = "Logging in";
-"login-error-message" = "Fail to complete login";
-"login-title" = "Welcome back";
-"login-subtitle" = "Hello there, log in to continue!";
-"login-reset-password-button-action" = "Don't remember the password?";
+"login-indeterminate-message" = "Logging in...";
+"login-title" = "Welcome back!";
+"login-subtitle" = "Sign in to continue";
+"login-reset-password-button-action" = "Forgot your password?";
 "login-title-social" = "Or sign in with these options:";
 
 //ResetPasswordViewController
-"reset-password-error" = "Something went wrong, please try again";
+"reset-password-error" = "Something went wrong. Please try again";
 "reset-password-loading" = "Sending...";
 "reset-password-success" = "Email sent successfully";
 "reset-password-title" = "Forgot your password?";
-"reset-password-subtitle" = "Enter email to receive instructions";
+"reset-password-subtitle" = "Enter your email to receive instructions";
 "reset-password-button-action" = "Recover password";
 
 //RegisterViewController
@@ -61,7 +61,7 @@
 "register-title" = "Welcome!";
 "register-subtitle" = "Sign up to continue";
 "register-title-social" = "Or sign in with these options:";
-"register-t&c-message" = "I accept the Terms and Conditions";
+"register-t&c-message" = "I agree to the Terms and Conditions";
 "register-t&c-message-link" = "Terms and Conditions";
 
 //MapViewController
@@ -72,43 +72,52 @@
 "map-last-three-week-used-subtitle" = "Three weeks ago";
 "map-last-month-used-subtitle" = "A month ago";
 "map-more-than-one-month-used-subtitle" = "More than a month";
-"map-annotation-photos-titel" = "Photos";
-"map-annotation-info-titel" = "Updated:";
+"map-annotation-photos-title" = "Photos";
+"map-annotation-info-title" = "Updated:";
 "map-annotation-view-last-update-title" = "Last update: %@";
-"map-annotation-view-none-last-update-title" = "No publication yet";
+"map-annotation-view-none-last-update-title" = "No activity yet";
 "map-fetch-data-loading" = "Loading picsites";
-"map-fetch-error-fetching" = "Fail loading picsties";
+"map-fetch-error-fetching" = "Error loading picsties";
 
 //PicsiteProfileViewController
 "picsite-profile-empty-photos-error" = "No photos have been uploaded to this site yet";
+"picsite-profile-empty-photos-button-title" = "Upload first image";
 
 //UploadPhotoConfirmationViewController
-"upload-photo-confirmation-select-place-title" = "Select the place where this photograph belongs:";
+"upload-photo-confirmation-select-place-title" = "Select the place this photo belongs to:";
 "upload-photo-confirmation-select-place-button" = "Select picsite";
-"upload-photo-confirmation-loading-message" = "Uploading new photo";
-"upload-photo-confirmation-upload-photo-button" = "Upload new photo";
-"upload-photo-confirmation-navigation-title" = "Selected photo";
+"upload-photo-confirmation-loading-message" = "Uploading photo";
+"upload-photo-confirmation-upload-photo-button" = "Upload photo";
+"upload-photo-confirmation-navigation-title" = "Selected Photo";
+"upload-photo-confirmation-success" = "Photo uploaded";
 
 //UploadPicsiteConfirmationViewController
-"upload-picsite-confirmation-title-text-field-picsite-name" = "Name of the new place";
-"upload-picsite-confirmation-select-profile-photo-title" = "Upload a profile picture for this new site";
-"upload-picsite-confirmation-upload-picsite-button" = "Upload new picsite";
+"upload-picsite-confirmation-title-text-field-picsite-name" = "Place Name";
+"upload-picsite-confirmation-select-profile-photo-title" = "Upload a profile photo for this site";
+"upload-picsite-confirmation-upload-picsite-button" = "Upload picsite";
 "upload-picsite-confirmation-loading-message" = "Uploading picsite";
-"upload-picsite-confirmation-title-text-field-picsite-error" = "The name must contain at least 5 characters";
+"upload-picsite-confirmation-title-text-field-picsite-error" = "Name must be at least 1 characters long";
 "upload-picsite-confirmation-navigation-title" = "Information";
 
 //UploadContentViewController
-"upload-content-navigation-title" = "Create content";
-"upload-content-upload-photo-label" = "Upload your photos and share them on the existing picsites on the map";
+"upload-content-navigation-title" = "Create Content";
+"upload-content-upload-photo-label" = "Upload your photos and share them on existing picsites on the map";
 "upload-content-upload-photo-button" = "Upload photo";
-"upload-content-upload-picsite-label" = "Create a new point of interest on the map to be able to share new photos";
+"upload-content-upload-picsite-label" = "Create a new point of interest on the map to share new photos";
 "upload-content-upload-picsite-button" = "Create picsite";
 
 //UploadPhotoMapViewController
 "upload-photo-map-title" = "Select picsite";
 "upload-photo-map-second-title" = "Confirm?";
+"upload-photo-map-select-picsite-section-title" = "Select the place where the image belongs";
+"upload-photo-map-select-picsite-button-section-title" = "You can create a point of interest if it does not exist:";
+"upload-photo-picsite-button" = "Create picsite";
 
 //UploadPicsiteMapViewController
-"upload-picsite-map-title" = "Create place";
+"upload-picsite-map-title" = "Create picsite";
 "upload-picsite-map-second-title" = "Confirm?";
 "upload-picsite-map-create-picsite-title" = "Create picsite";
+"upload-picsite-map-create-picsite-section-title" = "Choose where to create the new picsite; remember that you cannot create them less than 500m apart";
+"upload-picsite-map-create-picsite-success" = "Picsite created";
+"upload-picsite-button-title" = "Select";
+"upload-picsite-region-error-title" = "There is already a point within 500 meters of this location";

@@ -17,7 +17,7 @@ public extension UIViewController {
         navigationItem.leftBarButtonItem = barButtonItem
     }
     
-    func addCloseButton(tintColorWhite: Bool = true, prefersButtonOnTheLeft: Bool = false) {
+    func addCloseButton(tintColorWhite: Bool = true, prefersButtonOnTheLeft: Bool = true) {
         let barButtonItem: UIBarButtonItem = {
             if tintColorWhite {
                 return WhiteBarButtonItem(image: UIImage(systemName: "xmark")!, style: .plain, target: self, action: #selector(picsite_closeViewController))

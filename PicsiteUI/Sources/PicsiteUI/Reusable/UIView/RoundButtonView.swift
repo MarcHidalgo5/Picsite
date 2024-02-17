@@ -3,7 +3,6 @@
 //
 
 import UIKit
-import PicsiteUI
 
 public class RoundButtonView: UIView {
     
@@ -11,7 +10,7 @@ public class RoundButtonView: UIView {
 
     public init(imageButton: UIImage?, color: UIColor) {
         super.init(frame: .zero)
-        let cancelButton: UIButton = {
+        let button: UIButton = {
             var config = UIButton.Configuration.plain()
             config.image = imageButton
             config.baseForegroundColor = color
@@ -26,11 +25,11 @@ public class RoundButtonView: UIView {
             return button
         }()
         
-        self.addAutolayoutSubview(cancelButton)
-        cancelButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        cancelButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        cancelButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        cancelButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        self.addAutolayoutSubview(button)
+        button.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        button.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
         roundCorners(radius: 25)
         addPicsiteShadow()

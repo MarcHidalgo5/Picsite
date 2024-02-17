@@ -8,7 +8,7 @@ import BSWInterfaceKit
 import PicsiteKit
 import CoreLocation
 
-class UploadPhotoConfirmationViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
+public class UploadPhotoConfirmationViewController: UIViewController, TransparentNavigationBarPreferenceProvider {
     
     private var selectedPhoto: Photo
     private let imageData: PicsiteMediaPickerBehavior.ImageData
@@ -53,10 +53,11 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
     }()
      
     
-    init(imageData: PicsiteMediaPickerBehavior.ImageData) {
+    public init(imageData: PicsiteMediaPickerBehavior.ImageData, selectedPicsite: Picsite? = nil) {
         self.imageData = imageData
+        self.currentPicsiteSelected = selectedPicsite
         self.selectedPhoto = Photo(url: imageData.localURL)
-             super.init(nibName: nil, bundle: nil)
+        super.init(nibName: nil, bundle: nil)
         addPlainBackButton(tintColorWhite: false)
         self.title = "upload-photo-confirmation-navigation-title".localized
     }
@@ -65,7 +66,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = ColorPalette.picsiteBackgroundColor
         
@@ -75,16 +76,12 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
             configuration.setFont(fontDescriptor: FontPalette.mediumTextStyler.fontDescriptor!, size: 16)
             configuration.cornerStyle = .large
             let action = UIAction { [weak self] _ in
-                guard let self, let picsiteID = self.currentPicsiteSelected?.id, let localImageURL = self.imageData.localURL else { return }
-                performBlockingTask(loadingMessage: "upload-photo-confirmation-loading-message".localized) {
-                    do {
-                        try await self.dataSource.uploadImageToFirebaseStorage(with: localImageURL, into: picsiteID)
-                        NotificationCenter.default.post(name: UploadContentNotification, object: nil)
-                        self.closeViewController(sender: nil)
-                    } catch {
-                        self.showErrorAlert("error".localized, error: error)
-                    }
+                guard let self else { return }
+                Task {
+                    try await self.uploadTask()
+                    self.closeViewController(sender: nil)
                 }
+               
             }
             let button = UIButton(configuration: configuration, primaryAction: action)
             button.translatesAutoresizingMaskIntoConstraints = false
@@ -105,13 +102,14 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         }
 
         imageView.setPhoto(selectedPhoto)
-        nextButton.addCustomVideoAskShadow()
+        nextButton.addCustomPicsiteShadow()
         nextButton.roundCorners(radius: 12)
         
         confirmButtonView.selectPicsite = { [weak self] in
             guard let self else { return }
             let vc = UploadPhotoMapViewController(delegate: self)
             let navVC = MinimalNavigationController(rootViewController: vc)
+            navVC.modalPresentationStyle = .fullScreen
             self.present(navVC, animated: true)
         }
         
@@ -131,6 +129,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         ])
         
         fetchData()
+        configureFor(picsite: currentPicsiteSelected)
     }
 
     func fetchData() {
@@ -138,6 +137,19 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
             try await self.dataSource.getClosestPicsite(to: self.imageData.location)
         } completion: { [weak self] vm in
             self?.configureFor(picsite: vm)
+        }
+    }
+    
+    private func uploadTask() async throws {
+        guard let picsiteID = self.currentPicsiteSelected?.id, let localImageURL = self.imageData.localURL else { return }
+        performBlockingTask(loadingMessage: "upload-photo-confirmation-loading-message".localized, successMessage: "upload-photo-confirmation-success".localized) {
+            do {
+                try await self.dataSource.uploadImageToFirebaseStorage(with: localImageURL, into: picsiteID)
+                try await Task.sleep(nanoseconds: 1_500_000_000)
+                NotificationCenter.default.post(name: UploadContentNotification, object: nil)
+            } catch {
+                self.showErrorAlert("error".localized, error: error)
+            }
         }
     }
     
@@ -159,7 +171,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
         
         let picsiteLabel: UILabel = {
             let label = UILabel()
-            label.attributedText = FontPalette.mediumTextStyler.attributedString("upload-photo-confirmation-select-place-title".localized, color: ColorPalette.picsiteTitleColor, forSize: 16)
+            label.attributedText = FontPalette.mediumTextStyler.attributedString("upload-photo-confirmation-select-place-title".localized, color: ColorPalette.picsiteTitleColor, forSize: 16).settingLineSpacing(5)
             label.numberOfLines = 2
             label.textAlignment = .center
             return label
@@ -213,7 +225,7 @@ class UploadPhotoConfirmationViewController: UIViewController, TransparentNaviga
 }
 
 extension UploadPhotoConfirmationViewController: UploadPhotoMapViewControllerDelegate {
-    func didSelectPicsite(_ picsite: Picsite) {
+    public func didSelectPicsite(_ picsite: Picsite) {
         self.dismiss(animated: true) {
             self.currentPicsiteSelected = picsite
         }

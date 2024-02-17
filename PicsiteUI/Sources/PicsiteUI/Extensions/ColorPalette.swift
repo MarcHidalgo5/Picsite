@@ -21,4 +21,8 @@ public enum ColorPalette {
     public static var picsiteGreenColor: UIColor!
     public static var picsiteLightGray: UIColor!
     public static var picsiteDarkGray: UIColor!
+    
+    public static var picsiteAnnotationRecent: UIColor!
+    public static var picsiteAnnotationMoreOneWeek: UIColor!
+    public static var picsiteAnnotationMoreOneMonth: UIColor!
 }

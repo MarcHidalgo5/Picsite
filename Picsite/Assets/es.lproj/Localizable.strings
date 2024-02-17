@@ -6,12 +6,14 @@
 "error-perform-blocking-task" = "Ha ocurrido un problema";
 
 //Google
-"authentication-google-error" = "Error al iniciar session";
+"authentication-google-error" = "Error al iniciar sesión";
 
 //TabBarController
 "tabbar-controller-map-title" = "Mapa";
 "tabbar-controller-add-title" = "Añadir";
-"tabbar-controller-profile-title" = "Perfil";
+"tabbar-controller-profile-title" = "Configuración";
+"sign-out" = "Cerrar sesión";
+"sign-out-loading-title" = "Cerrando sesión";
 
 //TextField
 "textField-name-placeholder" = "";
@@ -72,15 +74,16 @@
 "map-last-three-week-used-subtitle" = "Hace tres semanas";
 "map-last-month-used-subtitle" = "Hace un mes";
 "map-more-than-one-month-used-subtitle" = "Más de un mes";
-"map-annotation-photos-titel" = "Fotos";
+"map-annotation-photos-title" = "Fotos";
 "map-annotation-info-titel" = "Actualizado:";
 "map-annotation-view-last-update-title" = "Ultima pubicación: %@";
-"map-annotation-view-none-last-update-title" = "Aún no hay publicaciónes";
+"map-annotation-view-none-last-update-title" = "Aún no hay actividad";
 "map-fetch-data-loading" = "Cargando picsites";
 "map-fetch-error-fetching" = "Error al cargar los picsties";
 
 //PicsiteProfileViewController
 "picsite-profile-empty-photos-error" = "Aún no se ha subido ninguna foto a este sitio";
+"picsite-profile-empty-photos-button-title" = "Subir primera foto";
 
 //UploadPhotoConfirmationViewController
 "upload-photo-confirmation-select-place-title" = "Selecciona el lugar al que pertenece esta fotografía:";
@@ -88,13 +91,14 @@
 "upload-photo-confirmation-loading-message" = "Subiendo foto";
 "upload-photo-confirmation-upload-photo-button" = "Subir foto";
 "upload-photo-confirmation-navigation-title" = "Foto seleccionada";
+"upload-photo-confirmation-success" = "Foto subida";
 
 //UploadPicsiteConfirmationViewController
 "upload-picsite-confirmation-title-text-field-picsite-name" = "Nombre del lugar";
 "upload-picsite-confirmation-select-profile-photo-title" = "Sube una foto de perfil para este sitio";
 "upload-picsite-confirmation-upload-picsite-button" = "Subir picsite";
 "upload-picsite-confirmation-loading-message" = "Subiendo picsite";
-"upload-picsite-confirmation-title-text-field-picsite-error" = "El nombre debe contener al menos 5 caracteres";
+"upload-picsite-confirmation-title-text-field-picsite-error" = "El nombre debe contener al menos 1 caracter";
 "upload-picsite-confirmation-navigation-title" = "Información";
 
 //UploadContentViewController
@@ -107,8 +111,15 @@
 //UploadPhotoMapViewController
 "upload-photo-map-title" = "Seleccionar picsite";
 "upload-photo-map-second-title" = "¿Confirmar?";
+"upload-photo-map-select-picsite-section-title" = "Selecciona el lugar donde pertenece la imagen";
+"upload-photo-map-select-picsite-button-section-title" = "Puedes crear un lugar de interes si aun no existe:";
+"upload-photo-picsite-button" = "Crear picsite";
 
 //UploadPicsiteMapViewController
-"upload-picsite-map-title" = "Crear lugar";
+"upload-picsite-map-title" = "Crear picsite";
 "upload-picsite-map-second-title" = "¿Confirmar?";
 "upload-picsite-map-create-picsite-title" = "Crear picsite";
+"upload-picsite-map-create-picsite-section-title" = "Elige donde creare el nuevo picsite, recuerda que no puedes crearlos a menos de 500m entre ellos";
+"upload-picsite-map-create-picsite-success" = "Picsite creado";
+"upload-picsite-button-title" = "Seleccionar";
+"upload-picsite-region-error-title" = "Ya existe un punto a menos de 500 metros de esta ubicación";
