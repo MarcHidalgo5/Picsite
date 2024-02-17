@@ -6,12 +6,14 @@
 "error-perform-blocking-task" = "Ha ocurrido un problema";
 
 //Google
-"authentication-google-error" = "Error al iniciar session";
+"authentication-google-error" = "Error al iniciar sesión";
 
 //TabBarController
 "tabbar-controller-map-title" = "Mapa";
 "tabbar-controller-add-title" = "Añadir";
-"tabbar-controller-profile-title" = "Perfil";
+"tabbar-controller-profile-title" = "Configuración";
+"sign-out" = "Cerrar sesión";
+"sign-out-loading-title" = "Cerrando sesión";
 
 //TextField
 "textField-name-placeholder" = "";

@@ -26,7 +26,7 @@ open class BaseMapViewController: UIViewController, BaseMapViewControlleType, Tr
     
     private var locationManager: CLLocationManager!
     private var currentLocation: CLLocation?
-    private let picsitAnnotationView = PicsiteAnnotationView(frame: CGRect(x: 10, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width - 20, height: 100))
+    public var picsitAnnotationView = PicsiteAnnotationView(frame: CGRect(x: 10, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width - 20, height: 100))
     private var initialTouchPoint: CGPoint = CGPoint(x: 0,y: 0)
     private var loadingAnnotation = false
     public let mapView : MKMapView = {

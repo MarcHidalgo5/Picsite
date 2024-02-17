@@ -10,7 +10,9 @@
 //TabBarController
 "tabbar-controller-map-title" = "Map";
 "tabbar-controller-add-title" = "Add";
-"tabbar-controller-profile-title" = "Profile";
+"tabbar-controller-profile-title" = "Configuration";
+"sign-out" = "Sign out";
+"sign-out-loading-title" = "Closing session";
 
 //TextField
 "textField-name-placeholder" = "";
