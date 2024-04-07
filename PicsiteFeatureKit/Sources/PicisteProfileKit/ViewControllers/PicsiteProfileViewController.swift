@@ -85,7 +85,6 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-        NotificationCenter.default.addObserver(self, selector: #selector(fetchData), name: UploadContentNotification, object: nil)
     }
     
     override public func viewDidLoad() {

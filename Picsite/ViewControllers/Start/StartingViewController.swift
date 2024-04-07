@@ -31,6 +31,7 @@ class StartingViewController: UIViewController {
     init(observer: StartingObserver) {
         self.observer = observer
         super.init(nibName: nil, bundle: nil)
+        self.navigationItem.backBarButtonItem?.isHidden = true
     }
     
     required init?(coder: NSCoder) {

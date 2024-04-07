@@ -122,4 +122,4 @@
 "upload-picsite-map-create-picsite-section-title" = "Elige donde creare el nuevo picsite, recuerda que no puedes crearlos a menos de 500m entre ellos";
 "upload-picsite-map-create-picsite-success" = "Picsite creado";
 "upload-picsite-button-title" = "Seleccionar";
-"upload-picsite-region-error-title" = "Ya existe un punto a menos de 500 metros de esta ubicación";
+"upload-picsite-region-error-title" = "Ya existe un punto cerca de esta ubicación";

@@ -4,4 +4,4 @@
 
 import Foundation
 
-public let UploadContentNotification = Notification.Name("UploadContentNotificationNotification")
+public let UploadContentNotification = Notification.Name("UploadContentNotification")
