@@ -8,16 +8,6 @@ import BSWFoundation
 
 public extension UIButton {
 
-    static func plainButton(withTitle title: String, color: UIColor = ColorPalette.picsiteTintColor, handler: @escaping VoidHandler) -> UIButton {
-        var config = UIButton.Configuration.plain()
-        config.setFont(fontDescriptor: FontPalette.mediumTextStyler.fontDescriptor!, size: 16, foregroundColor: color)
-        config.title = title
-        config.contentInsets = .init(uniform: 5)
-        return UIButton(configuration: config, primaryAction: UIAction(handler: { action in
-            handler()
-        }))
-    }
-    
     static func fillButton(withTitle title: String, color: UIColor = .white, backgroundColor: UIColor = ColorPalette.picsiteDeepBlueColor, handler: @escaping VoidHandler) -> UIButton {
         var config = UIButton.Configuration.filled()
         config.setFont(fontDescriptor: FontPalette.mediumTextStyler.fontDescriptor!, size: 16, foregroundColor: color)

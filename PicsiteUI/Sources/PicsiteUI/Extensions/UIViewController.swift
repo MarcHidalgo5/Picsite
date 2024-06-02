@@ -131,8 +131,6 @@ private class WhiteBarButtonItem: UIBarButtonItem {
     override public var tintColor: UIColor? {
         get {
             return UIColor.white
-        } set {
-            // No-op
-        }
+        } set { }
     }
 }

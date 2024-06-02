@@ -130,7 +130,6 @@ extension StartingViewController: AuthenticationObserver {
     func didAuthenticate(kind: AuthenticationPerformerKind) {
         switch kind {
         case .register:
-            #warning("Tutorial vc?")
             observer.didFinishAuthentication()
         case .login, .google:
             observer.didFinishAuthentication()

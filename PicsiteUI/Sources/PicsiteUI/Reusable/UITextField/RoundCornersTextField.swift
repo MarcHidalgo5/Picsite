@@ -7,7 +7,6 @@ import UIKit
 public class RoundCornersTextField: UITextField {
     
     enum Constants {
-        static let BackgroundColor = UIColor(light: .white, dark: UIColor(rgb: 0x262627))
         static let TransparentBackgroundColor = UIColor.clear
         static let TextColor = ColorPalette.picsiteTitleColor
         static let PlaceholderColor = ColorPalette.picsitePlaceholderColor

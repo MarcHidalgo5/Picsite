@@ -117,21 +117,7 @@ final public class PicsiteMediaPickerBehavior: NSObject, UIDocumentPickerDelegat
         }
     }
 
-    // MARK: UIDocumentPickerDelegate
     
-    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        defer {
-            self.currentRequest = nil
-        }
-        guard let currentRequest = self.currentRequest, let url = urls.first else { return }
-        let targetURL = cachePathForMedia(currentRequest.kind)
-        do {
-            try self.fileManager.moveItem(at: url, to: targetURL)
-            self.finishRequest(withURL: targetURL, shouldDismissVC: false)
-        } catch {
-            self.finishRequest(withURL: nil, shouldDismissVC: false)
-        }
-    }
 
     public func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         self.finishRequest(withURL: nil, shouldDismissVC: false)
