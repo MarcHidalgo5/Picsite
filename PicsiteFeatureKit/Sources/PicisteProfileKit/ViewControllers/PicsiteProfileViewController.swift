@@ -193,9 +193,7 @@ public class PicsiteProfileViewController: UIViewController, TransparentNavigati
     private func createEmptyConfiguration() -> ErrorView.Configuration {
         return .init(title: FontPalette.mediumTextStyler.attributedString("picsite-profile-empty-photos-error".localized, color: ColorPalette.picsiteTitleColor, forSize: 16).settingParagraphStyle {
             $0.alignment = .center
-        }, button: .fillButton(withTitle: "picsite-profile-empty-photos-button-title".localized, handler: { [weak self] in
-            self?.onSelectPhoto()
-        }))
+        })
     }
     
     private func onSelectPhoto() {
