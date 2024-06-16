@@ -64,7 +64,7 @@ public enum AuthenticationPerformerError: Swift.Error {
     public var errorDescription: String {
         switch self {
         case .usenameUnavaliable:
-            return "authentication-validation-error-username-already-exists"
+            return "authentication-validation-error-username-already-exists".localized
         }
     }
 }

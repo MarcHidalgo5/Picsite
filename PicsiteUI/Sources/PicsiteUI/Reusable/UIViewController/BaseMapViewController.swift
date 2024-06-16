@@ -57,7 +57,7 @@ open class BaseMapViewController: UIViewController, BaseMapViewControlleType, Tr
         fatalError("init(coder:) has not been implemented")
     }
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         mapView.register(
